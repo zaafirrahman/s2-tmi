@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Laporan Proses EFA — Dimensi Service Quality Bank ABC</title>
+<style>
+:root{
+  --bg:#ffffff; --fg:#1a1d23; --muted:#5b6472; --border:#e2e5ea;
+  --accent:#2f5fa8; --accent-soft:#eef3fb; --good:#1f7a4d; --warn:#b5651d; --bad:#b3261e;
+  --code-bg:#f4f6f8;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14161a; --fg:#e8eaed; --muted:#9aa3af; --border:#2b2f36;
+    --accent:#7fb0ff; --accent-soft:#1c2733; --good:#5fd394; --warn:#e0a35c; --bad:#ff6b64;
+    --code-bg:#1c1f24;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14161a; --fg:#e8eaed; --muted:#9aa3af; --border:#2b2f36;
+  --accent:#7fb0ff; --accent-soft:#1c2733; --good:#5fd394; --warn:#e0a35c; --bad:#ff6b64;
+  --code-bg:#1c1f24;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.55;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+.wrap{max-width:880px;margin:0 auto;padding:2.2rem 1.3rem 4rem}
+header.top{border-bottom:3px solid var(--accent);padding-bottom:1.1rem;margin-bottom:2rem}
+header.top h1{font-size:1.55rem;margin:0 0 .3rem}
+header.top p{margin:.15rem 0;color:var(--muted);font-size:.92rem}
+nav.toc{background:var(--accent-soft);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:2.2rem}
+nav.toc h2{font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:0 0 .6rem}
+nav.toc ol{margin:0;padding-left:1.2rem;columns:2;column-gap:1.5rem;font-size:.9rem}
+nav.toc li{margin-bottom:.35rem}
+nav.toc a{color:var(--accent);text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+section{margin-bottom:2.6rem;scroll-margin-top:1rem}
+section h2{font-size:1.2rem;border-left:4px solid var(--accent);padding-left:.6rem;margin:0 0 .9rem}
+section h3{font-size:1rem;margin:1.3rem 0 .5rem;color:var(--fg)}
+p{margin:.5rem 0}
+.lede{color:var(--muted);font-size:.93rem}
+table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.7rem 0 1.1rem}
+caption{caption-side:top;text-align:left;font-size:.78rem;color:var(--muted);margin-bottom:.3rem;font-style:italic}
+th,td{border:1px solid var(--border);padding:.4rem .55rem;text-align:left}
+th{background:var(--accent-soft);font-weight:600}
+tbody tr:nth-child(even){background:color-mix(in srgb, var(--accent-soft) 40%, transparent)}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.badge{display:inline-block;padding:.1rem .5rem;border-radius:99px;font-size:.75rem;font-weight:600}
+.badge.good{background:color-mix(in srgb, var(--good) 18%, transparent);color:var(--good)}
+.badge.warn{background:color-mix(in srgb, var(--warn) 18%, transparent);color:var(--warn)}
+.badge.bad{background:color-mix(in srgb, var(--bad) 18%, transparent);color:var(--bad)}
+.card{background:var(--accent-soft);border:1px solid var(--border);border-radius:10px;padding:.9rem 1.1rem;margin:.8rem 0}
+.card.note{border-left:4px solid var(--accent)}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;margin:.8rem 0}
+.stat{border:1px solid var(--border);border-radius:10px;padding:.7rem .8rem;background:var(--bg)}
+.stat .num{font-size:1.35rem;font-weight:700;color:var(--accent)}
+.stat .lbl{font-size:.75rem;color:var(--muted)}
+code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--code-bg);padding:.1rem .35rem;border-radius:5px;font-size:.85em}
+.funnel{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:.9rem 0;font-size:.85rem}
+.funnel .box{border:1px solid var(--border);border-radius:8px;padding:.4rem .7rem;background:var(--bg);text-align:center}
+.funnel .box b{display:block;font-size:1.05rem;color:var(--accent)}
+.funnel .arrow{color:var(--muted)}
+.factorcard{border:1px solid var(--border);border-radius:10px;padding:.8rem 1rem;margin:.7rem 0}
+.factorcard h4{margin:0 0 .3rem;font-size:.95rem;color:var(--accent)}
+.factorcard .meta{font-size:.78rem;color:var(--muted);margin-bottom:.5rem}
+footer{border-top:1px solid var(--border);margin-top:2.5rem;padding-top:1rem;color:var(--muted);font-size:.78rem}
+@media (max-width:520px){nav.toc ol{columns:1}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>Exploratory Factor Analysis — Dimensi Service Quality Bank ABC</h1>
+  <p>TI5102 Analisis Data dan Statistik &middot; Kelompok 5</p>
+  <p>Catatan proses lengkap Langkah 1–9, disusun kronologis sebagai bahan sebelum dituangkan ke slide.</p>
+</header>
+
+<nav class="toc">
+  <h2>Daftar Langkah</h2>
+  <ol>
+    <li><a href="#l1">Uji Kelayakan Data</a></li>
+    <li><a href="#l2">Anti-Image Correlation / MSA</a></li>
+    <li><a href="#l3">Ekstraksi Awal & Komunalitas</a></li>
+    <li><a href="#l4">Penentuan Jumlah Faktor</a></li>
+    <li><a href="#l5">Rotasi Faktor</a></li>
+    <li><a href="#l6">Purifikasi Iteratif</a></li>
+    <li><a href="#l7">Uji Reliabilitas</a></li>
+    <li><a href="#l8">Interpretasi & Pelabelan</a></li>
+    <li><a href="#l9">Refleksi Komparatif</a></li>
+  </ol>
+</nav>
+
+<section id="l1">
+  <h2>1. Uji Kelayakan Data</h2>
+  <p class="lede">Mengecek apakah 30 item punya struktur korelasi yang layak difaktorkan.</p>
+  <div class="grid3">
+    <div class="stat"><div class="num">0.896</div><div class="lbl">KMO overall (30 item)</div></div>
+    <div class="stat"><div class="num">&lt; 0.001</div><div class="lbl">Bartlett p-value</div></div>
+    <div class="stat"><div class="num"><span class="badge good">Meritorious</span></div><div class="lbl">Kategori KMO</div></div>
+  </div>
+  <p><b>Kesimpulan:</b> KMO 0.896 (kategori "meritorious", &gt;0.8) dan Bartlett signifikan (p&lt;0.05) → data layak dianalisis dengan analisis faktor.</p>
+</section>
+
+<section id="l2">
+  <h2>2. Anti-Image Correlation / MSA per Item</h2>
+  <p class="lede">MSA = versi individual dari KMO; mengukur proporsi varians tiap item yang dijelaskan faktor bersama vs noise uniknya sendiri.</p>
+  <div class="tablewrap">
+  <table>
+    <caption>5 item dengan MSA terendah (dari 30 item awal)</caption>
+    <thead><tr><th>Item</th><th>MSA</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>X17</td><td>0.746</td><td><span class="badge warn">Terendah</span></td></tr>
+      <tr><td>X20</td><td>0.768</td><td><span class="badge warn">Rendah</span></td></tr>
+      <tr><td>X11</td><td>0.769</td><td><span class="badge warn">Rendah</span></td></tr>
+      <tr><td>X4</td><td>0.786</td><td><span class="badge warn">Rendah</span></td></tr>
+      <tr><td>X19</td><td>0.808</td><td><span class="badge warn">Rendah</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Semua item masih di atas batas minimum 0.5, tapi 5 item di atas jauh lebih rendah dari rata-rata item lain (0.85–0.94) → ditandai sebagai watchlist, belum diputuskan dibuang.</p>
+</section>
+
+<section id="l3">
+  <h2>3. Ekstraksi Faktor Awal & Komunalitas</h2>
+  <p class="lede">Ekstraksi awal dilakukan dengan asumsi 5 faktor (berdasarkan teori a priori SERVQUAL), lalu divalidasi ulang di Langkah 4.</p>
+  <div class="tablewrap">
+  <table>
+    <caption>5 item dengan komunalitas terendah (ekstraksi n=5, 30 item awal)</caption>
+    <thead><tr><th>Item</th><th>Komunalitas</th></tr></thead>
+    <tbody>
+      <tr><td>X17</td><td>0.064</td></tr>
+      <tr><td>X11</td><td>0.072</td></tr>
+      <tr><td>X20</td><td>0.077</td></tr>
+      <tr><td>X4</td><td>0.083</td></tr>
+      <tr><td>X19</td><td>0.121</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="card note">
+    <b>Konvergensi bukti:</b> 5 item di atas persis sama dengan 5 item MSA terendah di Langkah 2 — dua metrik independen sepakat menunjuk item yang sama sebagai kandidat eliminasi (threshold komunalitas umum: &lt;0.3–0.4).
+  </div>
+</section>
+
+<section id="l4">
+  <h2>4. Penentuan Jumlah Faktor</h2>
+  <div class="grid3">
+    <div class="stat"><div class="num">7</div><div class="lbl">Kaiser (eigenvalue&gt;1)</div></div>
+    <div class="stat"><div class="num">5</div><div class="lbl">Scree plot (elbow)</div></div>
+    <div class="stat"><div class="num">5</div><div class="lbl">Teori a priori SERVQUAL</div></div>
+  </div>
+  <div class="tablewrap">
+  <table>
+    <caption>Eigenvalue 10 faktor pertama (ekstraksi awal, 30 item)</caption>
+    <thead><tr><th>Faktor</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr></thead>
+    <tbody><tr><td>Eigenvalue</td><td>7.068</td><td>2.673</td><td>2.258</td><td>1.826</td><td>1.722</td><td>1.070</td><td>1.027</td><td>0.938</td><td>0.890</td><td>0.870</td></tr></tbody>
+  </table>
+  </div>
+  <p><b>Keputusan: 5 faktor.</b> Kaiser overestimate (7) — faktor ke-6 &amp; ke-7 eigenvalue-nya cuma 1.070 dan 1.027, nyaris tidak melewati 1, dan secara visual menyatu dengan barisan faktor minor berikutnya yang melandai. Drop tajam justru terjadi dari faktor 5 (1.722) ke 6 (1.070). Scree plot dan teori a priori sepakat di angka 5 → dipilih 5 faktor.</p>
+</section>
+
+<section id="l5">
+  <h2>5. Rotasi Faktor</h2>
+  <p class="lede">Oblique (Promax) dipilih karena dimensi service quality diduga saling berkorelasi secara konsep — dan ini diverifikasi ke data, bukan diasumsikan begitu saja.</p>
+  <div class="tablewrap">
+  <table>
+    <caption>Matriks korelasi antar faktor (φ) hasil rotasi Promax, 30 item awal</caption>
+    <thead><tr><th></th><th>F1</th><th>F2</th><th>F3</th><th>F4</th><th>F5</th></tr></thead>
+    <tbody>
+      <tr><td>F1</td><td>1.000</td><td>0.197</td><td>0.404</td><td>0.475</td><td>0.393</td></tr>
+      <tr><td>F2</td><td>0.197</td><td>1.000</td><td>0.287</td><td>0.223</td><td>0.389</td></tr>
+      <tr><td>F3</td><td>0.404</td><td>0.287</td><td>1.000</td><td>0.248</td><td>0.483</td></tr>
+      <tr><td>F4</td><td>0.475</td><td>0.223</td><td>0.248</td><td>1.000</td><td>0.289</td></tr>
+      <tr><td>F5</td><td>0.393</td><td>0.389</td><td>0.483</td><td>0.289</td><td>1.000</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Korelasi antar faktor berkisar 0.20–0.48; separuh pasangan &gt;0.32 (ambang umum justifikasi oblique) → pilihan Promax terbukti tepat secara empiris, bukan cuma asumsi konsep. Perbandingan dengan Varimax (orthogonal) menunjukkan pola pengelompokan item yang serupa → struktur faktor stabil/robust terlepas dari metode rotasi.</p>
+</section>
+
+<section id="l6">
+  <h2>6. Purifikasi Item Iteratif</h2>
+  <p class="lede">Kriteria eliminasi: loading tertinggi &lt; 0.40 (item lemah, acuan Hair et al.) atau gap loading primer–sekunder &lt; 0.20 (cross-loading, acuan Costello &amp; Osborne 2005).</p>
+
+  <div class="funnel">
+    <div class="box"><b>30</b>item awal</div>
+    <span class="arrow">→ iterasi 1 →</span>
+    <div class="box"><b>25</b>item</div>
+    <span class="arrow">→ iterasi 2 →</span>
+    <div class="box"><b>23</b>item</div>
+    <span class="arrow">→ iterasi 3 →</span>
+    <div class="box"><b>20</b>item final</div>
+  </div>
+
+  <div class="tablewrap">
+  <table>
+    <caption>Log purifikasi — 10 item dieliminasi dalam 3 iterasi</caption>
+    <thead><tr><th>Iterasi</th><th>Item</th><th>Alasan</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="5">1</td><td>X4</td><td>MSA 0.786, komunalitas 0.083, loading tertinggi 0.294 (&lt;0.40)</td></tr>
+      <tr><td>X11</td><td>MSA 0.769, komunalitas 0.072, loading tertinggi 0.270</td></tr>
+      <tr><td>X17</td><td>MSA 0.746 (terendah), komunalitas 0.064 (terendah), loading tertinggi 0.229</td></tr>
+      <tr><td>X19</td><td>MSA 0.808, komunalitas 0.121, loading tertinggi 0.333</td></tr>
+      <tr><td>X20</td><td>MSA 0.768, komunalitas 0.077, loading tertinggi 0.266</td></tr>
+      <tr><td rowspan="2">2</td><td>X6</td><td>Cross-loading F1/F2 (0.467 vs 0.452, gap=0.015) — praktis seri</td></tr>
+      <tr><td>X23</td><td>Cross-loading F3/F2 (0.440 vs 0.435, gap=0.005) — praktis seri</td></tr>
+      <tr><td rowspan="3">3</td><td>X7</td><td>Cross-loading F1 (0.434 vs 0.345, gap=0.089) — di bawah ambang gap 0.20</td></tr>
+      <tr><td>X9</td><td>Cross-loading F3 (0.524 vs 0.380, gap=0.144) — di bawah ambang gap 0.20</td></tr>
+      <tr><td>X28</td><td>Cross-loading F1 (0.425 vs 0.318, gap=0.107) — di bawah ambang gap 0.20</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="card note">
+    <b>Catatan keputusan iterasi 3:</b> X7/X9/X28 secara isi kalimat memang tampak menyerempet dua dimensi sekaligus, namun tetap dieliminasi karena gap loading-nya masih di bawah ambang batas yang sudah ditetapkan di awal (konsistensi kriteria > justifikasi naratif post-hoc). Kesamaan makna konseptual tidak dijadikan alasan pengecualian, karena berisiko hanya kebetulan pada sampel ini dan belum tentu stabil bila diuji ulang pada sampel lain.
+  </div>
+
+  <div class="tablewrap">
+  <table>
+    <caption>KMO overall tiap iterasi (naik lalu turun sesuai jumlah item)</caption>
+    <thead><tr><th>Tahap</th><th>30 item (awal)</th><th>Iterasi 1 (25)</th><th>Iterasi 2 (23)</th><th>Iterasi 3 (20, final)</th></tr></thead>
+    <tbody><tr><td>KMO overall</td><td>0.896</td><td>0.904</td><td>0.888</td><td>0.856</td></tr></tbody>
+  </table>
+  </div>
+  <p>KMO turun seiring pengurangan item (wajar), namun tetap di kategori "meritorious" (&gt;0.8) di semua tahap. Pada struktur final, <code>flag_low</code> dan <code>flag_cross</code> kosong sepenuhnya — simple structure tercapai: 20 item, 5 faktor, tepat 4 item per faktor.</p>
+
+  <div class="tablewrap">
+  <table>
+    <caption>Matriks korelasi antar faktor (φ) — struktur final 20 item</caption>
+    <thead><tr><th></th><th>F1</th><th>F2</th><th>F3</th><th>F4</th><th>F5</th></tr></thead>
+    <tbody>
+      <tr><td>F1</td><td>1.000</td><td>0.285</td><td>0.285</td><td>0.388</td><td>0.463</td></tr>
+      <tr><td>F2</td><td>0.285</td><td>1.000</td><td>0.245</td><td>0.188</td><td>0.334</td></tr>
+      <tr><td>F3</td><td>0.285</td><td>0.245</td><td>1.000</td><td>0.362</td><td>0.311</td></tr>
+      <tr><td>F4</td><td>0.388</td><td>0.188</td><td>0.362</td><td>1.000</td><td>0.345</td></tr>
+      <tr><td>F5</td><td>0.463</td><td>0.334</td><td>0.311</td><td>0.345</td><td>1.000</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section id="l7">
+  <h2>7. Uji Reliabilitas (Cronbach's Alpha)</h2>
+  <div class="tablewrap">
+  <table>
+    <caption>Alpha per faktor final (4 item/faktor)</caption>
+    <thead><tr><th>Faktor</th><th>Item</th><th>Alpha</th><th>Kategori</th></tr></thead>
+    <tbody>
+      <tr><td>Faktor1</td><td>X2, X12, X21, X24</td><td>0.824</td><td><span class="badge good">Good</span></td></tr>
+      <tr><td>Faktor2</td><td>X3, X25, X26, X27</td><td>0.819</td><td><span class="badge good">Good</span></td></tr>
+      <tr><td>Faktor3</td><td>X5, X8, X14, X18</td><td>0.787</td><td><span class="badge good">Acceptable</span></td></tr>
+      <tr><td>Faktor4</td><td>X1, X16, X29, X30</td><td>0.779</td><td><span class="badge good">Acceptable</span></td></tr>
+      <tr><td>Faktor5</td><td>X10, X13, X15, X22</td><td>0.773</td><td><span class="badge good">Acceptable</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Semua di atas 0.7. Tidak ada yang &gt;0.9 (indikasi item tidak redundant), sekaligus tidak ada yang &lt;0.7 — sweet spot konsistensi internal.</p>
+
+  <h3>Diagnostik tambahan: Alpha if Item Deleted</h3>
+  <p>Mengecek apakah alpha naik jika salah satu item dibuang dari faktornya (delta negatif = item kontributif, wajib dipertahankan).</p>
+  <div class="tablewrap">
+  <table>
+    <caption>Delta alpha (alpha_if_deleted − alpha_full) — semua negatif di seluruh item</caption>
+    <thead><tr><th>Faktor</th><th>Delta per item (item: delta)</th></tr></thead>
+    <tbody>
+      <tr><td>Faktor1</td><td>X24: −0.062 &middot; X2: −0.054 &middot; X21: −0.044 &middot; X12: −0.024</td></tr>
+      <tr><td>Faktor2</td><td>X3: −0.061 &middot; X25: −0.059 &middot; X26: −0.045 &middot; X27: −0.022</td></tr>
+      <tr><td>Faktor3</td><td>X5: −0.058 &middot; X18: −0.055 &middot; X8: −0.051 &middot; X14: −0.045</td></tr>
+      <tr><td>Faktor4</td><td>X16: −0.071 &middot; X1: −0.068 &middot; X29: −0.041 &middot; X30: −0.035</td></tr>
+      <tr><td>Faktor5</td><td>X13: −0.064 &middot; X15: −0.064 &middot; X10: −0.050 &middot; X22: −0.041</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="card note">Seluruh delta negatif (kisaran −0.02 s/d −0.07) → tidak ada item yang melemahkan faktornya; kombinasi 4 item/faktor sudah optimal, mengonfirmasi hasil purifikasi Langkah 6.</div>
+</section>
+
+<section id="l8">
+  <h2>8. Interpretasi &amp; Pelabelan Faktor</h2>
+  <p class="lede">Item diurutkan berdasarkan loading tertinggi tiap faktor pada struktur final (20 item).</p>
+
+  <div class="factorcard">
+    <h4>Faktor 1 — Responsiveness</h4>
+    <div class="meta">α = 0.824 &middot; 4 item</div>
+    <table><tbody>
+      <tr><td class="mono">X24</td><td>0.810</td><td>Karyawan tidak pernah terlalu sibuk untuk merespons permintaan</td></tr>
+      <tr><td class="mono">X2</td><td>0.742</td><td>Karyawan selalu bersedia membantu</td></tr>
+      <tr><td class="mono">X21</td><td>0.709</td><td>Memberi tahu secara pasti kapan layanan diberikan</td></tr>
+      <tr><td class="mono">X12</td><td>0.672</td><td>Layanan cepat dan sigap</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="factorcard">
+    <h4>Faktor 2 — Assurance</h4>
+    <div class="meta">α = 0.819 &middot; 4 item</div>
+    <table><tbody>
+      <tr><td class="mono">X3</td><td>0.783</td><td>Perilaku karyawan menumbuhkan rasa percaya</td></tr>
+      <tr><td class="mono">X25</td><td>0.768</td><td>Pengetahuan memadai untuk menjawab pertanyaan</td></tr>
+      <tr><td class="mono">X26</td><td>0.689</td><td>Merasa aman secara finansial saat bertransaksi</td></tr>
+      <tr><td class="mono">X27</td><td>0.664</td><td>Konsisten bersikap sopan</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="factorcard">
+    <h4>Faktor 3 — Tangibles</h4>
+    <div class="meta">α = 0.787 &middot; 4 item</div>
+    <table><tbody>
+      <tr><td class="mono">X18</td><td>0.705</td><td>Materi layanan (brosur, formulir) menarik &amp; mudah dibaca</td></tr>
+      <tr><td class="mono">X14</td><td>0.692</td><td>Fasilitas fisik (gedung, ruang tunggu) menarik secara visual</td></tr>
+      <tr><td class="mono">X8</td><td>0.690</td><td>Karyawan berpenampilan rapi &amp; profesional</td></tr>
+      <tr><td class="mono">X5</td><td>0.688</td><td>Peralatan dan teknologi modern</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="factorcard">
+    <h4>Faktor 4 — Empathy</h4>
+    <div class="meta">α = 0.779 &middot; 4 item &middot; <span class="badge warn">berisi X1, lihat catatan §9</span></div>
+    <table><tbody>
+      <tr><td class="mono">X1</td><td>0.740</td><td>Jam operasional sesuai kebutuhan nasabah</td></tr>
+      <tr><td class="mono">X16</td><td>0.712</td><td>Perhatian secara personal</td></tr>
+      <tr><td class="mono">X29</td><td>0.665</td><td>Benar-benar mengutamakan kepentingan terbaik nasabah</td></tr>
+      <tr><td class="mono">X30</td><td>0.613</td><td>Memahami kebutuhan spesifik nasabah</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="factorcard">
+    <h4>Faktor 5 — Reliability</h4>
+    <div class="meta">α = 0.773 &middot; 4 item</div>
+    <table><tbody>
+      <tr><td class="mono">X15</td><td>0.730</td><td>Layanan benar sejak pertama kali</td></tr>
+      <tr><td class="mono">X13</td><td>0.682</td><td>Janji pada waktu tertentu selalu ditepati</td></tr>
+      <tr><td class="mono">X10</td><td>0.665</td><td>Catatan transaksi disimpan &amp; dikelola akurat</td></tr>
+      <tr><td class="mono">X22</td><td>0.625</td><td>Layanan sesuai waktu yang dijanjikan</td></tr>
+    </tbody></table>
+  </div>
+</section>
+
+<section id="l9">
+  <h2>9. Refleksi Komparatif terhadap SERVQUAL Parasuraman (1988)</h2>
+  <p class="lede">SERVQUAL adalah instrumen generik lintas-industri jasa (bukan spesifik perbankan), dikembangkan Parasuraman, Zeithaml &amp; Berry melalui proses EFA yang secara metodologis mirip dengan yang direplikasi pada tugas ini.</p>
+
+  <h3>Ringkasan struktur akhir</h3>
+  <ul>
+    <li><b>Jumlah faktor:</b> 5 — konsisten dengan struktur teoritis SERVQUAL (Tangibles, Reliability, Responsiveness, Assurance, Empathy).</li>
+    <li><b>Item bertahan:</b> 20 dari 30 item awal (10 item dieliminasi melalui 3 iterasi purifikasi).</li>
+    <li><b>Kecocokan isi faktor:</b> 4 dari 5 faktor terpetakan bersih 1-ke-1 dengan dimensi SERVQUAL asli berdasarkan makna item-item berloading tertinggi.</li>
+  </ul>
+
+  <h3>Penyimpangan yang ditemukan</h3>
+  <div class="card note">
+    <b>Item X1</b> ("jam operasional sesuai kebutuhan") secara teori SERVQUAL klasik biasanya masuk dimensi Tangibles/Access, namun pada hasil empiris ini justru berloading tertinggi (0.740) pada faktor yang didominasi item-item Empathy (X16, X29, X30). Kemungkinan interpretasi: responden mempersepsikan fleksibilitas jam operasional sebagai bentuk "bank peduli terhadap kebutuhan saya" (empati), bukan semata atribut fisik/operasional bank.
+  </div>
+
+  <h3>Item yang dieliminasi &amp; alasan konseptual</h3>
+  <p>10 item (X4, X6, X7, X9, X11, X17, X19, X20, X23, X28) dibuang. Lima di antaranya (X4, X11, X17, X19, X20) lemah di seluruh metrik (MSA, komunalitas, loading) — mengindikasikan item ini kurang relevan mengukur kelima dimensi yang terbentuk pada konteks data ini. Lima sisanya (X6, X7, X9, X23, X28) menunjukkan cross-loading — secara redaksional item-item ini memang menggabungkan dua konsep dimensi sekaligus dalam satu kalimat, sehingga secara statistik responden meresponnya sebagai representasi dua dimensi bersamaan, bukan satu dimensi tunggal yang bersih.</p>
+
+  <h3>Kesimpulan</h3>
+  <p>Struktur 5-dimensi SERVQUAL pada dasarnya terkonfirmasi secara empiris pada data simulasi Bank ABC, sejalan dengan literatur bahwa SERVQUAL dirancang sebagai instrumen generik lintas-industri jasa. Namun konsisten pula dengan temuan-temuan replikasi SERVQUAL lain di berbagai konteks, tidak seluruh item terpetakan sesuai dugaan teoritis awal (kasus X1) — menandakan struktur dimensi bersifat sensitif terhadap konteks budaya/industri spesifik, dalam hal ini konteks perbankan Indonesia pada data simulasi ini.</p>
+</section>
+
+<footer>
+  Laporan proses internal — dasar penyusunan slide TI5102. Output mentah &amp; syntax lengkap tersedia di notebook <code>EFA_SERVQUAL.ipynb</code>.
+</footer>
+
+</div>
+</body>
+</html>
