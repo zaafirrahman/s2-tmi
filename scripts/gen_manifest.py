@@ -1,7 +1,7 @@
 """Scan repo -> manifest.json (dipanggil GitHub Action tiap push)."""
 import json, os
 
-ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "bahan"))
 SKIP_DIRS = {".git", ".github", "scripts", "node_modules", "__pycache__", ".ipynb_checkpoints"}
 SKIP_FILES = {"index.html", "manifest.json", "README.md", ".gitignore"}
 

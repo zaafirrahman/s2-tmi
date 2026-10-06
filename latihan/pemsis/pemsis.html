@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latihan Pemsis | Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FBFAF5;--pencil:#2F3237;--mut:#6B6F76;--blue:#3B6FD4;--red:#D9402F;--grid:rgba(80,130,200,.16);--disp:'Caveat',cursive;--body:'Kalam',cursive}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--pencil);font:400 17px/1.45 var(--body);padding:44px clamp(20px,5vw,64px) 52px;overflow-x:hidden;background-color:var(--paper);
+background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1000px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+header{position:relative;padding-right:260px}
+h1{margin:0;font-family:var(--disp);font-weight:700;font-size:clamp(52px,9.5vw,108px);line-height:.9;transform:rotate(-1.5deg);transform-origin:left}
+.ul{display:block;width:min(100%,430px);height:18px;margin-top:2px;filter:url(#rough)}
+.sub{margin:10px 0 0;font-size:18px;color:var(--mut)}
+.sub::before{content:"ref: ";color:var(--blue)}
+.fig{position:absolute;right:0;top:-6px;width:240px;height:150px;filter:url(#rough)}
+.cap{position:absolute;right:6px;top:136px;font-family:var(--disp);font-size:20px;color:var(--red);transform:rotate(-3deg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:48px 34px;margin-top:70px}
+.card{position:relative;display:block;padding:30px 24px 24px;text-decoration:none;color:inherit;transition:transform .18s}
+.card::before{content:"";position:absolute;inset:0;background:rgba(251,250,245,.92);border:2.5px solid var(--pencil);border-radius:6px 14px 8px 12px;filter:url(#rough);z-index:-1}
+.card::after{content:"";position:absolute;inset:7px -7px -7px 7px;border:1.5px dashed var(--blue);border-radius:10px;filter:url(#rough);z-index:-2;opacity:.7}
+.card{isolation:isolate}
+.card h2{margin:0;font-family:var(--disp);font-weight:700;font-size:38px;line-height:1;display:inline-block;position:relative}
+.card h2 svg{position:absolute;left:-8px;right:-8px;bottom:-6px;width:calc(100% + 16px);height:12px;filter:url(#rough)}
+.card p{margin:14px 0 0;font-weight:700;font-size:17px;line-height:1.35}
+.note{position:absolute;top:-22px;right:12px;font-family:var(--disp);font-size:22px;font-weight:500;color:var(--red);transform:rotate(5deg)}
+.card:nth-child(odd){transform:rotate(-.8deg)}.card:nth-child(even){transform:rotate(.8deg)}
+.card:hover{transform:rotate(0) translateY(-4px)}
+.card:hover::before{background:#FFF6C9}
+footer{margin-top:56px;text-align:right}
+.back{font-family:var(--disp);font-weight:700;font-size:28px;color:var(--blue);text-decoration:none}
+.back:hover{color:var(--red)}
+a:focus-visible{outline:3px dashed var(--red);outline-offset:5px}
+@media(max-width:820px){header{padding-right:0}.fig,.cap{display:none}}
+@media(prefers-reduced-motion:reduce){.card{transition:none}}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;position:relative;z-index:2}.crumbs a{text-decoration:none}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}.crumbs [aria-current]{opacity:.65}.crumbs{margin-bottom:26px;font:700 26px/1.1 var(--disp)}.crumbs a{color:var(--blue)}.crumbs a:hover{color:var(--red);text-decoration:none}.crumbs span[aria-hidden]{color:var(--red)}.crumbs [aria-current]{color:var(--pencil);opacity:1}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4"/></filter></svg>
+<div class="wrap">
+<nav class="crumbs" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><span aria-current="page">Pemsis</span></nav>
+<header>
+  <h1>Latihan Pemsis</h1>
+  <svg class="ul" viewBox="0 0 430 18" preserveAspectRatio="none" aria-hidden="true"><path d="M4 11C80 4 150 15 230 8S370 6 426 10" fill="none" stroke="#D9402F" stroke-width="4" stroke-linecap="round"/></svg>
+  <p class="sub">TI5003 / Pemodelan dan Berpikir Sistem</p>
+  <svg class="fig" viewBox="0 0 240 150" fill="none" stroke="#2F3237" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="8" y="14" width="64" height="38" rx="6"/><rect x="164" y="14" width="64" height="38" rx="6"/><rect x="86" y="96" width="68" height="38" rx="6"/>
+    <path d="M72 30H162M150 22l12 8-12 8" stroke="#3B6FD4"/><path d="M196 52C196 84 176 108 156 114M164 104l-8 10 12 4" stroke="#3B6FD4"/><path d="M84 114C56 108 40 84 40 54M30 64l10-10 8 12" stroke="#3B6FD4"/>
+    <text x="108" y="125" font-family="Caveat" font-size="22" stroke="none" fill="#2F3237">sistem</text>
+    <circle cx="118" cy="74" r="14" stroke="#D9402F"/><text x="112" y="81" font-family="Caveat" font-size="22" font-weight="700" stroke="none" fill="#D9402F">R</text>
+  </svg>
+  <span class="cap">fig. 1 loop</span>
+</header>
+<main class="grid">
+  <a class="card" href="latihan1.html"><span class="note">mulai di sini</span><h2>Materi 1<svg viewBox="0 0 100 12" preserveAspectRatio="none"><path d="M2 7C30 2 60 10 98 4" fill="none" stroke="#F2C230" stroke-width="7" stroke-linecap="round" opacity=".8"/></svg></h2><p>System Thinking</p></a>
+  <a class="card" href="latihan2.html"><h2>Materi 2<svg viewBox="0 0 100 12" preserveAspectRatio="none"><path d="M2 7C30 2 60 10 98 4" fill="none" stroke="#F2C230" stroke-width="7" stroke-linecap="round" opacity=".8"/></svg></h2><p>System Concept</p></a>
+  <a class="card" href="latihan3.html"><h2>Materi 3<svg viewBox="0 0 100 12" preserveAspectRatio="none"><path d="M2 7C30 2 60 10 98 4" fill="none" stroke="#F2C230" stroke-width="7" stroke-linecap="round" opacity=".8"/></svg></h2><p>Problem Formulation SSM</p></a>
+  <a class="card" href="latihan4.1.html"><span class="note">cek diagramnya!</span><h2>Materi 4.1<svg viewBox="0 0 100 12" preserveAspectRatio="none"><path d="M2 7C30 2 60 10 98 4" fill="none" stroke="#F2C230" stroke-width="7" stroke-linecap="round" opacity=".8"/></svg></h2><p>System Model and Diagrams</p></a>
+</main>
+<footer><a class="back" href="../">Exercise Hub</a></footer>
+</div>
+</body>
+</html>

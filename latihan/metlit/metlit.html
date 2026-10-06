@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latihan Metlit | Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F0EEE6;--paper:#FAF9F5;--ink:#141413;--mut:#5E5D59;--clay:#D97757;--olive:#788C5D;--sky:#6A9BCC;--line:#D9D6CA;--disp:'Newsreader',Georgia,serif;--body:'DM Sans',system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--body);padding:48px clamp(20px,5vw,64px) 56px;overflow-x:hidden}
+.wrap{max-width:1000px;margin:0 auto}
+header{position:relative;padding-right:200px}
+h1{margin:0;font-family:var(--disp);font-weight:400;font-size:clamp(44px,8vw,88px);line-height:1;letter-spacing:-.025em}
+.sub{margin:18px 0 0;font-size:18px;color:var(--mut);max-width:34ch}
+.hero{position:absolute;right:0;top:-8px;width:170px;height:170px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:20px;margin-top:56px}
+.card{position:relative;display:flex;flex-direction:column;min-height:250px;padding:28px 26px;background:var(--paper);border:1px solid var(--line);border-radius:22px;text-decoration:none;color:inherit;overflow:hidden;transition:transform .2s,border-color .2s}
+.card svg{width:96px;height:96px;margin-bottom:auto}
+.card h2{margin:28px 0 6px;font-family:var(--disp);font-weight:500;font-size:30px;line-height:1.1;letter-spacing:-.01em}
+.card p{margin:0;color:var(--mut);font-size:15px}
+.card:hover{transform:translateY(-4px);border-color:var(--ink)}
+.card:nth-child(1) .fill{fill:var(--clay)}.card:nth-child(2) .fill{fill:var(--olive)}.card:nth-child(3) .fill{fill:var(--sky)}
+.card:nth-child(1) .st{stroke:var(--clay)}.card:nth-child(2) .st{stroke:var(--olive)}.card:nth-child(3) .st{stroke:var(--sky)}
+footer{margin-top:56px;display:flex;justify-content:flex-end}
+.back{font-family:var(--disp);font-style:italic;font-size:22px;color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--clay);padding-bottom:2px}
+.back:hover{color:var(--clay)}
+a:focus-visible{outline:3px solid var(--clay);outline-offset:4px}
+@media(max-width:700px){header{padding-right:0}.hero{position:static;width:96px;height:96px;margin-bottom:20px}}
+@media(prefers-reduced-motion:reduce){.card{transition:none}}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;position:relative;z-index:2}.crumbs a{text-decoration:none}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}.crumbs [aria-current]{opacity:.65}.crumbs{margin-bottom:28px;font-size:15px;color:var(--mut)}.crumbs a{color:var(--ink);border-bottom:1.5px solid var(--clay)}.crumbs a:hover{color:var(--clay);text-decoration:none}.crumbs span[aria-hidden]{color:var(--olive)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><span aria-current="page">Metlit</span></nav>
+<header>
+  <svg class="hero" viewBox="0 0 200 200" aria-hidden="true" fill="none" stroke-linecap="round">
+    <g stroke="#D97757" stroke-width="9"><path d="M100 24V76M100 124V176M24 100H76M124 100H176M46 46L83 83M117 117L154 154M154 46L117 83M83 117L46 154"/></g>
+    <circle cx="100" cy="100" r="9" fill="#141413"/>
+    <path d="M30 168C60 150 80 186 112 168S160 150 184 172" stroke="#141413" stroke-width="3"/>
+  </svg>
+  <h1>Latihan Metlit</h1>
+  <p class="sub">TI5004 / Metodologi Penelitian dan Literasi Digital</p>
+</header>
+<main class="grid">
+  <a class="card" href="latihan1.html">
+    <svg viewBox="0 0 100 100" fill="none" stroke-linecap="round" aria-hidden="true"><circle class="fill" cx="46" cy="46" r="28" opacity=".22"/><circle class="st" cx="46" cy="46" r="28" stroke-width="4"/><path d="M67 67L90 90" stroke="#141413" stroke-width="5"/></svg>
+    <h2>Materi 1</h2><p>Hakekat Penelitian S2</p></a>
+  <a class="card" href="latihan2.html">
+    <svg viewBox="0 0 100 100" fill="none" stroke-linecap="round" aria-hidden="true"><path class="fill" opacity=".22" d="M10 70C10 30 40 14 60 18C86 24 92 60 70 80C50 98 10 94 10 70Z"/><path class="st" stroke-width="4" d="M18 62C30 40 52 40 64 54M26 80C46 70 66 74 80 62" /><circle cx="30" cy="34" r="4" fill="#141413"/><circle cx="72" cy="34" r="4" fill="#141413"/></svg>
+    <h2>Materi 2</h2><p>Proses Penelitian</p></a>
+  <a class="card" href="latihan3.html">
+    <svg viewBox="0 0 100 100" fill="none" stroke-linecap="round" aria-hidden="true"><rect class="fill" opacity=".22" x="12" y="20" width="76" height="60" rx="20"/><path class="st" stroke-width="4" d="M30 42C44 30 56 54 70 40M30 62C44 50 56 74 70 60"/><path d="M50 8V20M40 14H60" stroke="#141413" stroke-width="4"/></svg>
+    <h2>Materi 3</h2><p>Perumusan Masalah</p></a>
+</main>
+<footer><a class="back" href="../">Exercise Hub</a></footer>
+</div>
+</body>
+</html>

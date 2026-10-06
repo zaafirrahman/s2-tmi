@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latihan Optim | Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+:root{--wood:#5E3F24;--wood2:#7A5532;--board:#1E3A2F;--chalk:#F2F0E6;--mut:#B9C7BC;--yel:#F5E27A;--pink:#F4A6B8;--blue:#9CD3F0;--disp:'Gochi Hand',cursive;--body:'Patrick Hand',cursive}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#2B1D12 repeating-linear-gradient(90deg,transparent 0 46px,rgba(0,0,0,.18) 46px 48px);padding:clamp(12px,3vw,36px);font:400 19px/1.4 var(--body);color:var(--chalk);overflow-x:hidden}
+svg.defs{position:absolute;width:0;height:0}
+.frame{max-width:1060px;margin:0 auto;background:var(--wood);border-radius:10px;padding:clamp(10px,1.6vw,18px);box-shadow:0 16px 30px rgba(0,0,0,.5),inset 0 0 0 2px var(--wood2)}
+.board{position:relative;background-color:var(--board);background-image:radial-gradient(ellipse at 20% 15%,rgba(255,255,255,.07),transparent 55%),radial-gradient(ellipse at 85% 90%,rgba(255,255,255,.05),transparent 50%),repeating-linear-gradient(8deg,transparent 0 40px,rgba(255,255,255,.012) 40px 41px);padding:clamp(24px,5vw,56px) clamp(18px,4vw,48px) 40px;box-shadow:inset 0 0 40px rgba(0,0,0,.55);overflow:hidden}
+.ghost{position:absolute;inset:0;background:radial-gradient(ellipse 60% 25% at 40% 60%,rgba(255,255,255,.035),transparent 70%),radial-gradient(ellipse 40% 18% at 75% 30%,rgba(255,255,255,.03),transparent 70%);pointer-events:none}
+header{position:relative;padding-right:240px}
+h1{margin:0;font-family:var(--disp);font-weight:400;font-size:clamp(44px,8.6vw,92px);line-height:1;filter:url(#chalk);text-shadow:0 0 1px rgba(255,255,255,.4)}
+.sub{margin:10px 0 0;font-size:21px;color:var(--yel);filter:url(#chalk)}
+.eq{margin:6px 0 0;font-size:20px;color:var(--mut);filter:url(#chalk)}
+.contour{position:absolute;right:-6px;top:-18px;width:230px;height:160px;filter:url(#chalk)}
+.grid{position:relative;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:34px 30px;margin-top:46px}
+.card{position:relative;display:block;padding:20px 22px 22px;text-decoration:none;color:inherit;transition:transform .15s}
+.card::before{content:"";position:absolute;inset:0;border:2.5px solid var(--chalk);border-radius:4px 10px 5px 9px;filter:url(#chalk);opacity:.85;transition:border-color .15s,background .15s}
+.card:hover{transform:translateY(-3px) rotate(-.4deg)}
+.card:hover::before{border-color:var(--yel);background:rgba(245,226,122,.07)}
+.formula{display:block;height:64px;margin-bottom:6px;filter:url(#chalk)}
+.card h2{margin:0;font-family:var(--disp);font-weight:400;font-size:30px;line-height:1.1;filter:url(#chalk)}
+.card:nth-child(1) h2{color:var(--yel)}.card:nth-child(2) h2{color:var(--blue)}.card:nth-child(3) h2{color:var(--pink)}.card:nth-child(4) h2{color:var(--yel)}.card:nth-child(5) h2{color:var(--blue)}
+.card p{margin:8px 0 0;font-size:19px;color:var(--chalk)}
+.tray{max-width:1060px;margin:0 auto;position:relative;height:auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:linear-gradient(var(--wood2),var(--wood));border-radius:0 0 8px 8px;padding:12px 22px;box-shadow:0 10px 20px rgba(0,0,0,.45)}
+.sticks{display:flex;align-items:center;gap:10px}
+.chalk{display:block;width:44px;height:12px;border-radius:3px;transform:rotate(-3deg)}
+.eraser{display:block;width:56px;height:20px;border-radius:3px;background:linear-gradient(#C9B07A 0 55%,#3B3430 55%)}
+.back{font-family:var(--disp);font-size:24px;color:var(--chalk);text-decoration:none;border-bottom:2px dashed var(--yel);padding-bottom:1px}
+.back:hover{color:var(--yel)}
+a:focus-visible{outline:3px solid var(--yel);outline-offset:4px}
+@media(max-width:820px){header{padding-right:0}.contour{display:none}}
+@media(prefers-reduced-motion:reduce){.card{transition:none}}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;position:relative;z-index:2}.crumbs a{text-decoration:none}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}.crumbs [aria-current]{opacity:.65}.crumbs{margin-bottom:24px;font:400 21px/1.2 var(--body);color:var(--mut)}.crumbs a{color:var(--yel)}.crumbs span[aria-hidden]{color:var(--pink)}.crumbs [aria-current]{color:var(--chalk);opacity:1}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><filter id="chalk" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7" result="g"/><feDisplacementMap in="SourceGraphic" in2="g" scale="2.4" result="d"/><feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="1" seed="3" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.7" result="m"/><feComposite in="d" in2="m" operator="in"/></filter></svg>
+<div class="frame">
+<div class="board">
+<div class="ghost"></div>
+<nav class="crumbs" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><span aria-current="page">Optim</span></nav>
+<header>
+  <h1>Latihan Optim</h1>
+  <p class="sub">TI5001 / Optimisasi &amp; Intelejensia Komputasional</p>
+  <p class="eq">min f(x), x &isin; S &nbsp;&rArr;&nbsp; &nabla;f(x*) = 0</p>
+  <svg class="contour" viewBox="0 0 230 160" fill="none" stroke-linecap="round" aria-hidden="true">
+    <g stroke="#B9C7BC" stroke-width="2.2"><ellipse cx="120" cy="84" rx="100" ry="62" transform="rotate(-18 120 84)"/><ellipse cx="120" cy="84" rx="70" ry="42" transform="rotate(-18 120 84)"/><ellipse cx="120" cy="84" rx="40" ry="22" transform="rotate(-18 120 84)"/></g>
+    <path d="M26 26L52 52L74 66L94 76L108 82" stroke="#F5E27A" stroke-width="3" stroke-dasharray="7 7"/>
+    <circle cx="26" cy="26" r="4" fill="#F5E27A"/><circle cx="52" cy="52" r="4" fill="#F5E27A"/><circle cx="74" cy="66" r="4" fill="#F5E27A"/>
+    <path d="M118 82l6 6M124 82l-6 6" stroke="#F4A6B8" stroke-width="3.5"/>
+    <text x="132" y="108" font-family="Gochi Hand" font-size="24" fill="#F4A6B8" stroke="none">x*</text>
+  </svg>
+</header>
+<main class="grid">
+  <a class="card" href="latihan2.html">
+    <svg class="formula" viewBox="0 0 260 64" fill="none" stroke-linecap="round"><text x="4" y="44" font-family="Gochi Hand" font-size="36" fill="#F5E27A" stroke="none">d/dx (x&#178;) = 2x</text></svg>
+    <h2>Materi 2</h2><p>Dasar-Dasar Kalkulus dan Aljabar</p></a>
+  <a class="card" href="latihan3.html">
+    <svg class="formula" viewBox="0 0 260 64" fill="none" stroke-linecap="round"><path d="M10 6Q60 100 110 6" stroke="#9CD3F0" stroke-width="3"/><circle cx="60" cy="40" r="4.5" fill="#F4A6B8"/><text x="130" y="44" font-family="Gochi Hand" font-size="34" fill="#9CD3F0" stroke="none">min f(x)</text></svg>
+    <h2>Materi 3</h2><p>Konsep Dasar dalam Optimisasi</p></a>
+  <a class="card" href="latihan4.html">
+    <svg class="formula" viewBox="0 0 260 64" fill="none" stroke-linecap="round"><text x="4" y="44" font-family="Gochi Hand" font-size="36" fill="#F4A6B8" stroke="none">&nabla;f(x) = 0</text></svg>
+    <h2>Materi 4</h2><p>Pemecahan Analitik Model Optimisasi Tak-Linier Tak-Berpembatas</p></a>
+  <a class="card" href="latihan5.html">
+    <svg class="formula" viewBox="0 0 260 64" fill="none" stroke-linecap="round"><text x="4" y="44" font-family="Gochi Hand" font-size="34" fill="#F5E27A" stroke="none">L = f + &lambda;g</text></svg>
+    <h2>Materi 5</h2><p>Pemecahan Analitik Model Optimisasi Tak-Linier Himpunan Berpembatas (Persamaan dan Pertidaksamaan)</p></a>
+  <a class="card" href="latihan6.html">
+    <svg class="formula" viewBox="0 0 260 64" fill="none" stroke-linecap="round"><text x="4" y="42" font-family="Gochi Hand" font-size="30" fill="#9CD3F0" stroke="none">x&#8330;&#8321; = x&#8330; &minus; &alpha;&nabla;f</text></svg>
+    <h2>Materi 6</h2><p>Metode Numerik Single</p></a>
+</main>
+</div>
+</div>
+<div class="tray">
+  <div class="sticks" aria-hidden="true"><i class="chalk" style="background:#F2F0E6"></i><i class="chalk" style="background:#F5E27A;transform:rotate(2deg)"></i><i class="chalk" style="background:#F4A6B8;transform:rotate(-1deg)"></i><i class="eraser"></i></div>
+  <a class="back" href="../">Exercise Hub</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EZ Exercise | Teknik dan Manajemen Industri</title>
+<link rel="icon" type="image/png" href="../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,900&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6E9C6;--navy:#2B3A67;--navy2:#1B2650;--coral:#E8674A;--peach:#F5A98F;--sage:#7BC49A;--mustard:#F2B544;
+--disp:"Fraunces",Georgia,serif;--body:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;overflow-x:hidden;color:var(--navy);font:700 16px/1.5 var(--body);padding:44px clamp(24px,5vw,64px) 56px;
+background:conic-gradient(rgba(170,125,50,.09) 25%,transparent 0 50%,rgba(170,125,50,.09) 0 75%,transparent 0) 0 0/44px 44px var(--bg)}
+.wrap{position:relative;max-width:1000px;margin:0 auto}
+header{position:relative}
+h1{margin:0;font:900 clamp(54px,9.5vw,108px)/.95 var(--disp);letter-spacing:-.02em;text-shadow:4px 4px 0 var(--peach)}
+.sub{margin:16px 0 0;font-size:20px;font-weight:700;color:#4A5A8A}
+.stk{position:absolute;right:0;top:-10px;display:flex;gap:2px}
+.stk svg{width:96px;height:96px}
+.stk svg:nth-child(odd){transform:rotate(-8deg)}.stk svg:nth-child(even){transform:rotate(7deg)}
+.leaf{position:absolute;width:28px;height:28px;pointer-events:none}
+main{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:76px 30px;margin-top:92px}
+.card{position:relative;display:block;min-height:128px;padding:22px 96px 22px 26px;background:var(--c);color:var(--navy);border:3px solid var(--navy);border-radius:22px;box-shadow:0 6px 0 var(--navy);text-decoration:none;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-5px);box-shadow:0 11px 0 var(--navy)}
+.card:active{transform:translateY(2px);box-shadow:0 3px 0 var(--navy)}
+.card h2{margin:0 0 6px;font:900 38px/1 var(--disp);letter-spacing:-.01em}
+.card p{margin:0;font-size:15px;line-height:1.4}
+.kode{display:inline-block;margin-top:12px!important;padding:2px 12px;background:var(--navy);color:#FFF3D6;border-radius:8px;font-size:13px!important;font-weight:800;letter-spacing:.04em}
+.char{position:absolute;right:26px;bottom:100%;width:62px;height:68px;margin-bottom:-3px}
+.prop{position:absolute;right:16px;bottom:14px;width:66px;height:66px}
+.card:hover .char{animation:hop .45s ease-out}
+@keyframes hop{50%{transform:translateY(-9px)}}
+footer{margin-top:60px;text-align:right}
+.back{display:inline-block;padding:8px 24px;background:var(--navy);color:#FFF3D6;font:800 20px/1.3 var(--body);border-radius:12px;box-shadow:0 4px 0 var(--navy2);text-decoration:none;transition:transform .15s,box-shadow .15s}
+.back:hover{transform:translateY(-3px);box-shadow:0 7px 0 var(--navy2)}
+a:focus-visible{outline:4px solid var(--coral);outline-offset:4px}
+@media(max-width:900px){.stk{display:none}main{margin-top:84px}}
+@media(prefers-reduced-motion:reduce){.card,.back{transition:none}.card:hover .char{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<svg class="leaf" style="top:2%;left:46%" viewBox="0 0 100 100" aria-hidden="true"><path d="M10 90C10 40 50 10 90 10C90 60 55 90 10 90Z" fill="#7BC49A"/><path d="M14 86L70 30" stroke="#2B3A67" stroke-width="5" stroke-linecap="round"/></svg>
+<svg class="leaf" style="top:30%;right:-18px;transform:rotate(70deg)" viewBox="0 0 100 100" aria-hidden="true"><path d="M10 90C10 40 50 10 90 10C90 60 55 90 10 90Z" fill="#7BC49A"/><path d="M14 86L70 30" stroke="#2B3A67" stroke-width="5" stroke-linecap="round"/></svg>
+<svg class="leaf" style="top:52%;left:-20px;transform:rotate(-30deg)" viewBox="0 0 100 100" aria-hidden="true"><path d="M10 90C10 40 50 10 90 10C90 60 55 90 10 90Z" fill="#7BC49A"/><path d="M14 86L70 30" stroke="#2B3A67" stroke-width="5" stroke-linecap="round"/></svg>
+<svg class="leaf" style="bottom:16%;right:42%;transform:rotate(110deg)" viewBox="0 0 100 100" aria-hidden="true"><path d="M10 90C10 40 50 10 90 10C90 60 55 90 10 90Z" fill="#7BC49A"/><path d="M14 86L70 30" stroke="#2B3A67" stroke-width="5" stroke-linecap="round"/></svg>
+
+<header>
+  <h1>EZ Exercise</h1>
+  <p class="sub">Terbentur, terbentur, terbentuk.</p>
+  <div class="stk" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><g transform="rotate(-35 50 50)"><rect x="38" y="8" width="24" height="62" fill="#F2B544" stroke="#2B3A67" stroke-width="4" stroke-linejoin="round"/><rect x="38" y="8" width="24" height="12" fill="#E8674A" stroke="#2B3A67" stroke-width="4"/><polygon points="38,70 62,70 50,94" fill="#FBE3C0" stroke="#2B3A67" stroke-width="4" stroke-linejoin="round"/><polygon points="45,83 55,83 50,94" fill="#2B3A67"/></g></svg>
+    <svg viewBox="0 0 100 100"><rect x="16" y="8" width="68" height="84" rx="9" fill="#FFF8E6" stroke="#2B3A67" stroke-width="4"/><path d="M28 32l6 6 11-13M28 54l6 6 11-13" fill="none" stroke="#3E9E6A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><rect x="28" y="68" width="16" height="16" rx="3" fill="none" stroke="#2B3A67" stroke-width="4"/><path d="M54 32H72M54 54H72M54 76H72" stroke="#2B3A67" stroke-width="4" stroke-linecap="round"/></svg>
+    <svg viewBox="0 0 100 100"><circle cx="50" cy="42" r="27" fill="#F7D56E" stroke="#2B3A67" stroke-width="4"/><rect x="38" y="69" width="24" height="16" rx="4" fill="#DDE3F0" stroke="#2B3A67" stroke-width="4"/><path d="M50 8V2M17 20l-5-5M83 20l5-5M6 44H0M94 44h6M42 46l8-14 8 14" fill="none" stroke="#2B3A67" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg viewBox="0 0 100 100"><path d="M12 18Q12 8 24 8H78Q90 8 90 18V54Q90 64 78 64H46L26 86V64H24Q12 64 12 54Z" fill="#E8674A" stroke="#2B3A67" stroke-width="4" stroke-linejoin="round"/><text x="51" y="46" text-anchor="middle" font-family="Georgia,serif" font-weight="900" font-size="30" fill="#FFF3D6">ez!</text></svg>
+  </div>
+</header>
+
+<main>
+  <a class="card" style="--c:#CFE8D5" href="anstat/anstat.html">
+    <svg class="char" viewBox="0 0 100 110" aria-hidden="true"><path d="M38 90V106M62 90V106" stroke="#2B3A67" stroke-width="4" stroke-linecap="round"/><rect x="14" y="12" width="72" height="78" rx="13" fill="#F2B544" stroke="#2B3A67" stroke-width="4"/><circle cx="38" cy="50" r="4.5" fill="#2B3A67"/><circle cx="62" cy="50" r="4.5" fill="#2B3A67"/><path d="M40 66Q50 75 60 66" stroke="#2B3A67" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+    <svg class="prop" viewBox="0 0 100 100" aria-hidden="true"><rect x="10" y="56" width="20" height="32" fill="#7BC49A" stroke="#2B3A67" stroke-width="4"/><rect x="40" y="30" width="20" height="58" fill="#E8674A" stroke="#2B3A67" stroke-width="4"/><rect x="70" y="44" width="20" height="44" fill="#F2B544" stroke="#2B3A67" stroke-width="4"/><path d="M4 90H96" stroke="#2B3A67" stroke-width="4" stroke-linecap="round"/></svg>
+    <h2>Anstat</h2>
+    <p>Analisis Data dan Statistik</p>
+    <p class="kode">TI5002</p>
+  </a>
+  <a class="card" style="--c:#FAD2C4" href="optim/optim.html">
+    <svg class="char" viewBox="0 0 100 110" aria-hidden="true"><path d="M38 92V106M62 92V106" stroke="#2B3A67" stroke-width="4" stroke-linecap="round"/><polygon points="50,8 92,40 76,92 24,92 8,40" fill="#7BC49A" stroke="#2B3A67" stroke-width="4" stroke-linejoin="round"/><circle cx="38" cy="52" r="4.5" fill="#2B3A67"/><circle cx="62" cy="52" r="4.5" fill="#2B3A67"/><path d="M42 68Q50 74 58 68" stroke="#2B3A67" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+    <svg class="prop" viewBox="0 0 100 100" aria-hidden="true"><ellipse cx="50" cy="52" rx="44" ry="34" fill="none" stroke="#2B3A67" stroke-width="4"/><ellipse cx="50" cy="52" rx="28" ry="20" fill="none" stroke="#2B3A67" stroke-width="4"/><path d="M12 22L30 40L44 48" fill="none" stroke="#E8674A" stroke-width="5" stroke-dasharray="7 7" stroke-linecap="round"/><circle cx="52" cy="54" r="8" fill="#F2B544" stroke="#2B3A67" stroke-width="4"/></svg>
+    <h2>Optim</h2>
+    <p>Optimisasi &amp; Intelejensia Komputasional</p>
+    <p class="kode">TI5001</p>
+  </a>
+  <a class="card" style="--c:#FBE3A3" href="pemsis/pemsis.html">
+    <svg class="char" viewBox="0 0 100 110" aria-hidden="true"><path d="M36 92V106M64 92V106" stroke="#2B3A67" stroke-width="4" stroke-linecap="round"/><polygon points="50,8 95,92 5,92" fill="#E8674A" stroke="#2B3A67" stroke-width="4" stroke-linejoin="round"/><circle cx="39" cy="64" r="4.5" fill="#2B3A67"/><circle cx="61" cy="64" r="4.5" fill="#2B3A67"/><path d="M42 77Q50 83 58 77" stroke="#2B3A67" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+    <svg class="prop" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 12A38 38 0 1 1 18 30" fill="none" stroke="#2B3A67" stroke-width="7" stroke-linecap="round"/><polygon points="4,34 26,10 34,40" fill="#2B3A67"/><circle cx="50" cy="54" r="19" fill="#7BC49A" stroke="#2B3A67" stroke-width="4"/><text x="50" y="65" text-anchor="middle" font-family="Arial" font-weight="900" font-size="28" fill="#2B3A67">R</text></svg>
+    <h2>Pemsis</h2>
+    <p>Pemodelan dan Berpikir Sistem</p>
+    <p class="kode">TI5003</p>
+  </a>
+  <a class="card" style="--c:#CFE3E8" href="metlit/metlit.html">
+    <svg class="char" viewBox="0 0 100 110" aria-hidden="true"><path d="M38 90V106M62 90V106" stroke="#2B3A67" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="50" r="40" fill="#F7B7A3" stroke="#2B3A67" stroke-width="4"/><circle cx="36" cy="48" r="10" fill="#fff" fill-opacity=".6" stroke="#2B3A67" stroke-width="3.5"/><circle cx="64" cy="48" r="10" fill="#fff" fill-opacity=".6" stroke="#2B3A67" stroke-width="3.5"/><path d="M46 48H54" stroke="#2B3A67" stroke-width="3.5"/><circle cx="36" cy="48" r="3.5" fill="#2B3A67"/><circle cx="64" cy="48" r="3.5" fill="#2B3A67"/><path d="M40 68Q50 76 60 68" stroke="#2B3A67" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+    <svg class="prop" viewBox="0 0 100 100" aria-hidden="true"><circle cx="42" cy="42" r="28" fill="#FFF8E6" stroke="#2B3A67" stroke-width="6"/><path d="M63 63L90 90" stroke="#2B3A67" stroke-width="11" stroke-linecap="round"/><path d="M30 34H54M30 46H48" stroke="#E8674A" stroke-width="5" stroke-linecap="round"/></svg>
+    <h2>Metlit</h2>
+    <p>Metodologi Penelitian dan Literasi Digital</p>
+    <p class="kode">TI5004</p>
+  </a>
+</main>
+
+<footer>
+  <a class="back" href="../index.html">Repo Hub</a>
+</footer>
+</div>
+</body>
+</html>
