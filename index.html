@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Materi S2</title>
+<style>
+:root{--bg:#fafaf8;--card:#fff;--fg:#1f2328;--mut:#6b7280;--bd:#e5e7eb;--code:#f6f8fa;--acc:#2563eb;--k:#cf222e;--s:#0a3069;--n:#0550ae;--c:#6e7781;--f:#8250df}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1115;--card:#171a21;--fg:#e6e8eb;--mut:#9aa3af;--bd:#2a2f3a;--code:#1d212b;--acc:#7aa2ff;--k:#ff7b72;--s:#a5d6ff;--n:#79c0ff;--c:#8b949e;--f:#d2a8ff}}
+*{box-sizing:border-box}html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;display:grid;grid-template-columns:290px 1fr;grid-template-rows:auto 1fr}
+header{grid-column:1/3;display:flex;gap:8px;align-items:center;padding:8px 12px;background:var(--card);border-bottom:1px solid var(--bd)}
+header b{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
+button,a.b{font:inherit;font-size:13px;padding:5px 11px;border:1px solid var(--bd);background:var(--code);color:var(--fg);border-radius:8px;cursor:pointer;text-decoration:none}
+#menu{display:none}
+aside{background:var(--card);border-right:1px solid var(--bd);overflow:auto;padding:8px;min-height:0}
+aside input{width:100%;padding:7px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--code);color:var(--fg);font:inherit;margin-bottom:8px}
+details{margin-left:10px}summary{cursor:pointer;padding:2px 0;font-weight:600;font-size:13.5px}
+.f{display:block;padding:3px 6px;margin-left:10px;border-radius:6px;color:var(--fg);text-decoration:none;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.f:hover{background:var(--code)}.f.on{background:var(--acc);color:#fff}
+main{overflow:auto;min-height:0;min-width:0}
+#v{padding:16px;max-width:980px;margin:0 auto}
+#v.full{max-width:none;padding:0;height:100%}
+iframe{width:100%;height:100%;border:0;background:#fff}
+.msg{color:var(--mut);padding:30px 0;text-align:center}
+pre{margin:0;background:var(--code);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;overflow-x:auto;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace}
+.md table,.out table,.t{border-collapse:collapse;font-size:13px}
+.md table,.tw{display:block;overflow-x:auto;max-width:100%}
+.md th,.md td,.out th,.out td,.t th,.t td{border:1px solid var(--bd);padding:3px 9px}
+.md code{background:var(--code);padding:1px 5px;border-radius:4px}.md pre code{padding:0}
+.md img,.out img,#v>img{max-width:100%;height:auto}
+.out{margin:6px 0 14px;border-left:3px solid var(--bd);padding:6px 12px;overflow-x:auto}
+.out pre{background:none;border:0;padding:0;white-space:pre-wrap;word-break:break-word}
+.out.err{border-color:#dc2626}.out img{background:#fff}
+.tab{display:inline-block;margin:0 6px 8px 0}.tab.on{background:var(--acc);color:#fff}
+canvas{display:block;max-width:100%;height:auto;margin:0 auto 10px;box-shadow:0 1px 4px #0003}
+.hljs-keyword,.hljs-literal,.hljs-built_in{color:var(--k)}.hljs-string,.hljs-regexp{color:var(--s)}
+.hljs-number,.hljs-attr{color:var(--n)}.hljs-comment{color:var(--c);font-style:italic}.hljs-title{color:var(--f)}
+@media(max-width:800px){body{grid-template-columns:1fr}header{grid-column:1}#menu{display:inline-block}
+aside{position:fixed;inset:46px 0 0 0;z-index:9;transform:translateX(-100%);transition:.2s;border:0}body.open aside{transform:none}}
+</style>
+</head>
+<body>
+<header><button id="menu">☰</button><b id="ttl">Materi S2</b><button id="cp">Salin link</button><a class="b" id="raw" target="_blank" rel="noopener">Raw</a></header>
+<aside><input id="q" placeholder="Cari file…" type="search"><div id="tree"></div></aside>
+<main><div id="v"><p class="msg">Pilih file dari daftar.</p></div></main>
+<script>
+const $=s=>document.querySelector(s),V=$('#v'),C='https://cdnjs.cloudflare.com/ajax/libs/';
+const LIBS={md:[C+'marked/12.0.2/marked.min.js',C+'dompurify/3.1.6/purify.min.js'],hl:[C+'highlight.js/11.9.0/highlight.min.js'],
+csv:[C+'PapaParse/5.4.1/papaparse.min.js'],xls:[C+'xlsx/0.18.5/xlsx.full.min.js'],doc:[C+'mammoth/1.6.0/mammoth.browser.min.js',C+'dompurify/3.1.6/purify.min.js'],pdf:[C+'pdf.js/3.11.174/pdf.min.js']};
+const L={},lib=u=>L[u]??=new Promise((r,j)=>{const s=document.createElement('script');s.src=u;s.onload=r;s.onerror=j;document.head.appendChild(s)});
+const need=(...k)=>Promise.all(k.flatMap(x=>LIBS[x]).map(lib));
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const ansi=s=>s.replace(/\u001b\[[0-9;]*[A-Za-z]/g,''),join=x=>Array.isArray(x)?x.join(''):x||'';
+const clean=h=>DOMPurify.sanitize(h,{FORBID_TAGS:['style','script','iframe'],FORBID_ATTR:['style']});
+const enc=p=>p.split('/').map(encodeURIComponent).join('/');
+const hl=(s,l)=>{try{return hljs.highlight(s,{language:l,ignoreIllegals:true}).value}catch(e){return esc(s)}};
+const get=async(p,t)=>{const r=await fetch(enc(p));if(!r.ok)throw Error(r.status);return t?r.text():r.arrayBuffer()};
+const LANG={py:'python',js:'javascript',json:'json',css:'css',sql:'sql',r:'r',sh:'bash',yml:'yaml',yaml:'yaml',xml:'xml',txt:'plaintext',log:'plaintext',ini:'ini',toml:'ini',cfg:'ini',java:'java',c:'c',cpp:'cpp',ts:'typescript',m:'matlab'};
+const tbl=rows=>{const t=document.createElement('table');t.className='t';rows.slice(0,500).forEach((r,i)=>{const tr=t.insertRow();r.forEach(c=>{const d=document.createElement(i?'td':'th');d.textContent=c??'';tr.appendChild(d)})});
+ const w=document.createElement('div');w.className='tw';w.appendChild(t);if(rows.length>500)w.insertAdjacentHTML('beforeend','<p class="msg">Menampilkan 500 dari '+rows.length+' baris.</p>');return w};
+
+function nbOut(o){const d=document.createElement('div');d.className='out';const m=o.data||{};
+ if(o.output_type==='stream')d.innerHTML='<pre>'+esc(ansi(join(o.text)))+'</pre>';
+ else if(o.output_type==='error'){d.classList.add('err');d.innerHTML='<pre>'+esc(ansi((o.traceback||[]).join('\n')))+'</pre>'}
+ else if(m['image/png'])d.innerHTML='<img src="data:image/png;base64,'+join(m['image/png']).replace(/\s/g,'')+'">';
+ else if(m['image/jpeg'])d.innerHTML='<img src="data:image/jpeg;base64,'+join(m['image/jpeg']).replace(/\s/g,'')+'">';
+ else if(m['text/html'])d.innerHTML=clean(join(m['text/html']));
+ else if(m['text/plain'])d.innerHTML='<pre>'+esc(ansi(join(m['text/plain'])))+'</pre>';
+ else return null;return d}
+
+const R={
+ async ipynb(p){await need('md','hl');const nb=JSON.parse(await get(p,1)),lang=nb.metadata?.language_info?.name||'python',f=document.createDocumentFragment();
+  for(const c of nb.cells){const e=document.createElement('div');
+   if(c.cell_type==='markdown')e.className='md',e.innerHTML=clean(marked.parse(join(c.source)));
+   else{e.innerHTML='<pre><code></code></pre>';e.querySelector('code').innerHTML=hl(join(c.source),lang);(c.outputs||[]).map(nbOut).filter(Boolean).forEach(o=>e.appendChild(o))}
+   f.appendChild(e)}V.innerHTML='';V.appendChild(f)},
+ async md(p){await need('md');V.innerHTML='<div class="md">'+clean(marked.parse(await get(p,1)))+'</div>'},
+ async code(p,ext){await need('hl');V.innerHTML='<pre><code></code></pre>';V.querySelector('code').innerHTML=hl(await get(p,1),LANG[ext]||'plaintext')},
+ async csv(p){await need('csv');V.innerHTML='';V.appendChild(tbl(Papa.parse(await get(p,1),{skipEmptyLines:true}).data))},
+ async xls(p){await need('xls');const wb=XLSX.read(await get(p));V.innerHTML='';const box=document.createElement('div');
+  wb.SheetNames.forEach((n,i)=>{const b=document.createElement('button');b.className='tab';b.textContent=n;b.onclick=()=>{[...V.querySelectorAll('.tab')].forEach(x=>x.classList.toggle('on',x===b));box.innerHTML='';box.appendChild(tbl(XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,defval:''})))};V.appendChild(b);if(!i)b.click()});V.appendChild(box)},
+ async docx(p){await need('doc');const r=await mammoth.convertToHtml({arrayBuffer:await get(p)});V.innerHTML='<div class="md">'+clean(r.value)+'</div>'},
+ async pdf(p){await need('pdf');pdfjsLib.GlobalWorkerOptions.workerSrc=C+'pdf.js/3.11.174/pdf.worker.min.js';
+  const pdf=await pdfjsLib.getDocument({data:await get(p)}).promise;V.innerHTML='';const w=Math.min(V.clientWidth||800,980),dpr=Math.min(devicePixelRatio||1,2),tok=p;
+  for(let i=1;i<=pdf.numPages;i++){if(cur!==tok)return;const pg=await pdf.getPage(i),b=pg.getViewport({scale:1}),vp=pg.getViewport({scale:w/b.width*dpr}),cv=document.createElement('canvas');
+   cv.width=vp.width;cv.height=vp.height;V.appendChild(cv);await pg.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise}},
+ html(p){V.className='full';V.innerHTML='<iframe sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals" src="'+enc(p)+'"></iframe>'},
+ img(p){V.innerHTML='<img src="'+enc(p)+'">'},
+ other(p){V.innerHTML='<p class="msg">Preview belum tersedia untuk tipe ini.<br><a href="'+enc(p)+'" download>Download file</a></p>'}
+};
+const MAP={ipynb:'ipynb',md:'md',csv:'csv',tsv:'csv',xlsx:'xls',xls:'xls',docx:'docx',pdf:'pdf',html:'html',htm:'html',png:'img',jpg:'img',jpeg:'img',gif:'img',webp:'img',svg:'img'};
+let cur='';
+async function open(p){cur=p;V.className='';V.innerHTML='<p class="msg">Memuat…</p>';document.body.classList.remove('open');
+ $('#ttl').textContent=p;$('#raw').href=enc(p);document.querySelectorAll('.f').forEach(a=>a.classList.toggle('on',a.dataset.p===p));
+ const ext=p.split('.').pop().toLowerCase(),k=MAP[ext]||(LANG[ext]?'code':'other');
+ try{await R[k](p,ext)}catch(e){if(cur===p)V.innerHTML='<p class="msg">Gagal memuat: '+esc(String(e.message||e))+'</p>'}}
+const route=()=>{const p=decodeURIComponent(location.hash.slice(2));if(p)open(p)};
+addEventListener('hashchange',route);
+$('#menu').onclick=()=>document.body.classList.toggle('open');
+$('#cp').onclick=async()=>{try{await navigator.clipboard.writeText(location.href);$('#cp').textContent='Tersalin ✓'}catch(e){prompt('Salin link:',location.href)}setTimeout(()=>$('#cp').textContent='Salin link',1500)};
+
+let files=[];
+const link=f=>{const a=document.createElement('a');a.className='f';a.dataset.p=f.p;a.href='#/'+enc(f.p);a.textContent=f.p.split('/').pop();a.title=f.p;return a};
+function build(q){const T=$('#tree');T.innerHTML='';
+ if(q){files.filter(f=>f.p.toLowerCase().includes(q)).forEach(f=>{const a=link(f);a.textContent=f.p;T.appendChild(a)});return}
+ const root={};files.forEach(f=>{let n=root;f.p.split('/').slice(0,-1).forEach(d=>n=n[d]??={});(n.__f??=[]).push(f)});
+ const draw=(n,box,top)=>{Object.keys(n).filter(k=>k!=='__f').sort().forEach(k=>{const d=document.createElement('details');d.open=top;d.innerHTML='<summary>'+esc(k)+'</summary>';draw(n[k],d,false);box.appendChild(d)});(n.__f||[]).forEach(f=>box.appendChild(link(f)))};
+ draw(root,T,true);const cp=decodeURIComponent(location.hash.slice(2));
+ if(cp)T.querySelectorAll('.f').forEach(a=>{if(a.dataset.p===cp){a.classList.add('on');for(let e=a.parentElement;e&&e!==T;e=e.parentElement)if(e.tagName==='DETAILS')e.open=true}})}
+$('#q').oninput=e=>build(e.target.value.trim().toLowerCase());
+fetch('manifest.json',{cache:'no-cache'}).then(r=>r.json()).then(m=>{files=m.files;build('');route()}).catch(()=>{$('#tree').innerHTML='<p class="msg">manifest.json tidak ditemukan.<br>Jalankan <code>python scripts/gen_manifest.py</code> atau push dulu.</p>'});
+</script>
+</body>
+</html>
