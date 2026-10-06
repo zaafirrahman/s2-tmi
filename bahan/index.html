@@ -25,7 +25,10 @@ aside{background:var(--card);border-right:1.5px solid var(--line);overflow:auto;
 aside input{width:100%;padding:8px 10px;border:1.5px solid var(--bd);border-radius:3px;background:var(--bg);color:var(--fg);font:inherit;margin-bottom:10px}
 aside input:focus{border-color:var(--acc)}
 details{margin-left:10px}summary{cursor:pointer;padding:3px 0;font:600 17px/1.3 var(--disp);letter-spacing:.01em}
-.f{display:block;padding:4px 8px;margin-left:10px;border-radius:3px;color:var(--fg);text-decoration:none;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.f{display:flex;align-items:center;gap:7px;padding:4px 8px;margin-left:10px;border-radius:3px;color:var(--fg);text-decoration:none;font-size:13.5px}
+.f span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ic{flex:none;width:26px;height:16px;border-radius:3px;font:700 9px/16px var(--body);font-style:normal;text-align:center;letter-spacing:.02em;color:#fff;background:#6B6B64}
+.ic.pdf{background:#E5473B}.ic.docx{background:#2B6CD4}.ic.xlsx{background:#1E8E4E}.ic.csv{background:#1B9A8C}.ic.ipynb{background:#F37726}.ic.py{background:#3776AB}.ic.html{background:#D8481F}
 .f:hover{background:var(--code)}.f.on{background:var(--acc);color:var(--ink);font-weight:500}
 main{overflow:auto;min-height:0;min-width:0}
 #v{margin:20px auto;max-width:980px;padding:22px;background:var(--bg);border:1.5px solid var(--bd)}
@@ -116,9 +119,13 @@ $('#menu').onclick=()=>document.body.classList.toggle('open');
 $('#cp').onclick=async()=>{try{await navigator.clipboard.writeText(location.href);$('#cp').textContent='Tersalin ✓'}catch(e){prompt('Salin link:',location.href)}setTimeout(()=>$('#cp').textContent='Salin link',1500)};
 
 let files=[];
-const link=f=>{const a=document.createElement('a');a.className='f';a.dataset.p=f.p;a.href='#/'+enc(f.p);a.textContent=f.p.split('/').pop();a.title=f.p;return a};
+const ICT={pdf:'PDF',docx:'DOC',doc:'DOC',xlsx:'XLS',xls:'XLS',csv:'CSV',tsv:'CSV',ipynb:'NB',py:'PY',html:'HTM',htm:'HTM'};
+const ICC={doc:'docx',xls:'xlsx',tsv:'csv',htm:'html'};
+const link=(f,full)=>{const a=document.createElement('a');a.className='f';a.dataset.p=f.p;a.href='#/'+enc(f.p);a.title=f.p;
+ const e=f.p.split('.').pop().toLowerCase(),i=document.createElement('i'),s=document.createElement('span');
+ i.className='ic '+(ICC[e]||e);i.textContent=ICT[e]||e.slice(0,3).toUpperCase();s.textContent=full?f.p:f.p.split('/').pop();a.append(i,s);return a};
 function build(q){const T=$('#tree');T.innerHTML='';
- if(q){files.filter(f=>f.p.toLowerCase().includes(q)).forEach(f=>{const a=link(f);a.textContent=f.p;T.appendChild(a)});return}
+ if(q){files.filter(f=>f.p.toLowerCase().includes(q)).forEach(f=>{T.appendChild(link(f,1))});return}
  const root={};files.forEach(f=>{let n=root;f.p.split('/').slice(0,-1).forEach(d=>n=n[d]??={});(n.__f??=[]).push(f)});
  const draw=(n,box,top)=>{Object.keys(n).filter(k=>k!=='__f').sort().forEach(k=>{const d=document.createElement('details');d.open=top;d.innerHTML='<summary>'+esc(k)+'</summary>';draw(n[k],d,false);box.appendChild(d)});(n.__f||[]).forEach(f=>box.appendChild(link(f)))};
  draw(root,T,true);const cp=decodeURIComponent(location.hash.slice(2));
