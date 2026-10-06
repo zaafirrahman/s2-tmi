@@ -21,6 +21,7 @@ button,a.b{font:500 13px var(--body);padding:6px 12px;border:1.5px solid var(--a
 button:hover,a.b:hover{background:var(--acc);color:var(--ink)}
 button:focus-visible,a.b:focus-visible,aside input:focus-visible,.f:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset:2px}
 #menu{display:none}
+.ib{display:inline-flex;align-items:center;justify-content:center;padding:6px 9px}.ib svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 aside{background:var(--card);border-right:1.5px solid var(--line);overflow:auto;padding:10px;min-height:0}
 aside input{width:100%;padding:8px 10px;border:1.5px solid var(--bd);border-radius:3px;background:var(--bg);color:var(--fg);font:inherit;margin-bottom:10px}
 aside input:focus{border-color:var(--acc)}
@@ -53,13 +54,13 @@ pre{margin:0;background:var(--code);border:1px solid var(--bd);border-radius:3px
 canvas{display:block;max-width:100%;height:auto;margin:0 auto 12px;outline:1px solid var(--bd)}
 .hljs-keyword,.hljs-literal,.hljs-built_in{color:var(--k)}.hljs-string,.hljs-regexp{color:var(--s)}
 .hljs-number,.hljs-attr{color:var(--n)}.hljs-comment{color:var(--c);font-style:italic}.hljs-title{color:var(--f)}
-@media(max-width:800px){body{grid-template-columns:1fr}header{grid-column:1}#menu{display:inline-block}.lg{display:none}
+@media(max-width:800px){body{grid-template-columns:1fr}header{grid-column:1}#menu{display:inline-block}.lg{height:24px}
 aside{position:fixed;inset:54px 0 0 0;z-index:9;transform:translateX(-100%);transition:.2s;border:0}body.open aside{transform:none}
 #v{margin:0;border-width:0;padding:16px}}
 </style>
 </head>
 <body>
-<header><button id="menu">☰</button><a class="b" href="../index.html">Repo Hub</a><img class="lg" src="../logo.png" alt="" onerror="this.remove()"><b id="ttl">Materi & Tugas</b><button id="cp">Copy Link</button><a class="b" id="raw" target="_blank" rel="noopener">Download</a></header>
+<header><button id="menu">☰</button><a class="b" href="../index.html">Hub</a><img class="lg" src="../logo.png" alt="" onerror="this.remove()"><b id="ttl">Materi & Tugas</b><button id="cp" class="ib" title="Salin link" aria-label="Salin link"></button><a class="b ib" id="raw" target="_blank" rel="noopener" title="Download" aria-label="Download"></a></header>
 <aside><input id="q" placeholder="Cari file…" type="search"><div id="tree"></div></aside>
 <main><div id="v"><p class="msg">Pilih file dari daftar.</p></div></main>
 <script>
@@ -110,13 +111,15 @@ const R={
 const MAP={ipynb:'ipynb',md:'md',csv:'csv',tsv:'csv',xlsx:'xls',xls:'xls',docx:'docx',pdf:'pdf',html:'html',htm:'html',png:'img',jpg:'img',jpeg:'img',gif:'img',webp:'img',svg:'img'};
 let cur='';
 async function open(p){cur=p;V.className='';V.innerHTML='<p class="msg">Memuat…</p>';document.body.classList.remove('open');
- $('#ttl').textContent=p;$('#raw').href=enc(p);document.querySelectorAll('.f').forEach(a=>a.classList.toggle('on',a.dataset.p===p));
+ $('#raw').href=enc(p);document.querySelectorAll('.f').forEach(a=>a.classList.toggle('on',a.dataset.p===p));
  const ext=p.split('.').pop().toLowerCase(),k=MAP[ext]||(LANG[ext]?'code':'other');
  try{await R[k](p,ext)}catch(e){if(cur===p)V.innerHTML='<p class="msg">Gagal memuat: '+esc(String(e.message||e))+'</p>'}}
 const route=()=>{const p=decodeURIComponent(location.hash.slice(2));if(p)open(p)};
 addEventListener('hashchange',route);
 $('#menu').onclick=()=>document.body.classList.toggle('open');
-$('#cp').onclick=async()=>{try{await navigator.clipboard.writeText(location.href);$('#cp').textContent='Tersalin ✓'}catch(e){prompt('Salin link:',location.href)}setTimeout(()=>$('#cp').textContent='Salin link',1500)};
+const ICO={cp:'<svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>',ok:'<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',dl:'<svg viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>'};
+$('#cp').innerHTML=ICO.cp;$('#raw').innerHTML=ICO.dl;
+$('#cp').onclick=async()=>{const b=$('#cp');try{await navigator.clipboard.writeText(location.href);b.innerHTML=ICO.ok}catch(e){prompt('Salin link:',location.href)}setTimeout(()=>b.innerHTML=ICO.cp,1500)};
 
 let files=[];
 const ICT={pdf:'PDF',docx:'DOC',doc:'DOC',xlsx:'XLS',xls:'XLS',csv:'CSV',tsv:'CSV',ipynb:'NB',py:'PY',html:'HTM',htm:'HTM'};
