@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Latihan Materi 1 | EZ Exercise</title>
+<link rel="icon" type="image/png" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -168,14 +169,15 @@ header.hd .sub{margin:12px 0 0;font-size:18px;color:var(--mut)}
 details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);font-size:22px;padding:2px 0}
 .mt{margin-top:22px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;position:relative;z-index:2;margin-bottom:26px;font:800 18px/1.2 var(--disp)}.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}.crumbs [aria-current]{opacity:.65}.crumbs span[aria-hidden]{color:#111}
 </style>
 </head>
 <body>
 <div class="wrap">
+<nav class="crumbs" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="anstat.html">Anstat</a><span aria-hidden="true">/</span><span aria-current="page">Materi 1</span></nav>
 
   <!-- START -->
   <section id="start">
-    <div class="topbar"><a class="back" href="anstat.html">Kembali</a></div>
     <header class="hd">
       <h1>Materi 1</h1>
       <p class="sub">TI5002 / Analisis Data dan Statistika · Pendahuluan</p>
@@ -223,8 +225,8 @@ details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);fon
       <div class="navrow">
         <button class="btn ghost" id="finishBtn">Selesaikan sekarang</button>
         <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-          <span class="hint" id="hint">Tekan A sampai D untuk menjawab</span>
-          <button class="btn" id="nextBtn" disabled>Berikutnya</button>
+          <span class="hint" id="hint">Tekan W, A, S, atau D untuk menjawab, Enter untuk lewati</span>
+          <button class="btn ghost" id="nextBtn">Lewati</button>
         </div>
       </div>
     </div>
@@ -290,7 +292,7 @@ const ITEMS = [{"id": "latihan1-01", "bab": 1, "type": "Konsep", "q": "Dalam ana
 /* ===== util ===== */
 const $ = s => document.querySelector(s);
 const PTS_OK = 3, PTS_BAD = -1;
-const LETTERS = ["A","B","C","D"];
+const LETTERS = ["W","A","S","D"];
 const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
 const fmt = v => (v>0?"+":v<0?"−":"")+Math.abs(v);
 const babOf = id => BAB.find(b=>b.id===id);
@@ -312,7 +314,7 @@ renderChapters(); updateSummary(); };
 }
 function updateSummary(){
   const n=ITEMS.filter(x=>cfg.babs.has(x.bab)).length;
-  $("#selCount").textContent=`${cfg.babs.size} dari ${BAB.length} bab dipilih`;
+  $("#selCount").textContent=`${cfg.babs.size} dari ${BAB.length} bagian dipilih`;
   $("#summary").innerHTML = n ? `<b>${n} soal</b>, tanpa batas waktu. Poin maksimum <b>+${n*PTS_OK}</b>.` : "Pilih minimal satu bab.";
   $("#startBtn").disabled = !n;
 }
@@ -367,9 +369,9 @@ function renderQ(){
   const fb=$("#feedback"); fb.className="feedback";
   if(a!==null) showFeedback();
   const last=S.i===S.items.length-1;
-  $("#nextBtn").textContent= last?"Lihat hasil":"Berikutnya";
-  $("#nextBtn").disabled = a===null;
-  $("#hint").textContent = a===null ? "Tekan A sampai D untuk menjawab" : "Tekan Enter untuk lanjut";
+  $("#nextBtn").textContent= a===null ? (last?"Lewati dan lihat hasil":"Lewati") : (last?"Lihat hasil":"Berikutnya");
+  $("#nextBtn").classList.toggle("ghost",a===null);
+  $("#hint").textContent = a===null ? "Tekan W, A, S, atau D untuk menjawab, Enter untuk lewati" : "Tekan Enter untuk lanjut";
   const c=counts(); $("#hudOk").textContent=c.ok; $("#hudBad").textContent=c.bad; $("#hudPts").textContent=fmt(c.pts);
   paintStrip();
 }
@@ -385,7 +387,6 @@ function answer(i){
   S.ans[S.i]=i; renderQ();
 }
 function next(){
-  if(S.ans[S.i]===null) return;
   if(S.i===S.items.length-1) finish(); else { S.i++; renderQ(); window.scrollTo({top:0}); }
 }
 $("#nextBtn").onclick=next;
@@ -393,8 +394,8 @@ document.addEventListener("keydown",e=>{
   const modalOpen=!$("#modal").classList.contains("hidden");
   if(modalOpen){ if(e.key==="Escape") $("#modal").classList.add("hidden"); return; }
   if(!S||S.done||$("#quiz").classList.contains("hidden")) return;
-  const k=e.key.toLowerCase(), m={a:0,b:1,c:2,d:3,"1":0,"2":1,"3":2,"4":3};
-  if(k in m) answer(m[k]); else if((k==="enter"||k==="arrowright")&&S.ans[S.i]!==null){ e.preventDefault(); next(); }
+  const k=e.key.toLowerCase(), m={w:0,a:1,s:2,d:3,"1":0,"2":1,"3":2,"4":3};
+  if(k in m) answer(m[k]); else if((k==="enter"||k==="arrowright")&&!(e.target&&e.target.id==="finishBtn")){ e.preventDefault(); next(); }
 });
 
 /* modal selesai */

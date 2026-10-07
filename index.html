@@ -22,10 +22,11 @@ header{max-width:1000px;margin:0 auto}
 .logo{height:clamp(60px,11.5vw,130px);width:auto;display:block}
 h1{margin:0;font:700 clamp(68px,13vw,148px)/.88 var(--disp);letter-spacing:-.01em}
 .sub{margin:10px 0 0;font-size:18px;font-weight:500;color:var(--mut)}
-.by{margin:6px 0 0;font:600 22px/1.2 var(--disp);letter-spacing:.01em}
-.by a{color:var(--amber);text-decoration:none;border-bottom:1px solid transparent}
-.by a:hover{border-bottom-color:var(--amber)}
-.by a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.by{margin: 6px 0 0;font: 600 22px/1.2 var(--disp);letter-spacing: .01em;display: inline-flex;align-items: center;gap: 8px;                   }
+.by a{color:#F99C1C;text-decoration: none;border-bottom: 1px solid transparent;}
+.by a:hover{ border-bottom-color:#F99C1C; }
+.by a:focus-visible{ outline: 3px solid #fff; outline-offset: 3px; }
+.by img{height: 1em;width: auto;display: inline-block;}
 .loop{position:relative;aspect-ratio:1000/620;max-width:1000px;margin:28px auto 0}
 .loop svg{position:absolute;inset:0;width:100%;height:100%}
 .d{fill:none;stroke:var(--amber);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:draw .75s ease-out forwards;animation-delay:var(--t)}
@@ -58,7 +59,7 @@ background:var(--amber);color:var(--ni);border:1.5px solid var(--amber);box-shad
 <header>
   <div class="brand"><h1>Repo S2</h1><img class="logo" src="logo.png" alt="Logo Repo S2"></div>
   <p class="sub">Teknik dan Manajemen Industri, ITB</p>
-  <p class="by"><a href="https://zaafirrahman.github.io" target="_blank" rel="noopener">Built by @Zaafirrahman</a></p>
+  <p class="by"><a href="https://zaafirrahman.github.io" target="_blank" rel="noopener">Forged by @Zaafirrahman</a><img src="zaa.svg" alt="Zaafirrahman"></p>
 </header>
 
 <main class="loop">
