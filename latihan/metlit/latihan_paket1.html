@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Latihan Materi 3 | Metlit Exercise</title>
+<title>Latihan UTS Paket 1 (Easy) | Metlit Exercise</title>
 <link rel="icon" type="image/png" href="../../logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,7 +81,7 @@ header.hd .sub{margin:12px 0 0;font-size:18px;color:var(--mut)}
 .btn:disabled{background:#E6E6DE;color:#77776F;box-shadow:none;cursor:not-allowed;border-color:#77776F}
 
 /* hud */
-.hud{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center;margin-bottom:12px}
+.hud{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin-bottom:12px}
 .stat{display:flex;flex-direction:column;line-height:1.2}
 .stat small{color:var(--mut);font-size:13px}
 .stat .v{font-weight:700;font-size:22px}
@@ -169,18 +169,22 @@ header.hd .sub{margin:12px 0 0;font-size:18px;color:var(--mut)}
 details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);font-size:22px;padding:2px 0}
 .mt{margin-top:22px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:26px;font:800 18px/1.2 var(--disp)}.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}.crumbs [aria-current]{opacity:.65}.crumbs span[aria-hidden]{color:#111}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;position:relative;z-index:2}.crumbs a{text-decoration:none}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}.crumbs [aria-current]{opacity:.65}.crumbs{margin-bottom:26px;font:800 18px/1.2 var(--disp)}.crumbs a{color:var(--acc)}.crumbs span[aria-hidden]{color:#111}
+.lvl{display:inline-block;border:2px solid #111;padding:1px 10px;font:800 14px/1.5 var(--disp);letter-spacing:.02em;text-transform:uppercase;vertical-align:middle;color:#111}
+.lvl.l1{background:#12A594}.lvl.l2{background:#FFE14D}.lvl.l3{background:#FF4B3E}.lvl.l4{background:#111;color:#fff}
+.lvlrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:10px 0 0;font-size:15px;color:var(--mut)}
 </style>
 </head>
 <body>
 <div class="wrap">
+<nav class="crumbs" id="crumbs" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="metlit.html">Metlit</a><span aria-hidden="true">/</span><a href="uts.html">Latihan UTS</a><span aria-hidden="true">/</span><span aria-current="page">Paket 1 · Easy</span></nav>
 
   <!-- START -->
   <section id="start">
-    <nav class="crumbs" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="metlit.html">Metlit</a><span aria-hidden="true">/</span><span aria-current="page">Materi 3</span></nav>
     <header class="hd">
-      <h1>Materi 3</h1>
-      <p class="sub">TI5004 / Metodologi Penelitian dan Literasi Digital · Perumusan Masalah</p>
+      <h1>Paket 1</h1>
+      <p class="sub">TI5004 / Metodologi Penelitian dan Literasi Digital</p>
+      <p class="lvlrow"><span class="lvl l1">Easy</span><span>Definisi, istilah, dan urutan langkah langsung dari slide.</span></p>
       <div class="stk" aria-hidden="true"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><circle cx='44' cy='44' r='28' fill='#00C2A8' fill-opacity='.45'/><path d='M64 64L90 90' stroke-width='7'/><path d='M30 38C34 30 40 27 47 27' stroke-width='3'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M8 28Q28 20 50 30V84Q28 74 8 82Z' fill='#FFB300'/><path d='M92 28Q72 20 50 30V84Q72 74 92 82Z' fill='#6C4DF6' fill-opacity='.45'/><path d='M18 42Q30 38 40 44M18 54Q30 50 40 56' stroke-width='2.5'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M14 18H86Q92 18 92 24V62Q92 68 86 68H48L28 86V68H14Q8 68 8 62V24Q8 18 14 18Z' fill='#FFB300'/><text x='50' y='57' text-anchor='middle' font-family='Georgia,serif' font-size='46' font-weight='700' fill='#111' stroke='none'>?</text></svg></div>
     </header>
 
@@ -191,10 +195,10 @@ details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);fon
         <div class="rule m"><b>−1</b><span>jawaban salah</span></div>
         <div class="rule z"><b>0</b><span>tidak dijawab</span></div>
       </div>
-      <p class="rulenote">Tanpa batas waktu. Poin dinormalkan ke skala 0 sampai 100. Skor 25 setara tidak menjawab sama sekali atau menebak acak.</p>
+      <p class="rulenote">Poin dinormalkan ke skala 0 sampai 100. Skor 25 setara tidak menjawab sama sekali atau menebak acak.</p>
 
-      <div id="chapSec"><div class="sec" style="margin-top:30px">Pilih bagian <small id="selCount"></small></div>
-      <div class="chapters" id="chapters"></div></div>
+      <div class="sec" style="margin-top:30px">Pilih bab <small id="selCount"></small></div>
+      <div class="chapters" id="chapters"></div>
 
       <div class="sec" style="margin-top:30px">Pengaturan</div>
       <div class="opts-row">
@@ -211,21 +215,22 @@ details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);fon
 
   <!-- QUIZ -->
   <section id="quiz" class="hidden">
-    <div class="topbar"><span class="tag">Latihan Metlit · Materi 3</span></div>
+    <div class="topbar"><span class="tag">Latihan UTS Paket 1 · Easy</span></div>
     <div class="hud">
       <div class="stat"><small>Soal</small><span class="v num" id="hudQ">1/1</span></div>
+      <div class="timer num" id="timer" role="timer" aria-live="off">30:00</div>
       <div class="stat right"><small>Poin (<span id="hudOk">0</span> benar, <span id="hudBad">0</span> salah)</small><span class="v num" id="hudPts">0</span></div>
     </div>
     <div class="strip" id="strip" aria-hidden="true"></div>
     <div class="card flat">
-      <div class="qmeta"><span class="chip" id="qBab"></span><span class="chip t" id="qType"></span></div>
+      <div class="qmeta"><span class="chip" id="qMateri"></span><span class="chip t" id="qType"></span></div>
       <p class="qtext" id="qText"></p>
       <div class="options" id="options"></div>
       <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
       <div class="navrow">
         <button class="btn ghost" id="finishBtn">Selesaikan sekarang</button>
         <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-          <span class="hint" id="hint">Tekan A sampai D untuk menjawab</span>
+          <span class="hint" id="hint">Tekan W, A, S, D untuk menjawab</span>
           <button class="btn" id="nextBtn" disabled>Berikutnya</button>
         </div>
       </div>
@@ -234,7 +239,7 @@ details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);fon
 
   <!-- RESULT -->
   <section id="result" class="hidden">
-    <div class="topbar"><span class="tag">Hasil Materi 3</span></div>
+    <div class="topbar"><span class="tag">Hasil Paket 1 · Easy</span></div>
     <div class="card">
       <div class="res-head">
         <div class="scorebox"><span class="big num" id="scoreBig">0</span><small>skor dari 100</small></div>
@@ -249,8 +254,8 @@ details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);fon
       <div class="kpis" id="kpis"></div>
     </div>
 
-    <div class="card mt" id="recapBabCard">
-      <h2 style="font-size:28px;margin-bottom:16px">Rekap per bagian</h2>
+    <div class="card mt">
+      <h2 style="font-size:28px;margin-bottom:16px">Rekap per bab</h2>
       <div class="recap" id="recap"></div>
       <div class="insight" id="insight"></div>
     </div>
@@ -271,7 +276,7 @@ details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);fon
       <button class="btn" id="againWrong">Ulangi soal yang salah</button>
       <button class="btn ghost" id="againAll">Ulangi dengan pengaturan sama</button>
       <button class="btn ghost" id="toMenu">Ubah pengaturan</button>
-      <a class="btn ghost" href="metlit.html">Daftar materi</a>
+      <a class="btn ghost" href="uts.html">Daftar paket</a>
     </div>
   </section>
 </div>
@@ -286,18 +291,16 @@ details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);fon
 
 <script>
 /* ===== Data: tiap soal {id, bab, type, q, o:[4 pilihan], a:indeks benar, e:bahasan} ===== */
-const BAB = [{"id": 1, "short": "Bagian 1", "name": "Pendahuluan"}, {"id": 2, "short": "Bagian 2", "name": "Jenis Masalah"}, {"id": 3, "short": "Bagian 3", "name": "Sistem Terintegrasi"}, {"id": 4, "short": "Bagian 4", "name": "Sumber Masalah"}, {"id": 5, "short": "Bagian 5", "name": "Proses & Alat Perumusan"}, {"id": 6, "short": "Bagian 6", "name": "Penentuan Topik"}];
-const ITEMS = [{"id": "latihan3-01", "bab": 1, "type": "Konsep", "q": "Kata <i>perceived</i> pada definisi masalah (\"a perceived difference between what a situation is and what it should be\") menyiratkan bahwa…", "o": ["masalah selalu objektif dan terukur tanpa bergantung pada pengamat", "ada orang atau kelompok (pemilik masalah) yang mempersepsikan kesenjangan tersebut", "penyebab masalah sudah diketahui sebelum penelitian dimulai", "masalah hanya sah bila dibuktikan dengan data kuantitatif"], "a": 1, "e": "Perceived berarti dirasakan/dipersepsikan, jadi harus ada orang atau kelompok yang memiliki masalah. Penyebab justru belum diketahui pada tahap ini."}, {"id": "latihan3-02", "bab": 1, "type": "Konsep", "q": "Pada definisi masalah, bagian <i>what it should be</i> berfungsi sebagai…", "o": ["kriteria solusi (preferensi atau kondisi yang diinginkan)", "akar penyebab masalah", "hipotesis yang akan diuji", "batasan ruang lingkup penelitian"], "a": 0, "e": "What it should be adalah kondisi yang disukai/diinginkan/preferensi, sehingga menjadi kriteria untuk menilai solusi."}, {"id": "latihan3-03", "bab": 1, "type": "Konsep", "q": "Analogi rumusan masalah sebagai <i>destination</i> sebelum <i>journey</i> menyiratkan bahwa…", "o": ["tujuan bisa ditentukan setelah data terkumpul", "rumusan masalah hanya perlu ditulis di bab akhir laporan", "rancangan penelitian (sampling, percobaan, dll) baru dapat ditentukan dan diringkas setelah tujuan jelas", "semua rute penelitian pasti menghasilkan kesimpulan yang sama"], "a": 2, "e": "Dengan tujuan yang jelas, rancangan penelitian lebih mudah disusun dan rute terpendek (cara sampling, percobaan) bisa dipilih."}, {"id": "latihan3-04", "bab": 1, "type": "Konsep", "q": "Pada diagram proses penelitian Sekaran (2000), tahap yang langsung mengikuti perumusan masalah adalah…", "o": ["perumusan hipotesis", "perumusan kerangka teoritis (identifikasi variabel dan hubungannya)", "rancangan penelitian", "penyimpulan"], "a": 1, "e": "Urutannya: perumusan masalah → kerangka teoritis → hipotesis → rancangan penelitian. Hipotesis dirumuskan setelah variabel dan hubungannya dikenali."}, {"bab": 1, "type": "Konsep", "q": "Makna \"No Problem No Research\" adalah…", "o": ["penelitian hanya ada bila ada masalah", "penelitian tidak butuh masalah", "masalah harus selalu besar", "semua masalah pasti diteliti"], "a": 0, "e": "Penelitian dimulai dari adanya masalah.", "id": "latihan3-05"}, {"bab": 1, "type": "Konsep", "q": "Dalam analogi slide, rumusan masalah berperan seperti…", "o": ["tujuan (destination) sebelum perjalanan", "bekal makanan", "kendaraan", "peta lama"], "a": 0, "e": "Rumusan masalah adalah destination yang ditetapkan sebelum journey.", "id": "latihan3-06"}, {"id": "latihan3-07", "bab": 2, "type": "Konsep", "q": "Ciri yang membedakan <b>complex system</b> dari simple system adalah…", "o": ["jumlah elemen sedikit dan hukum perilaku terdefinisi jelas", "sistem tidak berevolusi dan tertutup terhadap lingkungan", "atribut elemen sudah ditentukan sebelumnya", "subsistem bersifat purposeful dan membangkitkan tujuannya sendiri"], "a": 3, "e": "Pada complex system subsistem punya tujuan sendiri, atribut tidak ditentukan sebelumnya, perilaku probabilistik, dan sistem terbuka serta berevolusi."}, {"id": "latihan3-08", "bab": 2, "type": "Kasus", "q": "Sebuah stasiun kerja memiliki 5 elemen, interaksi sedikit tetapi terorganisir, hukum perilaku jelas, dan tidak berubah seiring waktu. Klasifikasi sistemnya adalah…", "o": ["complex system karena melibatkan operator manusia", "simple system", "complex system karena terbuka terhadap lingkungan", "tidak dapat diklasifikasikan tanpa data probabilistik"], "a": 1, "e": "Jumlah elemen kecil, hukum terdefinisi, dan tidak berevolusi adalah ciri simple system."}, {"id": "latihan3-09", "bab": 2, "type": "Kasus", "q": "Serikat pekerja dan manajemen memiliki nilai dan keyakinan yang agak berbeda, tidak otomatis sepakat soal cara, tetapi kompromi masih mungkin dan keduanya terlibat mengambil keputusan. Partisipan ini bersifat…", "o": ["unitary", "coercive", "pluralist", "unitary-coercive"], "a": 2, "e": "Pluralist: kepentingan dasarnya kompatibel, nilai berbeda sebagian, kompromi mungkin. Coercive: kompromi sejati tidak mungkin."}, {"id": "latihan3-10", "bab": 2, "type": "Kasus", "q": "Satu pihak memaksakan keputusan kepada pihak lain; tidak ada kesepakatan tentang tujuan dalam susunan sistem saat ini dan kompromi sejati tidak mungkin. Ini ciri partisipan…", "o": ["unitary", "pluralist", "coercive", "simple"], "a": 2, "e": "Coercive: tidak berbagi kepentingan, nilai bertentangan, dan ada pihak yang dipaksa menerima keputusan."}, {"id": "latihan3-11", "bab": 2, "type": "Konsep", "q": "Konteks yang menurut slide <b>belum</b> dimiliki alat (tools) memadai untuk menanganinya adalah…", "o": ["simple-unitary", "complex-pluralist", "simple-coercive", "complex-coercive"], "a": 3, "e": "Slide menyatakan untuk complex-coercive tools belum tersedia."}, {"id": "latihan3-12", "bab": 2, "type": "Kasus", "q": "Manajemen puncak memutuskan lokasi pabrik baru untuk 10 tahun ke depan di tengah ketidakpastian pasar. Karakter masalah dan pendekatan yang cocok menurut slide adalah…", "o": ["operasional, deterministik, model standar", "taktis, probabilistik, model standar", "strategis, tidak terstruktur, ketidakpastian, simulasi", "operasional, semi terstruktur, simulasi"], "a": 2, "e": "Level top: strategic, unstructured, uncertainty, dengan simulasi. Operasional: structured-deterministic; taktis: semi-structured-probabilistic."}, {"id": "latihan3-13", "bab": 2, "type": "Konsep", "q": "Pasangan karakteristik yang benar untuk masalah <b>tactical</b> (middle management) adalah…", "o": ["semi terstruktur, probabilistik, model standar", "terstruktur, deterministik, model standar", "tidak terstruktur, ketidakpastian, simulasi", "terstruktur, probabilistik, simulasi"], "a": 0, "e": "Tactical: semi structured, probabilistic, model standard."}, {"bab": 2, "type": "Konsep", "q": "Ciri <b>complex system</b> adalah…", "o": ["elemen banyak dan interaksi banyak", "elemen sedikit dan interaksi sedikit", "tertutup dan tidak berubah", "hukum perilaku sangat sederhana"], "a": 0, "e": "Complex: banyak elemen, banyak interaksi, longgar, probabilistik, terbuka.", "id": "latihan3-14"}, {"bab": 2, "type": "Konsep", "q": "Partisipan <b>unitary</b> adalah partisipan yang…", "o": ["berbagi kepentingan dan nilai yang kompatibel", "saling bertentangan total", "dipaksa menerima keputusan", "tidak ikut keputusan"], "a": 0, "e": "Unitary: kepentingan sama, nilai dan keyakinan sangat kompatibel.", "id": "latihan3-15"}, {"bab": 2, "type": "Konsep", "q": "Masalah level operasional bersifat…", "o": ["deterministik", "penuh ketidakpastian", "tak terstruktur", "selalu strategis"], "a": 0, "e": "Operational: structured, deterministic, model standar.", "id": "latihan3-16"}, {"id": "latihan3-17", "bab": 3, "type": "Kasus", "q": "Sebuah penelitian menilai kinerja dengan indikator ROI, ROE, dan IRR. Tingkat sistem terintegrasi yang paling sesuai adalah…", "o": ["work station", "manufacturing system", "corporate system", "industrial system"], "a": 2, "e": "Tabel slide: corporate system (people, facility, material) dengan tujuan ROI, ROE, IRR."}, {"bab": 3, "type": "Konsep", "q": "Tipe sistem terintegrasi paling kecil yang tersusun dari man, machine, dan material adalah…", "o": ["industrial system", "work station", "corporate system", "manufacturing system"], "a": 1, "e": "Tipe: work station, manufacturing, corporate, industrial.", "id": "latihan3-18"}, {"id": "latihan3-19", "bab": 4, "type": "Kasus", "q": "Seorang peneliti tiba-tiba terilhami topik saat melihat konstruksi (misalnya Cakar Ayam) tanpa rencana. Menurut Ticehurst &amp; Veal, ini termasuk…", "o": ["pengamatan sepintas (bagian personal interest)", "kebijakan organisasi", "isu populer", "bacaan (the literature)"], "a": 0, "e": "Pengamatan sepintas adalah ilham tiba-tiba tanpa rencana karena melihat sesuatu, bagian dari personal interest."}, {"id": "latihan3-20", "bab": 4, "type": "Kasus", "q": "Peneliti memilih topik dari bagian \"saran penelitian lanjutan\" sebuah laporan penelitian. Sumber topiknya adalah…", "o": ["intuisi", "the literature (bacaan)", "social issues", "policy or management"], "a": 1, "e": "Laporan penelitian yang memuat saran penelitian lanjut termasuk sumber the literature."}, {"id": "latihan3-21", "bab": 4, "type": "Kasus", "q": "Topik penelitian berangkat dari kebijakan perusahaan yang tidak berjalan seperti yang direncanakan. Sumber topiknya adalah…", "o": ["minat pribadi", "isu populer", "pengamatan sepintas", "kebijakan organisasi (policy or management)"], "a": 3, "e": "Slide menyebut kebijakan yang memerlukan langkah operasional atau yang tidak berjalan sesuai rencana sebagai sumber masalah."}, {"id": "latihan3-22", "bab": 4, "type": "Konsep", "q": "Sumber topik <i>popular issues</i> menurut Ticehurst &amp; Veal ditandai oleh…", "o": ["pengalaman kerja praktek sendiri", "diskusi, seminar, dan pertemuan ilmiah, di mana para pakar melihat masalah secara profesional", "laporan penelitian terdahulu", "pernyataan pemegang otoritas pemerintahan"], "a": 1, "e": "Popular issues datang dari diskusi, seminar, dan pertemuan ilmiah."}, {"bab": 4, "type": "Konsep", "q": "Pengalaman saat kerja praktek yang memunculkan ide topik termasuk sumber masalah…", "o": ["minat pribadi", "isu populer", "kebijakan organisasi", "bacaan"], "a": 0, "e": "Pengalaman pribadi adalah bagian dari minat pribadi.", "id": "latihan3-23"}, {"id": "latihan3-24", "bab": 5, "type": "Kasus", "q": "\"Dua bulan terakhir perusahaan tidak bisa melakukan delivery tepat waktu.\" Pernyataan ini paling tepat disebut…", "o": ["akar masalah", "definisi masalah", "gejala (symptom) yang perlu diselidiki", "tujuan penelitian"], "a": 2, "e": "Yang terlihat umumnya gejala, bukan masalah. Gejala menunjukkan adanya masalah yang perlu diselidiki lewat observasi, wawancara, data sekunder, dan studi literatur."}, {"id": "latihan3-25", "bab": 5, "type": "Konsep", "q": "Urutan proses perumusan masalah yang benar menurut slide adalah…", "o": ["define problem → list of symptoms → analysis → root causes", "preliminary study → list of symptoms → analysis → identify root causes → define problem", "list of symptoms → define problem → preliminary study → analysis", "preliminary study → define problem → analysis → root causes"], "a": 1, "e": "Preliminary study, daftar gejala, analisis, identifikasi akar penyebab, lalu definisi masalah."}, {"bab": 5, "type": "Konsep", "q": "Diagram tulang ikan (fishbone) dipakai untuk…", "o": ["mencari akar penyebab masalah", "menghitung sampel", "menulis laporan", "membuat kuesioner"], "a": 0, "e": "Fishbone adalah alat mengidentifikasi akar penyebab.", "id": "latihan3-26"}, {"id": "latihan3-27", "bab": 6, "type": "Kasus", "q": "Topik menarik dan urgen, tetapi memerlukan data tujuh tahun dan dana jauh melampaui kemampuan peneliti. Kriteria pendefinisian masalah yang baik yang tidak terpenuhi adalah…", "o": ["relevant", "feasible", "interesting", "semuanya terpenuhi"], "a": 1, "e": "Feasible: dapat diselesaikan dalam kerangka waktu dan sumber daya penelitian."}, {"id": "latihan3-28", "bab": 6, "type": "Kasus", "q": "Peneliti ingin meneliti \"ketenangan batin pekerja\" tetapi belum punya cara mengukurnya. Pertimbangan pemilihan masalah yang bermasalah adalah…", "o": ["availability of data", "ethical issues", "measurement of concepts", "interest"], "a": 2, "e": "Measurement of concepts: konsep yang dipakai harus diyakinkan dapat diukur."}, {"bab": 6, "type": "Konsep", "q": "Tiga kriteria pendefinisian masalah yang baik adalah…", "o": ["relevant, feasible, interesting", "besar, mahal, populer", "cepat, murah, mudah", "lama, rumit, mahal"], "a": 0, "e": "Relevant, Feasible, Interesting.", "id": "latihan3-29"}, {"bab": 6, "type": "Konsep", "q": "Masalah penelitian secara formal dirumuskan dalam bentuk…", "o": ["kalimat tanya", "kalimat perintah", "kalimat seru", "tabel angka"], "a": 0, "e": "Pendefinisian masalah dirumuskan dalam kalimat tanya (bagaimana, apa, apakah).", "id": "latihan3-30"}];
-
-/* ===== util ===== */
-const $ = s => document.querySelector(s);
-const PTS_OK = 3, PTS_BAD = -1;
-const LETTERS = ["A","B","C","D"];
+const BAB = [{"id": 1, "short": "Materi 1", "name": "Hakekat Penelitian S2"}, {"id": 2, "short": "Materi 2", "name": "Proses Penelitian"}, {"id": 3, "short": "Materi 3", "name": "Perumusan Masalah"}, {"id": 4, "short": "Materi 4", "name": "Kerangka Teoritis"}];
+const ITEMS = [{"bab": 1, "type": "Konsep", "q": "Alat ukur yang <i>reliable</i> berarti…", "o": ["mengukur konsep yang tepat", "konsisten dan dapat diandalkan", "mahal", "rumit"], "a": 1, "e": "Reliable = konsisten; valid = mengukur apa yang seharusnya diukur.", "id": "M1-05"}, {"bab": 1, "type": "Konsep", "q": "Alat ukur yang <i>valid</i> berarti…", "o": ["mengukur apa yang memang ingin diukur", "selalu memberi angka sama", "dibuat oleh pakar", "dipakai banyak orang"], "a": 0, "e": "Valid = tepat mengukur konsep yang dimaksud.", "id": "M1-06"}, {"bab": 1, "type": "Konsep", "q": "Penelitian yang bertujuan memahami suatu fenomena disebut penelitian…", "o": ["terapan", "dasar (basic)", "eksplanatori", "kuantitatif"], "a": 1, "e": "Basic research memahami fenomena; applied research memecahkan masalah.", "id": "M1-15"}, {"bab": 1, "type": "Konsep", "q": "Penelitian yang bertujuan memecahkan masalah praktis disebut penelitian…", "o": ["dasar", "terapan (applied)", "murni", "eksploratori"], "a": 1, "e": "Applied research berorientasi pada pemecahan masalah.", "id": "M1-16"}, {"bab": 1, "type": "Konsep", "q": "Pendekatan penelitian yang terstruktur (tujuan, desain, sampel sudah ditentukan) disebut…", "o": ["kualitatif", "kuantitatif", "eksploratori", "studi kasus"], "a": 1, "e": "Structured approach = kuantitatif.", "id": "M1-17"}, {"bab": 1, "type": "Konsep", "q": "Penelitian deskriptif bertujuan untuk…", "o": ["menggambarkan secara sistematis suatu situasi, masalah, atau fenomena", "menguji sebab-akibat secara eksperimen", "meramalkan harga saham", "menciptakan teori tanpa data"], "a": 0, "e": "Descriptive research menggambarkan situasi atau fenomena secara sistematis.", "id": "M1-18"}, {"bab": 1, "type": "Konsep", "q": "Hipotesis adalah…", "o": ["kesimpulan akhir", "dugaan sementara yang akan diuji dengan data", "data mentah", "daftar pustaka"], "a": 1, "e": "Hipotesis adalah prediksi yang kebenarannya dibuktikan dengan data.", "id": "M1-27"}, {"bab": 1, "type": "Konsep", "q": "Langkah pertama dalam metoda ilmiah adalah…", "o": ["penarikan kesimpulan", "pengujian hipotesis", "perumusan masalah", "penulisan laporan"], "a": 2, "e": "Urutan dimulai dari perumusan masalah.", "id": "M1-28"}, {"bab": 1, "type": "Konsep", "q": "Langkah terakhir dalam metoda ilmiah adalah…", "o": ["perumusan masalah", "penarikan kesimpulan", "penyusunan kerangka berpikir", "perumusan hipotesis"], "a": 1, "e": "Metoda ilmiah ditutup dengan penarikan kesimpulan.", "id": "M1-29"}, {"bab": 1, "type": "Konsep", "q": "Penalaran deduktif bergerak dari…", "o": ["khusus ke umum", "umum ke khusus", "data ke data", "opini ke opini"], "a": 1, "e": "Deduktif: dari premis umum ke kesimpulan khusus.", "id": "M1-30"}, {"bab": 2, "type": "Konsep", "q": "Metoda ilmiah adalah…", "o": ["prosedur sistematik untuk mendapatkan ilmu baru", "kumpulan opini", "cara menulis laporan", "teknik wawancara"], "a": 0, "e": "Metoda ilmiah = prosedur sistematik dalam penelitian untuk mendapatkan ilmu baru.", "id": "M2-04"}, {"bab": 2, "type": "Konsep", "q": "Langkah pertama pada diagram alir proses penelitian adalah…", "o": ["analisis data", "perumusan masalah", "penyusunan laporan", "pelaksanaan penelitian"], "a": 1, "e": "Langkah 1 adalah perumusan masalah.", "id": "M2-10"}, {"bab": 2, "type": "Konsep", "q": "Pada proposal yang baik, pembaca dapat memahami…", "o": ["masalah penelitian, hasil yang diharapkan, cara melakukan penelitian, dan jadwalnya", "hanya biaya penelitian", "hanya daftar pustaka", "hanya kesimpulan"], "a": 0, "e": "Itu empat hal yang harus jelas dalam proposal.", "id": "M2-17"}, {"bab": 2, "type": "Konsep", "q": "Strategi penelitian berupa percobaan di laboratorium disebut…", "o": ["survey", "eksperimen", "observasi", "studi kasus"], "a": 1, "e": "Eksperimen = percobaan di laboratorium.", "id": "M2-18"}, {"bab": 2, "type": "Konsep", "q": "Strategi penelitian yang memakai obyek spesifik untuk investigasi empiris fenomena disebut…", "o": ["case study", "eksperimen", "grounded theory", "survey"], "a": 0, "e": "Case study memakai obyek spesifik.", "id": "M2-19"}, {"bab": 2, "type": "Konsep", "q": "Penelitian yang mencampur beberapa strategi disebut…", "o": ["mixed methods", "longitudinal", "cross-sectional", "eksploratori"], "a": 0, "e": "Mixed methods = campuran beberapa strategi.", "id": "M2-20"}, {"bab": 2, "type": "Konsep", "q": "Studi <i>cross-sectional</i> berarti data dikumpulkan…", "o": ["pada banyak titik waktu", "sekali pada satu periode waktu", "selama bertahun-tahun", "hanya dari arsip"], "a": 1, "e": "Cross-sectional: sekali; longitudinal: lebih dari satu titik waktu.", "id": "M2-21"}, {"bab": 2, "type": "Konsep", "q": "Langkah terakhir pada diagram alir proses penelitian adalah…", "o": ["analisis data", "perancangan penelitian", "penyusunan laporan", "pengembangan hipotesis"], "a": 2, "e": "Langkah 6 adalah penyusunan laporan.", "id": "M2-25"}, {"bab": 2, "type": "Konsep", "q": "Menurut slide, engineering adalah…", "o": ["to design under constraints", "to observe only", "to memorize", "to publish"], "a": 0, "e": "Engineering adalah \"to design under constraints\".", "id": "M2-29"}, {"bab": 2, "type": "Konsep", "q": "Teknik Industri berkaitan dengan perancangan, perbaikan, dan pemasangan…", "o": ["sistem terintegrasi", "mesin tunggal saja", "gedung", "jalan raya"], "a": 0, "e": "Definisi IIE: design, improvement, installation of integrated systems.", "id": "M2-30"}, {"bab": 3, "type": "Konsep", "q": "Makna \"No Problem No Research\" adalah…", "o": ["penelitian hanya ada bila ada masalah", "penelitian tidak butuh masalah", "masalah harus selalu besar", "semua masalah pasti diteliti"], "a": 0, "e": "Penelitian dimulai dari adanya masalah.", "id": "M3-05"}, {"bab": 3, "type": "Konsep", "q": "Dalam analogi slide, rumusan masalah berperan seperti…", "o": ["tujuan (destination) sebelum perjalanan", "bekal makanan", "kendaraan", "peta lama"], "a": 0, "e": "Rumusan masalah adalah destination yang ditetapkan sebelum journey.", "id": "M3-06"}, {"bab": 3, "type": "Konsep", "q": "Ciri <b>complex system</b> adalah…", "o": ["elemen banyak dan interaksi banyak", "elemen sedikit dan interaksi sedikit", "tertutup dan tidak berubah", "hukum perilaku sangat sederhana"], "a": 0, "e": "Complex: banyak elemen, banyak interaksi, longgar, probabilistik, terbuka.", "id": "M3-14"}, {"bab": 3, "type": "Konsep", "q": "Partisipan <b>unitary</b> adalah partisipan yang…", "o": ["berbagi kepentingan dan nilai yang kompatibel", "saling bertentangan total", "dipaksa menerima keputusan", "tidak ikut keputusan"], "a": 0, "e": "Unitary: kepentingan sama, nilai dan keyakinan sangat kompatibel.", "id": "M3-15"}, {"bab": 3, "type": "Konsep", "q": "Masalah level operasional bersifat…", "o": ["deterministik", "penuh ketidakpastian", "tak terstruktur", "selalu strategis"], "a": 0, "e": "Operational: structured, deterministic, model standar.", "id": "M3-16"}, {"bab": 3, "type": "Konsep", "q": "Tipe sistem terintegrasi paling kecil yang tersusun dari man, machine, dan material adalah…", "o": ["industrial system", "work station", "corporate system", "manufacturing system"], "a": 1, "e": "Tipe: work station, manufacturing, corporate, industrial.", "id": "M3-18"}, {"bab": 3, "type": "Konsep", "q": "Pengalaman saat kerja praktek yang memunculkan ide topik termasuk sumber masalah…", "o": ["minat pribadi", "isu populer", "kebijakan organisasi", "bacaan"], "a": 0, "e": "Pengalaman pribadi adalah bagian dari minat pribadi.", "id": "M3-23"}, {"bab": 3, "type": "Konsep", "q": "Diagram tulang ikan (fishbone) dipakai untuk…", "o": ["mencari akar penyebab masalah", "menghitung sampel", "menulis laporan", "membuat kuesioner"], "a": 0, "e": "Fishbone adalah alat mengidentifikasi akar penyebab.", "id": "M3-26"}, {"bab": 3, "type": "Konsep", "q": "Tiga kriteria pendefinisian masalah yang baik adalah…", "o": ["relevant, feasible, interesting", "besar, mahal, populer", "cepat, murah, mudah", "lama, rumit, mahal"], "a": 0, "e": "Relevant, Feasible, Interesting.", "id": "M3-29"}, {"bab": 3, "type": "Konsep", "q": "Masalah penelitian secara formal dirumuskan dalam bentuk…", "o": ["kalimat tanya", "kalimat perintah", "kalimat seru", "tabel angka"], "a": 0, "e": "Pendefinisian masalah dirumuskan dalam kalimat tanya (bagaimana, apa, apakah).", "id": "M3-30"}, {"bab": 4, "type": "Konsep", "q": "Literature review adalah kajian terhadap karya…", "o": ["yang sudah dan belum dipublikasikan dari sumber sekunder", "hanya data primer", "hanya internet", "hanya buku fiksi"], "a": 0, "e": "Mencakup published and unpublished work dari secondary sources.", "id": "M4-07"}, {"bab": 4, "type": "Konsep", "q": "Textbook dan ensiklopedi termasuk sumber bacaan…", "o": ["umum", "khusus", "tidak ilmiah", "primer"], "a": 0, "e": "Sumber umum: textbook, ensiklopedi, kamus.", "id": "M4-08"}, {"bab": 4, "type": "Konsep", "q": "Contoh database jurnal ilmiah elektronik pada slide adalah…", "o": ["ScienceDirect", "Instagram", "YouTube", "WhatsApp"], "a": 0, "e": "Contoh: Science Direct, IEEE Explorer, Springer, Proquest.", "id": "M4-09"}, {"bab": 4, "type": "Konsep", "q": "Derajat publikasi tertinggi adalah publikasi pada…", "o": ["jurnal internasional", "laporan kelas", "tugas akhir", "working paper"], "a": 0, "e": "Jurnal berkualifikasi internasional adalah derajat tertinggi.", "id": "M4-10"}, {"bab": 4, "type": "Konsep", "q": "Menurut slide, teori adalah…", "o": ["model atau abstraksi dari dunia nyata yang terobservasi", "fakta mentah", "data kuesioner", "daftar pustaka"], "a": 0, "e": "Teori adalah model/abstraksi segmen dunia nyata.", "id": "M4-15"}, {"bab": 4, "type": "Konsep", "q": "Kerangka teoritik juga disebut…", "o": ["model konseptual", "laporan akhir", "instrumen", "populasi"], "a": 0, "e": "Kerangka teoritik atau model konseptual.", "id": "M4-19"}, {"bab": 4, "type": "Konsep", "q": "Variabel adalah sesuatu yang…", "o": ["nilainya berubah-ubah", "selalu tetap", "tidak bisa diukur", "hanya angka bulat"], "a": 0, "e": "Variabel mempunyai nilai yang berubah-ubah.", "id": "M4-25"}, {"bab": 4, "type": "Konsep", "q": "Empat jenis variabel pada slide adalah dependen, independen, moderasi, dan…", "o": ["mediasi", "konstanta", "parameter", "populasi"], "a": 0, "e": "Dependen, independen, moderasi, mediasi.", "id": "M4-26"}, {"bab": 4, "type": "Konsep", "q": "Variabel independen adalah variabel yang…", "o": ["memengaruhi variabel dependen", "dipengaruhi semua variabel", "tidak punya peran", "selalu satu"], "a": 0, "e": "Independen memengaruhi dependen.", "id": "M4-27"}, {"bab": 4, "type": "Konsep", "q": "Hubungan antar variabel dalam model matematik dinyatakan dengan…", "o": ["persamaan dan pertaksamaan", "gambar saja", "opini", "kutipan"], "a": 0, "e": "Hubungan antar variabel: persamaan, pertaksamaan.", "id": "M4-30"}, {"id": "M4-14", "bab": 4, "type": "Konsep", "q": "Struktur teori terdiri dari konsep, hubungan, dan…", "o": ["sampel", "lingkup (scope)", "instrumen", "hipotesis alternatif"], "a": 1, "e": "Struktur teori: konsep, hubungan antar konsep, dan lingkup (scope)."}, {"id": "M2-08", "bab": 2, "type": "Konsep", "q": "Hasil akhir dari tiga tahap pertama proses penelitian sering disebut…", "o": ["laporan akhir", "proposal penelitian", "tesis", "uji sensitivitas"], "a": 1, "e": "Tahap perumusan masalah, hipotesis/model, dan perancangan menghasilkan proposal penelitian."}, {"id": "M2-11", "bab": 2, "type": "Konsep", "q": "Tujuan penelitian \"exploration\" menurut slide berarti…", "o": ["mencari fakta", "mencari pola (looking for patterns)", "meramalkan kejadian", "memperbaiki praktik"], "a": 1, "e": "Description: fact finding; exploration: looking for patterns; analysis: explaining why/how; prediction: forecasting; problem solving: improvement."}, {"id": "M1-24", "bab": 1, "type": "Konsep", "q": "Menurut slide, penyelidikan ilmiah lebih didominasi oleh…", "o": ["speculative activity", "critical (analytical) activity", "intuisi semata", "pengalaman pribadi tanpa verifikasi"], "a": 1, "e": "Speculative mengandalkan pengalaman dan intuisi; critical/analytical mengandalkan ketelitian, pengetahuan mendalam, dan perhatian pada kerincian."}, {"id": "M1-23", "bab": 1, "type": "Konsep", "q": "Langkah metoda ilmiah yang tepat berada sebelum perumusan hipotesis adalah…", "o": ["pengujian hipotesis", "penarikan kesimpulan", "penyusunan kerangka berpikir", "pengumpulan data lapangan"], "a": 2, "e": "Urutan: perumusan masalah, penyusunan kerangka berpikir, perumusan hipotesis, pengujian hipotesis, penarikan kesimpulan."}, {"id": "M2-23", "bab": 2, "type": "Konsep", "q": "Kegiatan pengumpulan data pada langkah 4 adalah…", "o": ["wawancara, kuesioner, eksperimen, sampling, observasi", "uji sensitivitas dan verifikasi", "perumusan hipotesis", "penulisan buku tesis"], "a": 0, "e": "Pelaksanaan penelitian sesuai rencana, dengan kegiatan pengumpulan data."}, {"id": "M3-11", "bab": 3, "type": "Konsep", "q": "Konteks yang menurut slide <b>belum</b> dimiliki alat (tools) memadai untuk menanganinya adalah…", "o": ["simple-unitary", "complex-pluralist", "simple-coercive", "complex-coercive"], "a": 3, "e": "Slide menyatakan untuk complex-coercive tools belum tersedia."}, {"id": "M4-12", "bab": 4, "type": "Konsep", "q": "Menurut slide, membangun teori (theory building) identik dengan…", "o": ["mengumpulkan kuesioner", "memodelkan sistem nyata (system modeling)", "menulis laporan", "menghitung sampel"], "a": 1, "e": "Theory building identik dengan system modeling."}, {"id": "M1-19", "bab": 1, "type": "Konsep", "q": "Sifat pragmatisme ilmu menurut slide adalah…", "o": ["kebenaran absolut dibuktikan sekali untuk selamanya", "hipotesis diterima selama tidak ada fakta yang menolaknya", "ilmu hanya mencari kebenaran yang tidak berguna", "teori tidak boleh direvisi"], "a": 1, "e": "Pembuktian tidak absolut; ilmu mencari kebenaran yang bermanfaat bagi manusia."}, {"id": "M4-29", "bab": 4, "type": "Konsep", "q": "Dalam model optimisasi, variabel independen (alternatif) sering disebut…", "o": ["outcomes", "decision variables (variabel keputusan)", "konstanta", "kriteria"], "a": 1, "e": "Variabel independen adalah alternatif/decision variables; variabel dependen adalah outcomes atau ukuran efektivitas."}];
+const TOTAL_SECONDS = 30*60, PTS_OK = 3, PTS_BAD = -1;
+const LETTERS = ["W","A","S","D"];
 const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const mmss = s => { s=Math.max(0,s); return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0"); };
 const fmt = v => (v>0?"+":v<0?"−":"")+Math.abs(v);
 const babOf = id => BAB.find(b=>b.id===id);
 const cfg = { babs:new Set(BAB.map(b=>b.id)), shufQ:true, shufO:true };
-let S = null;
+let S = null, tick = null;
 
 /* ===== layar awal ===== */
 function renderChapters(){
@@ -307,15 +310,14 @@ function renderChapters(){
     const el=document.createElement("button");
     el.className="chap"; el.setAttribute("aria-pressed",cfg.babs.has(b.id));
     el.innerHTML=`<span class="box"></span><span><b>${b.short}: ${b.name}</b><span>${n} soal</span></span>`;
-    el.onclick=()=>{ cfg.babs.has(b.id)?cfg.babs.delete(b.id):cfg.babs.add(b.id); $("#chapSec").classList.toggle("hidden",BAB.length<2);
-renderChapters(); updateSummary(); };
+    el.onclick=()=>{ cfg.babs.has(b.id)?cfg.babs.delete(b.id):cfg.babs.add(b.id); renderChapters(); updateSummary(); };
     box.appendChild(el);
   });
 }
 function updateSummary(){
   const n=ITEMS.filter(x=>cfg.babs.has(x.bab)).length;
   $("#selCount").textContent=`${cfg.babs.size} dari ${BAB.length} bab dipilih`;
-  $("#summary").innerHTML = n ? `<b>${n} soal</b>, tanpa batas waktu. Poin maksimum <b>+${n*PTS_OK}</b>.` : "Pilih minimal satu bab.";
+  $("#summary").innerHTML = n ? `<b>${n} soal</b> dalam 30 menit, rata-rata <b>${Math.round(TOTAL_SECONDS/n)} detik</b> per soal. Poin maksimum <b>+${n*PTS_OK}</b>.` : "Pilih minimal satu bab.";
   $("#startBtn").disabled = !n;
 }
 $("#tgQ").onclick=e=>{cfg.shufQ=!cfg.shufQ;e.currentTarget.setAttribute("aria-pressed",cfg.shufQ);};
@@ -328,14 +330,21 @@ function buildItems(){
 function permuteOptions(items){
   return items.map(it=>{ const idx=shuffle([0,1,2,3]); return {...it,o:idx.map(i=>it.o[i]),a:idx.indexOf(it.a)}; });
 }
-function show(id){ ["start","quiz","result"].forEach(s=>$("#"+s).classList.toggle("hidden",s!==id)); window.scrollTo(0,0); }
+function show(id){ $("#crumbs").classList.toggle("hidden",id==="quiz"); ["start","quiz","result"].forEach(s=>$("#"+s).classList.toggle("hidden",s!==id)); window.scrollTo(0,0); }
 
 /* ===== sesi ===== */
 function startSession(items){
   if(cfg.shufO) items=permuteOptions(items);
-  S={items,ans:items.map(()=>null),i:0,done:false};
+  S={items,ans:items.map(()=>null),i:0,start:Date.now(),end:Date.now()+TOTAL_SECONDS*1000,done:false};
   $("#strip").innerHTML=items.map(()=>"<i></i>").join("");
-  show("quiz"); renderQ();
+  show("quiz"); renderQ(); clearInterval(tick); tick=setInterval(onTick,250); onTick();
+}
+function onTick(){
+  if(!S||S.done) return;
+  const left=Math.ceil((S.end-Date.now())/1000), t=$("#timer");
+  t.textContent=mmss(left);
+  t.classList.toggle("warn",left<=300&&left>60); t.classList.toggle("crit",left<=60);
+  if(left<=0) finish(true);
 }
 function counts(){
   let ok=0,bad=0;
@@ -353,7 +362,7 @@ function paintStrip(){
 function renderQ(){
   const it=S.items[S.i], a=S.ans[S.i], b=babOf(it.bab);
   $("#hudQ").textContent=`${S.i+1}/${S.items.length}`;
-  $("#qBab").textContent=`${b.short}: ${b.name}`;
+  $("#qMateri").textContent=`${b.short}: ${b.name}`;
   $("#qType").textContent=it.type;
   $("#qText").innerHTML=it.q;
   const box=$("#options"); box.innerHTML=""; box.classList.toggle("locked",a!==null);
@@ -369,9 +378,10 @@ function renderQ(){
   const fb=$("#feedback"); fb.className="feedback";
   if(a!==null) showFeedback();
   const last=S.i===S.items.length-1;
-  $("#nextBtn").textContent= last?"Lihat hasil":"Berikutnya";
-  $("#nextBtn").disabled = a===null;
-  $("#hint").textContent = a===null ? "Tekan A sampai D untuk menjawab" : "Tekan Enter untuk lanjut";
+  $("#nextBtn").textContent= last?"Lihat hasil":(a===null?"Lewati":"Berikutnya");
+  $("#nextBtn").disabled = false;
+  $("#nextBtn").classList.toggle("ghost", a===null && !last);
+  $("#hint").textContent = a===null ? "Tekan W, A, S, D untuk menjawab, Enter untuk lewati" : "Tekan Enter untuk lanjut";
   const c=counts(); $("#hudOk").textContent=c.ok; $("#hudBad").textContent=c.bad; $("#hudPts").textContent=fmt(c.pts);
   paintStrip();
 }
@@ -387,16 +397,15 @@ function answer(i){
   S.ans[S.i]=i; renderQ();
 }
 function next(){
-  if(S.ans[S.i]===null) return;
-  if(S.i===S.items.length-1) finish(); else { S.i++; renderQ(); window.scrollTo({top:0}); }
+  if(S.i===S.items.length-1) finish(false); else { S.i++; renderQ(); window.scrollTo({top:0}); }
 }
 $("#nextBtn").onclick=next;
 document.addEventListener("keydown",e=>{
   const modalOpen=!$("#modal").classList.contains("hidden");
   if(modalOpen){ if(e.key==="Escape") $("#modal").classList.add("hidden"); return; }
   if(!S||S.done||$("#quiz").classList.contains("hidden")) return;
-  const k=e.key.toLowerCase(), m={a:0,b:1,c:2,d:3,"1":0,"2":1,"3":2,"4":3};
-  if(k in m) answer(m[k]); else if((k==="enter"||k==="arrowright")&&S.ans[S.i]!==null){ e.preventDefault(); next(); }
+  const k=e.key.toLowerCase(), m={w:0,a:1,s:2,d:3,"1":0,"2":1,"3":2,"4":3};
+  if(k in m) answer(m[k]); else if((k==="enter"||k==="arrowright")){ e.preventDefault(); next(); }
 });
 
 /* modal selesai */
@@ -406,7 +415,7 @@ $("#finishBtn").onclick=()=>{
   $("#modal").classList.remove("hidden"); $("#mYes").focus();
 };
 $("#mNo").onclick=()=>$("#modal").classList.add("hidden");
-$("#mYes").onclick=()=>{ $("#modal").classList.add("hidden"); finish(); };
+$("#mYes").onclick=()=>{ $("#modal").classList.add("hidden"); finish(false); };
 
 /* ===== hasil ===== */
 function recapRows(keyOf, labelOf, subOf){
@@ -425,25 +434,27 @@ const rowHtml = r => `
     <div class="sc num">${r.o}/${r.t}</div>
   </div>`;
 
-function finish(){
-  if(S.done) return; S.done=true;
+function finish(timeUp){
+  if(S.done) return; S.done=true; clearInterval(tick);
+  const used=Math.min(TOTAL_SECONDS,Math.round((Date.now()-S.start)/1000));
   const n=S.items.length, {ok,bad,pts}=counts(), blank=n-ok-bad;
   const min=n*PTS_BAD, max=n*PTS_OK;
   const score=Math.round((pts-min)/(max-min)*100);
   const grade = score>=85?"Sangat baik": score>=70?"Baik": score>=55?"Cukup":"Perlu latihan lagi";
   $("#scoreBig").textContent=score;
   $("#grade").textContent=grade;
-  $("#gradeSub").textContent=`Kamu menjawab benar ${ok} dari ${n} soal.`;
+  $("#gradeSub").textContent=(timeUp?"Waktu habis. ":"")+`Kamu menjawab benar ${ok} dari ${n} soal.`;
   $("#stack").innerHTML=`<i class="g" style="width:${ok/n*100}%"></i><i class="r" style="width:${bad/n*100}%"></i><i class="b" style="width:${blank/n*100}%"></i>`;
   $("#formula").innerHTML=`Poin mentah: ${ok} × 3 + ${bad} × (−1) + ${blank} × 0 = <b class="num">${fmt(pts)}</b>, dari rentang ${fmt(min)} sampai ${fmt(max)}. Skor = (${fmt(pts)} − (${fmt(min)})) ÷ ${max-min} × 100 = <b class="num">${score}</b>.`;
-  const answered=ok+bad, acc=answered?Math.round(ok/answered*100):0;
+  const answered=ok+bad, acc=answered?Math.round(ok/answered*100):0, avg=answered?Math.round(used/answered):null;
   $("#kpis").innerHTML=`
     <div class="kpi ok"><small>Benar</small><b class="num">${ok}</b></div>
     <div class="kpi bad"><small>Salah</small><b class="num">${bad}</b></div>
     <div class="kpi"><small>Tidak dijawab</small><b class="num">${blank}</b></div>
     <div class="kpi"><small>Poin mentah</small><b class="num">${fmt(pts)}</b></div>
-    <div class="kpi"><small>Akurasi (yang dijawab)</small><b class="num">${acc}%</b></div>`;
-  $("#recapBabCard").classList.toggle("hidden",BAB.length<2);
+    <div class="kpi"><small>Akurasi (yang dijawab)</small><b class="num">${acc}%</b></div>
+    <div class="kpi"><small>Waktu terpakai</small><b class="num">${mmss(used)}</b></div>
+    <div class="kpi"><small>Rata-rata per soal</small><b class="num">${avg===null?"-":avg+" dtk"}</b></div>`;
   const rows=recapRows(it=>it.bab, k=>babOf(k).name, k=>babOf(k).short+": ").sort((a,b)=>a.k-b.k);
   $("#recap").innerHTML=rows.map(rowHtml).join("");
   const ins=$("#insight");

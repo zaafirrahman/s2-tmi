@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latihan UTS | Metlit Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBFAFF;--ink:#111;--mut:#4B4B4B;--acc:#5A3BE0;--p:#6C4DF6;--s:#FFB300;--disp:'Bricolage Grotesque',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--hw:800}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background-color:var(--bg);color:var(--ink);font:400 16px/1.5 var(--body);padding:40px clamp(20px,5vw,64px) 48px;overflow-x:hidden}
+.wrap{max-width:1000px;margin:0 auto}
+header{position:relative}
+h1{margin:0;font-family:var(--disp);font-weight:var(--hw);font-size:clamp(44px,8.5vw,96px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:12px 0 0;font-size:18px;color:var(--mut)}
+.stk{position:absolute;right:0;top:-8px;display:flex;gap:6px}
+.stk svg{width:90px;height:90px}
+.stk svg:nth-child(1){transform:rotate(-8deg)}.stk svg:nth-child(2){transform:rotate(6deg)}.stk svg:nth-child(3){transform:rotate(-3deg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:40px 28px;margin-top:52px}
+.card{position:relative;display:block;padding:20px 22px;text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s,background .15s}
+.card h2{margin:0 0 6px;font-family:var(--disp);font-weight:var(--hw);font-size:32px;line-height:1.05}
+.card p{margin:0;font-size:15px;line-height:1.4}
+.card::after{content:"";position:absolute;top:-24px;right:-12px;width:58px;height:58px;background-size:contain;background-repeat:no-repeat;pointer-events:none}
+footer{margin-top:48px;text-align:right}
+.back{font-family:var(--disp);font-weight:var(--hw);font-size:22px;line-height:1.2;color:var(--acc);text-decoration:none;border-bottom:1px solid transparent}
+.back:hover{border-bottom-color:var(--acc)}
+a:focus-visible{outline:3px solid var(--acc);outline-offset:4px}
+@media(max-width:900px){.stk{display:none}}
+@media(prefers-reduced-motion:reduce){.card{transition:none}}
+body{background-image:linear-gradient(rgba(108,77,246,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(108,77,246,.14) 1px,transparent 1px);background-size:28px 28px}
+.card{background:#fff;border:3px solid #111;box-shadow:6px 6px 0 #6C4DF6}
+.card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 #12A594}
+.card.uts{background:#6C4DF6;color:#fff;box-shadow:6px 6px 0 #111}
+.card.uts:hover{box-shadow:9px 9px 0 #111}
+.card:nth-child(1)::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20d%3D%27M6%2082C30%2082%2036%2018%2050%2018S70%2082%2094%2082Z%27%20fill%3D%27%2312A594%27%20fill-opacity%3D%27.35%27%20stroke%3D%27%23111%27%20stroke-width%3D%274%27%20stroke-linejoin%3D%27round%27/%3E%3Cpath%20d%3D%27M4%2082H96%27%20stroke%3D%27%23111%27%20stroke-width%3D%274%27%20stroke-linecap%3D%27round%27/%3E%3C/svg%3E")}
+.card:nth-child(2)::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20d%3D%27M12%2078L90%2022%27%20stroke%3D%27%23111%27%20stroke-width%3D%274%27%20stroke-linecap%3D%27round%27/%3E%3Ccircle%20cx%3D%2720%27%20cy%3D%2770%27%20r%3D%276%27%20fill%3D%27%23FF4B3E%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Ccircle%20cx%3D%2732%27%20cy%3D%2754%27%20r%3D%276%27%20fill%3D%27%23FF4B3E%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Ccircle%20cx%3D%2746%27%20cy%3D%2762%27%20r%3D%276%27%20fill%3D%27%23FF4B3E%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Ccircle%20cx%3D%2758%27%20cy%3D%2740%27%20r%3D%276%27%20fill%3D%27%23FF4B3E%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Ccircle%20cx%3D%2772%27%20cy%3D%2746%27%20r%3D%276%27%20fill%3D%27%23FF4B3E%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Ccircle%20cx%3D%2784%27%20cy%3D%2722%27%20r%3D%276%27%20fill%3D%27%23FF4B3E%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3C/svg%3E")}
+.card:nth-child(3)::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Crect%20x%3D%278%27%20y%3D%2768%27%20width%3D%2716%27%20height%3D%2722%27%20fill%3D%27%2312A594%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Crect%20x%3D%2726%27%20y%3D%2744%27%20width%3D%2716%27%20height%3D%2746%27%20fill%3D%27%2312A594%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Crect%20x%3D%2744%27%20y%3D%2720%27%20width%3D%2716%27%20height%3D%2770%27%20fill%3D%27%23FF4B3E%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Crect%20x%3D%2762%27%20y%3D%2746%27%20width%3D%2716%27%20height%3D%2744%27%20fill%3D%27%2312A594%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Crect%20x%3D%2780%27%20y%3D%2770%27%20width%3D%2716%27%20height%3D%2720%27%20fill%3D%27%2312A594%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3C/svg%3E")}
+.card:nth-child(4)::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Crect%20x%3D%274%27%20y%3D%2730%27%20width%3D%2792%27%20height%3D%2740%27%20rx%3D%278%27%20fill%3D%27%23FFE14D%27%20stroke%3D%27%23111%27%20stroke-width%3D%274%27/%3E%3Ctext%20x%3D%2750%27%20y%3D%2757%27%20text-anchor%3D%27middle%27%20font-family%3D%27monospace%27%20font-size%3D%2720%27%20font-weight%3D%27700%27%20fill%3D%27%23111%27%3Ep%26lt%3B.05%3C/text%3E%3C/svg%3E")}
+.card:nth-child(5)::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ccircle%20cx%3D%2750%27%20cy%3D%2750%27%20r%3D%2742%27%20fill%3D%27%23FF4B3E%27%20stroke%3D%27%23111%27%20stroke-width%3D%274%27/%3E%3Ctext%20x%3D%2750%27%20y%3D%2770%27%20text-anchor%3D%27middle%27%20font-family%3D%27Georgia%27%20font-size%3D%2760%27%20font-weight%3D%27700%27%20fill%3D%27%23fff%27%3E%26%23963%3B%3C/text%3E%3C/svg%3E")}
+.card:nth-child(6)::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20d%3D%27M6%2082C30%2082%2036%2018%2050%2018S70%2082%2094%2082Z%27%20fill%3D%27%2312A594%27%20fill-opacity%3D%27.35%27%20stroke%3D%27%23111%27%20stroke-width%3D%274%27%20stroke-linejoin%3D%27round%27/%3E%3Cpath%20d%3D%27M4%2082H96%27%20stroke%3D%27%23111%27%20stroke-width%3D%274%27%20stroke-linecap%3D%27round%27/%3E%3C/svg%3E")}
+.card:nth-child(7)::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20d%3D%27M12%2078L90%2022%27%20stroke%3D%27%23111%27%20stroke-width%3D%274%27%20stroke-linecap%3D%27round%27/%3E%3Ccircle%20cx%3D%2720%27%20cy%3D%2770%27%20r%3D%276%27%20fill%3D%27%23FF4B3E%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Ccircle%20cx%3D%2732%27%20cy%3D%2754%27%20r%3D%276%27%20fill%3D%27%23FF4B3E%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Ccircle%20cx%3D%2746%27%20cy%3D%2762%27%20r%3D%276%27%20fill%3D%27%23FF4B3E%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Ccircle%20cx%3D%2758%27%20cy%3D%2740%27%20r%3D%276%27%20fill%3D%27%23FF4B3E%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Ccircle%20cx%3D%2772%27%20cy%3D%2746%27%20r%3D%276%27%20fill%3D%27%23FF4B3E%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Ccircle%20cx%3D%2784%27%20cy%3D%2722%27%20r%3D%276%27%20fill%3D%27%23FF4B3E%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3C/svg%3E")}
+.card:nth-child(8)::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Crect%20x%3D%278%27%20y%3D%2768%27%20width%3D%2716%27%20height%3D%2722%27%20fill%3D%27%2312A594%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Crect%20x%3D%2726%27%20y%3D%2744%27%20width%3D%2716%27%20height%3D%2746%27%20fill%3D%27%2312A594%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Crect%20x%3D%2744%27%20y%3D%2720%27%20width%3D%2716%27%20height%3D%2770%27%20fill%3D%27%23FF4B3E%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Crect%20x%3D%2762%27%20y%3D%2746%27%20width%3D%2716%27%20height%3D%2744%27%20fill%3D%27%2312A594%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3Crect%20x%3D%2780%27%20y%3D%2770%27%20width%3D%2716%27%20height%3D%2720%27%20fill%3D%27%2312A594%27%20stroke%3D%27%23111%27%20stroke-width%3D%273%27/%3E%3C/svg%3E")}
+.card .meta{margin-top:8px;font-size:13px;color:var(--mut)}
+.rule{margin-top:44px;border:3px solid #111;background:#FFE14D;padding:12px 18px;font-weight:500;max-width:640px}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;position:relative;z-index:2}.crumbs a{text-decoration:none}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}.crumbs [aria-current]{opacity:.65}.crumbs{margin-bottom:26px;font:800 18px/1.2 var(--disp)}.crumbs a{color:var(--acc)}.crumbs span[aria-hidden]{color:#111}
+.lvl{display:inline-block;border:2px solid #111;padding:1px 10px;font:800 14px/1.5 var(--disp);letter-spacing:.02em;text-transform:uppercase;vertical-align:middle;color:#111}
+.lvl.l1{background:#12A594}.lvl.l2{background:#FFE14D}.lvl.l3{background:#FF4B3E}.lvl.l4{background:#111;color:#fff}
+.lvlrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:10px 0 0;font-size:15px;color:var(--mut)}
+.card .lvl{margin-bottom:10px}
+.card::after{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="crumbs" id="crumbs" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="metlit.html">Metlit</a><span aria-hidden="true">/</span><span aria-current="page">Latihan UTS</span></nav>
+<header>
+  <h1>Latihan UTS</h1>
+  <p class="sub">TI5004 / Metodologi Penelitian dan Literasi Digital</p>
+  <div class="stk" aria-hidden="true"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><circle cx='44' cy='44' r='28' fill='#00C2A8' fill-opacity='.45'/><path d='M64 64L90 90' stroke-width='7'/><path d='M30 38C34 30 40 27 47 27' stroke-width='3'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M8 28Q28 20 50 30V84Q28 74 8 82Z' fill='#FFB300'/><path d='M92 28Q72 20 50 30V84Q72 74 92 82Z' fill='#6C4DF6' fill-opacity='.45'/><path d='M18 42Q30 38 40 44M18 54Q30 50 40 56' stroke-width='2.5'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M14 18H86Q92 18 92 24V62Q92 68 86 68H48L28 86V68H14Q8 68 8 62V24Q8 18 14 18Z' fill='#FFB300'/><text x='50' y='57' text-anchor='middle' font-family='Georgia,serif' font-size='46' font-weight='700' fill='#111' stroke='none'>?</text></svg></div>
+</header>
+<main class="grid">
+  <a class="card" href="latihan_paket1.html"><span class="lvl l1">Easy</span><h2>Paket 1</h2><p>50 soal dari Materi 1 sampai Materi 4, waktu 30 menit</p><p class="meta">Definisi, istilah, dan urutan langkah langsung dari slide.</p><p class="meta">Mayoritas soal konsep dasar, sedikit kasus singkat</p></a>
+  <a class="card" href="latihan_paket2.html"><span class="lvl l2">Medium</span><h2>Paket 2</h2><p>50 soal dari Materi 1 sampai Materi 4, waktu 30 menit</p><p class="meta">Penerapan konsep dan kasus sederhana dari slide.</p><p class="meta">Konsep dan kasus, tanpa banyak jebakan</p></a>
+  <a class="card" href="latihan_paket3.html"><span class="lvl l3">Hard</span><h2>Paket 3</h2><p>50 soal dari Materi 1 sampai Materi 4, waktu 30 menit</p><p class="meta">Membedakan konsep yang mirip dan kasus yang butuh penilaian.</p><p class="meta">Banyak kasus dan pengecoh yang mirip</p></a>
+  <a class="card" href="latihan_paket4.html"><span class="lvl l4">Expert</span><h2>Paket 4</h2><p>50 soal dari Materi 1 sampai Materi 4, waktu 30 menit</p><p class="meta">Pengecoh sangat mirip dan penalaran kasus, tetap bersumber dari slide.</p><p class="meta">Soal paling menantang dari Materi 1 sampai 4</p></a>
+</main>
+<div class="rule">Benar +3, salah −1, tidak dijawab 0. Skor akhir dinormalkan ke skala 0 sampai 100.</div>
+<footer><a class="back" href="metlit.html">Kembali</a></footer>
+</div>
+</body>
+</html>
