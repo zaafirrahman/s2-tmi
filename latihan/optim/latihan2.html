@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latihan Materi 2 | Optim Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F8FAFF;--ink:#111;--mut:#4B4B4B;--acc:#2448D8;--p:#2F5BFF;--s:#FF8A1F;--ptint:#DCE5FF;--red:#FF4B3E;--teal:#12A594;--yel:#FFE14D;--oktint:#CDEFE9;--badtint:#FFDAD6;--okink:#0B6F62;--badink:#B3261B;--line:#D4DAEC;--disp:'Bricolage Grotesque',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;--hw:800}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background-color:var(--bg);color:var(--ink);font:400 16px/1.5 var(--body);padding:32px clamp(16px,5vw,64px) 56px;overflow-x:hidden;background-image:linear-gradient(rgba(47,91,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(47,91,255,.13) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:900px;margin:0 auto}
+.hidden{display:none!important}
+button{font:inherit;color:inherit;cursor:pointer;border-radius:0}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:4px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+h1,h2,h3{font-family:var(--disp);font-weight:var(--hw);margin:0}
+
+/* top */
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.back{font-family:var(--disp);font-weight:var(--hw);font-size:20px;line-height:1.2;color:var(--acc);text-decoration:none;border-bottom:2px solid transparent}
+.back:hover{border-bottom-color:var(--acc)}
+.tag{font-family:var(--disp);font-weight:var(--hw);font-size:20px}
+
+/* header start */
+header.hd{position:relative;margin-bottom:34px}
+header.hd h1{font-size:clamp(44px,8.5vw,92px);line-height:.95;letter-spacing:-.01em}
+header.hd .sub{margin:12px 0 0;font-size:18px;color:var(--mut)}
+.stk{position:absolute;right:0;top:-8px;display:flex;gap:6px}
+.stk svg{width:80px;height:80px}
+.stk svg:nth-child(1){transform:rotate(-8deg)}.stk svg:nth-child(2){transform:rotate(6deg)}.stk svg:nth-child(3){transform:rotate(-3deg)}
+@media(max-width:900px){.stk{display:none}}
+
+/* surfaces */
+.card{background:#fff;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--p);padding:22px}
+.card.flat{box-shadow:6px 6px 0 var(--ink)}
+.sec{font-family:var(--disp);font-weight:var(--hw);font-size:24px;margin:26px 0 12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sec:first-child{margin-top:0}
+.sec small{font:500 14px var(--body);color:var(--mut)}
+
+/* score rule tiles */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:520px){.rules{grid-template-columns:1fr}}
+.rule{border:3px solid var(--ink);padding:10px 14px;display:flex;align-items:baseline;gap:12px;background:#fff}
+.rule b{font-family:var(--disp);font-weight:var(--hw);font-size:34px;line-height:1}
+.rule span{font-size:15px;color:var(--ink)}
+.rule.p{background:var(--oktint)} .rule.m{background:var(--badtint)} .rule.z{background:#E9EDF8}
+.rulenote{margin:10px 0 0;font-size:14px;color:var(--mut)}
+
+/* chapters */
+.chapters{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.chap{display:flex;gap:12px;align-items:flex-start;text-align:left;border:3px solid var(--ink);background:#fff;padding:12px 14px;transition:transform .12s,box-shadow .12s}
+.chap:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--s)}
+.chap[aria-pressed="true"]{background:var(--ptint)}
+.chap .box{width:22px;height:22px;border:3px solid var(--ink);background:#fff;flex:none;margin-top:1px;display:grid;place-items:center}
+.chap[aria-pressed="true"] .box{background:var(--ink)}
+.chap[aria-pressed="true"] .box::after{content:"";width:10px;height:5px;border-left:3px solid #fff;border-bottom:3px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.chap b{display:block;font-weight:600;font-size:15px;line-height:1.3}
+.chap span span{font-size:13px;color:var(--mut)}
+
+/* toggles */
+.opts-row{display:flex;flex-wrap:wrap;gap:12px}
+.toggle{display:flex;align-items:center;gap:12px;border:3px solid var(--ink);background:#fff;padding:8px 14px 8px 10px;font-size:15px}
+.toggle .sw{width:42px;height:24px;border:3px solid var(--ink);background:#fff;position:relative;flex:none}
+.toggle .sw::after{content:"";position:absolute;top:1px;left:1px;width:14px;height:14px;background:var(--ink);transition:transform .12s}
+.toggle[aria-pressed="true"]{background:var(--ptint)}
+.toggle[aria-pressed="true"] .sw{background:var(--p)}
+.toggle[aria-pressed="true"] .sw::after{transform:translateX(18px)}
+
+.startbar{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-top:28px;padding-top:20px;border-top:3px dashed var(--ink)}
+.summary{font-size:16px;max-width:46ch}
+
+/* buttons */
+.btn{display:inline-block;border:3px solid var(--ink);background:var(--p);color:#fff;font-family:var(--disp);font-weight:var(--hw);font-size:19px;line-height:1.1;padding:12px 22px;box-shadow:4px 4px 0 var(--ink);text-decoration:none;transition:transform .12s,box-shadow .12s}
+.btn:hover:not(:disabled){transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active:not(:disabled){transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn.ghost{background:#fff;color:var(--ink)}
+.btn:disabled{background:#E6E6DE;color:#77776F;box-shadow:none;cursor:not-allowed;border-color:#77776F}
+
+/* hud */
+.hud{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center;margin-bottom:12px}
+.stat{display:flex;flex-direction:column;line-height:1.2}
+.stat small{color:var(--mut);font-size:13px}
+.stat .v{font-weight:700;font-size:22px}
+.stat.right{text-align:right;align-items:flex-end}
+.timer{font-size:30px;font-weight:700;border:3px solid var(--ink);background:#fff;padding:6px 16px;min-width:140px;text-align:center;box-shadow:4px 4px 0 var(--ink)}
+.timer.warn{background:var(--yel)}
+.timer.crit{background:var(--red);animation:pulse 1s steps(2,end) infinite}
+@keyframes pulse{50%{opacity:.65}}
+.strip{display:flex;gap:2px;height:20px;align-items:flex-end;margin:6px 0 18px}
+.strip i{flex:1;min-width:2px;height:35%;background:var(--line)}
+.strip i.ok{background:var(--teal);height:100%}
+.strip i.bad{background:var(--red);height:70%}
+.strip i.cur{background:var(--ink);height:100%}
+
+/* question */
+.qmeta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip{font-size:13px;font-weight:600;border:2px solid var(--ink);padding:2px 10px;background:var(--ptint)}
+.chip.t{background:var(--yel)}
+.qtext{font-family:var(--disp);font-weight:var(--hw);font-size:clamp(21px,3.6vw,28px);line-height:1.2;margin:0 0 20px}
+.options{display:grid;gap:12px}
+.opt{display:flex;gap:14px;align-items:flex-start;text-align:left;width:100%;border:3px solid var(--ink);background:#fff;padding:12px 14px;box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.opt .k{flex:none;width:32px;height:32px;border:3px solid var(--ink);display:grid;place-items:center;font-weight:700;font-size:15px;background:#fff}
+.opt .t{padding-top:3px;flex:1}
+.opt .mk{font-size:13px;font-weight:600;padding-top:5px;white-space:nowrap}
+.options:not(.locked) .opt:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.opt.ok{background:var(--oktint)} .opt.ok .k{background:var(--teal)} .opt.ok .mk{color:var(--okink)}
+.opt.bad{background:var(--badtint)} .opt.bad .k{background:var(--red)} .opt.bad .mk{color:var(--badink)}
+.options.locked .opt{cursor:default;box-shadow:none}
+.options.locked .opt:not(.ok):not(.bad){opacity:.5}
+.feedback{margin-top:18px;border:3px solid var(--ink);padding:14px 16px;display:none}
+.feedback.show{display:block}
+.feedback.ok{background:var(--oktint)} .feedback.bad{background:var(--badtint)}
+.feedback h3{font-size:22px;margin-bottom:4px}
+.feedback p{margin:4px 0 0;font-size:15px}
+.feedback .ans{font-weight:600}
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap}
+.hint{font-size:14px;color:var(--mut)}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(17,17,17,.6);display:grid;place-items:center;padding:20px;z-index:20}
+.modal .box{background:#fff;border:3px solid var(--ink);box-shadow:8px 8px 0 var(--p);padding:22px;max-width:420px;width:100%}
+.modal h3{font-size:26px;margin-bottom:8px}
+.modal p{margin:0 0 18px;color:var(--mut)}
+.modal .row{display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap}
+
+/* result */
+.res-head{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+@media(max-width:620px){.res-head{grid-template-columns:1fr;justify-items:start}}
+.scorebox{border:3px solid var(--ink);background:var(--yel);box-shadow:6px 6px 0 var(--ink);padding:14px 26px 12px;text-align:center;min-width:190px}
+.scorebox .big{font-family:var(--disp);font-weight:var(--hw);font-size:92px;line-height:1;display:block}
+.scorebox small{font-size:14px;font-weight:600}
+.res-head h2{font-size:clamp(30px,5.5vw,46px);line-height:1}
+.res-head p{margin:10px 0 0;color:var(--mut)}
+.stack{display:flex;height:22px;border:3px solid var(--ink);margin-top:22px;background:#fff}
+.stack i{display:block;height:100%}
+.stack .g{background:var(--teal)} .stack .r{background:var(--red)} .stack .b{background:var(--line)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--mut);margin-top:10px}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border:2px solid var(--ink);margin-right:6px;vertical-align:-1px;background:var(--c)}
+.formula{margin:18px 0 0;border:3px dashed var(--ink);padding:10px 14px;font-size:14.5px;background:#fff}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:22px}
+.kpi{border:3px solid var(--ink);padding:10px 12px;background:#fff}
+.kpi small{display:block;color:var(--mut);font-size:13px}
+.kpi b{font-size:22px}
+.kpi.ok{background:var(--oktint)} .kpi.bad{background:var(--badtint)}
+.recap{display:grid;gap:14px}
+.rrow{display:grid;grid-template-columns:minmax(120px,230px) 1fr 64px;gap:14px;align-items:center}
+@media(max-width:560px){.rrow{grid-template-columns:1fr 60px}.rrow .bar{grid-column:1/-1;order:3}}
+.rrow .nm b{display:block;font-weight:600;font-size:15px;line-height:1.25}
+.rrow .nm small{color:var(--mut);font-size:13px}
+.bar{height:18px;display:flex;border:3px solid var(--ink);background:#fff}
+.bar i{display:block;height:100%}
+.bar .g{background:var(--teal)} .bar .r{background:var(--red)}
+.rrow .sc{text-align:right;font-weight:700;font-size:15px}
+.insight{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.insight{grid-template-columns:1fr}}
+.ins{border:3px solid var(--ink);padding:12px 14px;font-size:15px}
+.ins b{display:block;margin-bottom:2px}
+.ins.good{background:var(--oktint)} .ins.weak{background:var(--badtint)}
+.review{display:grid;gap:12px;margin-top:14px}
+.rv{border:3px solid var(--ink);border-left-width:10px;border-left-color:var(--red);padding:11px 14px;background:#fff;font-size:15px}
+.rv .q{font-weight:600;margin-bottom:6px}
+.rv .y{color:var(--badink)} .rv .c{color:var(--okink);font-weight:600}
+.rv .e{color:var(--mut);margin-top:4px}
+.actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);font-size:22px;padding:2px 0}
+.mt{margin-top:22px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.mx{display:inline-grid;gap:1px 14px;padding:1px 9px;margin:2px 4px;vertical-align:middle;border-left:2px solid var(--ink);border-right:2px solid var(--ink);border-radius:6px;font-family:var(--mono);font-size:.88em;font-weight:500;line-height:1.4}
+.mx.dt{border-radius:0}.mx i{font-style:normal;text-align:center;white-space:nowrap}
+.opt .t sup,.qtext sup{font-size:.7em}
+.qtext{overflow-wrap:anywhere}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;position:relative;z-index:2;margin-bottom:26px;font:800 18px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}.crumbs span[aria-hidden]{color:#111}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="3.2" markerHeight="3.2" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#111"/></marker></svg>
+<div class="wrap">
+
+  <!-- START -->
+  <section id="start">
+    <nav class="crumbs" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="optim.html">Optim</a><span aria-hidden="true">/</span><span aria-current="page">Materi 2</span></nav>
+    <header class="hd">
+      <h1>Materi 2</h1>
+      <p class="sub">TI5001 / Optimisasi &amp; Intelejensia Komputasional · Dasar-Dasar Kalkulus dan Aljabar</p>
+      <div class="stk" aria-hidden="true"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><g transform='rotate(-20 50 50)'><ellipse cx='50' cy='50' rx='42' ry='26' fill='#2F5BFF' fill-opacity='.2' stroke-width='3'/><ellipse cx='50' cy='50' rx='27' ry='15' fill='#FFD93D' fill-opacity='.5' stroke-width='3'/><ellipse cx='50' cy='50' rx='10' ry='5' fill='#FF8A1F' stroke-width='3'/></g><path d='M10 18L28 36L40 44' stroke-width='3' stroke-dasharray='6 6' marker-end='url(#ah)'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M12 14Q50 126 88 14' fill='#2F5BFF' fill-opacity='.22'/><path d='M4 86H96' stroke-width='3'/><circle cx='50' cy='70' r='7' fill='#FF8A1F' stroke-width='3'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M8 20Q50 110 92 20' stroke-width='3'/><path d='M20.6 43L33.2 57.8L43.3 63.9L50 65' stroke-width='2.5' stroke-dasharray='5 5'/><circle cx='20.6' cy='43' r='5' fill='#2F5BFF' stroke-width='3'/><circle cx='33.2' cy='57.8' r='5' fill='#FFD93D' stroke-width='3'/><circle cx='43.3' cy='63.9' r='5' fill='#FFD93D' stroke-width='3'/><circle cx='50' cy='66' r='6' fill='#FF8A1F' stroke-width='3'/></svg></div>
+    </header>
+
+    <div class="card">
+      <div class="sec">Aturan skor</div>
+      <div class="rules">
+        <div class="rule p"><b>+3</b><span>jawaban benar</span></div>
+        <div class="rule m"><b>−1</b><span>jawaban salah</span></div>
+        <div class="rule z"><b>0</b><span>tidak dijawab</span></div>
+      </div>
+      <p class="rulenote">Tanpa batas waktu. Poin dinormalkan ke skala 0 sampai 100. Skor 25 setara tidak menjawab sama sekali atau menebak acak.</p>
+
+      <div id="chapSec"><div class="sec" style="margin-top:30px">Pilih bagian <small id="selCount"></small></div>
+      <div class="chapters" id="chapters"></div></div>
+
+      <div class="sec" style="margin-top:30px">Pengaturan</div>
+      <div class="opts-row">
+        <button class="toggle" id="tgQ" aria-pressed="true"><span class="sw"></span>Acak urutan soal</button>
+        <button class="toggle" id="tgO" aria-pressed="true"><span class="sw"></span>Acak urutan pilihan</button>
+      </div>
+
+      <div class="startbar">
+        <div class="summary" id="summary"></div>
+        <button class="btn" id="startBtn">Mulai kuis</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="hidden">
+    <div class="topbar"><span class="tag">Latihan Optim · Materi 2</span></div>
+    <div class="hud">
+      <div class="stat"><small>Soal</small><span class="v num" id="hudQ">1/1</span></div>
+      <div class="stat right"><small>Poin (<span id="hudOk">0</span> benar, <span id="hudBad">0</span> salah)</small><span class="v num" id="hudPts">0</span></div>
+    </div>
+    <div class="strip" id="strip" aria-hidden="true"></div>
+    <div class="card flat">
+      <div class="qmeta"><span class="chip" id="qBab"></span><span class="chip t" id="qType"></span></div>
+      <p class="qtext" id="qText"></p>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+      <div class="navrow">
+        <button class="btn ghost" id="finishBtn">Selesaikan sekarang</button>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <span class="hint" id="hint">Tekan W, A, S, D untuk menjawab, atau Enter untuk melewati</span>
+          <button class="btn ghost" id="nextBtn">Lewati</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="hidden">
+    <div class="topbar"><span class="tag">Hasil Materi 2</span></div>
+    <div class="card">
+      <div class="res-head">
+        <div class="scorebox"><span class="big num" id="scoreBig">0</span><small>skor dari 100</small></div>
+        <div>
+          <h2 id="grade"></h2>
+          <p id="gradeSub"></p>
+        </div>
+      </div>
+      <div class="stack" id="stack" aria-hidden="true"></div>
+      <div class="legend"><span style="--c:var(--teal)">Benar</span><span style="--c:var(--red)">Salah</span><span style="--c:var(--line)">Tidak dijawab</span></div>
+      <p class="formula" id="formula"></p>
+      <div class="kpis" id="kpis"></div>
+    </div>
+
+    <div class="card mt" id="recapBabCard">
+      <h2 style="font-size:28px;margin-bottom:16px">Rekap per bagian</h2>
+      <div class="recap" id="recap"></div>
+      <div class="insight" id="insight"></div>
+    </div>
+
+    <div class="card mt">
+      <h2 style="font-size:28px;margin-bottom:16px">Rekap per jenis soal</h2>
+      <div class="recap" id="recapType"></div>
+    </div>
+
+    <div class="card mt">
+      <details id="revBox">
+        <summary id="revSum">Tinjau soal yang salah</summary>
+        <div class="review" id="review"></div>
+      </details>
+    </div>
+
+    <div class="actions">
+      <button class="btn" id="againWrong">Ulangi soal yang salah</button>
+      <button class="btn ghost" id="againAll">Ulangi dengan pengaturan sama</button>
+      <button class="btn ghost" id="toMenu">Ubah pengaturan</button>
+      <a class="btn ghost" href="optim.html">Daftar materi</a>
+    </div>
+  </section>
+</div>
+
+<div class="modal hidden" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="box">
+    <h3 id="mTitle">Selesaikan sekarang?</h3>
+    <p id="mText"></p>
+    <div class="row"><button class="btn ghost" id="mNo">Lanjut mengerjakan</button><button class="btn" id="mYes">Selesaikan</button></div>
+  </div>
+</div>
+
+<script>
+/* ===== Data: tiap soal {id, bab, type, q, o:[4 pilihan], a:indeks benar, e:bahasan} ===== */
+const BAB = [{"id": 1, "short": "Bagian 1", "name": "Turunan dan Turunan Parsial"}, {"id": 2, "short": "Bagian 2", "name": "Matriks, Determinan, dan Minor"}, {"id": 3, "short": "Bagian 3", "name": "Akar Polinomial dan Metode Numerik"}, {"id": 4, "short": "Bagian 4", "name": "Invers dan Sistem Persamaan Linier"}];
+const ITEMS = [{"id": "latihan2-01", "bab": 1, "type": "Hitungan", "q": "Turunan dari f(x) = (x² + 1)(x³ − 2x) adalah…", "o": ["6x³ − 4x", "5x⁴ + 3x² − 2", "3x⁴ + x² − 2", "5x⁴ − 3x² − 2"], "a": 3, "e": "Aturan perkalian: f′ = g′h + gh′ = 2x(x³ − 2x) + (x² + 1)(3x² − 2) = (2x⁴ − 4x²) + (3x⁴ + x² − 2) = 5x⁴ − 3x² − 2. Mengalikan turunan dengan turunan (6x³ − 4x) atau hanya memakai satu suku adalah kesalahan umum."}, {"id": "latihan2-02", "bab": 1, "type": "Hitungan", "q": "Untuk f(x) = x² / (x + 2), nilai turunan pertama di x = 1 adalah…", "o": ["1/3", "7/9", "5/9", "2/3"], "a": 2, "e": "Aturan pembagian: f′ = [2x(x + 2) − x²·1] / (x + 2)² = (x² + 4x)/(x + 2)². Di x = 1: 5/9. Tanda tambah (bukan kurang) pada pembilang menghasilkan 7/9, sedangkan membagi turunan pembilang dengan turunan penyebut memberi 2/3."}, {"id": "latihan2-03", "bab": 1, "type": "Hitungan", "q": "Diberikan y = (3x² − x)⁴. Nilai dy/dx di x = 1 adalah…", "o": ["32", "160", "192", "80"], "a": 1, "e": "Aturan rantai dengan u = 3x² − x: dy/dx = 4u³·(6x − 1). Di x = 1: u = 2 sehingga 4·8·5 = 160. Lupa mengurangi 1 pada (6x − 1) memberi 192; lupa faktor du/dx memberi 32."}, {"id": "latihan2-04", "bab": 1, "type": "Hitungan", "q": "Untuk f(x) = x⁴ − 2x³ + x, nilai turunan kedua d²f/dx² di x = 1 adalah…", "o": ["12", "24", "−1", "0"], "a": 3, "e": "f′ = 4x³ − 6x² + 1 dan f″ = 12x² − 12x, sehingga f″(1) = 0. Nilai −1 adalah f′(1) dan 12 adalah f‴(1) = 24x − 12."}, {"id": "latihan2-05", "bab": 1, "type": "Hitungan", "q": "Untuk f(x₁, x₂) = x₁²x₂³ + 2x₁x₂, turunan parsial campuran ∂²f/∂x₁∂x₂ adalah…", "o": ["6x₁x₂² + 2", "2x₂³ + 2", "6x₁x₂² + 2x₂", "6x₁x₂²"], "a": 0, "e": "∂f/∂x₁ = 2x₁x₂³ + 2x₂. Diturunkan terhadap x₂: 6x₁x₂² + 2. Urutan penurunan tidak mempengaruhi hasil karena ∂²f/∂x₁∂x₂ = ∂²f/∂x₂∂x₁."}, {"id": "latihan2-06", "bab": 1, "type": "Hitungan", "q": "Matriks Hessian dari f(x₁, x₂) = x₁²x₂ + x₂³ yang dievaluasi di (x₁, x₂) = (1, 2) adalah…", "o": ["<span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>4</i><i>1</i><i>1</i><i>12</i></span>", "<span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>4</i><i>2</i><i>2</i><i>12</i></span>", "<span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>4</i><i>2</i><i>2</i><i>6</i></span>", "<span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>2</i><i>4</i><i>4</i><i>12</i></span>"], "a": 1, "e": "∂²f/∂x₁² = 2x₂ = 4; ∂²f/∂x₁∂x₂ = 2x₁ = 2; ∂²f/∂x₂² = 6x₂ = 12. Hessian simetris, jadi elemen di luar diagonal sama."}, {"id": "latihan2-07", "bab": 1, "type": "Hitungan", "q": "Turunan dari f(x) = x⁻² + 4√x adalah…", "o": ["−2/x³ + 2/√x", "2/x³ + 2/√x", "−2/x³ + 1/(2√x)", "−2/x + 2/√x"], "a": 0, "e": "Aturan pangkat d(xⁿ)/dx = nxⁿ⁻¹: turunan x⁻² adalah −2x⁻³, dan turunan 4x^(1/2) adalah 4·(1/2)x^(−1/2) = 2/√x."}, {"id": "latihan2-08", "bab": 1, "type": "Hitungan", "q": "Nilai turunan f(x) = (2x − 1)³(x + 1) di x = 1 adalah…", "o": ["7", "12", "14", "13"], "a": 3, "e": "Perkalian + rantai: f′ = 3(2x − 1)²·2·(x + 1) + (2x − 1)³·1. Di x = 1: 3·1·2·2 + 1 = 13."}, {"id": "latihan2-09", "bab": 1, "type": "Hitungan", "q": "Vektor gradien ∇f dari f(x₁, x₂, x₃) = x₁x₂² + x₂x₃ di titik (1, 2, 3) adalah…", "o": ["(4, 4, 2)", "(4, 7, 3)", "(4, 7, 2)", "(2, 7, 2)"], "a": 2, "e": "∂f/∂x₁ = x₂² = 4; ∂f/∂x₂ = 2x₁x₂ + x₃ = 4 + 3 = 7; ∂f/∂x₃ = x₂ = 2."}, {"id": "latihan2-10", "bab": 2, "type": "Konsep", "q": "Matriks A berukuran 3×2, B berukuran 2×4, dan C berukuran 3×4. Pernyataan yang benar adalah…", "o": ["AB + C terdefinisi dan berukuran 3×4", "BA terdefinisi dan berukuran 4×3", "A<sup>T</sup>B terdefinisi dan berukuran 2×4", "AB<sup>T</sup> terdefinisi dan berukuran 3×4"], "a": 0, "e": "AB: (3×2)(2×4) = 3×4, sehingga bisa dijumlah dengan C. BA tidak terdefinisi (4 ≠ 3). A<sup>T</sup> berukuran 2×3 sehingga A<sup>T</sup>B tidak terdefinisi (3 ≠ 2). B<sup>T</sup> berukuran 4×2 sehingga AB<sup>T</sup> tidak terdefinisi (2 ≠ 4)."}, {"id": "latihan2-11", "bab": 2, "type": "Hitungan", "q": "Diberikan A = <span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>1</i><i>2</i><i>0</i><i>−1</i></span> dan B = <span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>3</i><i>0</i><i>1</i><i>4</i></span>. Hasil AB adalah…", "o": ["<span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>5</i><i>8</i><i>−1</i><i>−4</i></span>", "<span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>3</i><i>6</i><i>1</i><i>−2</i></span>", "<span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>3</i><i>0</i><i>0</i><i>−4</i></span>", "<span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>5</i><i>8</i><i>1</i><i>−4</i></span>"], "a": 0, "e": "Baris 1 AB: [1·3 + 2·1, 1·0 + 2·4] = [5, 8]. Baris 2: [0·3 + (−1)·1, 0·0 + (−1)·4] = [−1, −4]. Matriks [[3, 6], [1, −2]] adalah BA (perkalian matriks tidak komutatif), dan [[3, 0], [0, −4]] adalah perkalian elemen per elemen yang bukan perkalian matriks."}, {"id": "latihan2-12", "bab": 2, "type": "Hitungan", "q": "Matriks <span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>2</i><i>k</i><i>3</i><i>6</i></span> tidak memiliki invers jika nilai k sama dengan…", "o": ["4", "3", "2", "6"], "a": 0, "e": "Matriks tak memiliki invers bila determinannya nol (singular): 2·6 − 3k = 12 − 3k = 0 sehingga k = 4."}, {"id": "latihan2-13", "bab": 2, "type": "Hitungan", "q": "Determinan matriks <span class=\"mx\" style=\"grid-template-columns:repeat(3,auto)\"><i>2</i><i>0</i><i>1</i><i>1</i><i>3</i><i>−1</i><i>0</i><i>2</i><i>4</i></span> adalah…", "o": ["30", "34", "28", "26"], "a": 0, "e": "Ekspansi kofaktor baris 1: 2·(3·4 − (−1)·2) − 0·(…) + 1·(1·2 − 3·0) = 2·14 + 0 + 2 = 30. Kesalahan tanda pada suku ketiga memberi 26."}, {"id": "latihan2-14", "bab": 2, "type": "Hitungan", "q": "Untuk B = <span class=\"mx\" style=\"grid-template-columns:repeat(3,auto)\"><i>2</i><i>1</i><i>3</i><i>0</i><i>−1</i><i>4</i><i>5</i><i>2</i><i>1</i></span>, kofaktor c₂₁ adalah…", "o": ["−5", "20", "5", "−20"], "a": 2, "e": "M₂₁ diperoleh dengan menghapus baris 2 dan kolom 1: det[[1,3],[2,1]] = 1 − 6 = −5. c₂₁ = (−1)²⁺¹·(−5) = 5. Nilai −5 adalah minor tanpa tanda; ±20 berasal dari elemen lain (c₁₂ / M₁₂)."}, {"id": "latihan2-15", "bab": 2, "type": "Analisis", "q": "Manakah matriks berikut yang singular (tidak memiliki invers)?", "o": ["<span class=\"mx\" style=\"grid-template-columns:repeat(3,auto)\"><i>2</i><i>0</i><i>0</i><i>0</i><i>3</i><i>0</i><i>0</i><i>0</i><i>1</i></span>", "<span class=\"mx\" style=\"grid-template-columns:repeat(3,auto)\"><i>1</i><i>2</i><i>3</i><i>0</i><i>1</i><i>4</i><i>5</i><i>6</i><i>0</i></span>", "<span class=\"mx\" style=\"grid-template-columns:repeat(3,auto)\"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span>", "<span class=\"mx\" style=\"grid-template-columns:repeat(3,auto)\"><i>1</i><i>1</i><i>0</i><i>0</i><i>1</i><i>1</i><i>1</i><i>0</i><i>1</i></span>"], "a": 2, "e": "Pada matriks [[1,2,3],[4,5,6],[7,8,9]] baris 3 = 2×(baris 2) − baris 1, sehingga determinannya 0. Determinan tiga matriks lain adalah 1, 6, dan 2 (semuanya tak nol)."}, {"id": "latihan2-16", "bab": 2, "type": "Konsep", "q": "Untuk matriks bujursangkar 5×5, banyaknya principal minor dan banyaknya leading principal minor berturut-turut adalah…", "o": ["25 dan 5", "31 dan 5", "31 dan 15", "32 dan 5"], "a": 1, "e": "Matriks n×n memiliki 2ⁿ − 1 principal minor (2⁵ − 1 = 31) dan tepat n leading principal minor (5)."}, {"id": "latihan2-17", "bab": 2, "type": "Hitungan", "q": "Determinan leading principal minor orde 1, 2, dan 3 dari <span class=\"mx\" style=\"grid-template-columns:repeat(3,auto)\"><i>2</i><i>−1</i><i>0</i><i>−1</i><i>3</i><i>4</i><i>0</i><i>4</i><i>5</i></span> berturut-turut adalah…", "o": ["2, 7, −7", "2, 5, −1", "2, 5, 7", "2, 5, −7"], "a": 3, "e": "Orde 1: 2. Orde 2: 2·3 − (−1)(−1) = 5. Orde 3: det A = 2(15 − 16) − (−1)(−5 − 0) + 0 = −2 − 5 = −7."}, {"id": "latihan2-18", "bab": 2, "type": "Konsep", "q": "Untuk matriks 3×3 A = (aᵢⱼ), submatriks manakah yang merupakan principal minor tetapi <b>bukan</b> leading principal minor?", "o": ["<span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>a₂₂</i><i>a₂₃</i><i>a₃₂</i><i>a₃₃</i></span>", "(a₁₁)", "<span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>a₁₁</i><i>a₁₂</i><i>a₂₁</i><i>a₂₂</i></span>", "A itu sendiri"], "a": 0, "e": "Leading principal minor diperoleh dengan membuang baris dan kolom <i>terakhir</i>. Submatriks yang dibentuk baris/kolom 2 dan 3 diperoleh dengan membuang baris dan kolom pertama, sehingga ia principal minor tetapi bukan leading principal minor."}, {"id": "latihan2-19", "bab": 3, "type": "Hitungan", "q": "Jika x₁ dan x₂ adalah akar-akar dari 2x² − 3x − 5 = 0, nilai x₁² + x₂² adalah…", "o": ["9/4", "5/2", "29/4", "49/4"], "a": 2, "e": "Rumus kuadrat: x = (3 ± √(9 + 40))/4 = (3 ± 7)/4 sehingga x = 5/2 dan x = −1. Maka x₁² + x₂² = 25/4 + 1 = 29/4. (9/4 adalah (x₁ + x₂)², 49/4 adalah (x₁ − x₂)².)"}, {"id": "latihan2-20", "bab": 3, "type": "Konsep", "q": "Untuk f(x) = 2x³ − 3x² − 11x + 6, banyaknya kandidat akar rasional <i>berbeda</i> menurut teorema akar rasional adalah…", "o": ["8", "10", "16", "12"], "a": 3, "e": "p adalah faktor 6 (±1, ±2, ±3, ±6) dan q adalah faktor 2 (±1, ±2). Nilai p/q yang berbeda: ±1, ±2, ±3, ±6, ±1/2, ±3/2 = 12. Pilihan 16 muncul bila duplikat seperti 2/2 = 1 dan 6/2 = 3 tidak disatukan."}, {"id": "latihan2-21", "bab": 3, "type": "Hitungan", "q": "Hasil bagi f(x) = 2x³ − 3x² − 11x + 6 oleh (x − 3), yang sisanya nol, adalah…", "o": ["2x² + 3x − 2", "2x² − x − 6", "2x² − 3x − 2", "2x² + 3x + 2"], "a": 0, "e": "Pembagian sintetik dengan r = 3: 2 → 2·3 − 3 = 3 → 3·3 − 11 = −2 → −2·3 + 6 = 0. Hasil bagi 2x² + 3x − 2 = (2x − 1)(x + 2), sehingga akar-akar f adalah 3, 1/2, dan −2."}, {"id": "latihan2-22", "bab": 3, "type": "Hitungan", "q": "Metode bisection untuk mencari akar f(x) = x³ − 2x − 5 dimulai dari [a, b] = [2, 3]. Interval setelah tiga iterasi adalah…", "o": ["[2,5; 3]", "[2; 2,125]", "[2,125; 2,25]", "[2,25; 2,5]"], "a": 1, "e": "f(2) = −1 dan f(3) = 16. m = 2,5: f = 5,625 > 0 → [2; 2,5]. m = 2,25: f ≈ 1,89 > 0 → [2; 2,25]. m = 2,125: f ≈ 0,346 > 0 → [2; 2,125]. Akar berada di interval yang tanda f-nya berubah."}, {"id": "latihan2-23", "bab": 3, "type": "Hitungan", "q": "Metode Newton-Raphson untuk f(x) = x² − 10 dengan x₀ = 3 menghasilkan x₂ ≈…", "o": ["3,1667", "3,1623", "3,0000", "3,2000"], "a": 1, "e": "x₁ = 3 − (−1)/6 = 3,1667. f(x₁) ≈ 0,0278 dan f′(x₁) ≈ 6,3333, sehingga x₂ = 3,1667 − 0,00439 ≈ 3,1623 (≈ √10)."}, {"id": "latihan2-24", "bab": 3, "type": "Konsep", "q": "Perbedaan mendasar metode bisection dan Newton-Raphson untuk mencari akar adalah…", "o": ["Newton-Raphson memerlukan f(a)f(b) < 0, sedangkan bisection memerlukan turunan f′(x)", "bisection memerlukan f(a) dan f(b) berlawanan tanda dan hanya memakai nilai fungsi; Newton-Raphson memerlukan f′(x) dan satu titik awal", "bisection selalu menemukan akar tepat dalam satu iterasi untuk polinomial orde 2", "keduanya memerlukan f′(x) dan dua titik awal berlawanan tanda"], "a": 1, "e": "Bisection membagi dua interval yang tanda fungsinya berlawanan di kedua ujung, tanpa turunan. Newton-Raphson memakai x_{k+1} = x_k − f(x_k)/f′(x_k) dari satu titik awal."}, {"id": "latihan2-25", "bab": 3, "type": "Analisis", "q": "Polinomial f(x) = x⁴ − 2x² + 1 memiliki…", "o": ["2 akar dan 2 akar berbeda", "4 akar dan 1 akar berbeda", "4 akar dan 4 akar berbeda", "4 akar (dihitung dengan keberulangannya) dan 2 akar berbeda"], "a": 3, "e": "f(x) = (x² − 1)² = (x − 1)²(x + 1)². Polinomial derajat 4 punya 4 akar dengan keberulangan: x = 1 (dua kali) dan x = −1 (dua kali), jadi hanya 2 akar berbeda."}, {"id": "latihan2-26", "bab": 4, "type": "Hitungan", "q": "Invers dari A = <span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>4</i><i>2</i><i>3</i><i>2</i></span> adalah…", "o": ["<span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>1</i><i>1</i><i>3/2</i><i>2</i></span>", "<span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>2</i><i>−2</i><i>−3</i><i>4</i></span>", "<span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>1</i><i>−1</i><i>−3/2</i><i>2</i></span>", "<span class=\"mx\" style=\"grid-template-columns:repeat(2,auto)\"><i>2</i><i>−1</i><i>−3/2</i><i>1</i></span>"], "a": 2, "e": "det A = 4·2 − 2·3 = 2. A⁻¹ = (1/2)·[[2, −2], [−3, 4]] = [[1, −1], [−3/2, 2]]. Kesalahan umum: lupa membagi dengan determinan (hasil [[2, −2], [−3, 4]]), tidak menukar elemen diagonal, atau salah tanda."}, {"id": "latihan2-27", "bab": 4, "type": "Hitungan", "q": "Untuk A = <span class=\"mx\" style=\"grid-template-columns:repeat(3,auto)\"><i>2</i><i>0</i><i>1</i><i>1</i><i>3</i><i>−1</i><i>0</i><i>2</i><i>4</i></span> (det A = 30), elemen baris 1 kolom 2 dari A⁻¹ adalah…", "o": ["−2/15", "2", "1/15", "−1/15"], "a": 2, "e": "A⁻¹ = Cᵀ/det A, sehingga (A⁻¹)₁₂ = c₂₁/det A (indeks tertukar karena transpos). c₂₁ = (−1)³·det[[0,1],[2,4]] = −(−2) = 2, jadi 2/30 = 1/15. Memakai c₁₂ tanpa transpos memberi −2/15, minor tanpa tanda memberi −1/15."}, {"id": "latihan2-28", "bab": 4, "type": "Hitungan", "q": "Diketahui A⁻¹ = <span class=\"mx\" style=\"grid-template-columns:repeat(3,auto)\"><i>2</i><i>−3</i><i>−4</i><i>0</i><i>−1</i><i>−1</i><i>1</i><i>−1</i><i>−2</i></span> untuk A = <span class=\"mx\" style=\"grid-template-columns:repeat(3,auto)\"><i>1</i><i>−2</i><i>−1</i><i>−1</i><i>0</i><i>2</i><i>1</i><i>−1</i><i>−2</i></span>. Solusi Ax = b dengan b = (1, 0, 2)ᵀ adalah x =…", "o": ["(2, 0, 1)", "(−6, −2, −3)", "(−1, 3, −3)", "(−6, −2, 3)"], "a": 1, "e": "x = A⁻¹b = (2·1 + (−3)·0 + (−4)·2, 0·1 + (−1)·0 + (−1)·2, 1·1 + (−1)·0 + (−2)·2) = (−6, −2, −3). Pilihan (−1, 3, −3) adalah hasil Ab (bukan A⁻¹b)."}, {"id": "latihan2-29", "bab": 4, "type": "Hitungan", "q": "Sistem x₁ + x₂ + x₃ = 6; 2x₂ + 5x₃ = −4; 2x₁ + 5x₂ − x₃ = 27 dipecahkan dengan eliminasi Gauss-Jordan. Nilai x₁ − x₃ adalah…", "o": ["−7", "7", "3", "5"], "a": 1, "e": "Solusinya x = (5, 3, −2): 5 + 3 − 2 = 6; 6 − 10 = −4; 10 + 15 + 2 = 27. Jadi x₁ − x₃ = 5 − (−2) = 7."}, {"id": "latihan2-30", "bab": 4, "type": "Analisis", "q": "Pada eliminasi Gauss-Jordan sistem di atas, setelah R₃ ← R₃ − 2R₁ dan R₂ ← R₂/2 diperoleh baris 2: [0 1 5/2 | −2] dan baris 3: [0 3 −3 | 15]. Operasi yang menghilangkan x₂ dari baris 3 adalah…", "o": ["R₃ ← R₃ − R₂/3", "R₂ ← R₂ − 3R₃", "R₃ ← R₃ + 3R₂", "R₃ ← R₃ − 3R₂"], "a": 3, "e": "Koefisien x₂ pada baris 3 adalah 3 dan pada baris 2 adalah 1, sehingga R₃ − 3R₂ = [0 0 −3 − 15/2 | 15 + 6] = [0 0 −21/2 | 21], yang memberi x₃ = −2."}];
+
+/* ===== util ===== */
+const $ = s => document.querySelector(s);
+const PTS_OK = 3, PTS_BAD = -1;
+const LETTERS = ["W","A","S","D"];
+const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const fmt = v => (v>0?"+":v<0?"−":"")+Math.abs(v);
+const babOf = id => BAB.find(b=>b.id===id);
+const cfg = { babs:new Set(BAB.map(b=>b.id)), shufQ:true, shufO:true };
+let S = null;
+
+/* ===== layar awal ===== */
+function renderChapters(){
+  $("#chapSec").classList.toggle("hidden",BAB.length<2);
+  const box=$("#chapters"); box.innerHTML="";
+  BAB.forEach(b=>{
+    const n=ITEMS.filter(x=>x.bab===b.id).length;
+    const el=document.createElement("button");
+    el.className="chap"; el.setAttribute("aria-pressed",cfg.babs.has(b.id));
+    el.innerHTML=`<span class="box"></span><span><b>${b.short}: ${b.name}</b><span>${n} soal</span></span>`;
+    el.onclick=()=>{ cfg.babs.has(b.id)?cfg.babs.delete(b.id):cfg.babs.add(b.id); $("#chapSec").classList.toggle("hidden",BAB.length<2);
+renderChapters(); updateSummary(); };
+    box.appendChild(el);
+  });
+}
+function updateSummary(){
+  const n=ITEMS.filter(x=>cfg.babs.has(x.bab)).length;
+  $("#selCount").textContent=`${cfg.babs.size} dari ${BAB.length} bab dipilih`;
+  $("#summary").innerHTML = n ? `<b>${n} soal</b>, tanpa batas waktu. Poin maksimum <b>+${n*PTS_OK}</b>.` : "Pilih minimal satu bab.";
+  $("#startBtn").disabled = !n;
+}
+$("#tgQ").onclick=e=>{cfg.shufQ=!cfg.shufQ;e.currentTarget.setAttribute("aria-pressed",cfg.shufQ);};
+$("#tgO").onclick=e=>{cfg.shufO=!cfg.shufO;e.currentTarget.setAttribute("aria-pressed",cfg.shufO);};
+
+function buildItems(){
+  let items=ITEMS.filter(x=>cfg.babs.has(x.bab)).map(x=>({...x,o:x.o.slice()}));
+  return cfg.shufQ?shuffle(items):items;
+}
+function permuteOptions(items){
+  return items.map(it=>{ const idx=shuffle([0,1,2,3]); return {...it,o:idx.map(i=>it.o[i]),a:idx.indexOf(it.a)}; });
+}
+function show(id){ ["start","quiz","result"].forEach(s=>$("#"+s).classList.toggle("hidden",s!==id)); window.scrollTo(0,0); }
+
+/* ===== sesi ===== */
+function startSession(items){
+  if(cfg.shufO) items=permuteOptions(items);
+  S={items,ans:items.map(()=>null),i:0,done:false};
+  $("#strip").innerHTML=items.map(()=>"<i></i>").join("");
+  show("quiz"); renderQ();
+}
+function counts(){
+  let ok=0,bad=0;
+  S.items.forEach((it,i)=>{ if(S.ans[i]!==null){ S.ans[i]===it.a?ok++:bad++; } });
+  return {ok,bad,pts:ok*PTS_OK+bad*PTS_BAD};
+}
+function paintStrip(){
+  const els=$("#strip").children;
+  S.items.forEach((it,i)=>{
+    const a=S.ans[i]; let c="";
+    if(a!==null) c = a===it.a ? "ok":"bad"; else if(i===S.i) c="cur";
+    els[i].className=c;
+  });
+}
+function renderQ(){
+  const it=S.items[S.i], a=S.ans[S.i], b=babOf(it.bab);
+  $("#hudQ").textContent=`${S.i+1}/${S.items.length}`;
+  $("#qBab").textContent=`${b.short}: ${b.name}`;
+  $("#qType").textContent=it.type;
+  $("#qText").innerHTML=it.q;
+  const box=$("#options"); box.innerHTML=""; box.classList.toggle("locked",a!==null);
+  it.o.forEach((t,i)=>{
+    const el=document.createElement("button");
+    el.className="opt";
+    let mk="";
+    if(a!==null){ if(i===it.a){ el.classList.add("ok"); mk=`<span class="mk">${a===it.a?"Jawabanmu, benar":"Jawaban benar"}</span>`; } else if(i===a){ el.classList.add("bad"); mk=`<span class="mk">Jawabanmu, salah</span>`; } el.disabled=true; }
+    el.innerHTML=`<span class="k">${LETTERS[i]}</span><span class="t">${t}</span>${mk}`;
+    el.onclick=()=>answer(i);
+    box.appendChild(el);
+  });
+  const fb=$("#feedback"); fb.className="feedback";
+  if(a!==null) showFeedback();
+  const last=S.i===S.items.length-1;
+  $("#nextBtn").textContent= a===null ? (last?"Lewati dan lihat hasil":"Lewati") : (last?"Lihat hasil":"Berikutnya");
+  $("#nextBtn").classList.toggle("ghost",a===null);
+  $("#nextBtn").disabled = false;
+  $("#hint").textContent = a===null ? "Tekan W, A, S, D untuk menjawab, atau Enter untuk melewati" : "Tekan Enter untuk lanjut";
+  const c=counts(); $("#hudOk").textContent=c.ok; $("#hudBad").textContent=c.bad; $("#hudPts").textContent=fmt(c.pts);
+  paintStrip();
+}
+function showFeedback(){
+  const it=S.items[S.i], a=S.ans[S.i], fb=$("#feedback"), good=a===it.a;
+  fb.className="feedback show "+(good?"ok":"bad");
+  fb.innerHTML = good
+    ? `<h3>Benar, +3 poin</h3><p>${it.e}</p>`
+    : `<h3>Salah, −1 poin</h3><p class="ans">Jawaban benar: ${LETTERS[it.a]}. ${it.o[it.a]}</p><p>${it.e}</p>`;
+}
+function answer(i){
+  if(!S||S.done||S.ans[S.i]!==null) return;
+  S.ans[S.i]=i; renderQ();
+}
+function next(){
+  if(S.i===S.items.length-1) finish(); else { S.i++; renderQ(); window.scrollTo({top:0}); }
+}
+$("#nextBtn").onclick=next;
+document.addEventListener("keydown",e=>{
+  const modalOpen=!$("#modal").classList.contains("hidden");
+  if(modalOpen){ if(e.key==="Escape") $("#modal").classList.add("hidden"); return; }
+  if(!S||S.done||$("#quiz").classList.contains("hidden")) return;
+  const k=e.key.toLowerCase(), m={w:0,a:1,s:2,d:3,"1":0,"2":1,"3":2,"4":3};
+  if(k in m) answer(m[k]); else if((k==="enter"||k==="arrowright")){ e.preventDefault(); next(); }
+});
+
+/* modal selesai */
+$("#finishBtn").onclick=()=>{
+  const un=S.ans.filter(a=>a===null).length;
+  $("#mText").textContent = un? `Masih ada ${un} soal belum dijawab. Soal kosong bernilai 0 poin.` : "Semua soal sudah dijawab.";
+  $("#modal").classList.remove("hidden"); $("#mYes").focus();
+};
+$("#mNo").onclick=()=>$("#modal").classList.add("hidden");
+$("#mYes").onclick=()=>{ $("#modal").classList.add("hidden"); finish(); };
+
+/* ===== hasil ===== */
+function recapRows(keyOf, labelOf, subOf){
+  const keys=[...new Set(S.items.map(keyOf))];
+  return keys.map(k=>{
+    const idx=S.items.map((it,i)=>keyOf(it)===k?i:-1).filter(i=>i>=0);
+    const o=idx.filter(i=>S.ans[i]!==null&&S.ans[i]===S.items[i].a).length;
+    const w=idx.filter(i=>S.ans[i]!==null&&S.ans[i]!==S.items[i].a).length;
+    return {k,label:labelOf(k),sub:subOf(k),t:idx.length,o,w,e:idx.length-o-w,p:Math.round(o/idx.length*100)};
+  });
+}
+const rowHtml = r => `
+  <div class="rrow">
+    <div class="nm"><b>${r.label}</b><small>${r.sub}benar ${r.o}, salah ${r.w}${r.e?`, kosong ${r.e}`:""}</small></div>
+    <div class="bar" title="${r.o} benar, ${r.w} salah, ${r.e} kosong"><i class="g" style="width:${r.o/r.t*100}%"></i><i class="r" style="width:${r.w/r.t*100}%"></i></div>
+    <div class="sc num">${r.o}/${r.t}</div>
+  </div>`;
+
+function finish(){
+  if(S.done) return; S.done=true;
+  const n=S.items.length, {ok,bad,pts}=counts(), blank=n-ok-bad;
+  const min=n*PTS_BAD, max=n*PTS_OK;
+  const score=Math.round((pts-min)/(max-min)*100);
+  const grade = score>=85?"Sangat baik": score>=70?"Baik": score>=55?"Cukup":"Perlu latihan lagi";
+  $("#scoreBig").textContent=score;
+  $("#grade").textContent=grade;
+  $("#gradeSub").textContent=`Kamu menjawab benar ${ok} dari ${n} soal.`;
+  $("#stack").innerHTML=`<i class="g" style="width:${ok/n*100}%"></i><i class="r" style="width:${bad/n*100}%"></i><i class="b" style="width:${blank/n*100}%"></i>`;
+  $("#formula").innerHTML=`Poin mentah: ${ok} × 3 + ${bad} × (−1) + ${blank} × 0 = <b class="num">${fmt(pts)}</b>, dari rentang ${fmt(min)} sampai ${fmt(max)}. Skor = (${fmt(pts)} − (${fmt(min)})) ÷ ${max-min} × 100 = <b class="num">${score}</b>.`;
+  const answered=ok+bad, acc=answered?Math.round(ok/answered*100):0;
+  $("#kpis").innerHTML=`
+    <div class="kpi ok"><small>Benar</small><b class="num">${ok}</b></div>
+    <div class="kpi bad"><small>Salah</small><b class="num">${bad}</b></div>
+    <div class="kpi"><small>Tidak dijawab</small><b class="num">${blank}</b></div>
+    <div class="kpi"><small>Poin mentah</small><b class="num">${fmt(pts)}</b></div>
+    <div class="kpi"><small>Akurasi (yang dijawab)</small><b class="num">${acc}%</b></div>`;
+  $("#recapBabCard").classList.toggle("hidden",BAB.length<2);
+  const rows=recapRows(it=>it.bab, k=>babOf(k).name, k=>babOf(k).short+": ").sort((a,b)=>a.k-b.k);
+  $("#recap").innerHTML=rows.map(rowHtml).join("");
+  const ins=$("#insight");
+  if(rows.length>1){
+    const best=rows.reduce((a,b)=>b.p>a.p?b:a), worst=rows.reduce((a,b)=>b.p<a.p?b:a);
+    ins.innerHTML=`<div class="ins good"><b>Paling kuat</b>${babOf(best.k).short}: ${best.label} (${best.p}% benar)</div>
+                   <div class="ins weak"><b>Perlu diulang</b>${babOf(worst.k).short}: ${worst.label} (${worst.p}% benar)</div>`;
+  } else ins.innerHTML="";
+  $("#recapType").innerHTML=recapRows(it=>it.type, k=>k, k=>"").sort((a,b)=>b.t-a.t).map(rowHtml).join("");
+  const wrong=S.items.map((it,i)=>({it,i})).filter(x=>S.ans[x.i]!==null&&S.ans[x.i]!==x.it.a);
+  $("#revSum").textContent=`Tinjau soal yang salah (${wrong.length})`;
+  $("#review").innerHTML = wrong.length ? wrong.map(({it,i})=>`
+    <div class="rv"><div class="q">${babOf(it.bab).short}: ${it.q}</div>
+    <div class="y">Jawabanmu: ${LETTERS[S.ans[i]]}. ${it.o[S.ans[i]]}</div>
+    <div class="c">Jawaban benar: ${LETTERS[it.a]}. ${it.o[it.a]}</div>
+    <div class="e">${it.e}</div></div>`).join("") : `<p style="margin:0;color:var(--mut)">Tidak ada jawaban salah.</p>`;
+  $("#revBox").open = false;
+  const redo = S.items.filter((it,i)=>S.ans[i]===null||S.ans[i]!==it.a).length;
+  $("#againWrong").disabled = redo===0;
+  $("#againWrong").textContent = `Ulangi soal yang salah dan kosong (${redo})`;
+  show("result");
+}
+$("#againWrong").onclick=()=>{
+  // ambil ulang dari data asli supaya urutan pilihan tidak teracak dua kali
+  const ids=S.items.filter((it,i)=>S.ans[i]===null||S.ans[i]!==it.a).map(it=>it.id);
+  const items=ids.map(id=>{ const x=ITEMS.find(z=>z.id===id); return {...x,o:x.o.slice()}; });
+  startSession(cfg.shufQ?shuffle(items):items);
+};
+$("#againAll").onclick=()=>startSession(buildItems());
+$("#toMenu").onclick=()=>{ S=null; show("start"); };
+$("#startBtn").onclick=()=>startSession(buildItems());
+
+renderChapters(); updateSummary();
+</script>
+</body>
+</html>

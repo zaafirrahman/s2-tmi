@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latihan Materi 6 | Optim Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F8FAFF;--ink:#111;--mut:#4B4B4B;--acc:#2448D8;--p:#2F5BFF;--s:#FF8A1F;--ptint:#DCE5FF;--red:#FF4B3E;--teal:#12A594;--yel:#FFE14D;--oktint:#CDEFE9;--badtint:#FFDAD6;--okink:#0B6F62;--badink:#B3261B;--line:#D4DAEC;--disp:'Bricolage Grotesque',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;--hw:800}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background-color:var(--bg);color:var(--ink);font:400 16px/1.5 var(--body);padding:32px clamp(16px,5vw,64px) 56px;overflow-x:hidden;background-image:linear-gradient(rgba(47,91,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(47,91,255,.13) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:900px;margin:0 auto}
+.hidden{display:none!important}
+button{font:inherit;color:inherit;cursor:pointer;border-radius:0}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:4px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+h1,h2,h3{font-family:var(--disp);font-weight:var(--hw);margin:0}
+
+/* top */
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.back{font-family:var(--disp);font-weight:var(--hw);font-size:20px;line-height:1.2;color:var(--acc);text-decoration:none;border-bottom:2px solid transparent}
+.back:hover{border-bottom-color:var(--acc)}
+.tag{font-family:var(--disp);font-weight:var(--hw);font-size:20px}
+
+/* header start */
+header.hd{position:relative;margin-bottom:34px}
+header.hd h1{font-size:clamp(44px,8.5vw,92px);line-height:.95;letter-spacing:-.01em}
+header.hd .sub{margin:12px 0 0;font-size:18px;color:var(--mut)}
+.stk{position:absolute;right:0;top:-8px;display:flex;gap:6px}
+.stk svg{width:80px;height:80px}
+.stk svg:nth-child(1){transform:rotate(-8deg)}.stk svg:nth-child(2){transform:rotate(6deg)}.stk svg:nth-child(3){transform:rotate(-3deg)}
+@media(max-width:900px){.stk{display:none}}
+
+/* surfaces */
+.card{background:#fff;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--p);padding:22px}
+.card.flat{box-shadow:6px 6px 0 var(--ink)}
+.sec{font-family:var(--disp);font-weight:var(--hw);font-size:24px;margin:26px 0 12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sec:first-child{margin-top:0}
+.sec small{font:500 14px var(--body);color:var(--mut)}
+
+/* score rule tiles */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:520px){.rules{grid-template-columns:1fr}}
+.rule{border:3px solid var(--ink);padding:10px 14px;display:flex;align-items:baseline;gap:12px;background:#fff}
+.rule b{font-family:var(--disp);font-weight:var(--hw);font-size:34px;line-height:1}
+.rule span{font-size:15px;color:var(--ink)}
+.rule.p{background:var(--oktint)} .rule.m{background:var(--badtint)} .rule.z{background:#E9EDF8}
+.rulenote{margin:10px 0 0;font-size:14px;color:var(--mut)}
+
+/* chapters */
+.chapters{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.chap{display:flex;gap:12px;align-items:flex-start;text-align:left;border:3px solid var(--ink);background:#fff;padding:12px 14px;transition:transform .12s,box-shadow .12s}
+.chap:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--s)}
+.chap[aria-pressed="true"]{background:var(--ptint)}
+.chap .box{width:22px;height:22px;border:3px solid var(--ink);background:#fff;flex:none;margin-top:1px;display:grid;place-items:center}
+.chap[aria-pressed="true"] .box{background:var(--ink)}
+.chap[aria-pressed="true"] .box::after{content:"";width:10px;height:5px;border-left:3px solid #fff;border-bottom:3px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.chap b{display:block;font-weight:600;font-size:15px;line-height:1.3}
+.chap span span{font-size:13px;color:var(--mut)}
+
+/* toggles */
+.opts-row{display:flex;flex-wrap:wrap;gap:12px}
+.toggle{display:flex;align-items:center;gap:12px;border:3px solid var(--ink);background:#fff;padding:8px 14px 8px 10px;font-size:15px}
+.toggle .sw{width:42px;height:24px;border:3px solid var(--ink);background:#fff;position:relative;flex:none}
+.toggle .sw::after{content:"";position:absolute;top:1px;left:1px;width:14px;height:14px;background:var(--ink);transition:transform .12s}
+.toggle[aria-pressed="true"]{background:var(--ptint)}
+.toggle[aria-pressed="true"] .sw{background:var(--p)}
+.toggle[aria-pressed="true"] .sw::after{transform:translateX(18px)}
+
+.startbar{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-top:28px;padding-top:20px;border-top:3px dashed var(--ink)}
+.summary{font-size:16px;max-width:46ch}
+
+/* buttons */
+.btn{display:inline-block;border:3px solid var(--ink);background:var(--p);color:#fff;font-family:var(--disp);font-weight:var(--hw);font-size:19px;line-height:1.1;padding:12px 22px;box-shadow:4px 4px 0 var(--ink);text-decoration:none;transition:transform .12s,box-shadow .12s}
+.btn:hover:not(:disabled){transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active:not(:disabled){transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn.ghost{background:#fff;color:var(--ink)}
+.btn:disabled{background:#E6E6DE;color:#77776F;box-shadow:none;cursor:not-allowed;border-color:#77776F}
+
+/* hud */
+.hud{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center;margin-bottom:12px}
+.stat{display:flex;flex-direction:column;line-height:1.2}
+.stat small{color:var(--mut);font-size:13px}
+.stat .v{font-weight:700;font-size:22px}
+.stat.right{text-align:right;align-items:flex-end}
+.timer{font-size:30px;font-weight:700;border:3px solid var(--ink);background:#fff;padding:6px 16px;min-width:140px;text-align:center;box-shadow:4px 4px 0 var(--ink)}
+.timer.warn{background:var(--yel)}
+.timer.crit{background:var(--red);animation:pulse 1s steps(2,end) infinite}
+@keyframes pulse{50%{opacity:.65}}
+.strip{display:flex;gap:2px;height:20px;align-items:flex-end;margin:6px 0 18px}
+.strip i{flex:1;min-width:2px;height:35%;background:var(--line)}
+.strip i.ok{background:var(--teal);height:100%}
+.strip i.bad{background:var(--red);height:70%}
+.strip i.cur{background:var(--ink);height:100%}
+
+/* question */
+.qmeta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip{font-size:13px;font-weight:600;border:2px solid var(--ink);padding:2px 10px;background:var(--ptint)}
+.chip.t{background:var(--yel)}
+.qtext{font-family:var(--disp);font-weight:var(--hw);font-size:clamp(21px,3.6vw,28px);line-height:1.2;margin:0 0 20px}
+.options{display:grid;gap:12px}
+.opt{display:flex;gap:14px;align-items:flex-start;text-align:left;width:100%;border:3px solid var(--ink);background:#fff;padding:12px 14px;box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.opt .k{flex:none;width:32px;height:32px;border:3px solid var(--ink);display:grid;place-items:center;font-weight:700;font-size:15px;background:#fff}
+.opt .t{padding-top:3px;flex:1}
+.opt .mk{font-size:13px;font-weight:600;padding-top:5px;white-space:nowrap}
+.options:not(.locked) .opt:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.opt.ok{background:var(--oktint)} .opt.ok .k{background:var(--teal)} .opt.ok .mk{color:var(--okink)}
+.opt.bad{background:var(--badtint)} .opt.bad .k{background:var(--red)} .opt.bad .mk{color:var(--badink)}
+.options.locked .opt{cursor:default;box-shadow:none}
+.options.locked .opt:not(.ok):not(.bad){opacity:.5}
+.feedback{margin-top:18px;border:3px solid var(--ink);padding:14px 16px;display:none}
+.feedback.show{display:block}
+.feedback.ok{background:var(--oktint)} .feedback.bad{background:var(--badtint)}
+.feedback h3{font-size:22px;margin-bottom:4px}
+.feedback p{margin:4px 0 0;font-size:15px}
+.feedback .ans{font-weight:600}
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap}
+.hint{font-size:14px;color:var(--mut)}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(17,17,17,.6);display:grid;place-items:center;padding:20px;z-index:20}
+.modal .box{background:#fff;border:3px solid var(--ink);box-shadow:8px 8px 0 var(--p);padding:22px;max-width:420px;width:100%}
+.modal h3{font-size:26px;margin-bottom:8px}
+.modal p{margin:0 0 18px;color:var(--mut)}
+.modal .row{display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap}
+
+/* result */
+.res-head{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+@media(max-width:620px){.res-head{grid-template-columns:1fr;justify-items:start}}
+.scorebox{border:3px solid var(--ink);background:var(--yel);box-shadow:6px 6px 0 var(--ink);padding:14px 26px 12px;text-align:center;min-width:190px}
+.scorebox .big{font-family:var(--disp);font-weight:var(--hw);font-size:92px;line-height:1;display:block}
+.scorebox small{font-size:14px;font-weight:600}
+.res-head h2{font-size:clamp(30px,5.5vw,46px);line-height:1}
+.res-head p{margin:10px 0 0;color:var(--mut)}
+.stack{display:flex;height:22px;border:3px solid var(--ink);margin-top:22px;background:#fff}
+.stack i{display:block;height:100%}
+.stack .g{background:var(--teal)} .stack .r{background:var(--red)} .stack .b{background:var(--line)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--mut);margin-top:10px}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border:2px solid var(--ink);margin-right:6px;vertical-align:-1px;background:var(--c)}
+.formula{margin:18px 0 0;border:3px dashed var(--ink);padding:10px 14px;font-size:14.5px;background:#fff}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:22px}
+.kpi{border:3px solid var(--ink);padding:10px 12px;background:#fff}
+.kpi small{display:block;color:var(--mut);font-size:13px}
+.kpi b{font-size:22px}
+.kpi.ok{background:var(--oktint)} .kpi.bad{background:var(--badtint)}
+.recap{display:grid;gap:14px}
+.rrow{display:grid;grid-template-columns:minmax(120px,230px) 1fr 64px;gap:14px;align-items:center}
+@media(max-width:560px){.rrow{grid-template-columns:1fr 60px}.rrow .bar{grid-column:1/-1;order:3}}
+.rrow .nm b{display:block;font-weight:600;font-size:15px;line-height:1.25}
+.rrow .nm small{color:var(--mut);font-size:13px}
+.bar{height:18px;display:flex;border:3px solid var(--ink);background:#fff}
+.bar i{display:block;height:100%}
+.bar .g{background:var(--teal)} .bar .r{background:var(--red)}
+.rrow .sc{text-align:right;font-weight:700;font-size:15px}
+.insight{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.insight{grid-template-columns:1fr}}
+.ins{border:3px solid var(--ink);padding:12px 14px;font-size:15px}
+.ins b{display:block;margin-bottom:2px}
+.ins.good{background:var(--oktint)} .ins.weak{background:var(--badtint)}
+.review{display:grid;gap:12px;margin-top:14px}
+.rv{border:3px solid var(--ink);border-left-width:10px;border-left-color:var(--red);padding:11px 14px;background:#fff;font-size:15px}
+.rv .q{font-weight:600;margin-bottom:6px}
+.rv .y{color:var(--badink)} .rv .c{color:var(--okink);font-weight:600}
+.rv .e{color:var(--mut);margin-top:4px}
+.actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);font-size:22px;padding:2px 0}
+.mt{margin-top:22px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.mx{display:inline-grid;gap:1px 14px;padding:1px 9px;margin:2px 4px;vertical-align:middle;border-left:2px solid var(--ink);border-right:2px solid var(--ink);border-radius:6px;font-family:var(--mono);font-size:.88em;font-weight:500;line-height:1.4}
+.mx.dt{border-radius:0}.mx i{font-style:normal;text-align:center;white-space:nowrap}
+.opt .t sup,.qtext sup{font-size:.7em}
+.qtext{overflow-wrap:anywhere}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;position:relative;z-index:2;margin-bottom:26px;font:800 18px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}.crumbs span[aria-hidden]{color:#111}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="3.2" markerHeight="3.2" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#111"/></marker></svg>
+<div class="wrap">
+
+  <!-- START -->
+  <section id="start">
+    <nav class="crumbs" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="optim.html">Optim</a><span aria-hidden="true">/</span><span aria-current="page">Materi 6</span></nav>
+    <header class="hd">
+      <h1>Materi 6</h1>
+      <p class="sub">TI5001 / Optimisasi &amp; Intelejensia Komputasional · Metode Numerik Single</p>
+      <div class="stk" aria-hidden="true"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><g transform='rotate(-20 50 50)'><ellipse cx='50' cy='50' rx='42' ry='26' fill='#2F5BFF' fill-opacity='.2' stroke-width='3'/><ellipse cx='50' cy='50' rx='27' ry='15' fill='#FFD93D' fill-opacity='.5' stroke-width='3'/><ellipse cx='50' cy='50' rx='10' ry='5' fill='#FF8A1F' stroke-width='3'/></g><path d='M10 18L28 36L40 44' stroke-width='3' stroke-dasharray='6 6' marker-end='url(#ah)'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M12 14Q50 126 88 14' fill='#2F5BFF' fill-opacity='.22'/><path d='M4 86H96' stroke-width='3'/><circle cx='50' cy='70' r='7' fill='#FF8A1F' stroke-width='3'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M8 20Q50 110 92 20' stroke-width='3'/><path d='M20.6 43L33.2 57.8L43.3 63.9L50 65' stroke-width='2.5' stroke-dasharray='5 5'/><circle cx='20.6' cy='43' r='5' fill='#2F5BFF' stroke-width='3'/><circle cx='33.2' cy='57.8' r='5' fill='#FFD93D' stroke-width='3'/><circle cx='43.3' cy='63.9' r='5' fill='#FFD93D' stroke-width='3'/><circle cx='50' cy='66' r='6' fill='#FF8A1F' stroke-width='3'/></svg></div>
+    </header>
+
+    <div class="card">
+      <div class="sec">Aturan skor</div>
+      <div class="rules">
+        <div class="rule p"><b>+3</b><span>jawaban benar</span></div>
+        <div class="rule m"><b>−1</b><span>jawaban salah</span></div>
+        <div class="rule z"><b>0</b><span>tidak dijawab</span></div>
+      </div>
+      <p class="rulenote">Tanpa batas waktu. Poin dinormalkan ke skala 0 sampai 100. Skor 25 setara tidak menjawab sama sekali atau menebak acak.</p>
+
+      <div id="chapSec"><div class="sec" style="margin-top:30px">Pilih bagian <small id="selCount"></small></div>
+      <div class="chapters" id="chapters"></div></div>
+
+      <div class="sec" style="margin-top:30px">Pengaturan</div>
+      <div class="opts-row">
+        <button class="toggle" id="tgQ" aria-pressed="true"><span class="sw"></span>Acak urutan soal</button>
+        <button class="toggle" id="tgO" aria-pressed="true"><span class="sw"></span>Acak urutan pilihan</button>
+      </div>
+
+      <div class="startbar">
+        <div class="summary" id="summary"></div>
+        <button class="btn" id="startBtn">Mulai kuis</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="hidden">
+    <div class="topbar"><span class="tag">Latihan Optim · Materi 6</span></div>
+    <div class="hud">
+      <div class="stat"><small>Soal</small><span class="v num" id="hudQ">1/1</span></div>
+      <div class="stat right"><small>Poin (<span id="hudOk">0</span> benar, <span id="hudBad">0</span> salah)</small><span class="v num" id="hudPts">0</span></div>
+    </div>
+    <div class="strip" id="strip" aria-hidden="true"></div>
+    <div class="card flat">
+      <div class="qmeta"><span class="chip" id="qBab"></span><span class="chip t" id="qType"></span></div>
+      <p class="qtext" id="qText"></p>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+      <div class="navrow">
+        <button class="btn ghost" id="finishBtn">Selesaikan sekarang</button>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <span class="hint" id="hint">Tekan W, A, S, D untuk menjawab, atau Enter untuk melewati</span>
+          <button class="btn ghost" id="nextBtn">Lewati</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="hidden">
+    <div class="topbar"><span class="tag">Hasil Materi 6</span></div>
+    <div class="card">
+      <div class="res-head">
+        <div class="scorebox"><span class="big num" id="scoreBig">0</span><small>skor dari 100</small></div>
+        <div>
+          <h2 id="grade"></h2>
+          <p id="gradeSub"></p>
+        </div>
+      </div>
+      <div class="stack" id="stack" aria-hidden="true"></div>
+      <div class="legend"><span style="--c:var(--teal)">Benar</span><span style="--c:var(--red)">Salah</span><span style="--c:var(--line)">Tidak dijawab</span></div>
+      <p class="formula" id="formula"></p>
+      <div class="kpis" id="kpis"></div>
+    </div>
+
+    <div class="card mt" id="recapBabCard">
+      <h2 style="font-size:28px;margin-bottom:16px">Rekap per bagian</h2>
+      <div class="recap" id="recap"></div>
+      <div class="insight" id="insight"></div>
+    </div>
+
+    <div class="card mt">
+      <h2 style="font-size:28px;margin-bottom:16px">Rekap per jenis soal</h2>
+      <div class="recap" id="recapType"></div>
+    </div>
+
+    <div class="card mt">
+      <details id="revBox">
+        <summary id="revSum">Tinjau soal yang salah</summary>
+        <div class="review" id="review"></div>
+      </details>
+    </div>
+
+    <div class="actions">
+      <button class="btn" id="againWrong">Ulangi soal yang salah</button>
+      <button class="btn ghost" id="againAll">Ulangi dengan pengaturan sama</button>
+      <button class="btn ghost" id="toMenu">Ubah pengaturan</button>
+      <a class="btn ghost" href="optim.html">Daftar materi</a>
+    </div>
+  </section>
+</div>
+
+<div class="modal hidden" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="box">
+    <h3 id="mTitle">Selesaikan sekarang?</h3>
+    <p id="mText"></p>
+    <div class="row"><button class="btn ghost" id="mNo">Lanjut mengerjakan</button><button class="btn" id="mYes">Selesaikan</button></div>
+  </div>
+</div>
+
+<script>
+/* ===== Data: tiap soal {id, bab, type, q, o:[4 pilihan], a:indeks benar, e:bahasan} ===== */
+const BAB = [{"id": 1, "short": "Bagian 1", "name": "Konsep Dasar, Direct Search, dan Newton"}, {"id": 2, "short": "Bagian 2", "name": "Dichotomous, Fibonacci, dan Golden Section"}, {"id": 3, "short": "Bagian 3", "name": "Bisection dan Perbandingan Metode"}];
+const ITEMS = [{"id": "latihan6-01", "bab": 1, "type": "Konsep", "q": "Metode numerik pada slide mengasumsikan fungsi yang dioptimisasi bersifat unimodal. Jika f(x) memiliki dua lembah (dua minimum lokal) pada interval pencarian, maka…", "o": ["metode interval dapat konvergen ke salah satu minimum lokal yang belum tentu global", "metode selalu menemukan minimum global", "interval ketidakpastian menjadi dua interval terpisah", "metode tidak dapat dijalankan sama sekali"], "a": 0, "e": "Unimodal berarti hanya ada satu puncak atau lembah. Prosedur yang membuang sebagian interval berdasarkan perbandingan nilai fungsi bisa menyingkirkan lembah yang benar bila asumsi ini dilanggar."}, {"id": "latihan6-02", "bab": 1, "type": "Konsep", "q": "Interval ketidakpastian (interval of uncertainty) adalah…", "o": ["interval kesalahan pembulatan pada komputer", "jarak antara dua titik stasioner", "interval nilai fungsi tujuan pada solusi layak", "interval tempat titik optimal berada, yang terus dipersempit hingga mencapai panjang yang diinginkan"], "a": 3, "e": "Prinsip metode numerik pada slide adalah menentukan interval ketidakpastian yang memuat optimum dan mempersempitnya sampai panjang akhir l yang ditetapkan."}, {"id": "latihan6-03", "bab": 1, "type": "Hitungan", "q": "Pada metode direct search, panjang interval ketidakpastian akhir yang diinginkan l = 0,02. Panjang langkah λ adalah…", "o": ["0,02", "0,01", "0,0001", "0,04"], "a": 1, "e": "λ = l/2 = 0,01. Dengan langkah l/2 di kiri dan kanan titik akhir, interval ketidakpastian akhir berpanjang l."}, {"id": "latihan6-04", "bab": 1, "type": "Analisis", "q": "Direct search untuk meminimumkan f(x) = (x − 2)² dengan titik awal x⁽¹⁾ = 5 dan λ = 0,05. Karena f(5 + λ) > f(5), arah d = −1. Iterasi berhenti pada titik…", "o": ["x = 5,00 karena tidak ada perbaikan", "x = 1,95 setelah 61 langkah", "x = 2,05 setelah 59 langkah", "x = 2,00 setelah 60 langkah, karena f(1,95) ≥ f(2,00)"], "a": 3, "e": "Dari 5 bergerak ke kiri 0,05 per langkah: 5 − 0,05k. Pada k = 60, x = 2,00 dengan f = 0. Langkah berikutnya f(1,95) = 0,0025 ≥ f(2,00), sehingga berhenti dan interval ketidakpastian akhir [1,95; 2,05] berpanjang l = 0,1."}, {"id": "latihan6-05", "bab": 1, "type": "Konsep", "q": "Pada Langkah 0 direct search untuk <b>maksimisasi</b>, jika f(x⁽¹⁾ + λ) < f(x⁽¹⁾), maka…", "o": ["λ dilipatduakan", "arah pencarian diubah menjadi d = −1 lalu lanjut ke langkah 1", "arah tetap d = 1", "pencarian berhenti dan interval [x⁽¹⁾, x⁽¹⁾ + λ] ditetapkan"], "a": 1, "e": "d = 1 berarti ke kanan. Jika bergerak ke kanan membuat f (yang dimaksimumkan) turun, arah dibalik ke kiri (d = −1). Jika f sama, berhenti."}, {"id": "latihan6-06", "bab": 1, "type": "Hitungan", "q": "Metode Newton meminimumkan f(x) = x⁴/4 − x dari x⁽¹⁾ = 2. Nilai x⁽³⁾ adalah…", "o": ["1,0106", "1,2500", "1,1105", "1,4167"], "a": 2, "e": "f′ = x³ − 1 dan f″ = 3x². x⁽²⁾ = 2 − 7/12 = 1,4167. x⁽³⁾ = 1,4167 − (2,8434 − 1)/(3·2,0069) = 1,4167 − 0,3061 = 1,1105. Iterasi menuju x* = 1."}, {"id": "latihan6-07", "bab": 1, "type": "Konsep", "q": "Metode Newton diterapkan pada fungsi kuadrat f(x) = 3x² − 6x + 2 dari titik awal x⁽¹⁾ = 10. Setelah satu iterasi diperoleh…", "o": ["x⁽²⁾ = 4, yaitu setengah jalan menuju optimum", "x⁽²⁾ = 1, yaitu titik optimal tepat", "x⁽²⁾ = 5,5 sehingga perlu banyak iterasi", "tidak dapat dihitung karena f″ konstan"], "a": 1, "e": "Newton memakai pendekatan kuadratik; untuk fungsi kuadrat pendekatan itu tepat. f′ = 6x − 6 dan f″ = 6: x⁽²⁾ = 10 − 54/6 = 1. Iterasi berikutnya tidak bergerak sehingga |x⁽³⁾ − x⁽²⁾| < ε."}, {"id": "latihan6-08", "bab": 1, "type": "Analisis", "q": "Metode Newton diterapkan pada f(x) = x⁴ − 2x dengan titik awal x⁽¹⁾ = 0. Masalah yang terjadi adalah…", "o": ["f′(0) = 0 sehingga iterasi langsung berhenti di optimum", "f″(0) < 0 sehingga iterasi menuju maksimum", "f″(0) = 0 sehingga f′/f″ tidak terdefinisi (pembagian dengan nol)", "tidak ada masalah, x⁽²⁾ = 0,5"], "a": 2, "e": "f′ = 4x³ − 2 dan f″ = 12x². Di x = 0: f′ = −2 dan f″ = 0, sehingga x⁽²⁾ = x⁽¹⁾ − f′/f″ tak terdefinisi. Newton membutuhkan f″ ≠ 0 di titik iterasi."}, {"id": "latihan6-09", "bab": 1, "type": "Hitungan", "q": "Pendekatan kuadratik di x⁽ᵏ⁾ = 1 untuk f(x) = x³ adalah q(x) = f + f′(x − 1) + ½f″(x − 1)². Titik x⁽ᵏ⁺¹⁾ dari q′(x) = 0 adalah…", "o": ["2/3", "0,5", "0", "1,5"], "a": 1, "e": "f(1) = 1, f′(1) = 3, f″(1) = 6. q′(x) = 3 + 6(x − 1) = 0 → x = 1 − 3/6 = 0,5 (sama dengan x − f′/f″)."}, {"id": "latihan6-10", "bab": 1, "type": "Konsep", "q": "Pengelompokan metode pada slide yang <b>benar</b> adalah…", "o": ["hanya golden section yang berbasis evaluasi fungsi", "direct search dan Newton berbasis turunan; sisanya berbasis evaluasi fungsi", "Fibonacci dan bisection berbasis turunan", "direct search, dichotomous, Fibonacci, dan golden section berbasis evaluasi fungsi; Newton dan bisection berbasis turunan"], "a": 3, "e": "Bisection memakai tanda f′(m); Newton memakai f′ dan f″. Direct search, dichotomous, Fibonacci, dan golden section hanya membandingkan nilai f di titik-titik uji."}, {"id": "latihan6-11", "bab": 2, "type": "Hitungan", "q": "Dichotomous search untuk <b>memaksimumkan</b> f(x) = −(x − 3)² pada [0, 4] dengan ε = 0,02. Titik u⁽¹⁾, v⁽¹⁾ dan interval berikutnya adalah…", "o": ["u = 1,99; v = 2,01; interval berikutnya [0; 2,01]", "u = 2,00; v = 2,02; interval berikutnya [1,99; 4]", "u = 1,99; v = 2,01; interval berikutnya [1,99; 4]", "u = 1,98; v = 2,02; interval berikutnya [0; 2,01]"], "a": 2, "e": "u = a + (b − a)/2 − ε/2 = 2 − 0,01 = 1,99 dan v = 2,01. f(u) = −1,0201 < f(v) = −0,9801. Pada maksimisasi, jika f(u) < f(v) maka a⁽ᵏ⁺¹⁾ = u dan b⁽ᵏ⁺¹⁾ = b⁽ᵏ⁾ → [1,99; 4]."}, {"id": "latihan6-12", "bab": 2, "type": "Hitungan", "q": "Dichotomous search pada [0, 10] dengan ε = 0,2. Panjang interval ketidakpastian pada awal iterasi ke-4 (a⁽⁴⁾ − b⁽⁴⁾ dalam nilai mutlak) adalah…", "o": ["0,8", "2,65", "1,25", "1,425"], "a": 3, "e": "Panjang berikutnya = (panjang + ε)/2: L₁ = 10 → L₂ = 5,1 → L₃ = 2,65 → L₄ = 1,425. Karena dua titik uji sama-sama berjarak ε/2 dari titik tengah, interval tidak persis separuh."}, {"id": "latihan6-13", "bab": 2, "type": "Analisis", "q": "Pada contoh slide dichotomous (minimisasi, ε = 0,0001) iterasi k = 2 memiliki a = 0,5, b = 2, f(u) = 0,062463 dan f(v) = 0,062513 dengan u = 1,2499 dan v = 1,2500. Interval pada iterasi k = 3 adalah…", "o": ["[0,5; 1,25]", "[1,2499; 2]", "[1,25; 2]", "[0,5; 1,2499]"], "a": 0, "e": "Minimisasi: jika f(u) ≤ f(v) maka a⁽ᵏ⁺¹⁾ = a⁽ᵏ⁾ dan b⁽ᵏ⁺¹⁾ = v⁽ᵏ⁾. Karena 0,062463 ≤ 0,062513, interval baru [0,5; v] = [0,5; 1,25]."}, {"id": "latihan6-14", "bab": 2, "type": "Hitungan", "q": "Metode Fibonacci dengan a = −2, b = 8 dan l = 0,1. Jumlah iterasi n yang dipilih (F₀ = F₁ = 1) adalah…", "o": ["9", "10", "12", "11"], "a": 3, "e": "(b − a)/l = 100. Deret: F₈ = 34, F₉ = 55, F₁₀ = 89, F₁₁ = 144. Syarat F_n > 100 pertama terpenuhi pada n = 11 (F₁₀ = 89 < 100)."}, {"id": "latihan6-15", "bab": 2, "type": "Hitungan", "q": "Metode Fibonacci dengan b − a = 10 dan l = 0,01. Nilai n terkecil yang memenuhi F_n > (b − a)/l adalah…", "o": ["16", "14", "17", "15"], "a": 0, "e": "(b − a)/l = 1000. F₁₅ = 987 < 1000 sehingga belum cukup, F₁₆ = 1597 > 1000. Jadi n = 16."}, {"id": "latihan6-16", "bab": 2, "type": "Hitungan", "q": "Metode Fibonacci pada [0, 10] dengan n = 7 (F₅ = 8, F₆ = 13, F₇ = 21). Titik u⁽¹⁾ dan v⁽¹⁾ adalah…", "o": ["u ≈ 2,380 dan v ≈ 3,810", "u ≈ 3,810 dan v ≈ 6,190", "u ≈ 6,190 dan v ≈ 3,810", "u ≈ 3,820 dan v ≈ 6,180"], "a": 1, "e": "u⁽¹⁾ = a + F_{n−2}/F_n · (b − a) = 10·8/21 ≈ 3,810 dan v⁽¹⁾ = a + F_{n−1}/F_n · (b − a) = 10·13/21 ≈ 6,190. Titik yang sama sekali berbeda dari golden section 3,82/6,18 menunjukkan bahwa rasio Fibonacci berubah tiap iterasi."}, {"id": "latihan6-17", "bab": 2, "type": "Konsep", "q": "Pada metode Fibonacci, konstanta pembeda ε diperlukan karena…", "o": ["agar interval awal selalu lebih besar dari l", "nilai F_n terlalu besar untuk dihitung", "pada iterasi k = n, u⁽ᵏ⁾ = v⁽ᵏ⁾ sehingga kedua titik harus dibedakan agar dapat dibandingkan", "agar f dapat diturunkan dua kali"], "a": 2, "e": "Rumus u dan v memberi titik yang berimpit pada iterasi terakhir. Slide menetapkan v⁽ᵏ⁾ = u⁽ᵏ⁻¹⁾ + ε dan mensyaratkan l > ε."}, {"id": "latihan6-18", "bab": 2, "type": "Konsep", "q": "Alasan menetapkan n sehingga F_n > (b − a)/l pada metode Fibonacci adalah…", "o": ["agar n selalu bilangan genap", "agar dua titik uji tidak pernah berimpit", "agar nilai ε bisa dibuat nol", "agar panjang interval akhir sekitar (b − a)/F_n lebih kecil dari l yang diinginkan"], "a": 3, "e": "Setiap iterasi menyusutkan interval menurut rasio Fibonacci, sehingga setelah n langkah panjang interval ≈ (b − a)/F_n. Memilih F_n > (b − a)/l menjamin nilai ini kurang dari l."}, {"id": "latihan6-19", "bab": 2, "type": "Hitungan", "q": "Golden section dengan γ = 0,618 pada [0, 5]. Titik u⁽¹⁾ dan v⁽¹⁾ adalah…", "o": ["u = 1,545 dan v = 3,455", "u = 1,910 dan v = 3,090", "u = 3,090 dan v = 1,910", "u = 2,500 dan v = 2,510"], "a": 1, "e": "u = a + (1 − γ)(b − a) = 0,382·5 = 1,910 dan v = a + γ(b − a) = 0,618·5 = 3,090. Dengan konstruksi ini u < v."}, {"id": "latihan6-20", "bab": 2, "type": "Analisis", "q": "Golden section meminimumkan f(x) = (x − 1)² pada [−1, 2]. Diperoleh u⁽¹⁾ = 0,146 dan v⁽¹⁾ = 0,854 dengan f(u) = 0,729 > f(v) = 0,021. Titik u⁽²⁾ pada iterasi ke-2 adalah…", "o": ["0,854, yaitu v⁽¹⁾ yang dipakai ulang", "1,291", "0,146", "0,500"], "a": 0, "e": "Minimisasi dengan f(u) > f(v): a⁽²⁾ = u⁽¹⁾ = 0,146, b⁽²⁾ = 2, dan u⁽²⁾ = v⁽¹⁾ = 0,854; hanya v⁽²⁾ yang dihitung baru (≈ 1,292). Inilah alasan golden section hanya menambah satu evaluasi fungsi per iterasi."}, {"id": "latihan6-21", "bab": 2, "type": "Hitungan", "q": "Golden section pada interval awal [0, 10] dengan l = 0,5 dan γ = 0,618. Panjang interval pada iterasi k adalah 10γ^(k−1). Pencarian berhenti pada iterasi ke…", "o": ["8", "6", "7", "9"], "a": 0, "e": "Panjang: k = 7 → 10·0,618⁶ ≈ 0,557 (belum < 0,5); k = 8 → 10·0,618⁷ ≈ 0,344 < 0,5. Pemeriksaan di langkah 1 menghentikan proses pada k = 8."}, {"id": "latihan6-22", "bab": 2, "type": "Konsep", "q": "Hubungan yang benar mengenai golden ratio γ = 0,618 adalah…", "o": ["γ² = 1 − γ (≈ 0,382), sehingga salah satu titik uji dapat dipakai ulang pada iterasi berikutnya", "γ² = 1 + γ", "γ·(1 − γ) = 1", "γ² = γ − 1"], "a": 0, "e": "γ = (√5 − 1)/2 memenuhi γ² + γ − 1 = 0, jadi γ² = 1 − γ. Akibatnya titik v⁽ᵏ⁾ dalam interval [a, v] berada pada posisi (1 − γ) yang sama dengan u⁽ᵏ⁺¹⁾."}, {"id": "latihan6-23", "bab": 3, "type": "Hitungan", "q": "Bisection (minimisasi) untuk f(x) = x⁴ − 4x pada [0, 3]. Karena f′ = 4x³ − 4, interval setelah tiga iterasi adalah…", "o": ["[0,75; 1,5]", "[0,75; 1,125]", "[1,125; 1,5]", "[0; 1,5]"], "a": 1, "e": "m = 1,5: f′ = 9,5 > 0 → b = 1,5. m = 0,75: f′ = −2,3125 < 0 → a = 0,75. m = 1,125: f′ ≈ 1,695 > 0 → b = 1,125. Interval [0,75; 1,125] memuat x* = 1."}, {"id": "latihan6-24", "bab": 3, "type": "Hitungan", "q": "Bisection dengan interval awal [−1, 2]. Banyaknya pembagian dua minimal agar panjang interval ketidakpastian ≤ 0,01 adalah…", "o": ["9", "8", "10", "30"], "a": 0, "e": "Panjang setelah k pembagian = 3/2ᵏ. Syarat 3/2ᵏ ≤ 0,01 → 2ᵏ ≥ 300. 2⁸ = 256 < 300 dan 2⁹ = 512 ≥ 300 sehingga k = 9."}, {"id": "latihan6-25", "bab": 3, "type": "Hitungan", "q": "Bisection untuk <b>memaksimumkan</b> f(x) = −(x − 1)² pada [−1, 2]. Titik tengah pertama m = 0,5 dan f′(0,5) = 1. Interval berikutnya adalah…", "o": ["[0,5; 2]", "[−1; 0,5]", "[0,5; 0,5]", "[−1; 2] (tetap)"], "a": 0, "e": "Maksimisasi: f′(m) > 0 berarti f masih naik di m, sehingga maksimum di sebelah kanan: a⁽ᵏ⁺¹⁾ = m dan b⁽ᵏ⁺¹⁾ = b. Jika f′(m) < 0 interval menjadi [a, m]; jika 0, berhenti."}, {"id": "latihan6-26", "bab": 3, "type": "Konsep", "q": "Metode yang pada tiap iterasi (setelah iterasi awal) hanya memerlukan <b>satu</b> evaluasi fungsi baru adalah…", "o": ["dichotomous search dan golden section", "dichotomous search dan Fibonacci", "Newton dan dichotomous search", "Fibonacci dan golden section"], "a": 3, "e": "Fibonacci dan golden section memakai ulang satu titik uji dari iterasi sebelumnya, sehingga hanya satu titik baru yang dievaluasi. Dichotomous membutuhkan dua evaluasi baru per iterasi."}, {"id": "latihan6-27", "bab": 3, "type": "Konsep", "q": "Persyaratan awal yang <b>benar</b> untuk tiap metode adalah…", "o": ["direct search memerlukan interval [a, b] dan Newton memerlukan dua titik awal", "semua metode memerlukan titik awal dan interval", "direct search dan Newton memerlukan titik awal; dichotomous, Fibonacci, golden section, dan bisection memerlukan interval [a, b]", "bisection dan Newton memerlukan titik awal; yang lain interval"], "a": 2, "e": "Direct search dan Newton untuk masalah tak berpembatas (−∞ < x < ∞) dengan titik awal x⁽¹⁾. Metode interval digunakan untuk masalah berpembatas a ≤ x ≤ b."}, {"id": "latihan6-28", "bab": 3, "type": "Hitungan", "q": "Newton meminimumkan f(x) = eˣ − 2x dari x⁽¹⁾ = 0. Nilai x⁽³⁾ adalah…", "o": ["1,0000", "0,6931", "0,7358", "0,5000"], "a": 2, "e": "f′ = eˣ − 2 dan f″ = eˣ. x⁽²⁾ = 0 − (−1)/1 = 1. x⁽³⁾ = 1 − (e − 2)/e = 1 − 0,2642 = 0,7358. Iterasi berikutnya ≈ 0,6940, menuju x* = ln 2 ≈ 0,6931."}, {"id": "latihan6-29", "bab": 3, "type": "Analisis", "q": "Pada contoh slide (minimisasi (x − 1)² pada [−1, 2], l = 0,01), dichotomous menghitung dua titik uji pada iterasi k = 1 sampai 9, sedangkan golden section menghitung dua titik pada k = 1 dan satu titik pada k = 2 sampai 12. Total evaluasi fungsi keduanya adalah…", "o": ["dichotomous 9 dan golden section 12", "dichotomous 18 dan golden section 26", "dichotomous 18 dan golden section 13", "dichotomous 20 dan golden section 24"], "a": 2, "e": "Dichotomous: 9 iterasi × 2 = 18 evaluasi. Golden section: 2 + 11 × 1 = 13 evaluasi. Golden section lebih hemat meski interval akhirnya sedikit lebih panjang (0,0093 dibanding 0,0059)."}, {"id": "latihan6-30", "bab": 3, "type": "Analisis", "q": "Pada slide bisection (minimisasi, f = (x − 1)², ε = 0,001) dihasilkan f′(m) = −1,0 pada k = 1 (m = 0,5) dan 0,5 pada k = 2 (m = 1,25). Interval pada awal iterasi k = 3 adalah…", "o": ["[−1; 0,5]", "[0,5; 1,25]", "[0,5; 2]", "[1,25; 2]"], "a": 1, "e": "k = 1: f′(0,5) < 0 pada minimisasi → a = m = 0,5 → [0,5; 2]. k = 2: f′(1,25) > 0 → b = m = 1,25 → [0,5; 1,25], dan seterusnya mengerucut ke x* = 1."}];
+
+/* ===== util ===== */
+const $ = s => document.querySelector(s);
+const PTS_OK = 3, PTS_BAD = -1;
+const LETTERS = ["W","A","S","D"];
+const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const fmt = v => (v>0?"+":v<0?"−":"")+Math.abs(v);
+const babOf = id => BAB.find(b=>b.id===id);
+const cfg = { babs:new Set(BAB.map(b=>b.id)), shufQ:true, shufO:true };
+let S = null;
+
+/* ===== layar awal ===== */
+function renderChapters(){
+  $("#chapSec").classList.toggle("hidden",BAB.length<2);
+  const box=$("#chapters"); box.innerHTML="";
+  BAB.forEach(b=>{
+    const n=ITEMS.filter(x=>x.bab===b.id).length;
+    const el=document.createElement("button");
+    el.className="chap"; el.setAttribute("aria-pressed",cfg.babs.has(b.id));
+    el.innerHTML=`<span class="box"></span><span><b>${b.short}: ${b.name}</b><span>${n} soal</span></span>`;
+    el.onclick=()=>{ cfg.babs.has(b.id)?cfg.babs.delete(b.id):cfg.babs.add(b.id); $("#chapSec").classList.toggle("hidden",BAB.length<2);
+renderChapters(); updateSummary(); };
+    box.appendChild(el);
+  });
+}
+function updateSummary(){
+  const n=ITEMS.filter(x=>cfg.babs.has(x.bab)).length;
+  $("#selCount").textContent=`${cfg.babs.size} dari ${BAB.length} bab dipilih`;
+  $("#summary").innerHTML = n ? `<b>${n} soal</b>, tanpa batas waktu. Poin maksimum <b>+${n*PTS_OK}</b>.` : "Pilih minimal satu bab.";
+  $("#startBtn").disabled = !n;
+}
+$("#tgQ").onclick=e=>{cfg.shufQ=!cfg.shufQ;e.currentTarget.setAttribute("aria-pressed",cfg.shufQ);};
+$("#tgO").onclick=e=>{cfg.shufO=!cfg.shufO;e.currentTarget.setAttribute("aria-pressed",cfg.shufO);};
+
+function buildItems(){
+  let items=ITEMS.filter(x=>cfg.babs.has(x.bab)).map(x=>({...x,o:x.o.slice()}));
+  return cfg.shufQ?shuffle(items):items;
+}
+function permuteOptions(items){
+  return items.map(it=>{ const idx=shuffle([0,1,2,3]); return {...it,o:idx.map(i=>it.o[i]),a:idx.indexOf(it.a)}; });
+}
+function show(id){ ["start","quiz","result"].forEach(s=>$("#"+s).classList.toggle("hidden",s!==id)); window.scrollTo(0,0); }
+
+/* ===== sesi ===== */
+function startSession(items){
+  if(cfg.shufO) items=permuteOptions(items);
+  S={items,ans:items.map(()=>null),i:0,done:false};
+  $("#strip").innerHTML=items.map(()=>"<i></i>").join("");
+  show("quiz"); renderQ();
+}
+function counts(){
+  let ok=0,bad=0;
+  S.items.forEach((it,i)=>{ if(S.ans[i]!==null){ S.ans[i]===it.a?ok++:bad++; } });
+  return {ok,bad,pts:ok*PTS_OK+bad*PTS_BAD};
+}
+function paintStrip(){
+  const els=$("#strip").children;
+  S.items.forEach((it,i)=>{
+    const a=S.ans[i]; let c="";
+    if(a!==null) c = a===it.a ? "ok":"bad"; else if(i===S.i) c="cur";
+    els[i].className=c;
+  });
+}
+function renderQ(){
+  const it=S.items[S.i], a=S.ans[S.i], b=babOf(it.bab);
+  $("#hudQ").textContent=`${S.i+1}/${S.items.length}`;
+  $("#qBab").textContent=`${b.short}: ${b.name}`;
+  $("#qType").textContent=it.type;
+  $("#qText").innerHTML=it.q;
+  const box=$("#options"); box.innerHTML=""; box.classList.toggle("locked",a!==null);
+  it.o.forEach((t,i)=>{
+    const el=document.createElement("button");
+    el.className="opt";
+    let mk="";
+    if(a!==null){ if(i===it.a){ el.classList.add("ok"); mk=`<span class="mk">${a===it.a?"Jawabanmu, benar":"Jawaban benar"}</span>`; } else if(i===a){ el.classList.add("bad"); mk=`<span class="mk">Jawabanmu, salah</span>`; } el.disabled=true; }
+    el.innerHTML=`<span class="k">${LETTERS[i]}</span><span class="t">${t}</span>${mk}`;
+    el.onclick=()=>answer(i);
+    box.appendChild(el);
+  });
+  const fb=$("#feedback"); fb.className="feedback";
+  if(a!==null) showFeedback();
+  const last=S.i===S.items.length-1;
+  $("#nextBtn").textContent= a===null ? (last?"Lewati dan lihat hasil":"Lewati") : (last?"Lihat hasil":"Berikutnya");
+  $("#nextBtn").classList.toggle("ghost",a===null);
+  $("#nextBtn").disabled = false;
+  $("#hint").textContent = a===null ? "Tekan W, A, S, D untuk menjawab, atau Enter untuk melewati" : "Tekan Enter untuk lanjut";
+  const c=counts(); $("#hudOk").textContent=c.ok; $("#hudBad").textContent=c.bad; $("#hudPts").textContent=fmt(c.pts);
+  paintStrip();
+}
+function showFeedback(){
+  const it=S.items[S.i], a=S.ans[S.i], fb=$("#feedback"), good=a===it.a;
+  fb.className="feedback show "+(good?"ok":"bad");
+  fb.innerHTML = good
+    ? `<h3>Benar, +3 poin</h3><p>${it.e}</p>`
+    : `<h3>Salah, −1 poin</h3><p class="ans">Jawaban benar: ${LETTERS[it.a]}. ${it.o[it.a]}</p><p>${it.e}</p>`;
+}
+function answer(i){
+  if(!S||S.done||S.ans[S.i]!==null) return;
+  S.ans[S.i]=i; renderQ();
+}
+function next(){
+  if(S.i===S.items.length-1) finish(); else { S.i++; renderQ(); window.scrollTo({top:0}); }
+}
+$("#nextBtn").onclick=next;
+document.addEventListener("keydown",e=>{
+  const modalOpen=!$("#modal").classList.contains("hidden");
+  if(modalOpen){ if(e.key==="Escape") $("#modal").classList.add("hidden"); return; }
+  if(!S||S.done||$("#quiz").classList.contains("hidden")) return;
+  const k=e.key.toLowerCase(), m={w:0,a:1,s:2,d:3,"1":0,"2":1,"3":2,"4":3};
+  if(k in m) answer(m[k]); else if((k==="enter"||k==="arrowright")){ e.preventDefault(); next(); }
+});
+
+/* modal selesai */
+$("#finishBtn").onclick=()=>{
+  const un=S.ans.filter(a=>a===null).length;
+  $("#mText").textContent = un? `Masih ada ${un} soal belum dijawab. Soal kosong bernilai 0 poin.` : "Semua soal sudah dijawab.";
+  $("#modal").classList.remove("hidden"); $("#mYes").focus();
+};
+$("#mNo").onclick=()=>$("#modal").classList.add("hidden");
+$("#mYes").onclick=()=>{ $("#modal").classList.add("hidden"); finish(); };
+
+/* ===== hasil ===== */
+function recapRows(keyOf, labelOf, subOf){
+  const keys=[...new Set(S.items.map(keyOf))];
+  return keys.map(k=>{
+    const idx=S.items.map((it,i)=>keyOf(it)===k?i:-1).filter(i=>i>=0);
+    const o=idx.filter(i=>S.ans[i]!==null&&S.ans[i]===S.items[i].a).length;
+    const w=idx.filter(i=>S.ans[i]!==null&&S.ans[i]!==S.items[i].a).length;
+    return {k,label:labelOf(k),sub:subOf(k),t:idx.length,o,w,e:idx.length-o-w,p:Math.round(o/idx.length*100)};
+  });
+}
+const rowHtml = r => `
+  <div class="rrow">
+    <div class="nm"><b>${r.label}</b><small>${r.sub}benar ${r.o}, salah ${r.w}${r.e?`, kosong ${r.e}`:""}</small></div>
+    <div class="bar" title="${r.o} benar, ${r.w} salah, ${r.e} kosong"><i class="g" style="width:${r.o/r.t*100}%"></i><i class="r" style="width:${r.w/r.t*100}%"></i></div>
+    <div class="sc num">${r.o}/${r.t}</div>
+  </div>`;
+
+function finish(){
+  if(S.done) return; S.done=true;
+  const n=S.items.length, {ok,bad,pts}=counts(), blank=n-ok-bad;
+  const min=n*PTS_BAD, max=n*PTS_OK;
+  const score=Math.round((pts-min)/(max-min)*100);
+  const grade = score>=85?"Sangat baik": score>=70?"Baik": score>=55?"Cukup":"Perlu latihan lagi";
+  $("#scoreBig").textContent=score;
+  $("#grade").textContent=grade;
+  $("#gradeSub").textContent=`Kamu menjawab benar ${ok} dari ${n} soal.`;
+  $("#stack").innerHTML=`<i class="g" style="width:${ok/n*100}%"></i><i class="r" style="width:${bad/n*100}%"></i><i class="b" style="width:${blank/n*100}%"></i>`;
+  $("#formula").innerHTML=`Poin mentah: ${ok} × 3 + ${bad} × (−1) + ${blank} × 0 = <b class="num">${fmt(pts)}</b>, dari rentang ${fmt(min)} sampai ${fmt(max)}. Skor = (${fmt(pts)} − (${fmt(min)})) ÷ ${max-min} × 100 = <b class="num">${score}</b>.`;
+  const answered=ok+bad, acc=answered?Math.round(ok/answered*100):0;
+  $("#kpis").innerHTML=`
+    <div class="kpi ok"><small>Benar</small><b class="num">${ok}</b></div>
+    <div class="kpi bad"><small>Salah</small><b class="num">${bad}</b></div>
+    <div class="kpi"><small>Tidak dijawab</small><b class="num">${blank}</b></div>
+    <div class="kpi"><small>Poin mentah</small><b class="num">${fmt(pts)}</b></div>
+    <div class="kpi"><small>Akurasi (yang dijawab)</small><b class="num">${acc}%</b></div>`;
+  $("#recapBabCard").classList.toggle("hidden",BAB.length<2);
+  const rows=recapRows(it=>it.bab, k=>babOf(k).name, k=>babOf(k).short+": ").sort((a,b)=>a.k-b.k);
+  $("#recap").innerHTML=rows.map(rowHtml).join("");
+  const ins=$("#insight");
+  if(rows.length>1){
+    const best=rows.reduce((a,b)=>b.p>a.p?b:a), worst=rows.reduce((a,b)=>b.p<a.p?b:a);
+    ins.innerHTML=`<div class="ins good"><b>Paling kuat</b>${babOf(best.k).short}: ${best.label} (${best.p}% benar)</div>
+                   <div class="ins weak"><b>Perlu diulang</b>${babOf(worst.k).short}: ${worst.label} (${worst.p}% benar)</div>`;
+  } else ins.innerHTML="";
+  $("#recapType").innerHTML=recapRows(it=>it.type, k=>k, k=>"").sort((a,b)=>b.t-a.t).map(rowHtml).join("");
+  const wrong=S.items.map((it,i)=>({it,i})).filter(x=>S.ans[x.i]!==null&&S.ans[x.i]!==x.it.a);
+  $("#revSum").textContent=`Tinjau soal yang salah (${wrong.length})`;
+  $("#review").innerHTML = wrong.length ? wrong.map(({it,i})=>`
+    <div class="rv"><div class="q">${babOf(it.bab).short}: ${it.q}</div>
+    <div class="y">Jawabanmu: ${LETTERS[S.ans[i]]}. ${it.o[S.ans[i]]}</div>
+    <div class="c">Jawaban benar: ${LETTERS[it.a]}. ${it.o[it.a]}</div>
+    <div class="e">${it.e}</div></div>`).join("") : `<p style="margin:0;color:var(--mut)">Tidak ada jawaban salah.</p>`;
+  $("#revBox").open = false;
+  const redo = S.items.filter((it,i)=>S.ans[i]===null||S.ans[i]!==it.a).length;
+  $("#againWrong").disabled = redo===0;
+  $("#againWrong").textContent = `Ulangi soal yang salah dan kosong (${redo})`;
+  show("result");
+}
+$("#againWrong").onclick=()=>{
+  // ambil ulang dari data asli supaya urutan pilihan tidak teracak dua kali
+  const ids=S.items.filter((it,i)=>S.ans[i]===null||S.ans[i]!==it.a).map(it=>it.id);
+  const items=ids.map(id=>{ const x=ITEMS.find(z=>z.id===id); return {...x,o:x.o.slice()}; });
+  startSession(cfg.shufQ?shuffle(items):items);
+};
+$("#againAll").onclick=()=>startSession(buildItems());
+$("#toMenu").onclick=()=>{ S=null; show("start"); };
+$("#startBtn").onclick=()=>startSession(buildItems());
+
+renderChapters(); updateSummary();
+</script>
+</body>
+</html>
