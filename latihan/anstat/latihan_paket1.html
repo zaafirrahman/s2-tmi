@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latihan UTS Varian 1 | EZ Exercise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBFBF8;--ink:#111;--mut:#4B4B4B;--acc:#E2362A;--red:#FF4B3E;--teal:#12A594;--yel:#FFE14D;--oktint:#CDEFE9;--badtint:#FFDAD6;--okink:#0B6F62;--badink:#B3261B;--line:#D8D8D0;--disp:'Bricolage Grotesque',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;--hw:800}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background-color:var(--bg);color:var(--ink);font:400 16px/1.5 var(--body);padding:32px clamp(16px,5vw,64px) 56px;overflow-x:hidden;background-image:linear-gradient(rgba(18,165,148,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(18,165,148,.16) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:900px;margin:0 auto}
+.hidden{display:none!important}
+button{font:inherit;color:inherit;cursor:pointer;border-radius:0}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:4px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+h1,h2,h3{font-family:var(--disp);font-weight:var(--hw);margin:0}
+
+/* top */
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.back{font-family:var(--disp);font-weight:var(--hw);font-size:20px;line-height:1.2;color:var(--acc);text-decoration:none;border-bottom:2px solid transparent}
+.back:hover{border-bottom-color:var(--acc)}
+.tag{font-family:var(--disp);font-weight:var(--hw);font-size:20px}
+
+/* header start */
+header.hd{position:relative;margin-bottom:34px}
+header.hd h1{font-size:clamp(44px,8.5vw,92px);line-height:.95;letter-spacing:-.01em}
+header.hd .sub{margin:12px 0 0;font-size:18px;color:var(--mut)}
+.stk{position:absolute;right:0;top:-8px;display:flex;gap:6px}
+.stk svg{width:80px;height:80px}
+.stk svg:nth-child(1){transform:rotate(-8deg)}.stk svg:nth-child(2){transform:rotate(6deg)}.stk svg:nth-child(3){transform:rotate(-3deg)}
+@media(max-width:900px){.stk{display:none}}
+
+/* surfaces */
+.card{background:#fff;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--red);padding:22px}
+.card.flat{box-shadow:6px 6px 0 var(--ink)}
+.sec{font-family:var(--disp);font-weight:var(--hw);font-size:24px;margin:26px 0 12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sec:first-child{margin-top:0}
+.sec small{font:500 14px var(--body);color:var(--mut)}
+
+/* score rule tiles */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:520px){.rules{grid-template-columns:1fr}}
+.rule{border:3px solid var(--ink);padding:10px 14px;display:flex;align-items:baseline;gap:12px;background:#fff}
+.rule b{font-family:var(--disp);font-weight:var(--hw);font-size:34px;line-height:1}
+.rule span{font-size:15px;color:var(--ink)}
+.rule.p{background:var(--oktint)} .rule.m{background:var(--badtint)} .rule.z{background:#EDEDE6}
+.rulenote{margin:10px 0 0;font-size:14px;color:var(--mut)}
+
+/* chapters */
+.chapters{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.chap{display:flex;gap:12px;align-items:flex-start;text-align:left;border:3px solid var(--ink);background:#fff;padding:12px 14px;transition:transform .12s,box-shadow .12s}
+.chap:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--teal)}
+.chap[aria-pressed="true"]{background:var(--oktint)}
+.chap .box{width:22px;height:22px;border:3px solid var(--ink);background:#fff;flex:none;margin-top:1px;display:grid;place-items:center}
+.chap[aria-pressed="true"] .box{background:var(--ink)}
+.chap[aria-pressed="true"] .box::after{content:"";width:10px;height:5px;border-left:3px solid #fff;border-bottom:3px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.chap b{display:block;font-weight:600;font-size:15px;line-height:1.3}
+.chap span span{font-size:13px;color:var(--mut)}
+
+/* toggles */
+.opts-row{display:flex;flex-wrap:wrap;gap:12px}
+.toggle{display:flex;align-items:center;gap:12px;border:3px solid var(--ink);background:#fff;padding:8px 14px 8px 10px;font-size:15px}
+.toggle .sw{width:42px;height:24px;border:3px solid var(--ink);background:#fff;position:relative;flex:none}
+.toggle .sw::after{content:"";position:absolute;top:1px;left:1px;width:14px;height:14px;background:var(--ink);transition:transform .12s}
+.toggle[aria-pressed="true"]{background:var(--oktint)}
+.toggle[aria-pressed="true"] .sw{background:var(--teal)}
+.toggle[aria-pressed="true"] .sw::after{transform:translateX(18px)}
+
+.startbar{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-top:28px;padding-top:20px;border-top:3px dashed var(--ink)}
+.summary{font-size:16px;max-width:46ch}
+
+/* buttons */
+.btn{display:inline-block;border:3px solid var(--ink);background:var(--red);color:var(--ink);font-family:var(--disp);font-weight:var(--hw);font-size:19px;line-height:1.1;padding:12px 22px;box-shadow:4px 4px 0 var(--ink);text-decoration:none;transition:transform .12s,box-shadow .12s}
+.btn:hover:not(:disabled){transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active:not(:disabled){transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn.ghost{background:#fff}
+.btn:disabled{background:#E6E6DE;color:#77776F;box-shadow:none;cursor:not-allowed;border-color:#77776F}
+
+/* hud */
+.hud{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin-bottom:12px}
+.stat{display:flex;flex-direction:column;line-height:1.2}
+.stat small{color:var(--mut);font-size:13px}
+.stat .v{font-weight:700;font-size:22px}
+.stat.right{text-align:right;align-items:flex-end}
+.timer{font-size:30px;font-weight:700;border:3px solid var(--ink);background:#fff;padding:6px 16px;min-width:140px;text-align:center;box-shadow:4px 4px 0 var(--ink)}
+.timer.warn{background:var(--yel)}
+.timer.crit{background:var(--red);animation:pulse 1s steps(2,end) infinite}
+@keyframes pulse{50%{opacity:.65}}
+.strip{display:flex;gap:2px;height:20px;align-items:flex-end;margin:6px 0 18px}
+.strip i{flex:1;min-width:2px;height:35%;background:var(--line)}
+.strip i.ok{background:var(--teal);height:100%}
+.strip i.bad{background:var(--red);height:70%}
+.strip i.cur{background:var(--ink);height:100%}
+
+/* question */
+.qmeta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip{font-size:13px;font-weight:600;border:2px solid var(--ink);padding:2px 10px;background:var(--oktint)}
+.chip.t{background:var(--yel)}
+.qtext{font-family:var(--disp);font-weight:var(--hw);font-size:clamp(21px,3.6vw,28px);line-height:1.2;margin:0 0 20px}
+.options{display:grid;gap:12px}
+.opt{display:flex;gap:14px;align-items:flex-start;text-align:left;width:100%;border:3px solid var(--ink);background:#fff;padding:12px 14px;box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.opt .k{flex:none;width:32px;height:32px;border:3px solid var(--ink);display:grid;place-items:center;font-weight:700;font-size:15px;background:#fff}
+.opt .t{padding-top:3px;flex:1}
+.opt .mk{font-size:13px;font-weight:600;padding-top:5px;white-space:nowrap}
+.options:not(.locked) .opt:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--teal)}
+.opt.ok{background:var(--oktint)} .opt.ok .k{background:var(--teal)} .opt.ok .mk{color:var(--okink)}
+.opt.bad{background:var(--badtint)} .opt.bad .k{background:var(--red)} .opt.bad .mk{color:var(--badink)}
+.options.locked .opt{cursor:default;box-shadow:none}
+.options.locked .opt:not(.ok):not(.bad){opacity:.5}
+.feedback{margin-top:18px;border:3px solid var(--ink);padding:14px 16px;display:none}
+.feedback.show{display:block}
+.feedback.ok{background:var(--oktint)} .feedback.bad{background:var(--badtint)}
+.feedback h3{font-size:22px;margin-bottom:4px}
+.feedback p{margin:4px 0 0;font-size:15px}
+.feedback .ans{font-weight:600}
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap}
+.hint{font-size:14px;color:var(--mut)}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(17,17,17,.6);display:grid;place-items:center;padding:20px;z-index:20}
+.modal .box{background:#fff;border:3px solid var(--ink);box-shadow:8px 8px 0 var(--red);padding:22px;max-width:420px;width:100%}
+.modal h3{font-size:26px;margin-bottom:8px}
+.modal p{margin:0 0 18px;color:var(--mut)}
+.modal .row{display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap}
+
+/* result */
+.res-head{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+@media(max-width:620px){.res-head{grid-template-columns:1fr;justify-items:start}}
+.scorebox{border:3px solid var(--ink);background:var(--yel);box-shadow:6px 6px 0 var(--ink);padding:14px 26px 12px;text-align:center;min-width:190px}
+.scorebox .big{font-family:var(--disp);font-weight:var(--hw);font-size:92px;line-height:1;display:block}
+.scorebox small{font-size:14px;font-weight:600}
+.res-head h2{font-size:clamp(30px,5.5vw,46px);line-height:1}
+.res-head p{margin:10px 0 0;color:var(--mut)}
+.stack{display:flex;height:22px;border:3px solid var(--ink);margin-top:22px;background:#fff}
+.stack i{display:block;height:100%}
+.stack .g{background:var(--teal)} .stack .r{background:var(--red)} .stack .b{background:var(--line)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--mut);margin-top:10px}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border:2px solid var(--ink);margin-right:6px;vertical-align:-1px;background:var(--c)}
+.formula{margin:18px 0 0;border:3px dashed var(--ink);padding:10px 14px;font-size:14.5px;background:#fff}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:22px}
+.kpi{border:3px solid var(--ink);padding:10px 12px;background:#fff}
+.kpi small{display:block;color:var(--mut);font-size:13px}
+.kpi b{font-size:22px}
+.kpi.ok{background:var(--oktint)} .kpi.bad{background:var(--badtint)}
+.recap{display:grid;gap:14px}
+.rrow{display:grid;grid-template-columns:minmax(120px,230px) 1fr 64px;gap:14px;align-items:center}
+@media(max-width:560px){.rrow{grid-template-columns:1fr 60px}.rrow .bar{grid-column:1/-1;order:3}}
+.rrow .nm b{display:block;font-weight:600;font-size:15px;line-height:1.25}
+.rrow .nm small{color:var(--mut);font-size:13px}
+.bar{height:18px;display:flex;border:3px solid var(--ink);background:#fff}
+.bar i{display:block;height:100%}
+.bar .g{background:var(--teal)} .bar .r{background:var(--red)}
+.rrow .sc{text-align:right;font-weight:700;font-size:15px}
+.insight{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.insight{grid-template-columns:1fr}}
+.ins{border:3px solid var(--ink);padding:12px 14px;font-size:15px}
+.ins b{display:block;margin-bottom:2px}
+.ins.good{background:var(--oktint)} .ins.weak{background:var(--badtint)}
+.review{display:grid;gap:12px;margin-top:14px}
+.rv{border:3px solid var(--ink);border-left-width:10px;border-left-color:var(--red);padding:11px 14px;background:#fff;font-size:15px}
+.rv .q{font-weight:600;margin-bottom:6px}
+.rv .y{color:var(--badink)} .rv .c{color:var(--okink);font-weight:600}
+.rv .e{color:var(--mut);margin-top:4px}
+.actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);font-size:22px;padding:2px 0}
+.mt{margin-top:22px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- START -->
+  <section id="start">
+    <div class="topbar"><a class="back" href="uts.html">Kembali ke Latihan UTS</a></div>
+    <header class="hd">
+      <h1>Paket 1</h1>
+      <p class="sub">TI5002 / Analisis Data dan Statistika</p>
+      <div class="stk" aria-hidden="true"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M6 82C30 82 36 18 50 18S70 82 94 82Z' fill='#12A594' fill-opacity='.35' stroke='#111' stroke-width='4' stroke-linejoin='round'/><path d='M4 82H96' stroke='#111' stroke-width='4' stroke-linecap='round'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M12 78L90 22' stroke='#111' stroke-width='4' stroke-linecap='round'/><circle cx='20' cy='70' r='6' fill='#FF4B3E' stroke='#111' stroke-width='3'/><circle cx='32' cy='54' r='6' fill='#FF4B3E' stroke='#111' stroke-width='3'/><circle cx='46' cy='62' r='6' fill='#FF4B3E' stroke='#111' stroke-width='3'/><circle cx='58' cy='40' r='6' fill='#FF4B3E' stroke='#111' stroke-width='3'/><circle cx='72' cy='46' r='6' fill='#FF4B3E' stroke='#111' stroke-width='3'/><circle cx='84' cy='22' r='6' fill='#FF4B3E' stroke='#111' stroke-width='3'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='8' y='68' width='16' height='22' fill='#12A594' stroke='#111' stroke-width='3'/><rect x='26' y='44' width='16' height='46' fill='#12A594' stroke='#111' stroke-width='3'/><rect x='44' y='20' width='16' height='70' fill='#FF4B3E' stroke='#111' stroke-width='3'/><rect x='62' y='46' width='16' height='44' fill='#12A594' stroke='#111' stroke-width='3'/><rect x='80' y='70' width='16' height='20' fill='#12A594' stroke='#111' stroke-width='3'/></svg></div>
+    </header>
+
+    <div class="card">
+      <div class="sec">Aturan skor</div>
+      <div class="rules">
+        <div class="rule p"><b>+3</b><span>jawaban benar</span></div>
+        <div class="rule m"><b>−1</b><span>jawaban salah</span></div>
+        <div class="rule z"><b>0</b><span>tidak dijawab</span></div>
+      </div>
+      <p class="rulenote">Poin dinormalkan ke skala 0 sampai 100. Skor 25 setara tidak menjawab sama sekali atau menebak acak.</p>
+
+      <div class="sec" style="margin-top:30px">Pilih bab <small id="selCount"></small></div>
+      <div class="chapters" id="chapters"></div>
+
+      <div class="sec" style="margin-top:30px">Pengaturan</div>
+      <div class="opts-row">
+        <button class="toggle" id="tgQ" aria-pressed="true"><span class="sw"></span>Acak urutan soal</button>
+        <button class="toggle" id="tgO" aria-pressed="true"><span class="sw"></span>Acak urutan pilihan</button>
+      </div>
+
+      <div class="startbar">
+        <div class="summary" id="summary"></div>
+        <button class="btn" id="startBtn">Mulai kuis</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="hidden">
+    <div class="topbar"><span class="tag">Latihan UTS Paket 1</span></div>
+    <div class="hud">
+      <div class="stat"><small>Soal</small><span class="v num" id="hudQ">1/1</span></div>
+      <div class="timer num" id="timer" role="timer" aria-live="off">30:00</div>
+      <div class="stat right"><small>Poin (<span id="hudOk">0</span> benar, <span id="hudBad">0</span> salah)</small><span class="v num" id="hudPts">0</span></div>
+    </div>
+    <div class="strip" id="strip" aria-hidden="true"></div>
+    <div class="card flat">
+      <div class="qmeta"><span class="chip" id="qBab"></span><span class="chip t" id="qType"></span></div>
+      <p class="qtext" id="qText"></p>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+      <div class="navrow">
+        <button class="btn ghost" id="finishBtn">Selesaikan sekarang</button>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <span class="hint" id="hint">Tekan A sampai D untuk menjawab</span>
+          <button class="btn" id="nextBtn" disabled>Berikutnya</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="hidden">
+    <div class="topbar"><span class="tag">Hasil Paket 1</span></div>
+    <div class="card">
+      <div class="res-head">
+        <div class="scorebox"><span class="big num" id="scoreBig">0</span><small>skor dari 100</small></div>
+        <div>
+          <h2 id="grade"></h2>
+          <p id="gradeSub"></p>
+        </div>
+      </div>
+      <div class="stack" id="stack" aria-hidden="true"></div>
+      <div class="legend"><span style="--c:var(--teal)">Benar</span><span style="--c:var(--red)">Salah</span><span style="--c:var(--line)">Tidak dijawab</span></div>
+      <p class="formula" id="formula"></p>
+      <div class="kpis" id="kpis"></div>
+    </div>
+
+    <div class="card mt">
+      <h2 style="font-size:28px;margin-bottom:16px">Rekap per bab</h2>
+      <div class="recap" id="recap"></div>
+      <div class="insight" id="insight"></div>
+    </div>
+
+    <div class="card mt">
+      <h2 style="font-size:28px;margin-bottom:16px">Rekap per jenis soal</h2>
+      <div class="recap" id="recapType"></div>
+    </div>
+
+    <div class="card mt">
+      <details id="revBox">
+        <summary id="revSum">Tinjau soal yang salah</summary>
+        <div class="review" id="review"></div>
+      </details>
+    </div>
+
+    <div class="actions">
+      <button class="btn" id="againWrong">Ulangi soal yang salah</button>
+      <button class="btn ghost" id="againAll">Ulangi dengan pengaturan sama</button>
+      <button class="btn ghost" id="toMenu">Ubah pengaturan</button>
+      <a class="btn ghost" href="uts.html">Daftar paket</a>
+    </div>
+  </section>
+</div>
+
+<div class="modal hidden" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="box">
+    <h3 id="mTitle">Selesaikan sekarang?</h3>
+    <p id="mText"></p>
+    <div class="row"><button class="btn ghost" id="mNo">Lanjut mengerjakan</button><button class="btn" id="mYes">Selesaikan</button></div>
+  </div>
+</div>
+
+<script>
+/* ===== Data: tiap soal {id, bab, type, q, o:[4 pilihan], a:indeks benar, e:bahasan} ===== */
+const BAB = [{"id":1,"short":"Bab 1","name":"Pengantar Analisis Data & Statistika Multivariat"},{"id":2,"short":"Bab 2","name":"Analisis Regresi Linier Sederhana"},{"id":3,"short":"Bab 3","name":"Regresi Logistik (Logit)"},{"id":4,"short":"Bab 4","name":"Analisis Faktor Eksploratori (EFA)"},{"id":5,"short":"Bab 5","name":"Analisis Cluster"},{"id":6,"short":"Bab 6","name":"Structural Equation Modeling (SEM)"}];
+const ITEMS = [{"id":"V8","bab":1,"type":"Hitungan","q":"Nilai ujian suatu observasi = 90, rata-rata kelompok = 70, simpangan baku = 5. Nilai z observasi tersebut adalah…","o":["1,0","2,0","4,0","20,0"],"a":2,"e":"z = (90 − 70)/5 = 4,0. Karena |z| > 3, observasi ini tergolong outlier univariat."},{"id":"V6","bab":1,"type":"Interpretasi output","q":"Hasil uji reliabilitas sebuah kuesioner menunjukkan Cronbach’s alpha = 0,45. Kesimpulan yang tepat adalah…","o":["Instrumen sudah sangat reliabel","Konsistensi internal rendah, di bawah batas umum 0,70","Instrumen pasti valid","Data berdistribusi normal"],"a":1,"e":"Alpha ≥ 0,70 umumnya dianggap memadai. Nilai 0,45 menunjukkan konsistensi internal rendah."},{"id":"V1","bab":1,"type":"Kasus","q":"Data kepuasan pelanggan dicatat dari 1 (sangat tidak puas) sampai 5 (sangat puas). Jarak antar tingkat belum tentu sama. Secara ketat, skala ini adalah…","o":["Nominal","Ordinal","Interval","Rasio"],"a":1,"e":"Peringkat dengan jarak antar tingkat yang belum tentu sama = ordinal. Dalam praktik Likert sering diperlakukan sebagai interval, tetapi secara ketat ordinal."},{"id":"V12","bab":1,"type":"Konsep","q":"Suhu yang diukur dalam derajat Celsius termasuk skala…","o":["Nominal","Ordinal","Interval","Rasio"],"a":2,"e":"Jaraknya bermakna tetapi 0°C bukan nol mutlak (tidak berarti ‘tanpa suhu’). Kelvin baru termasuk skala rasio."},{"id":"O1-13","bab":1,"type":"Konsep","q":"Langkah pertama dalam <i>preprocessing</i> data adalah…","o":["Menguji hipotesis","Menghapus data ekstrem","Mengetahui pola data melalui deskripsi statistik","Menghitung reliabilitas"],"a":2,"e":"Mulai dengan getting the feel for the data (statistik deskriptif) sebelum uji asumsi."},{"id":"O1-9","bab":1,"type":"Konsep","q":"Pada data cross-sectional, analisis dilakukan terhadap…","o":["Satu objek selama periode waktu panjang","Banyak objek dalam satu waktu tertentu","Satu objek dalam banyak waktu","Variabel laten dalam beberapa model"],"a":1,"e":"Cross-sectional: data dikumpulkan dari banyak unit pada satu titik waktu."},{"id":"O1-6","bab":1,"type":"Konsep","q":"Variate dalam analisis multivariat adalah…","o":["Satu variabel dependen","Kombinasi linier dari beberapa variabel dengan bobot tertentu","Korelasi antar variabel","Perbandingan rata-rata antar kelompok"],"a":1,"e":"Variate adalah kombinasi linier variabel dengan bobot yang ditentukan secara empiris (Hair, 2019)."},{"id":"O1-1","bab":1,"type":"Konsep","q":"Analisis multivariat didefinisikan sebagai…","o":["Analisis satu variabel pada satu waktu","Analisis hubungan antara dua variabel","Analisis simultan terhadap lebih dari dua variabel","Analisis dengan satu variabel dependen"],"a":2,"e":"Menurut Hair et al. (2019), analisis multivariat adalah analisis simultan terhadap lebih dari dua variabel."},{"id":"V19","bab":2,"type":"Hitungan","q":"Pada suatu regresi diperoleh SSR = 60 dan SSE = 20. Nilai R² adalah…","o":["0,25","0,33","0,75","0,80"],"a":2,"e":"SST = SSR + SSE = 80; R² = SSR/SST = 60/80 = 0,75."},{"id":"V28","bab":2,"type":"Interpretasi output","q":"Model ln(Y) = 0,5 + 0,2X. Setiap kenaikan X satu unit diikuti…","o":["Kenaikan Y sebesar 0,2 unit","Kenaikan Y sekitar 22% (e<sup>0,2</sup> ≈ 1,22)","Penurunan Y sebesar 20%","Kenaikan Y sebesar 2%"],"a":1,"e":"Pada model eksponensial, perubahan Y bersifat proporsional: Y dikalikan e<sup>0,2</sup> ≈ 1,22 → naik sekitar 22%."},{"id":"V29","bab":2,"type":"Kasus","q":"Model dibangun dari data X antara 10 dan 50 (R² tinggi), lalu dipakai memprediksi Y untuk X = 200. Tindakan ini…","o":["Aman karena R² tinggi","Berisiko karena ekstrapolasi di luar rentang data; kelinieran belum tentu berlaku","Wajib dilakukan setiap kali model signifikan","Tidak dapat dihitung secara matematis"],"a":1,"e":"Prediksi di luar rentang data (ekstrapolasi) tidak dijamin valid meskipun fit dalam rentang data baik."},{"id":"V24","bab":2,"type":"Konsep","q":"Korelasi X dan Y adalah r = −0,9. Maka…","o":["R² = 0,81 dan slope negatif","R² = −0,81 dan slope negatif","R² = 0,90 dan slope negatif","R² = 0,81 dan slope positif"],"a":0,"e":"R² = r² = 0,81 (tidak mungkin negatif); slope searah dengan tanda r, yaitu negatif."},{"id":"O2-13","bab":2,"type":"Konsep","q":"Transformasi y* = ln y digunakan untuk model…","o":["Eksponensial","Resiprokal","Power","Hiperbola"],"a":0,"e":"Model eksponensial dilinearkan dengan y* = ln y. Power memakai ln pada y dan x."},{"id":"O2-6","bab":2,"type":"Konsep","q":"Metode <b>Least Square (OLS)</b> digunakan untuk…","o":["Meminimalkan jumlah nilai Y","Meminimalkan jumlah kuadrat residual","Memaksimalkan korelasi X dan Y","Menormalkan data X dan Y"],"a":1,"e":"OLS meminimalkan SSE = Σeᵢ² (jumlah kuadrat residual)."},{"id":"O2-2","bab":2,"type":"Konsep","q":"Bentuk umum model regresi linier sederhana adalah…","o":["Y = a + bX + e","Y = bX<sup>2</sup> + a","Y = XY + a","Y = e<sup>X</sup> + a"],"a":0,"e":"Y = α + βX + ε, dengan ε sebagai error acak."},{"id":"V48","bab":3,"type":"Hitungan","q":"Dengan aturan praktis 10 kejadian per prediktor (EPV), model dengan 4 prediktor memerlukan minimal berapa kejadian pada kelompok Y yang lebih kecil?","o":["4","14","40","400"],"a":2,"e":"10 × 4 = 40 kejadian."},{"id":"V39","bab":3,"type":"Hitungan","q":"Koefisien B = 0,8 dengan SE = 0,4. Nilai statistik Wald (versi SPSS) adalah…","o":["0,50","4,00","2,00","0,32"],"a":1,"e":"Wald SPSS = (B/SE)² = (0,8/0,4)² = 4. (Nilai z = 2.)"},{"id":"V31","bab":3,"type":"Hitungan","q":"Model regresi logistik untuk Y = lulus (1) / tidak lulus (0) menghasilkan B = 0,5 untuk jam belajar. Nilai Exp(B) adalah…","o":["0,50","0,62","2,72","1,65"],"a":3,"e":"Exp(0,5) = e<sup>0,5</sup> ≈ 1,65."},{"id":"V43","bab":3,"type":"Interpretasi output","q":"Exp(B) suatu prediktor = 1,8 dengan CI 95% = 0,9 sampai 3,6. Kesimpulannya…","o":["Signifikan positif","Tidak signifikan pada α = 5% karena interval mencakup 1","Signifikan negatif","Odds ratio sama dengan 0"],"a":1,"e":"OR = 1 berarti tidak ada efek. Jika CI 95% mencakup 1, efek tidak signifikan."},{"id":"V32","bab":3,"type":"Interpretasi output","q":"Dengan Exp(B) = 1,65 untuk jam belajar, interpretasi yang tepat adalah…","o":["Peluang lulus naik 1,65%","Odds lulus naik 1,65 kali (sekitar 65%) untuk setiap tambahan 1 jam belajar","Peluang lulus sebesar 165%","Jam belajar menurunkan odds lulus"],"a":1,"e":"Exp(B) adalah odds ratio: faktor perubahan odds per kenaikan satu unit X."},{"id":"O3-17","bab":3,"type":"Konsep","q":"Jika terjadi “quasi-complete separation”, solusi yang umum adalah:","o":["Hilangkan variabel prediktor","Gunakan penalized likelihood (Firth)","Naikkan cut-off probabilitas","Gunakan regresi linier"],"a":1,"e":"Metode Firth menambah penalti pada likelihood sehingga estimasi tetap hingga."},{"id":"O3-10","bab":3,"type":"Konsep","q":"Koefisien logit yang negatif menandakan:","o":["Variabel X menurunkan peluang kejadian Y=1","X tidak berpengaruh terhadap Y","Model tidak signifikan","Variabel X meningkatkan peluang kejadian"],"a":0,"e":"β negatif → Exp(β) < 1 → menurunkan odds Y=1."},{"id":"O3-6","bab":3,"type":"Konsep","q":"Uji Hosmer–Lemeshow digunakan untuk:","o":["Menguji signifikansi setiap β","Mengukur kekuatan hubungan antar variabel","Menilai kesesuaian model (goodness of fit)","Menguji normalitas residual"],"a":2,"e":"Membandingkan probabilitas observasi dan prediksi. p > 0,05 berarti model sesuai dengan data."},{"id":"O3-2","bab":3,"type":"Konsep","q":"Bentuk dasar fungsi logit dalam regresi logistik adalah:","o":["p = β₀ + β₁X₁ + ε","ln( p / (1 − p) ) = β₀ + β₁X₁ + … + β<sub>k</sub>X<sub>k</sub>","p = e<sup>β₀ + β₁X₁</sup>","Y = Xβ + ε"],"a":1,"e":"Logit mengubah probabilitas menjadi log-odds sehingga linier dalam parameter β."},{"id":"V70","bab":4,"type":"Hitungan","q":"Delapan indikator dianalisis; eigenvalue faktor pertama = 3,0. Proporsi varians yang dijelaskan faktor pertama…","o":["62,5%","30,0%","37,5%","3,0%"],"a":2,"e":"Total varians = jumlah indikator = 8. 3,0/8 = 37,5%."},{"id":"V54","bab":4,"type":"Hitungan","q":"Eigenvalue dari 6 indikator: 2,8; 1,7; 0,7; 0,4; 0,25; 0,15. Berdasarkan kriteria Kaiser, jumlah faktor yang dipertahankan adalah…","o":["1","2","3","6"],"a":1,"e":"Hanya dua faktor dengan eigenvalue > 1."},{"id":"V56","bab":4,"type":"Interpretasi output","q":"Sebuah indikator memiliki komunalitas 0,36. Interpretasinya…","o":["Terwakili sangat baik oleh faktor","Sekitar 64% variansnya tidak dijelaskan faktor; komunalitas rendah (&lt; 0,50)","Loading indikator sama dengan 0,36","Indikator wajib dipertahankan"],"a":1,"e":"Komunalitas = proporsi varians yang dijelaskan faktor. 1 − 0,36 = 0,64 adalah varians unik/error."},{"id":"O4-20","bab":4,"type":"Kasus","q":"Anda mengamati dua faktor berkorelasi 0,82 setelah rotasi oblique. Keputusan paling defensibel?","o":["Biarkan apa adanya","Gabungkan faktor, atau uji model satu faktor alternatif","Paksa rotasi varimax","Tambah indikator acak"],"a":1,"e":"Korelasi sangat tinggi menandakan redundansi; pertimbangkan model yang lebih parsimonious."},{"id":"V61","bab":4,"type":"Kecuali","q":"Syarat kelayakan data untuk EFA berikut benar, KECUALI…","o":["Nilai KMO memadai","Uji Bartlett signifikan","Terdapat cukup korelasi antar indikator (mis. banyak yang &gt; 0,30)","Seluruh indikator harus berskala nominal"],"a":3,"e":"EFA pada dasarnya untuk indikator metrik (atau ordinal yang diperlakukan sebagai metrik), bukan nominal."},{"id":"V60","bab":4,"type":"Konsep","q":"SPSS menampilkan Pattern Matrix dan Structure Matrix ketika rotasi yang digunakan adalah…","o":["Orthogonal (mis. Varimax)","Oblique (mis. Oblimin/Promax)","Tanpa rotasi","Semua jenis rotasi"],"a":1,"e":"Pada rotasi oblique faktor boleh berkorelasi, sehingga pola (pattern) dan struktur berbeda."},{"id":"O4-13","bab":4,"type":"Konsep","q":"Jika dua faktor secara teori berkorelasi, rotasi yang tepat adalah…","o":["Varimax","Quartimax","Oblimin/Promax","Equamax"],"a":2,"e":"Rotasi oblique (Promax/Oblimin) memungkinkan korelasi antarfaktor."},{"id":"O4-8","bab":4,"type":"Konsep","q":"Jika indikator memiliki skala yang berbeda (meter vs rupiah), maka sebelum EFA sebaiknya…","o":["Uji normalitas saja","Standarisasi (Z-score) atau gunakan matriks korelasi","Transformasi log untuk semua","Abaikan karena EFA tahan skala"],"a":1,"e":"Skala berbeda memengaruhi kovariansi; Z-score/korelasi membuat tiap indikator berkontribusi seimbang."},{"id":"O4-4","bab":4,"type":"Konsep","q":"KMO cocok untuk menilai…","o":["Normalitas indikator","Kecukupan sampel secara keseluruhan untuk analisis faktor","Linearitas indikator","Homoskedastisitas"],"a":1,"e":"Kaiser–Meyer–Olkin mengevaluasi kecukupan korelasi parsial/sampel untuk analisis faktor."},{"id":"V75","bab":5,"type":"Hitungan","q":"Cluster A = {a1, a2} dan B = {b1, b2}. Jarak: a1–b1 = 3; a1–b2 = 5; a2–b1 = 4; a2–b2 = 8. Jarak A–B menurut complete linkage adalah…","o":["3","5","8","15"],"a":2,"e":"Complete linkage memakai jarak terjauh antar anggota = 8. (Single = 3.)"},{"id":"V90","bab":5,"type":"Interpretasi output","q":"Centroid (Z-score) Segmen B: Pendapatan +1,2; Frekuensi belanja +1,0; Usia −0,3. Interpretasi yang tepat…","o":["Segmen berpendapatan rendah","Segmen berusia paling tua","Outlier","Segmen berpendapatan dan frekuensi belanja di atas rata-rata (potensi bernilai tinggi), relatif lebih muda"],"a":3,"e":"Z-score positif = di atas rata-rata seluruh sampel; negatif = di bawah rata-rata."},{"id":"V88","bab":5,"type":"Kasus","q":"Untuk validasi eksternal solusi cluster, peneliti sebaiknya…","o":["Menambah jumlah cluster hingga fit","Mengulang dengan algoritma dan data yang sama","Memprofil cluster dengan variabel yang tidak dipakai membentuk cluster (mis. usia, gender, perilaku beli)","Menghapus semua outlier"],"a":2,"e":"Validitas kriteria: bandingkan cluster pada variabel eksternal yang relevan secara teori."},{"id":"V83","bab":5,"type":"Kecuali","q":"Metode hierarkis agglomeratif berikut benar, KECUALI…","o":["Single linkage","Complete linkage","Metode Ward","K-Means"],"a":3,"e":"K-Means adalah metode non-hierarkis (partisi)."},{"id":"V82","bab":5,"type":"Konsep","q":"Setelah K-Means, ANOVA pada variabel pembentuk cluster sebaiknya dipakai sebagai…","o":["Ukuran deskriptif kontribusi variabel, bukan uji hipotesis formal, karena cluster sengaja dibentuk untuk memaksimalkan perbedaan","Bukti pasti inferensi populasi","Uji normalitas","Uji outlier"],"a":0,"e":"Karena cluster dibentuk agar berbeda pada variabel tersebut, nilai F/p tidak boleh ditafsirkan sebagai uji inferensial murni."},{"id":"O5-16","bab":5,"type":"Konsep","q":"Jika dua cluster memiliki centroid yang berjarak sangat kecil, interpretasinya adalah…","o":["Kedua cluster sama sekali tidak berhubungan","Kedua cluster mungkin seharusnya digabungkan","Cluster terpisah jelas","Data outlier"],"a":1,"e":"Jarak centroid kecil = similaritas tinggi; pertimbangkan menggabungkan atau meninjau ulang jumlah cluster."},{"id":"O5-11","bab":5,"type":"Konsep","q":"Dalam metode non-hierarkis (K-Means), tahap awal yang harus dilakukan adalah …","o":["Menentukan jumlah cluster (k) terlebih dahulu","Menentukan metode penggabungan","Menggunakan semua jarak mungkin","Menentukan cut-off R²"],"a":0,"e":"K-Means mensyaratkan k ditentukan di awal, lalu objek dialokasikan berdasarkan jarak ke centroid."},{"id":"O5-8","bab":5,"type":"Konsep","q":"Metode Ward bertujuan untuk …","o":["Meminimalkan jarak terjauh antar cluster","Meminimalkan jumlah kuadrat error intra-cluster","Memaksimalkan varian antar cluster","Menghapus outlier"],"a":1,"e":"Ward meminimalkan within-cluster variance (SSE) sehingga cluster homogen."},{"id":"O5-2","bab":5,"type":"Konsep","q":"Cluster analysis termasuk kategori metode …","o":["Dependensi","Interdependensi","Regresi","Konfirmatori"],"a":1,"e":"Semua variabel dipertimbangkan bersama tanpa pembedaan variabel bebas/terikat."},{"id":"V99","bab":6,"type":"Hitungan","q":"Tiga indikator memiliki standardized loading 0,8; 0,7; dan 0,6. Nilai AVE konstruk adalah…","o":["0,23","0,50","0,70","1,49"],"a":1,"e":"AVE = Σλ²/n = (0,64+0,49+0,36)/3 ≈ 0,497, yaitu sekitar 0,50 (batas minimal)."},{"id":"V91","bab":6,"type":"Hitungan","q":"Model memiliki 5 variabel observed dan 11 parameter yang diestimasi. Derajat kebebasan (df) = …","o":["15","11","4","26"],"a":2,"e":"Elemen unik = ½·5·6 = 15; df = 15 − 11 = 4."},{"id":"V101","bab":6,"type":"Interpretasi output","q":"Konstruk A memiliki √AVE = 0,78 dan korelasi A–B = 0,85. Menurut kriteria Fornell–Larcker…","o":["Validitas diskriminan terpenuhi","Validitas diskriminan tidak terpenuhi karena korelasi 0,85 &gt; √AVE 0,78","Terpenuhi karena korelasi tinggi","Kriteria tidak relevan"],"a":1,"e":"Validitas diskriminan menuntut √AVE lebih besar daripada korelasi dengan konstruk lain."},{"id":"V106","bab":6,"type":"Kasus","q":"Modification Index (MI) = 25 menyarankan menambahkan kovarians antara dua error indikator. Sikap yang tepat…","o":["Selalu tambahkan karena MI besar","Tambahkan hanya jika ada justifikasi teoritis (mis. butir berbunyi mirip) dan validasi ulang","Hapus semua indikator","MI tidak boleh dipakai"],"a":1,"e":"Respesifikasi harus berbasis teori dan divalidasi, bukan semata dorongan angka MI."},{"id":"V94","bab":6,"type":"Konsep","q":"Aturan praktis jumlah indikator per konstruk dalam SEM…","o":["1 indikator sudah cukup","Tepat 10 indikator","Tidak perlu indikator","Minimal 3 indikator per konstruk"],"a":3,"e":"Tiga indikator per konstruk membantu identifikasi dan stabilitas estimasi."},{"id":"O6-13","bab":6,"type":"Konsep","q":"Model over-identified berarti…","o":["Tidak bisa dihitung","Terlalu banyak koefisien tetap","df > 0 → model dapat dijustifikasi dan dilakukan uji fit","df < 0"],"a":2,"e":"Informasi lebih banyak daripada parameter yang diestimasi, sehingga fit dapat diuji."},{"id":"O6-9","bab":6,"type":"Konsep","q":"Hubungan antara measurement model dan analisis faktor eksploratori adalah…","o":["Measurement model mengganti EFA","Keduanya identik","Measurement model adalah lanjutan konfirmatori dari EFA","Measurement model tidak menguji validitas"],"a":2,"e":"Measurement model mengonfirmasi struktur faktor yang ditemukan EFA."},{"id":"O6-4","bab":6,"type":"Konsep","q":"Exogenous construct dalam SEM adalah…","o":["Variabel yang dipengaruhi oleh variabel lain","Variabel bebas yang tidak mempunyai panah masuk","Error measurement","Residual"],"a":1,"e":"Eksogen berperan sebagai prediktor dan tidak diprediksi oleh variabel lain."}];
+
+/* ===== util ===== */
+const $ = s => document.querySelector(s);
+const TOTAL_SECONDS = 30*60, PTS_OK = 3, PTS_BAD = -1;
+const LETTERS = ["A","B","C","D"];
+const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const mmss = s => { s=Math.max(0,s); return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0"); };
+const fmt = v => (v>0?"+":v<0?"−":"")+Math.abs(v);
+const babOf = id => BAB.find(b=>b.id===id);
+const cfg = { babs:new Set(BAB.map(b=>b.id)), shufQ:true, shufO:true };
+let S = null, tick = null;
+
+/* ===== layar awal ===== */
+function renderChapters(){
+  const box=$("#chapters"); box.innerHTML="";
+  BAB.forEach(b=>{
+    const n=ITEMS.filter(x=>x.bab===b.id).length;
+    const el=document.createElement("button");
+    el.className="chap"; el.setAttribute("aria-pressed",cfg.babs.has(b.id));
+    el.innerHTML=`<span class="box"></span><span><b>${b.short}: ${b.name}</b><span>${n} soal</span></span>`;
+    el.onclick=()=>{ cfg.babs.has(b.id)?cfg.babs.delete(b.id):cfg.babs.add(b.id); renderChapters(); updateSummary(); };
+    box.appendChild(el);
+  });
+}
+function updateSummary(){
+  const n=ITEMS.filter(x=>cfg.babs.has(x.bab)).length;
+  $("#selCount").textContent=`${cfg.babs.size} dari ${BAB.length} bab dipilih`;
+  $("#summary").innerHTML = n ? `<b>${n} soal</b> dalam 30 menit, rata-rata <b>${Math.round(TOTAL_SECONDS/n)} detik</b> per soal. Poin maksimum <b>+${n*PTS_OK}</b>.` : "Pilih minimal satu bab.";
+  $("#startBtn").disabled = !n;
+}
+$("#tgQ").onclick=e=>{cfg.shufQ=!cfg.shufQ;e.currentTarget.setAttribute("aria-pressed",cfg.shufQ);};
+$("#tgO").onclick=e=>{cfg.shufO=!cfg.shufO;e.currentTarget.setAttribute("aria-pressed",cfg.shufO);};
+
+function buildItems(){
+  let items=ITEMS.filter(x=>cfg.babs.has(x.bab)).map(x=>({...x,o:x.o.slice()}));
+  return cfg.shufQ?shuffle(items):items;
+}
+function permuteOptions(items){
+  return items.map(it=>{ const idx=shuffle([0,1,2,3]); return {...it,o:idx.map(i=>it.o[i]),a:idx.indexOf(it.a)}; });
+}
+function show(id){ ["start","quiz","result"].forEach(s=>$("#"+s).classList.toggle("hidden",s!==id)); window.scrollTo(0,0); }
+
+/* ===== sesi ===== */
+function startSession(items){
+  if(cfg.shufO) items=permuteOptions(items);
+  S={items,ans:items.map(()=>null),i:0,start:Date.now(),end:Date.now()+TOTAL_SECONDS*1000,done:false};
+  $("#strip").innerHTML=items.map(()=>"<i></i>").join("");
+  show("quiz"); renderQ(); clearInterval(tick); tick=setInterval(onTick,250); onTick();
+}
+function onTick(){
+  if(!S||S.done) return;
+  const left=Math.ceil((S.end-Date.now())/1000), t=$("#timer");
+  t.textContent=mmss(left);
+  t.classList.toggle("warn",left<=300&&left>60); t.classList.toggle("crit",left<=60);
+  if(left<=0) finish(true);
+}
+function counts(){
+  let ok=0,bad=0;
+  S.items.forEach((it,i)=>{ if(S.ans[i]!==null){ S.ans[i]===it.a?ok++:bad++; } });
+  return {ok,bad,pts:ok*PTS_OK+bad*PTS_BAD};
+}
+function paintStrip(){
+  const els=$("#strip").children;
+  S.items.forEach((it,i)=>{
+    const a=S.ans[i]; let c="";
+    if(a!==null) c = a===it.a ? "ok":"bad"; else if(i===S.i) c="cur";
+    els[i].className=c;
+  });
+}
+function renderQ(){
+  const it=S.items[S.i], a=S.ans[S.i], b=babOf(it.bab);
+  $("#hudQ").textContent=`${S.i+1}/${S.items.length}`;
+  $("#qBab").textContent=`${b.short}: ${b.name}`;
+  $("#qType").textContent=it.type;
+  $("#qText").innerHTML=it.q;
+  const box=$("#options"); box.innerHTML=""; box.classList.toggle("locked",a!==null);
+  it.o.forEach((t,i)=>{
+    const el=document.createElement("button");
+    el.className="opt";
+    let mk="";
+    if(a!==null){ if(i===it.a){ el.classList.add("ok"); mk=`<span class="mk">${a===it.a?"Jawabanmu, benar":"Jawaban benar"}</span>`; } else if(i===a){ el.classList.add("bad"); mk=`<span class="mk">Jawabanmu, salah</span>`; } el.disabled=true; }
+    el.innerHTML=`<span class="k">${LETTERS[i]}</span><span class="t">${t}</span>${mk}`;
+    el.onclick=()=>answer(i);
+    box.appendChild(el);
+  });
+  const fb=$("#feedback"); fb.className="feedback";
+  if(a!==null) showFeedback();
+  const last=S.i===S.items.length-1;
+  $("#nextBtn").textContent= last?"Lihat hasil":"Berikutnya";
+  $("#nextBtn").disabled = a===null;
+  $("#hint").textContent = a===null ? "Tekan A sampai D untuk menjawab" : "Tekan Enter untuk lanjut";
+  const c=counts(); $("#hudOk").textContent=c.ok; $("#hudBad").textContent=c.bad; $("#hudPts").textContent=fmt(c.pts);
+  paintStrip();
+}
+function showFeedback(){
+  const it=S.items[S.i], a=S.ans[S.i], fb=$("#feedback"), good=a===it.a;
+  fb.className="feedback show "+(good?"ok":"bad");
+  fb.innerHTML = good
+    ? `<h3>Benar, +3 poin</h3><p>${it.e}</p>`
+    : `<h3>Salah, −1 poin</h3><p class="ans">Jawaban benar: ${LETTERS[it.a]}. ${it.o[it.a]}</p><p>${it.e}</p>`;
+}
+function answer(i){
+  if(!S||S.done||S.ans[S.i]!==null) return;
+  S.ans[S.i]=i; renderQ();
+}
+function next(){
+  if(S.ans[S.i]===null) return;
+  if(S.i===S.items.length-1) finish(false); else { S.i++; renderQ(); window.scrollTo({top:0}); }
+}
+$("#nextBtn").onclick=next;
+document.addEventListener("keydown",e=>{
+  const modalOpen=!$("#modal").classList.contains("hidden");
+  if(modalOpen){ if(e.key==="Escape") $("#modal").classList.add("hidden"); return; }
+  if(!S||S.done||$("#quiz").classList.contains("hidden")) return;
+  const k=e.key.toLowerCase(), m={a:0,b:1,c:2,d:3,"1":0,"2":1,"3":2,"4":3};
+  if(k in m) answer(m[k]); else if((k==="enter"||k==="arrowright")&&S.ans[S.i]!==null){ e.preventDefault(); next(); }
+});
+
+/* modal selesai */
+$("#finishBtn").onclick=()=>{
+  const un=S.ans.filter(a=>a===null).length;
+  $("#mText").textContent = un? `Masih ada ${un} soal belum dijawab. Soal kosong bernilai 0 poin.` : "Semua soal sudah dijawab.";
+  $("#modal").classList.remove("hidden"); $("#mYes").focus();
+};
+$("#mNo").onclick=()=>$("#modal").classList.add("hidden");
+$("#mYes").onclick=()=>{ $("#modal").classList.add("hidden"); finish(false); };
+
+/* ===== hasil ===== */
+function recapRows(keyOf, labelOf, subOf){
+  const keys=[...new Set(S.items.map(keyOf))];
+  return keys.map(k=>{
+    const idx=S.items.map((it,i)=>keyOf(it)===k?i:-1).filter(i=>i>=0);
+    const o=idx.filter(i=>S.ans[i]!==null&&S.ans[i]===S.items[i].a).length;
+    const w=idx.filter(i=>S.ans[i]!==null&&S.ans[i]!==S.items[i].a).length;
+    return {k,label:labelOf(k),sub:subOf(k),t:idx.length,o,w,e:idx.length-o-w,p:Math.round(o/idx.length*100)};
+  });
+}
+const rowHtml = r => `
+  <div class="rrow">
+    <div class="nm"><b>${r.label}</b><small>${r.sub}benar ${r.o}, salah ${r.w}${r.e?`, kosong ${r.e}`:""}</small></div>
+    <div class="bar" title="${r.o} benar, ${r.w} salah, ${r.e} kosong"><i class="g" style="width:${r.o/r.t*100}%"></i><i class="r" style="width:${r.w/r.t*100}%"></i></div>
+    <div class="sc num">${r.o}/${r.t}</div>
+  </div>`;
+
+function finish(timeUp){
+  if(S.done) return; S.done=true; clearInterval(tick);
+  const used=Math.min(TOTAL_SECONDS,Math.round((Date.now()-S.start)/1000));
+  const n=S.items.length, {ok,bad,pts}=counts(), blank=n-ok-bad;
+  const min=n*PTS_BAD, max=n*PTS_OK;
+  const score=Math.round((pts-min)/(max-min)*100);
+  const grade = score>=85?"Sangat baik": score>=70?"Baik": score>=55?"Cukup":"Perlu latihan lagi";
+  $("#scoreBig").textContent=score;
+  $("#grade").textContent=grade;
+  $("#gradeSub").textContent=(timeUp?"Waktu habis. ":"")+`Kamu menjawab benar ${ok} dari ${n} soal.`;
+  $("#stack").innerHTML=`<i class="g" style="width:${ok/n*100}%"></i><i class="r" style="width:${bad/n*100}%"></i><i class="b" style="width:${blank/n*100}%"></i>`;
+  $("#formula").innerHTML=`Poin mentah: ${ok} × 3 + ${bad} × (−1) + ${blank} × 0 = <b class="num">${fmt(pts)}</b>, dari rentang ${fmt(min)} sampai ${fmt(max)}. Skor = (${fmt(pts)} − (${fmt(min)})) ÷ ${max-min} × 100 = <b class="num">${score}</b>.`;
+  const answered=ok+bad, acc=answered?Math.round(ok/answered*100):0, avg=answered?Math.round(used/answered):null;
+  $("#kpis").innerHTML=`
+    <div class="kpi ok"><small>Benar</small><b class="num">${ok}</b></div>
+    <div class="kpi bad"><small>Salah</small><b class="num">${bad}</b></div>
+    <div class="kpi"><small>Tidak dijawab</small><b class="num">${blank}</b></div>
+    <div class="kpi"><small>Poin mentah</small><b class="num">${fmt(pts)}</b></div>
+    <div class="kpi"><small>Akurasi (yang dijawab)</small><b class="num">${acc}%</b></div>
+    <div class="kpi"><small>Waktu terpakai</small><b class="num">${mmss(used)}</b></div>
+    <div class="kpi"><small>Rata-rata per soal</small><b class="num">${avg===null?"-":avg+" dtk"}</b></div>`;
+  const rows=recapRows(it=>it.bab, k=>babOf(k).name, k=>babOf(k).short+": ").sort((a,b)=>a.k-b.k);
+  $("#recap").innerHTML=rows.map(rowHtml).join("");
+  const ins=$("#insight");
+  if(rows.length>1){
+    const best=rows.reduce((a,b)=>b.p>a.p?b:a), worst=rows.reduce((a,b)=>b.p<a.p?b:a);
+    ins.innerHTML=`<div class="ins good"><b>Paling kuat</b>${babOf(best.k).short}: ${best.label} (${best.p}% benar)</div>
+                   <div class="ins weak"><b>Perlu diulang</b>${babOf(worst.k).short}: ${worst.label} (${worst.p}% benar)</div>`;
+  } else ins.innerHTML="";
+  $("#recapType").innerHTML=recapRows(it=>it.type, k=>k, k=>"").sort((a,b)=>b.t-a.t).map(rowHtml).join("");
+  const wrong=S.items.map((it,i)=>({it,i})).filter(x=>S.ans[x.i]!==null&&S.ans[x.i]!==x.it.a);
+  $("#revSum").textContent=`Tinjau soal yang salah (${wrong.length})`;
+  $("#review").innerHTML = wrong.length ? wrong.map(({it,i})=>`
+    <div class="rv"><div class="q">${babOf(it.bab).short}: ${it.q}</div>
+    <div class="y">Jawabanmu: ${LETTERS[S.ans[i]]}. ${it.o[S.ans[i]]}</div>
+    <div class="c">Jawaban benar: ${LETTERS[it.a]}. ${it.o[it.a]}</div>
+    <div class="e">${it.e}</div></div>`).join("") : `<p style="margin:0;color:var(--mut)">Tidak ada jawaban salah.</p>`;
+  $("#revBox").open = false;
+  const redo = S.items.filter((it,i)=>S.ans[i]===null||S.ans[i]!==it.a).length;
+  $("#againWrong").disabled = redo===0;
+  $("#againWrong").textContent = `Ulangi soal yang salah dan kosong (${redo})`;
+  show("result");
+}
+$("#againWrong").onclick=()=>{
+  // ambil ulang dari data asli supaya urutan pilihan tidak teracak dua kali
+  const ids=S.items.filter((it,i)=>S.ans[i]===null||S.ans[i]!==it.a).map(it=>it.id);
+  const items=ids.map(id=>{ const x=ITEMS.find(z=>z.id===id); return {...x,o:x.o.slice()}; });
+  startSession(cfg.shufQ?shuffle(items):items);
+};
+$("#againAll").onclick=()=>startSession(buildItems());
+$("#toMenu").onclick=()=>{ S=null; show("start"); };
+$("#startBtn").onclick=()=>startSession(buildItems());
+
+renderChapters(); updateSummary();
+</script>
+</body>
+</html>

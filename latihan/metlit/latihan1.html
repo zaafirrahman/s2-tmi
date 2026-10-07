@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latihan Materi 1 | Metlit Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBFAFF;--ink:#111;--mut:#4B4B4B;--acc:#5A3BE0;--p:#6C4DF6;--s:#FFB300;--red:#FF4B3E;--teal:#00C2A8;--yel:#FFE14D;--oktint:#C8F3EC;--badtint:#FFDAD6;--okink:#0B6F62;--badink:#B3261B;--line:#D8D8D0;--disp:'Bricolage Grotesque',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;--hw:800}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background-color:var(--bg);color:var(--ink);font:400 16px/1.5 var(--body);padding:32px clamp(16px,5vw,64px) 56px;overflow-x:hidden;background-image:linear-gradient(rgba(108,77,246,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(108,77,246,.14) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:900px;margin:0 auto}
+.hidden{display:none!important}
+button{font:inherit;color:inherit;cursor:pointer;border-radius:0}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:4px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+h1,h2,h3{font-family:var(--disp);font-weight:var(--hw);margin:0}
+
+/* top */
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.back{font-family:var(--disp);font-weight:var(--hw);font-size:20px;line-height:1.2;color:var(--acc);text-decoration:none;border-bottom:2px solid transparent}
+.back:hover{border-bottom-color:var(--acc)}
+.tag{font-family:var(--disp);font-weight:var(--hw);font-size:20px}
+
+/* header start */
+header.hd{position:relative;margin-bottom:34px}
+header.hd h1{font-size:clamp(44px,8.5vw,92px);line-height:.95;letter-spacing:-.01em}
+header.hd .sub{margin:12px 0 0;font-size:18px;color:var(--mut)}
+.stk{position:absolute;right:0;top:-8px;display:flex;gap:6px}
+.stk svg{width:80px;height:80px}
+.stk svg:nth-child(1){transform:rotate(-8deg)}.stk svg:nth-child(2){transform:rotate(6deg)}.stk svg:nth-child(3){transform:rotate(-3deg)}
+@media(max-width:900px){.stk{display:none}}
+
+/* surfaces */
+.card{background:#fff;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--p);padding:22px}
+.card.flat{box-shadow:6px 6px 0 var(--ink)}
+.sec{font-family:var(--disp);font-weight:var(--hw);font-size:24px;margin:26px 0 12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sec:first-child{margin-top:0}
+.sec small{font:500 14px var(--body);color:var(--mut)}
+
+/* score rule tiles */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:520px){.rules{grid-template-columns:1fr}}
+.rule{border:3px solid var(--ink);padding:10px 14px;display:flex;align-items:baseline;gap:12px;background:#fff}
+.rule b{font-family:var(--disp);font-weight:var(--hw);font-size:34px;line-height:1}
+.rule span{font-size:15px;color:var(--ink)}
+.rule.p{background:var(--oktint)} .rule.m{background:var(--badtint)} .rule.z{background:#EDEDE6}
+.rulenote{margin:10px 0 0;font-size:14px;color:var(--mut)}
+
+/* chapters */
+.chapters{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.chap{display:flex;gap:12px;align-items:flex-start;text-align:left;border:3px solid var(--ink);background:#fff;padding:12px 14px;transition:transform .12s,box-shadow .12s}
+.chap:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--s)}
+.chap[aria-pressed="true"]{background:var(--oktint)}
+.chap .box{width:22px;height:22px;border:3px solid var(--ink);background:#fff;flex:none;margin-top:1px;display:grid;place-items:center}
+.chap[aria-pressed="true"] .box{background:var(--ink)}
+.chap[aria-pressed="true"] .box::after{content:"";width:10px;height:5px;border-left:3px solid #fff;border-bottom:3px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.chap b{display:block;font-weight:600;font-size:15px;line-height:1.3}
+.chap span span{font-size:13px;color:var(--mut)}
+
+/* toggles */
+.opts-row{display:flex;flex-wrap:wrap;gap:12px}
+.toggle{display:flex;align-items:center;gap:12px;border:3px solid var(--ink);background:#fff;padding:8px 14px 8px 10px;font-size:15px}
+.toggle .sw{width:42px;height:24px;border:3px solid var(--ink);background:#fff;position:relative;flex:none}
+.toggle .sw::after{content:"";position:absolute;top:1px;left:1px;width:14px;height:14px;background:var(--ink);transition:transform .12s}
+.toggle[aria-pressed="true"]{background:var(--oktint)}
+.toggle[aria-pressed="true"] .sw{background:var(--teal)}
+.toggle[aria-pressed="true"] .sw::after{transform:translateX(18px)}
+
+.startbar{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-top:28px;padding-top:20px;border-top:3px dashed var(--ink)}
+.summary{font-size:16px;max-width:46ch}
+
+/* buttons */
+.btn{display:inline-block;border:3px solid var(--ink);background:var(--p);color:#fff;font-family:var(--disp);font-weight:var(--hw);font-size:19px;line-height:1.1;padding:12px 22px;box-shadow:4px 4px 0 var(--ink);text-decoration:none;transition:transform .12s,box-shadow .12s}
+.btn:hover:not(:disabled){transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active:not(:disabled){transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn.ghost{background:#fff;color:var(--ink)}
+.btn:disabled{background:#E6E6DE;color:#77776F;box-shadow:none;cursor:not-allowed;border-color:#77776F}
+
+/* hud */
+.hud{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center;margin-bottom:12px}
+.stat{display:flex;flex-direction:column;line-height:1.2}
+.stat small{color:var(--mut);font-size:13px}
+.stat .v{font-weight:700;font-size:22px}
+.stat.right{text-align:right;align-items:flex-end}
+.timer{font-size:30px;font-weight:700;border:3px solid var(--ink);background:#fff;padding:6px 16px;min-width:140px;text-align:center;box-shadow:4px 4px 0 var(--ink)}
+.timer.warn{background:var(--yel)}
+.timer.crit{background:var(--red);animation:pulse 1s steps(2,end) infinite}
+@keyframes pulse{50%{opacity:.65}}
+.strip{display:flex;gap:2px;height:20px;align-items:flex-end;margin:6px 0 18px}
+.strip i{flex:1;min-width:2px;height:35%;background:var(--line)}
+.strip i.ok{background:var(--teal);height:100%}
+.strip i.bad{background:var(--red);height:70%}
+.strip i.cur{background:var(--ink);height:100%}
+
+/* question */
+.qmeta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip{font-size:13px;font-weight:600;border:2px solid var(--ink);padding:2px 10px;background:var(--oktint)}
+.chip.t{background:var(--yel)}
+.qtext{font-family:var(--disp);font-weight:var(--hw);font-size:clamp(21px,3.6vw,28px);line-height:1.2;margin:0 0 20px}
+.options{display:grid;gap:12px}
+.opt{display:flex;gap:14px;align-items:flex-start;text-align:left;width:100%;border:3px solid var(--ink);background:#fff;padding:12px 14px;box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.opt .k{flex:none;width:32px;height:32px;border:3px solid var(--ink);display:grid;place-items:center;font-weight:700;font-size:15px;background:#fff}
+.opt .t{padding-top:3px;flex:1}
+.opt .mk{font-size:13px;font-weight:600;padding-top:5px;white-space:nowrap}
+.options:not(.locked) .opt:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.opt.ok{background:var(--oktint)} .opt.ok .k{background:var(--teal)} .opt.ok .mk{color:var(--okink)}
+.opt.bad{background:var(--badtint)} .opt.bad .k{background:var(--red)} .opt.bad .mk{color:var(--badink)}
+.options.locked .opt{cursor:default;box-shadow:none}
+.options.locked .opt:not(.ok):not(.bad){opacity:.5}
+.feedback{margin-top:18px;border:3px solid var(--ink);padding:14px 16px;display:none}
+.feedback.show{display:block}
+.feedback.ok{background:var(--oktint)} .feedback.bad{background:var(--badtint)}
+.feedback h3{font-size:22px;margin-bottom:4px}
+.feedback p{margin:4px 0 0;font-size:15px}
+.feedback .ans{font-weight:600}
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap}
+.hint{font-size:14px;color:var(--mut)}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(17,17,17,.6);display:grid;place-items:center;padding:20px;z-index:20}
+.modal .box{background:#fff;border:3px solid var(--ink);box-shadow:8px 8px 0 var(--p);padding:22px;max-width:420px;width:100%}
+.modal h3{font-size:26px;margin-bottom:8px}
+.modal p{margin:0 0 18px;color:var(--mut)}
+.modal .row{display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap}
+
+/* result */
+.res-head{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+@media(max-width:620px){.res-head{grid-template-columns:1fr;justify-items:start}}
+.scorebox{border:3px solid var(--ink);background:var(--yel);box-shadow:6px 6px 0 var(--ink);padding:14px 26px 12px;text-align:center;min-width:190px}
+.scorebox .big{font-family:var(--disp);font-weight:var(--hw);font-size:92px;line-height:1;display:block}
+.scorebox small{font-size:14px;font-weight:600}
+.res-head h2{font-size:clamp(30px,5.5vw,46px);line-height:1}
+.res-head p{margin:10px 0 0;color:var(--mut)}
+.stack{display:flex;height:22px;border:3px solid var(--ink);margin-top:22px;background:#fff}
+.stack i{display:block;height:100%}
+.stack .g{background:var(--teal)} .stack .r{background:var(--red)} .stack .b{background:var(--line)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--mut);margin-top:10px}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border:2px solid var(--ink);margin-right:6px;vertical-align:-1px;background:var(--c)}
+.formula{margin:18px 0 0;border:3px dashed var(--ink);padding:10px 14px;font-size:14.5px;background:#fff}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:22px}
+.kpi{border:3px solid var(--ink);padding:10px 12px;background:#fff}
+.kpi small{display:block;color:var(--mut);font-size:13px}
+.kpi b{font-size:22px}
+.kpi.ok{background:var(--oktint)} .kpi.bad{background:var(--badtint)}
+.recap{display:grid;gap:14px}
+.rrow{display:grid;grid-template-columns:minmax(120px,230px) 1fr 64px;gap:14px;align-items:center}
+@media(max-width:560px){.rrow{grid-template-columns:1fr 60px}.rrow .bar{grid-column:1/-1;order:3}}
+.rrow .nm b{display:block;font-weight:600;font-size:15px;line-height:1.25}
+.rrow .nm small{color:var(--mut);font-size:13px}
+.bar{height:18px;display:flex;border:3px solid var(--ink);background:#fff}
+.bar i{display:block;height:100%}
+.bar .g{background:var(--teal)} .bar .r{background:var(--red)}
+.rrow .sc{text-align:right;font-weight:700;font-size:15px}
+.insight{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.insight{grid-template-columns:1fr}}
+.ins{border:3px solid var(--ink);padding:12px 14px;font-size:15px}
+.ins b{display:block;margin-bottom:2px}
+.ins.good{background:var(--oktint)} .ins.weak{background:var(--badtint)}
+.review{display:grid;gap:12px;margin-top:14px}
+.rv{border:3px solid var(--ink);border-left-width:10px;border-left-color:var(--red);padding:11px 14px;background:#fff;font-size:15px}
+.rv .q{font-weight:600;margin-bottom:6px}
+.rv .y{color:var(--badink)} .rv .c{color:var(--okink);font-weight:600}
+.rv .e{color:var(--mut);margin-top:4px}
+.actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);font-size:22px;padding:2px 0}
+.mt{margin-top:22px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:26px;font:800 18px/1.2 var(--disp)}.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}.crumbs [aria-current]{opacity:.65}.crumbs span[aria-hidden]{color:#111}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- START -->
+  <section id="start">
+    <nav class="crumbs" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="metlit.html">Metlit</a><span aria-hidden="true">/</span><span aria-current="page">Materi 1</span></nav>
+    <header class="hd">
+      <h1>Materi 1</h1>
+      <p class="sub">TI5004 / Metodologi Penelitian dan Literasi Digital · Hakekat Penelitian</p>
+      <div class="stk" aria-hidden="true"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><circle cx='44' cy='44' r='28' fill='#00C2A8' fill-opacity='.45'/><path d='M64 64L90 90' stroke-width='7'/><path d='M30 38C34 30 40 27 47 27' stroke-width='3'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M8 28Q28 20 50 30V84Q28 74 8 82Z' fill='#FFB300'/><path d='M92 28Q72 20 50 30V84Q72 74 92 82Z' fill='#6C4DF6' fill-opacity='.45'/><path d='M18 42Q30 38 40 44M18 54Q30 50 40 56' stroke-width='2.5'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M14 18H86Q92 18 92 24V62Q92 68 86 68H48L28 86V68H14Q8 68 8 62V24Q8 18 14 18Z' fill='#FFB300'/><text x='50' y='57' text-anchor='middle' font-family='Georgia,serif' font-size='46' font-weight='700' fill='#111' stroke='none'>?</text></svg></div>
+    </header>
+
+    <div class="card">
+      <div class="sec">Aturan skor</div>
+      <div class="rules">
+        <div class="rule p"><b>+3</b><span>jawaban benar</span></div>
+        <div class="rule m"><b>−1</b><span>jawaban salah</span></div>
+        <div class="rule z"><b>0</b><span>tidak dijawab</span></div>
+      </div>
+      <p class="rulenote">Tanpa batas waktu. Poin dinormalkan ke skala 0 sampai 100. Skor 25 setara tidak menjawab sama sekali atau menebak acak.</p>
+
+      <div id="chapSec"><div class="sec" style="margin-top:30px">Pilih bagian <small id="selCount"></small></div>
+      <div class="chapters" id="chapters"></div></div>
+
+      <div class="sec" style="margin-top:30px">Pengaturan</div>
+      <div class="opts-row">
+        <button class="toggle" id="tgQ" aria-pressed="true"><span class="sw"></span>Acak urutan soal</button>
+        <button class="toggle" id="tgO" aria-pressed="true"><span class="sw"></span>Acak urutan pilihan</button>
+      </div>
+
+      <div class="startbar">
+        <div class="summary" id="summary"></div>
+        <button class="btn" id="startBtn">Mulai kuis</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="hidden">
+    <div class="topbar"><span class="tag">Latihan Metlit · Materi 1</span></div>
+    <div class="hud">
+      <div class="stat"><small>Soal</small><span class="v num" id="hudQ">1/1</span></div>
+      <div class="stat right"><small>Poin (<span id="hudOk">0</span> benar, <span id="hudBad">0</span> salah)</small><span class="v num" id="hudPts">0</span></div>
+    </div>
+    <div class="strip" id="strip" aria-hidden="true"></div>
+    <div class="card flat">
+      <div class="qmeta"><span class="chip" id="qBab"></span><span class="chip t" id="qType"></span></div>
+      <p class="qtext" id="qText"></p>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+      <div class="navrow">
+        <button class="btn ghost" id="finishBtn">Selesaikan sekarang</button>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <span class="hint" id="hint">Tekan A sampai D untuk menjawab</span>
+          <button class="btn" id="nextBtn" disabled>Berikutnya</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="hidden">
+    <div class="topbar"><span class="tag">Hasil Materi 1</span></div>
+    <div class="card">
+      <div class="res-head">
+        <div class="scorebox"><span class="big num" id="scoreBig">0</span><small>skor dari 100</small></div>
+        <div>
+          <h2 id="grade"></h2>
+          <p id="gradeSub"></p>
+        </div>
+      </div>
+      <div class="stack" id="stack" aria-hidden="true"></div>
+      <div class="legend"><span style="--c:var(--teal)">Benar</span><span style="--c:var(--red)">Salah</span><span style="--c:var(--line)">Tidak dijawab</span></div>
+      <p class="formula" id="formula"></p>
+      <div class="kpis" id="kpis"></div>
+    </div>
+
+    <div class="card mt" id="recapBabCard">
+      <h2 style="font-size:28px;margin-bottom:16px">Rekap per bagian</h2>
+      <div class="recap" id="recap"></div>
+      <div class="insight" id="insight"></div>
+    </div>
+
+    <div class="card mt">
+      <h2 style="font-size:28px;margin-bottom:16px">Rekap per jenis soal</h2>
+      <div class="recap" id="recapType"></div>
+    </div>
+
+    <div class="card mt">
+      <details id="revBox">
+        <summary id="revSum">Tinjau soal yang salah</summary>
+        <div class="review" id="review"></div>
+      </details>
+    </div>
+
+    <div class="actions">
+      <button class="btn" id="againWrong">Ulangi soal yang salah</button>
+      <button class="btn ghost" id="againAll">Ulangi dengan pengaturan sama</button>
+      <button class="btn ghost" id="toMenu">Ubah pengaturan</button>
+      <a class="btn ghost" href="metlit.html">Daftar materi</a>
+    </div>
+  </section>
+</div>
+
+<div class="modal hidden" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="box">
+    <h3 id="mTitle">Selesaikan sekarang?</h3>
+    <p id="mText"></p>
+    <div class="row"><button class="btn ghost" id="mNo">Lanjut mengerjakan</button><button class="btn" id="mYes">Selesaikan</button></div>
+  </div>
+</div>
+
+<script>
+/* ===== Data: tiap soal {id, bab, type, q, o:[4 pilihan], a:indeks benar, e:bahasan} ===== */
+const BAB = [{"id": 1, "short": "Bagian 1", "name": "Pendahuluan & Alat Ukur"}, {"id": 2, "short": "Bagian 2", "name": "Definisi & Jenis Penelitian"}, {"id": 3, "short": "Bagian 3", "name": "Scientific Method"}];
+const ITEMS = [{"id": "latihan1-01", "bab": 1, "type": "Konsep", "q": "Pada <i>cone of science</i> (Krishnaswamy dkk., 2006), tahap yang bertujuan \"to harness knowledge\" adalah…", "o": ["explain", "control", "predict", "create (technology)"], "a": 1, "e": "Explain: advance knowledge; predict: foreknowledge; control: harness knowledge; create (technology): improve man's living."}, {"id": "latihan1-02", "bab": 1, "type": "Kasus", "q": "Kuesioner kepuasan diberikan berulang kali dan hasilnya selalu konsisten, tetapi ternyata yang terukur adalah loyalitas, bukan kepuasan. Menurut Babbie (1992), alat ukur ini…", "o": ["valid dan reliable", "valid tetapi tidak reliable", "reliable tetapi tidak valid", "tidak valid dan tidak reliable"], "a": 2, "e": "Konsisten berarti reliable; tidak mengukur konsep yang dimaksud berarti tidak valid."}, {"id": "latihan1-03", "bab": 1, "type": "Konsep", "q": "Alat ukur yang \"valid but not reliable\" berarti…", "o": ["mengukur konsep yang dimaksud tetapi hasilnya tidak konsisten", "konsisten tetapi mengukur konsep lain", "tidak mengukur apa pun", "mengukur konsep dengan benar dan konsisten"], "a": 0, "e": "Valid: mengukur konsep yang ingin diukur. Not reliable: tidak bisa diandalkan (tidak konsisten)."}, {"id": "latihan1-04", "bab": 1, "type": "Konsep", "q": "Pada skema jenjang penelitian di slide, semakin tinggi jenjang (S1 ke S3), kegiatan semakin condong ke…", "o": ["penerapan/problem solving semata", "pengembangan teori", "pengumpulan data tanpa teori", "pelaporan operasional"], "a": 1, "e": "S3 berada di sisi pengembangan teori, sedangkan penerapan/problem solving banyak di S1, dengan S2 di antaranya."}, {"id": "latihan1-05", "bab": 1, "type": "Konsep", "q": "Rantai alasan pentingnya penelitian bagi teknik dan manajemen industri pada slide adalah…", "o": ["sistem terintegrasi adalah teknologi, teknologi memerlukan aplikasi sains dan penelitian", "penelitian hanya diperlukan untuk kelulusan", "teknologi tidak memerlukan sains", "penelitian hanya dipakai di dunia pendidikan"], "a": 0, "e": "Slide: sistem terintegrasi adalah bentuk teknologi; menghasilkannya perlu sains dan penelitian; penelitian dipakai juga untuk bekerja."}, {"id": "latihan1-06", "bab": 2, "type": "Konsep", "q": "Menurut Sekaran &amp; Bougie (2013), jika jawaban atas suatu pertanyaan sudah tersedia dalam literatur atau dokumentasi lain, maka…", "o": ["tetap disebut penelitian dasar", "tidak disebut sebagai sebuah penelitian", "disebut penelitian terapan", "wajib diuji ulang secara kualitatif"], "a": 1, "e": "Penelitian adalah usaha mencari jawaban yang memerlukan upaya; jawaban yang sudah ada bukan penelitian."}, {"id": "latihan1-07", "bab": 2, "type": "Konsep", "q": "Menurut Krishnaswamy dkk., penelitian untuk <b>memahami fenomena</b> dan untuk <b>memecahkan masalah</b> masing-masing disebut…", "o": ["terapan dan dasar", "dasar dan terapan", "deskriptif dan korelasional", "kualitatif dan kuantitatif"], "a": 1, "e": "Memahami fenomena: basic/fundamental research; memecahkan masalah: applied research."}, {"id": "latihan1-08", "bab": 2, "type": "Kasus", "q": "Peneliti mengembangkan metode penjadwalan baru untuk perusahaan sponsor; keberhasilan dinilai dari kegunaannya bagi keputusan sponsor. Jenis dan ciri penelitian ini adalah…", "o": ["basic research: curiosity, public domain, discovery", "applied research: need/problem, private domain, invention, norma sponsor", "basic research: norma absolut", "applied research: bersifat netral dan berlaku umum"], "a": 1, "e": "Applied: need/problem, product/service/method, purposive, private domain, invention, keberhasilan sesuai sponsor."}, {"id": "latihan1-09", "bab": 2, "type": "Konsep", "q": "Pernyataan yang benar tentang <b>basic research</b> menurut slide adalah…", "o": ["keberhasilan diukur dari kegunaan bagi sponsor", "bersifat purposive dan berlaku spesifik", "membangun teori umum dengan keberhasilan berupa publikasi jurnal ilmiah", "normanya ditentukan sponsor"], "a": 2, "e": "Basic research: curiosity, teori/penjelasan, netral, public domain, discovery, norma absolut."}, {"id": "latihan1-10", "bab": 2, "type": "Kasus", "q": "Sebuah studi bertujuan memastikan ada tidaknya hubungan antara dua aspek situasi. Menurut Kumar (2011), ini penelitian…", "o": ["deskriptif", "korelasional", "eksplanatori", "eksploratori"], "a": 1, "e": "Correlational: menemukan atau menetapkan hubungan/asosiasi/interdependensi. Eksplanatori menjelaskan mengapa dan bagaimana hubungan itu terbentuk."}, {"id": "latihan1-11", "bab": 2, "type": "Kasus", "q": "Setelah terbukti pelatihan berkorelasi dengan produktivitas, peneliti berikutnya ingin menjelaskan mengapa dan bagaimana hubungan itu terbentuk. Ini penelitian…", "o": ["eksploratori", "deskriptif", "eksplanatori", "korelasional"], "a": 2, "e": "Explanatory research menjelaskan mengapa dan bagaimana hubungan terjadi."}, {"id": "latihan1-12", "bab": 2, "type": "Kasus", "q": "Studi pilot atau studi kelayakan pada area yang masih sangat sedikit diketahui termasuk penelitian…", "o": ["eksploratori", "eksplanatori", "deskriptif", "korelasional"], "a": 0, "e": "Exploratory: menjelajahi area yang sedikit diketahui atau menyelidiki kemungkinan melakukan suatu studi."}, {"id": "latihan1-13", "bab": 2, "type": "Konsep", "q": "Pendekatan di mana tujuan, desain, sampel, dan pertanyaan responden sudah ditentukan sebelumnya diklasifikasikan sebagai…", "o": ["penelitian kualitatif", "penelitian kuantitatif", "penelitian eksploratori", "penelitian terapan"], "a": 1, "e": "Structured approach = quantitative; unstructured/fleksibel = qualitative (Kumar, 2011)."}, {"id": "latihan1-14", "bab": 2, "type": "Konsep", "q": "Menurut Kumar, landasan filosofis penelitian kuantitatif dan kualitatif masing-masing adalah…", "o": ["empirisme dan rasionalisme", "rasionalisme dan empirisme", "pragmatisme dan rasionalisme", "positivisme dan empirisme"], "a": 1, "e": "Kuantitatif: rationalism (manusia memperoleh pengetahuan lewat kapasitas bernalar); kualitatif: empiricism (pengetahuan dari pengalaman indrawi)."}, {"id": "latihan1-15", "bab": 2, "type": "Konsep", "q": "Pernyataan yang sesuai dengan penelitian <b>kualitatif</b> menurut slide Kumar adalah…", "o": ["menekankan jumlah sampel besar dan objektivitas bebas nilai", "nilai dominan authenticity tanpa mengklaim bebas nilai, dengan analisis berupa identifikasi tema", "data dianalisis dengan distribusi frekuensi dan tabulasi silang", "fokus sempit dengan responden sangat banyak"], "a": 1, "e": "Kualitatif: kasus lebih sedikit, banyak isu, authenticity, analisis tema. Pilihan lain adalah ciri kuantitatif."}, {"id": "latihan1-16", "bab": 3, "type": "Konsep", "q": "Sifat pragmatisme ilmu menurut slide adalah…", "o": ["kebenaran absolut dibuktikan sekali untuk selamanya", "hipotesis diterima selama tidak ada fakta yang menolaknya", "ilmu hanya mencari kebenaran yang tidak berguna", "teori tidak boleh direvisi"], "a": 1, "e": "Pembuktian tidak absolut; ilmu mencari kebenaran yang bermanfaat bagi manusia."}, {"id": "latihan1-17", "bab": 3, "type": "Konsep", "q": "\"Kemampuan memperkirakan nilai atau perilaku suatu unit atau beberapa unit dalam suatu sistem\" adalah definisi…", "o": ["understanding", "prediction", "theory", "hypothesis"], "a": 1, "e": "Understanding: pengetahuan tentang interaksi antar komponen sistem; prediction: kemampuan memperkirakan nilai atau perilaku."}, {"id": "latihan1-18", "bab": 3, "type": "Konsep", "q": "Dua syarat teori ilmiah yang disebut slide adalah…", "o": ["koheren dengan teori sebelumnya dan korespondensi dengan fakta empiris", "hanya cocok dengan intuisi peneliti dan populer", "tidak boleh bertentangan dengan data dan tidak boleh pluralistik", "deduktif murni dan tanpa data"], "a": 0, "e": "Kriteria kebenaran koheren (konsisten dengan teori sebelumnya) dan korespondensi (cocok dengan fakta empiris)."}, {"id": "latihan1-19", "bab": 3, "type": "Kasus", "q": "Sebuah teori baru cocok dengan data lapangan, tetapi bertentangan dengan teori mapan tanpa penjelasan apa pun. Teori ini…", "o": ["memenuhi korespondensi, tetapi belum memenuhi koherensi", "memenuhi koherensi, tetapi gagal korespondensi", "memenuhi keduanya", "otomatis menjadi hukum"], "a": 0, "e": "Cocok dengan fakta berarti korespondensi terpenuhi; bertentangan dengan teori sebelumnya berarti koherensi belum terpenuhi."}, {"id": "latihan1-20", "bab": 3, "type": "Konsep", "q": "Pernyataan yang <b>bukan</b> ciri riset scientific menurut slide adalah…", "o": ["dimulai dengan pertanyaan pada diri peneliti", "memerlukan rencana dan pertanyaan yang jelas", "bersifat melingkar", "dimulai dengan kesimpulan yang sudah ditetapkan lalu dicari datanya"], "a": 3, "e": "Riset mengikuti arahan hipotesis, berkaitan dengan fakta dan interpretasi, dan melingkar; bukan mencari data untuk kesimpulan yang sudah ada."}, {"id": "latihan1-21", "bab": 3, "type": "Konsep", "q": "Langkah metoda ilmiah yang tepat berada sebelum perumusan hipotesis adalah…", "o": ["pengujian hipotesis", "penarikan kesimpulan", "penyusunan kerangka berpikir", "pengumpulan data lapangan"], "a": 2, "e": "Urutan: perumusan masalah, penyusunan kerangka berpikir, perumusan hipotesis, pengujian hipotesis, penarikan kesimpulan."}, {"id": "latihan1-22", "bab": 3, "type": "Konsep", "q": "Menurut slide, penyelidikan ilmiah lebih didominasi oleh…", "o": ["speculative activity", "critical (analytical) activity", "intuisi semata", "pengalaman pribadi tanpa verifikasi"], "a": 1, "e": "Speculative mengandalkan pengalaman dan intuisi; critical/analytical mengandalkan ketelitian, pengetahuan mendalam, dan perhatian pada kerincian."}, {"id": "latihan1-23", "bab": 3, "type": "Kasus", "q": "Peneliti menulis \"Proporsi produk cacat = (jumlah item cacat / jumlah item keseluruhan) × 100%\". Metode berpikir analitis yang diterapkan adalah…", "o": ["redefinition", "explication", "illustration", "induksi"], "a": 1, "e": "Explication: konsep dinyatakan dalam bahasa simbolik yang tepat."}, {"id": "latihan1-24", "bab": 3, "type": "Kasus", "q": "Dalam suatu penelitian, istilah \"pekerja\" didefinisikan mencakup pekerja tetap dan pekerja kontrak. Ini contoh…", "o": ["explication", "redefinition", "illustration", "deduksi"], "a": 2, "e": "Illustration: arti istilah dan konsep disesuaikan dengan penggunaannya dalam penelitian."}, {"id": "latihan1-25", "bab": 3, "type": "Kasus", "q": "\"Mutu dalam pengendalian produksi diartikan sebagai proporsi penerimaan\" merupakan contoh…", "o": ["redefinition", "explication", "illustration", "silogisme"], "a": 0, "e": "Redefinition: istilah dinyatakan secara tepat dan tidak berarti ganda."}, {"id": "latihan1-26", "bab": 3, "type": "Konsep", "q": "Pernyataan yang benar tentang hypothetico-deductive method (Karl Popper) adalah…", "o": ["didasarkan pada metode axiomatic seperti pada formal science", "menjelaskan paradigma empirical science dan dimulai dari kerangka teoritis, hipotesis, lalu proses deduktif", "dimulai dari data lalu membangkitkan teori tanpa hipotesis", "hanya cocok untuk matematika"], "a": 1, "e": "Metode axiomatic adalah ciri formal science (matematika); hypothetico-deductive menjelaskan empirical science."}, {"id": "latihan1-27", "bab": 3, "type": "Kasus", "q": "Teori dimensi kualitas jasa (responsiveness, reliability, assurance, tangibles, empathy) dipakai untuk menganalisis keluhan pelanggan di PT X. Pola penalarannya adalah…", "o": ["induktif: dari kasus individual ke teori umum", "deduktif: dari teori umum ke persoalan spesifik", "abduktif tanpa premis", "aksiomatik murni"], "a": 1, "e": "Berpikir deduktif dimulai dari teori umum lalu diterapkan pada persoalan tertentu."}, {"id": "latihan1-28", "bab": 3, "type": "Kasus", "q": "Pada silogisme \"Semua binatang punya mata; kambing adalah binatang; kambing punya mata\", yang <b>bukan</b> penentu ketepatan kesimpulan adalah…", "o": ["kebenaran premis mayor", "kebenaran premis minor", "keabsahan (validity) penarikan kesimpulan", "jumlah responden yang diamati"], "a": 3, "e": "Ketepatan kesimpulan deduktif bergantung pada premis mayor, premis minor, dan validitas penarikan kesimpulan."}, {"id": "latihan1-29", "bab": 3, "type": "Kasus", "q": "Peneliti membangun hipotesis dari berbagai fakta pengamatan, lalu memeriksa kebenarannya dengan logika deduktif secara cermat. Pendekatan ini disebut…", "o": ["logico-hypothetico-verifikatif", "inductive murni", "hypothetico-deductive murni", "axiomatic"], "a": 0, "e": "Gabungan deduktif-induktif: hipotesis dari induksi, diverifikasi deduktif."}, {"id": "latihan1-30", "bab": 3, "type": "Konsep", "q": "Menurut slide, hipotesis adalah…", "o": ["kesimpulan akhir yang tidak perlu diuji", "perkiraan yang kebenarannya dibuktikan dengan data, disusun deduktif dari premis yang telah diketahui kebenarannya", "fakta yang diamati langsung di lapangan", "definisi istilah yang tidak berarti ganda"], "a": 1, "e": "Hipotesis adalah prediksi yang akan dibuktikan dengan data dan disusun secara deduktif berdasarkan premis yang benar."}];
+
+/* ===== util ===== */
+const $ = s => document.querySelector(s);
+const PTS_OK = 3, PTS_BAD = -1;
+const LETTERS = ["A","B","C","D"];
+const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const fmt = v => (v>0?"+":v<0?"−":"")+Math.abs(v);
+const babOf = id => BAB.find(b=>b.id===id);
+const cfg = { babs:new Set(BAB.map(b=>b.id)), shufQ:true, shufO:true };
+let S = null;
+
+/* ===== layar awal ===== */
+function renderChapters(){
+  const box=$("#chapters"); box.innerHTML="";
+  BAB.forEach(b=>{
+    const n=ITEMS.filter(x=>x.bab===b.id).length;
+    const el=document.createElement("button");
+    el.className="chap"; el.setAttribute("aria-pressed",cfg.babs.has(b.id));
+    el.innerHTML=`<span class="box"></span><span><b>${b.short}: ${b.name}</b><span>${n} soal</span></span>`;
+    el.onclick=()=>{ cfg.babs.has(b.id)?cfg.babs.delete(b.id):cfg.babs.add(b.id); $("#chapSec").classList.toggle("hidden",BAB.length<2);
+renderChapters(); updateSummary(); };
+    box.appendChild(el);
+  });
+}
+function updateSummary(){
+  const n=ITEMS.filter(x=>cfg.babs.has(x.bab)).length;
+  $("#selCount").textContent=`${cfg.babs.size} dari ${BAB.length} bab dipilih`;
+  $("#summary").innerHTML = n ? `<b>${n} soal</b>, tanpa batas waktu. Poin maksimum <b>+${n*PTS_OK}</b>.` : "Pilih minimal satu bab.";
+  $("#startBtn").disabled = !n;
+}
+$("#tgQ").onclick=e=>{cfg.shufQ=!cfg.shufQ;e.currentTarget.setAttribute("aria-pressed",cfg.shufQ);};
+$("#tgO").onclick=e=>{cfg.shufO=!cfg.shufO;e.currentTarget.setAttribute("aria-pressed",cfg.shufO);};
+
+function buildItems(){
+  let items=ITEMS.filter(x=>cfg.babs.has(x.bab)).map(x=>({...x,o:x.o.slice()}));
+  return cfg.shufQ?shuffle(items):items;
+}
+function permuteOptions(items){
+  return items.map(it=>{ const idx=shuffle([0,1,2,3]); return {...it,o:idx.map(i=>it.o[i]),a:idx.indexOf(it.a)}; });
+}
+function show(id){ ["start","quiz","result"].forEach(s=>$("#"+s).classList.toggle("hidden",s!==id)); window.scrollTo(0,0); }
+
+/* ===== sesi ===== */
+function startSession(items){
+  if(cfg.shufO) items=permuteOptions(items);
+  S={items,ans:items.map(()=>null),i:0,done:false};
+  $("#strip").innerHTML=items.map(()=>"<i></i>").join("");
+  show("quiz"); renderQ();
+}
+function counts(){
+  let ok=0,bad=0;
+  S.items.forEach((it,i)=>{ if(S.ans[i]!==null){ S.ans[i]===it.a?ok++:bad++; } });
+  return {ok,bad,pts:ok*PTS_OK+bad*PTS_BAD};
+}
+function paintStrip(){
+  const els=$("#strip").children;
+  S.items.forEach((it,i)=>{
+    const a=S.ans[i]; let c="";
+    if(a!==null) c = a===it.a ? "ok":"bad"; else if(i===S.i) c="cur";
+    els[i].className=c;
+  });
+}
+function renderQ(){
+  const it=S.items[S.i], a=S.ans[S.i], b=babOf(it.bab);
+  $("#hudQ").textContent=`${S.i+1}/${S.items.length}`;
+  $("#qBab").textContent=`${b.short}: ${b.name}`;
+  $("#qType").textContent=it.type;
+  $("#qText").innerHTML=it.q;
+  const box=$("#options"); box.innerHTML=""; box.classList.toggle("locked",a!==null);
+  it.o.forEach((t,i)=>{
+    const el=document.createElement("button");
+    el.className="opt";
+    let mk="";
+    if(a!==null){ if(i===it.a){ el.classList.add("ok"); mk=`<span class="mk">${a===it.a?"Jawabanmu, benar":"Jawaban benar"}</span>`; } else if(i===a){ el.classList.add("bad"); mk=`<span class="mk">Jawabanmu, salah</span>`; } el.disabled=true; }
+    el.innerHTML=`<span class="k">${LETTERS[i]}</span><span class="t">${t}</span>${mk}`;
+    el.onclick=()=>answer(i);
+    box.appendChild(el);
+  });
+  const fb=$("#feedback"); fb.className="feedback";
+  if(a!==null) showFeedback();
+  const last=S.i===S.items.length-1;
+  $("#nextBtn").textContent= last?"Lihat hasil":"Berikutnya";
+  $("#nextBtn").disabled = a===null;
+  $("#hint").textContent = a===null ? "Tekan A sampai D untuk menjawab" : "Tekan Enter untuk lanjut";
+  const c=counts(); $("#hudOk").textContent=c.ok; $("#hudBad").textContent=c.bad; $("#hudPts").textContent=fmt(c.pts);
+  paintStrip();
+}
+function showFeedback(){
+  const it=S.items[S.i], a=S.ans[S.i], fb=$("#feedback"), good=a===it.a;
+  fb.className="feedback show "+(good?"ok":"bad");
+  fb.innerHTML = good
+    ? `<h3>Benar, +3 poin</h3><p>${it.e}</p>`
+    : `<h3>Salah, −1 poin</h3><p class="ans">Jawaban benar: ${LETTERS[it.a]}. ${it.o[it.a]}</p><p>${it.e}</p>`;
+}
+function answer(i){
+  if(!S||S.done||S.ans[S.i]!==null) return;
+  S.ans[S.i]=i; renderQ();
+}
+function next(){
+  if(S.ans[S.i]===null) return;
+  if(S.i===S.items.length-1) finish(); else { S.i++; renderQ(); window.scrollTo({top:0}); }
+}
+$("#nextBtn").onclick=next;
+document.addEventListener("keydown",e=>{
+  const modalOpen=!$("#modal").classList.contains("hidden");
+  if(modalOpen){ if(e.key==="Escape") $("#modal").classList.add("hidden"); return; }
+  if(!S||S.done||$("#quiz").classList.contains("hidden")) return;
+  const k=e.key.toLowerCase(), m={a:0,b:1,c:2,d:3,"1":0,"2":1,"3":2,"4":3};
+  if(k in m) answer(m[k]); else if((k==="enter"||k==="arrowright")&&S.ans[S.i]!==null){ e.preventDefault(); next(); }
+});
+
+/* modal selesai */
+$("#finishBtn").onclick=()=>{
+  const un=S.ans.filter(a=>a===null).length;
+  $("#mText").textContent = un? `Masih ada ${un} soal belum dijawab. Soal kosong bernilai 0 poin.` : "Semua soal sudah dijawab.";
+  $("#modal").classList.remove("hidden"); $("#mYes").focus();
+};
+$("#mNo").onclick=()=>$("#modal").classList.add("hidden");
+$("#mYes").onclick=()=>{ $("#modal").classList.add("hidden"); finish(); };
+
+/* ===== hasil ===== */
+function recapRows(keyOf, labelOf, subOf){
+  const keys=[...new Set(S.items.map(keyOf))];
+  return keys.map(k=>{
+    const idx=S.items.map((it,i)=>keyOf(it)===k?i:-1).filter(i=>i>=0);
+    const o=idx.filter(i=>S.ans[i]!==null&&S.ans[i]===S.items[i].a).length;
+    const w=idx.filter(i=>S.ans[i]!==null&&S.ans[i]!==S.items[i].a).length;
+    return {k,label:labelOf(k),sub:subOf(k),t:idx.length,o,w,e:idx.length-o-w,p:Math.round(o/idx.length*100)};
+  });
+}
+const rowHtml = r => `
+  <div class="rrow">
+    <div class="nm"><b>${r.label}</b><small>${r.sub}benar ${r.o}, salah ${r.w}${r.e?`, kosong ${r.e}`:""}</small></div>
+    <div class="bar" title="${r.o} benar, ${r.w} salah, ${r.e} kosong"><i class="g" style="width:${r.o/r.t*100}%"></i><i class="r" style="width:${r.w/r.t*100}%"></i></div>
+    <div class="sc num">${r.o}/${r.t}</div>
+  </div>`;
+
+function finish(){
+  if(S.done) return; S.done=true;
+  const n=S.items.length, {ok,bad,pts}=counts(), blank=n-ok-bad;
+  const min=n*PTS_BAD, max=n*PTS_OK;
+  const score=Math.round((pts-min)/(max-min)*100);
+  const grade = score>=85?"Sangat baik": score>=70?"Baik": score>=55?"Cukup":"Perlu latihan lagi";
+  $("#scoreBig").textContent=score;
+  $("#grade").textContent=grade;
+  $("#gradeSub").textContent=`Kamu menjawab benar ${ok} dari ${n} soal.`;
+  $("#stack").innerHTML=`<i class="g" style="width:${ok/n*100}%"></i><i class="r" style="width:${bad/n*100}%"></i><i class="b" style="width:${blank/n*100}%"></i>`;
+  $("#formula").innerHTML=`Poin mentah: ${ok} × 3 + ${bad} × (−1) + ${blank} × 0 = <b class="num">${fmt(pts)}</b>, dari rentang ${fmt(min)} sampai ${fmt(max)}. Skor = (${fmt(pts)} − (${fmt(min)})) ÷ ${max-min} × 100 = <b class="num">${score}</b>.`;
+  const answered=ok+bad, acc=answered?Math.round(ok/answered*100):0;
+  $("#kpis").innerHTML=`
+    <div class="kpi ok"><small>Benar</small><b class="num">${ok}</b></div>
+    <div class="kpi bad"><small>Salah</small><b class="num">${bad}</b></div>
+    <div class="kpi"><small>Tidak dijawab</small><b class="num">${blank}</b></div>
+    <div class="kpi"><small>Poin mentah</small><b class="num">${fmt(pts)}</b></div>
+    <div class="kpi"><small>Akurasi (yang dijawab)</small><b class="num">${acc}%</b></div>`;
+  $("#recapBabCard").classList.toggle("hidden",BAB.length<2);
+  const rows=recapRows(it=>it.bab, k=>babOf(k).name, k=>babOf(k).short+": ").sort((a,b)=>a.k-b.k);
+  $("#recap").innerHTML=rows.map(rowHtml).join("");
+  const ins=$("#insight");
+  if(rows.length>1){
+    const best=rows.reduce((a,b)=>b.p>a.p?b:a), worst=rows.reduce((a,b)=>b.p<a.p?b:a);
+    ins.innerHTML=`<div class="ins good"><b>Paling kuat</b>${babOf(best.k).short}: ${best.label} (${best.p}% benar)</div>
+                   <div class="ins weak"><b>Perlu diulang</b>${babOf(worst.k).short}: ${worst.label} (${worst.p}% benar)</div>`;
+  } else ins.innerHTML="";
+  $("#recapType").innerHTML=recapRows(it=>it.type, k=>k, k=>"").sort((a,b)=>b.t-a.t).map(rowHtml).join("");
+  const wrong=S.items.map((it,i)=>({it,i})).filter(x=>S.ans[x.i]!==null&&S.ans[x.i]!==x.it.a);
+  $("#revSum").textContent=`Tinjau soal yang salah (${wrong.length})`;
+  $("#review").innerHTML = wrong.length ? wrong.map(({it,i})=>`
+    <div class="rv"><div class="q">${babOf(it.bab).short}: ${it.q}</div>
+    <div class="y">Jawabanmu: ${LETTERS[S.ans[i]]}. ${it.o[S.ans[i]]}</div>
+    <div class="c">Jawaban benar: ${LETTERS[it.a]}. ${it.o[it.a]}</div>
+    <div class="e">${it.e}</div></div>`).join("") : `<p style="margin:0;color:var(--mut)">Tidak ada jawaban salah.</p>`;
+  $("#revBox").open = false;
+  const redo = S.items.filter((it,i)=>S.ans[i]===null||S.ans[i]!==it.a).length;
+  $("#againWrong").disabled = redo===0;
+  $("#againWrong").textContent = `Ulangi soal yang salah dan kosong (${redo})`;
+  show("result");
+}
+$("#againWrong").onclick=()=>{
+  // ambil ulang dari data asli supaya urutan pilihan tidak teracak dua kali
+  const ids=S.items.filter((it,i)=>S.ans[i]===null||S.ans[i]!==it.a).map(it=>it.id);
+  const items=ids.map(id=>{ const x=ITEMS.find(z=>z.id===id); return {...x,o:x.o.slice()}; });
+  startSession(cfg.shufQ?shuffle(items):items);
+};
+$("#againAll").onclick=()=>startSession(buildItems());
+$("#toMenu").onclick=()=>{ S=null; show("start"); };
+$("#startBtn").onclick=()=>startSession(buildItems());
+
+renderChapters(); updateSummary();
+</script>
+</body>
+</html>
