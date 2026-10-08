@@ -51,6 +51,11 @@ pre{margin:0;background:var(--code);border:1px solid var(--bd);border-radius:3px
 .out pre{background:none;border:0;padding:0;white-space:pre-wrap;word-break:break-word}
 .out.err{border-color:#FF6B5B}.out img{background:#fff}
 .tab{display:inline-block;margin:0 6px 8px 0}.tab.on{background:var(--acc);color:var(--ink)}
+.pg{position:relative;margin:0 auto 12px;outline:1px solid var(--bd);background:#fff}
+.pg canvas{margin:0;outline:0;width:100%;height:100%}
+.textLayer{position:absolute;inset:0;overflow:hidden;line-height:1;text-size-adjust:none;opacity:.25}
+.textLayer span,.textLayer br{color:transparent;position:absolute;white-space:pre;cursor:text;transform-origin:0 0}
+.textLayer ::selection{background:#FFC400}
 canvas{display:block;max-width:100%;height:auto;margin:0 auto 12px;outline:1px solid var(--bd)}
 .hljs-keyword,.hljs-literal,.hljs-built_in{color:var(--k)}.hljs-string,.hljs-regexp{color:var(--s)}
 .hljs-number,.hljs-attr{color:var(--n)}.hljs-comment{color:var(--c);font-style:italic}.hljs-title{color:var(--f)}
@@ -101,9 +106,17 @@ const R={
   wb.SheetNames.forEach((n,i)=>{const b=document.createElement('button');b.className='tab';b.textContent=n;b.onclick=()=>{[...V.querySelectorAll('.tab')].forEach(x=>x.classList.toggle('on',x===b));box.innerHTML='';box.appendChild(tbl(XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,defval:''})))};V.appendChild(b);if(!i)b.click()});V.appendChild(box)},
  async docx(p){await need('doc');const r=await mammoth.convertToHtml({arrayBuffer:await get(p)});V.innerHTML='<div class="md">'+clean(r.value)+'</div>'},
  async pdf(p){await need('pdf');pdfjsLib.GlobalWorkerOptions.workerSrc=C+'pdf.js/3.11.174/pdf.worker.min.js';
-  const pdf=await pdfjsLib.getDocument({data:await get(p)}).promise;V.innerHTML='';const w=Math.min(V.clientWidth||800,980),dpr=Math.min(devicePixelRatio||1,2),tok=p;
-  for(let i=1;i<=pdf.numPages;i++){if(cur!==tok)return;const pg=await pdf.getPage(i),b=pg.getViewport({scale:1}),vp=pg.getViewport({scale:w/b.width*dpr}),cv=document.createElement('canvas');
-   cv.width=vp.width;cv.height=vp.height;V.appendChild(cv);await pg.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise}},
+  const pdf=await pdfjsLib.getDocument({data:await get(p)}).promise;V.innerHTML='';
+  const cs=getComputedStyle(V),w=Math.min(V.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight),980)||800,dpr=Math.min(devicePixelRatio||1,2),tok=p;
+  for(let i=1;i<=pdf.numPages;i++){if(cur!==tok)return;
+   const pg=await pdf.getPage(i),b=pg.getViewport({scale:1}),sc=w/b.width,vp=pg.getViewport({scale:sc}),hp=pg.getViewport({scale:sc*dpr});
+   const wrap=document.createElement('div');wrap.className='pg';wrap.style.width=vp.width+'px';wrap.style.height=vp.height+'px';
+   const cv=document.createElement('canvas');cv.width=hp.width;cv.height=hp.height;
+   const tl=document.createElement('div');tl.className='textLayer';tl.style.setProperty('--scale-factor',sc);
+   wrap.append(cv,tl);V.appendChild(wrap);
+   await pg.render({canvasContext:cv.getContext('2d'),viewport:hp}).promise;
+   if(cur!==tok)return;
+   try{await pdfjsLib.renderTextLayer({textContentSource:await pg.getTextContent(),container:tl,viewport:vp,textDivs:[]}).promise}catch(e){}}},
  html(p){V.className='full';V.innerHTML='<iframe sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals" src="'+enc(p)+'"></iframe>'},
  img(p){V.innerHTML='<img src="'+enc(p)+'">'},
  other(p){V.innerHTML='<p class="msg">Preview belum tersedia untuk tipe ini.<br><a href="'+enc(p)+'" download>Download file</a></p>'}

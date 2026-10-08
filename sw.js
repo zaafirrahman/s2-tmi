@@ -1,4 +1,4 @@
-const VERSION = 'repo-s2-tmi-v1';
+const VERSION = 'repo-s2-tmi-v2';
 const CORE = [
   './',
   './index.html',
@@ -47,15 +47,15 @@ self.addEventListener('fetch', e => {
   // Other origins (e.g. thesis catalog): leave to the network
   if (url.origin !== location.origin) return;
 
-  // Pages: network-first, fall back to cache, then offline page
-  if (req.mode === 'navigate') {
+  // Pages and JSON data (e.g. bahan/manifest.json file list): network-first
+  if (req.mode === 'navigate' || url.pathname.endsWith('.json')) {
     e.respondWith(
       fetch(req).then(res => {
         const copy = res.clone();
         caches.open(VERSION).then(c => c.put(req, copy));
         return res;
       }).catch(() =>
-        caches.match(req).then(hit => hit || caches.match('./offline.html'))
+        caches.match(req).then(hit => hit || (req.mode === 'navigate' ? caches.match('./offline.html') : Response.error()))
       )
     );
     return;
