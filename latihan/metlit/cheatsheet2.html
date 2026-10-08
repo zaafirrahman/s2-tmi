@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 2 | Metlit Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBFAFF;--ink:#111;--mut:#4B4B4B;--acc:#5A3BE0;--p:#6C4DF6;--s:#FFB300;--y:#FFE14D;--teal:#00C2A8;--tint:#E6E0FF;--amb:#FFF0C2;--tt:#C8F3EC;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans','Liberation Sans',Arial,Helvetica,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(108,77,246,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(108,77,246,.14) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut)}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--p);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#fff}.box.g2{--g:var(--s);--gi:var(--ink)}.box.g3{--g:var(--y);--gi:var(--ink)}.box.g4{--g:var(--acc);--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600}
+.t td.c,.t th.c{text-align:center}
+.t td.k{background:var(--tint);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tt)}
+.chip.p{background:var(--tint)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.two>div{border:2px solid var(--ink);padding:4px 7px;font-size:12.4px;background:#fff}
+.two h3{margin:0 0 3px;font:800 14px var(--disp)}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--amb)}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8.5pt;margin:2px 0 0}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .two>div{font-size:7pt;padding:2px 4px;border-width:1px}.two h3{font-size:8pt}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt}
+ .fig{margin:3px 0}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:1.04">
+<svg class="defs" aria-hidden="true"><defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#111"/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="metlit.html">Metlit</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet 2</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 2</h1><p class="sub">TI5004 / Metodologi Penelitian dan Literasi Digital · Proses Penelitian</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan2.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet2.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; Metoda ilmiah</h2><div class="in">
+<ul><li><b>Metoda ilmiah</b> = <span class='hl'>prosedur sistematik</span> dalam penelitian untuk mendapat ilmu baru</li>
+<li><b>Metodologi penelitian</b> = prosedur <i>di dalam</i> metoda ilmiah</li></ul>
+<div class='chips'><span class='chip p'>1 Perumusan masalah (RQ)</span><span class='chip p'>2 Kerangka berpikir (literatur)</span><span class='chip p'>3 Hipotesis</span><span class='chip p'>4 Pembuktian hipotesis</span><span class='chip p'>5 Kesimpulan</span></div>
+<ul><li>Literatur / SOTA &rarr; penalaran <b>deduktif</b> &rarr; hipotesis</li>
+<li>Dunia nyata / pengalaman &rarr; data empirik &rarr; proses <b>induktif</b></li>
+<li>Hipotesis diuji &rarr; diterima atau ditolak</li></ul></div></section>
+<section class="box g2"><h2>2 &middot; Kekhasan teknik &amp; manajemen industri</h2><div class="in">
+<ul><li>Proses penelitian bisa beda menurut sifat keilmuan, tetap berdasar <b>pendekatan ilmiah</b></li>
+<li>Kekhasan TMI = <span class='hl'>adanya unsur manusia</span> &rarr; terkait <b>ilmu perilaku manusia</b> (behaviour science) &rarr; persoalan, cara selesai, dan proses penelitian beragam</li>
+<li>Tak selalu bisa 100% ilmiah: ukur hal subyektif (feelings, attitudes, perception) &amp; sulit dapat sampel representatif</li>
+<li>Thesis S2 TMI: rancang / pecahkan masalah sistem integral, pendekatan <b>analitik, komputasional, eksperimen</b> yang sesuai, dikomunikasikan profesional di forum akademik</li>
+<li>S1 &rarr; S3: penerapan / problem solving &rarr; <b>pengembangan teori</b></li></ul></div></section>
+<section class="box g3"><h2>3 &middot; 6 langkah proses penelitian</h2><div class="in"><svg class='fig' viewBox='0 0 300 142' role='img' aria-label='Diagram alir enam langkah penelitian'>
+<text x='150' y='10' font-size='9' text-anchor='middle' font-weight='600' style='fill:#5A3BE0'>langkah 1&ndash;3 = PROPOSAL PENELITIAN</text>
+<path d='M8 15H292' stroke='#5A3BE0' stroke-width='2.4'/><path d='M8 15V21M292 15V21' stroke='#5A3BE0' stroke-width='2.4'/>
+<g stroke='#111' stroke-width='2.2'>
+<rect x='8' y='24' width='84' height='36' fill='#E6E0FF'/><rect x='108' y='24' width='84' height='36' fill='#E6E0FF'/><rect x='208' y='24' width='84' height='36' fill='#E6E0FF'/>
+<rect x='8' y='92' width='84' height='36' fill='#C8F3EC'/><rect x='108' y='92' width='84' height='36' fill='#C8F3EC'/><rect x='208' y='92' width='84' height='36' fill='#C8F3EC'/></g>
+<g font-size='8.6' text-anchor='middle' font-weight='600'>
+<text x='50' y='38'>1 &middot; Perumusan</text><text x='50' y='50'>masalah</text>
+<text x='150' y='38'>2 &middot; Hipotesis</text><text x='150' y='50'>atau model</text>
+<text x='250' y='38'>3 &middot; Perancangan</text><text x='250' y='50'>penelitian</text>
+<text x='50' y='106'>4 &middot; Pelaksanaan</text><text x='50' y='118'>penelitian</text>
+<text x='150' y='106'>5 &middot; Analisis</text><text x='150' y='118'>data</text>
+<text x='250' y='106'>6 &middot; Penyusunan</text><text x='250' y='118'>laporan</text></g>
+<g fill='none' stroke='#111' stroke-width='2.2'>
+<path d='M92 42H106' marker-end='url(#ah)'/><path d='M192 42H206' marker-end='url(#ah)'/>
+<path d='M250 60V76H50V90' marker-end='url(#ah)'/>
+<path d='M92 110H106' marker-end='url(#ah)'/><path d='M192 110H206' marker-end='url(#ah)'/></g>
+</svg></div></section>
+<section class="box g4"><h2>4 &middot; Langkah 1 &middot; Perumusan masalah</h2><div class="in">
+<ul><li>2 kegiatan besar: <b>identifikasi masalah</b> (= proses <b>diagnosis</b>) lalu <b>pendefinisian masalah</b></li>
+<li>Masalah muncul dari: pengamatan awal sistem terintegrasi, keluhan <i>stakeholders</i> (supervisor, manajer, direktur, CEO, konsumen), atau literatur</li>
+<li>Pendefinisian menghasilkan: <span class='hl'>lingkup</span> masalah (lengkap &amp; rinci), <b>batasan</b>, gambaran <b>output</b>, <b>manfaat</b></li></ul></div></section>
+<section class="box g1"><h2>5 &middot; Langkah 2 &middot; Hipotesis atau model</h2><div class="in">
+<ul><li>Literatur &amp; penelitian terdahulu &rarr; cari <b>teori, construct, state of the art</b></li>
+<li>Kajian menentukan <b>variabel</b>, keterkaitan antar variabel, dan sifat hubungan</li>
+<li>Hasil: <span class='hl'>model</span> masalah <b>atau</b> <span class='hl'>hipotesis</span> untuk menjawab persoalan</li></ul></div></section>
+<section class="box g2"><h2>6 &middot; Langkah 3 &middot; Perancangan penelitian</h2><div class="in">
+<ul><li>Rencana penelitian + kerangka waktu. Hasil langkah 1&ndash;3 = <b>proposal</b></li>
+<li>Proposal baik: pembaca paham <b>masalah</b>, <b>hasil</b>, <b>cara</b> meneliti, dan <b>jadwal</b></li></ul>
+<table class='t'><tr><th>Tujuan penelitian</th><th>Arti</th></tr>
+<tr><td><b>Description</b></td><td>fact finding</td></tr>
+<tr><td><b>Exploration</b></td><td>looking for patterns</td></tr>
+<tr><td><b>Analysis</b></td><td>explaining why / how</td></tr>
+<tr><td><b>Prediction</b></td><td>forecasting likelihood of events</td></tr>
+<tr><td><b>Problem solving</b></td><td>improvement of current practice</td></tr></table></div></section>
+<section class="box g3"><h2>7 &middot; Maksud penelitian</h2><div class="in">
+<table class='t'><tr><th>Exploratory</th><th>Descriptive</th><th>Causal</th></tr>
+<tr><td>belum banyak diketahui; perlu <b>bangun kerangka teoritis</b>; biasanya belum bisa digeneralisasi</td>
+<td>jelaskan <b>fenomena</b>; karakteristik kelompok; kuantitatif / kualitatif; dasar keputusan</td>
+<td>cari apakah <b>satu / lebih variabel</b> mempengaruhi variabel lain (ada VI &amp; VD)</td></tr></table></div></section>
+<section class="box g4"><h2>8 &middot; Interferensi &amp; setting</h2><div class="in"><svg class='fig' viewBox='0 0 300 56' role='img' aria-label='Tingkat interferensi peneliti'>
+<path d='M10 28H290' stroke='#111' stroke-width='2.4' marker-end='url(#ah)'/>
+<g stroke='#111' stroke-width='2'><circle cx='50' cy='28' r='6' fill='#C8F3EC'/><circle cx='150' cy='28' r='6' fill='#FFE14D'/><circle cx='250' cy='28' r='6' fill='#FFB300'/></g>
+<g font-size='9' text-anchor='middle' font-weight='600'><text x='50' y='48'>Minimal</text><text x='150' y='48'>Moderate</text><text x='250' y='48'>Excessive</text></g>
+<g font-size='8.6' text-anchor='middle'><text x='50' y='14'>korelasional</text><text x='150' y='14'>kausal, kendali terbatas</text><text x='250' y='14'>sebab-akibat jelas</text></g>
+</svg>
+<table class='t'><tr><th>Setting</th><th>Ciri</th></tr>
+<tr><td><b>Noncontrived</b></td><td>alamiah, proses apa adanya, peneliti mengamati; field study / field experiment</td></tr>
+<tr><td><b>Contrived</b></td><td>setting buatan; eksperimen di laboratorium</td></tr></table></div></section>
+<section class="box g1"><h2>9 &middot; Strategi penelitian</h2><div class="in">
+<table class='t'>
+<tr><td class='k'>Eksperimen</td><td>percobaan di laboratorium; biasa untuk riset <b>deduktif</b></td></tr>
+<tr><td class='k'>Survey</td><td>kumpulkan info dari / tentang orang untuk menggambarkan, membandingkan, menjelaskan knowledge, behaviour, attitude</td></tr>
+<tr><td class='k'>Observation</td><td>amati &amp; ukur langsung obyek, setting alamiah</td></tr>
+<tr><td class='k'>Case study</td><td>obyek spesifik, investigasi empiris fenomena</td></tr>
+<tr><td class='k'>Grounded theory</td><td>teori dikembangkan <b>induktif</b> dari data: sampling, bandingkan dengan data lain sampai ada kesamaan &rarr; teori baru</td></tr>
+<tr><td class='k'>Action research</td><td>implementasi lalu evaluasi hasil penelitian</td></tr>
+<tr><td class='k'>Mixed methods</td><td>campuran beberapa strategi</td></tr></table></div></section>
+<section class="box g2"><h2>10 &middot; Unit analisis &amp; horison waktu</h2><div class="in">
+<p><b>Unit analisis</b> = tingkat agregasi data:</p>
+<div class='chips'><span class='chip'>individu</span><span class='chip'>dyad</span><span class='chip'>kelompok</span><span class='chip'>divisi / unit</span><span class='chip'>perusahaan</span><span class='chip'>sektor</span><span class='chip'>negara</span></div>
+<table class='t'><tr><th>Cross-sectional</th><th>Longitudinal</th></tr>
+<tr><td>data dikumpulkan <b>sekali</b> untuk satu periode</td><td>data pada <b>&gt; 1 titik waktu</b>; butuh waktu, biaya, usaha lebih besar; biasa di eksperimen</td></tr></table></div></section>
+<section class="box g3"><h2>11 &middot; Langkah 4&ndash;6</h2><div class="in">
+<ul><li><b>4 Pelaksanaan</b> sesuai rencana; pengumpulan data: wawancara, kuesioner, eksperimen, sampling, observasi</li>
+<li><b>5 Analisis data:</b> olah data, <b>verifikasi &amp; validasi</b>, interpretasi, bandingkan dengan teori, <b>uji sensitivitas</b>, kesimpulan (intervensi pada masalah), temukan kekurangan &rarr; saran perbaikan</li>
+<li><b>6 Laporan</b> (buku thesis) menjelaskan: persoalan, metode, data, pengolahan data, analisis, kesimpulan &amp; saran</li></ul></div></section>
+<section class="box g4"><h2>12 &middot; Sains vs engineering</h2><div class="in">
+<table class='t'><tr><th>Science</th><th>Applied / eng. science</th><th>Engineering</th></tr>
+<tr><td>selidiki &amp; pahami alam dan hukumnya: <b>kenapa</b></td><td><b>build to learn</b>: membangun (eksperimen, alat) untuk memahami</td><td>manipulasi hukum alam untuk manusia: <b>bagaimana</b>; <b>learn to build</b> produk / jasa</td></tr></table>
+<ul><li>Engineering dari Latin <b>ingeniere</b> (to design, to devise) = <span class='hl'>to design under constraints</span></li>
+<li>ABET: profesi; matematika &amp; pengetahuan alam; dari riset, pengalaman, praktik; diterapkan dengan <i>judgment</i>; pertimbangkan kendala (ekonomi, material, alam); untuk manfaat manusia</li></ul></div></section>
+<section class="box g1"><h2>13 &middot; Teknik Industri (IE)</h2><div class="in">
+<ul><li><span class='hl'>Design, improvement, installation</span> of <b>integrated systems</b> of people, materials, information, equipment, energy</li>
+<li>Bekal: matematika, fisika, ilmu sosial + prinsip &amp; metode analisis / desain rekayasa &rarr; specify, predict, evaluate</li>
+<li>Kemampuan (ABET): design, develop, implement, improve</li>
+<li>Output: <b>sistem efisien &amp; efektif (produktif)</b></li>
+<li>Masalah TI = <b>kesenjangan</b> harapan (rancangan) vs kenyataan (operasional) / ingin performansi lebih baik (inovasi); ukuran: efektivitas, efisiensi, produktivitas, kualitas</li></ul>
+<div class='chips'><span class='chip p'>sistem produksi</span><span class='chip p'>kerja &amp; ergonomi</span><span class='chip p'>organisasi &amp; manajemen</span><span class='chip p'>keputusan &amp; optimisasi</span><span class='chip p'>sistem informasi</span><span class='chip p'>perencanaan &amp; sistem industri</span></div></div></section>
+</main>
+<p class="foot">Dirangkum dari slide kuliah TI5004 (Materi 2). Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>

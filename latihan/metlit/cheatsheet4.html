@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 4 | Metlit Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBFAFF;--ink:#111;--mut:#4B4B4B;--acc:#5A3BE0;--p:#6C4DF6;--s:#FFB300;--y:#FFE14D;--teal:#00C2A8;--tint:#E6E0FF;--amb:#FFF0C2;--tt:#C8F3EC;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans','Liberation Sans',Arial,Helvetica,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(108,77,246,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(108,77,246,.14) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut)}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--p);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#fff}.box.g2{--g:var(--s);--gi:var(--ink)}.box.g3{--g:var(--y);--gi:var(--ink)}.box.g4{--g:var(--acc);--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600}
+.t td.c,.t th.c{text-align:center}
+.t td.k{background:var(--tint);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tt)}
+.chip.p{background:var(--tint)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.two>div{border:2px solid var(--ink);padding:4px 7px;font-size:12.4px;background:#fff}
+.two h3{margin:0 0 3px;font:800 14px var(--disp)}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--amb)}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8.5pt;margin:2px 0 0}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .two>div{font-size:7pt;padding:2px 4px;border-width:1px}.two h3{font-size:8pt}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt}
+ .fig{margin:3px 0}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:0.92">
+<svg class="defs" aria-hidden="true"><defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#111"/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="metlit.html">Metlit</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet 4</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 4</h1><p class="sub">TI5004 / Metodologi Penelitian dan Literasi Digital · Kerangka Teoritis</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan4.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet4.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; Peran tinjauan literatur</h2><div class="in">
+<ul><li>Saat perumusan masalah: studi literatur <b>menajamkan area masalah</b> jadi definisi jelas &amp; fokus. Setelah itu: <b>tinjauan literatur kritis</b> (lebih intensif)</li>
+<li><b>Literature review</b> = dokumentasi kajian komprehensif karya <b>published &amp; unpublished</b> dari <b>secondary sources</b> pada area minat peneliti</li>
+<li>Objective: kenalkan area riset &middot; identifikasi RQ spesifik &middot; telaah <i>state of the art</i> &middot; dasar kerangka teori &amp; hipotesis</li>
+<li>Hasil akhir: penjelasan kuat faktor / variabel yang mempengaruhi masalah &amp; hubungannya = <span class='hl'>kerangka teoritik (model konseptual)</span> &rarr; arah penyelesaian masalah</li>
+<li>Bentuk hasil: taksonomi persoalan, atau kerangka teoritik untuk kembangkan hipotesis</li></ul></div></section>
+<section class="box g2"><h2>2 &middot; Tujuan &amp; isi tinjauan kritis</h2><div class="in">
+<ul><li><b>Tujuan (sisi penulis):</b> tunjukkan paham latar belakang topik (riset relevan, perkembangan, penulis sebelumnya, kaitan antar riset, <b>kelemahan</b> riset / metoda sebelumnya) dan riset yang dijalankan <b>original</b></li>
+<li><b>Isi:</b> issue yang sudah &amp; harus dibahas; korelasi, <b>kontradiksi</b>, ketidakjelasan, <b>gap</b>, konflik; pendapat &amp; kapan ditulis; <b>key reviews &amp; key papers</b></li>
+<li>Pola: integrasikan &rarr; critical analysis hasil terdahulu &rarr; hubungkan antar konsep / teori &rarr; identifikasi isu utama</li></ul></div></section>
+<section class="box g3"><h2>3 &middot; Manfaat / kegunaan</h2><div class="in">
+<ol><li>Posisikan penelitian relatif ke pengetahuan yang ada</li><li><b>Hindari duplikasi</b> percuma</li><li>Perspektif khusus &amp; insight</li><li>Gagasan variabel penting baru</li><li>Terminologi &amp; definisi konsep</li><li>Argumen hubungan antar variabel</li><li><b>Testability &amp; replicability</b> lebih kuat</li><li>Temuan terkait temuan sebelumnya</li></ol>
+<p class='sm'>Juga: variabel penting tak terlewat; masalah lebih tepat; hindari <i>re-inventing the wheel</i>; masalah dianggap relevan oleh <i>scientific community</i>.</p></div></section>
+<section class="box g4"><h2>4 &middot; Sumber bacaan</h2><div class="in">
+<table class='t'><tr><th>Umum</th><th>Khusus</th></tr>
+<tr><td>teori &amp; konsep umum: <b>textbook, ensiklopedi, kamus</b></td><td>hal khusus dari penelitian khusus: jurnal, buletin penelitian, prosiding, thesis, disertasi</td></tr></table>
+<ul><li>Jenis review: self-study, context, historical, theoretical, methodological, integrative</li>
+<li>Laporan <b>unpublished</b>: skripsi S1, tesis S2, disertasi S3, makalah kelas, working paper / technical report. <b>Published</b>: journal paper, proceedings</li>
+<li>Khalayak: universitas &rarr; asosiasi &rarr; regional &rarr; nasional &rarr; internasional. <span class='hl'>Tertinggi = jurnal internasional</span></li>
+<li>Nilai informasi: jurnal terbaru &gt; textbook (lebih lama); TA / tesis belum terbit &lt; textbook / jurnal</li>
+<li><b>Recency:</b> konsep lama bisa dibantah, tapi tetap perlu untuk teori asli &amp; perkembangannya. <b>Relevansi:</b> sebanyak mungkin agar bisa dibandingkan</li>
+<li>Database: ScienceDirect, IEEE Explorer, Springer, ProQuest</li></ul>
+<div class='chips'><span class='chip y'>keywords</span><span class='chip y'>textbook / handbook</span><span class='chip y'>artikel jurnal terbaru</span><span class='chip y'>telusuri sitasi</span><span class='chip y'>proceeding, TA, tesis</span></div>
+<p class='sm'>Langkah: identifikasi sumber (bibliographic / abstract / full-text DB) &rarr; ekstrak (masalah, kerangka teori, variabel, metodologi, analisis data, hasil penting) &rarr; tulis.</p></div></section>
+<section class="box g1"><h2>5 &middot; Pengertian teori</h2><div class="in">
+<ul><li><b>Key (1999):</b> theory = <i>systematic attempt to understand what is observable in the world</i>; teori baik mengidentifikasi <b>variabel relevan &amp; hubungannya</b> sehingga <b>hipotesis teruji</b> bisa dibangkitkan</li>
+<li>Teori = <b>model</b> / <b>abstraksi</b> segmen dunia nyata yang terobservasi (pendekatan <b>rasional + empiris</b>); theory &asymp; theoretical model</li>
+<li><span class='hl'>Theory building = system modeling</span></li>
+<li><b>Model:</b> abstraksi realitas lewat karakteristik pentingnya; tunjukkan hubungan <b>sebab&ndash;akibat</b>, <b>tujuan&ndash;kendala</b>. Model matematik = simbol, operasi, terminologi matematik</li>
+<li>Tujuan teori: <b>Understanding</b> (interaksi antar komponen) &amp; <b>Prediction</b> (perkirakan nilai / perilaku unit; antisipasi kondisi sistem)</li>
+<li>Syarat ilmiah: konsisten dengan teori sebelumnya (<b>koherensi</b>) &amp; cocok fakta empiris (<b>korespondensi</b>)</li>
+<li>Struktur: <b>konsep</b> (ide berupa simbol / kata) &middot; <b>hubungan</b> antar konsep &middot; <b>lingkup (scope)</b></li></ul></div></section>
+<section class="box g2"><h2>6 &middot; Kerangka teoritik</h2><div class="in"><svg class='fig' viewBox='0 0 300 86' role='img' aria-label='Penyusunan kerangka teoritis'><rect x='4' y='4' width='70' height='22' fill='#fff' stroke='#111' stroke-width='2'/><text x='39.0' y='17.8' font-size='8' text-anchor='middle' font-weight="600">Wawancara</text><rect x='4' y='32' width='70' height='22' fill='#fff' stroke='#111' stroke-width='2'/><text x='39.0' y='45.8' font-size='8' text-anchor='middle' font-weight="600">Observasi</text><rect x='4' y='60' width='70' height='22' fill='#fff' stroke='#111' stroke-width='2'/><text x='39.0' y='73.8' font-size='8' text-anchor='middle' font-weight="600">Studi literatur</text><rect x='110' y='12' width='100' height='62' fill='#E6E0FF' stroke='#111' stroke-width='2'/><text x='160.0' y='27.2' font-size='7.4' text-anchor='middle' font-weight="600">Kerangka teoritis</text><text x='160.0' y='36.4' font-size='7.4' text-anchor='middle' font-weight="600">1 identifikasi</text><text x='160.0' y='45.6' font-size='7.4' text-anchor='middle' font-weight="600">variabel penelitian</text><text x='160.0' y='54.8' font-size='7.4' text-anchor='middle' font-weight="600">2 identifikasi jaringan</text><text x='160.0' y='64.0' font-size='7.4' text-anchor='middle' font-weight="600">hubungan antar variabel</text><rect x='244' y='24' width='52' height='38' fill='#FFE14D' stroke='#111' stroke-width='2'/><text x='270.0' y='36.4' font-size='7.4' text-anchor='middle' font-weight="600">Hipotesis</text><text x='270.0' y='45.6' font-size='7.4' text-anchor='middle' font-weight="600">yang dapat</text><text x='270.0' y='54.8' font-size='7.4' text-anchor='middle' font-weight="600">diuji</text><g fill='none' stroke='#111' stroke-width='2'><path d='M74 15H92V43H108' marker-end='url(#ah)'/><path d='M74 43H108' marker-end='url(#ah)'/><path d='M74 71H92V43' /><path d='M210 43H242' marker-end='url(#ah)'/></g></svg>
+<ul><li>= model konseptual yang jelaskan <b>hubungan antar faktor</b> penting pada masalah</li>
+<li>Kegunaan: rumuskan &amp; uji hubungan antar faktor (pahami dinamika situasi); rumuskan <b>hipotesis teruji</b> untuk tahu kerangka valid atau tidak</li>
+<li>Ciri baik: variabel penting diidentifikasi &amp; didiskusikan jelas &middot; jelaskan keterkaitan 2+ variabel &middot; <b>sifat &amp; arah</b> hubungan (positif / negatif) dari penelitian terdahulu &middot; ada argumen <b>mengapa</b> hubungan diharapkan &middot; divisualkan dalam skema / diagram</li>
+<li>Peran: <b>hubungkan penelitian dengan body of literature</b>; perspektif peneliti; strukturkan masalah; identifikasi faktor relevan &amp; hubungannya</li></ul></div></section>
+<section class="box g3"><h2>7 &middot; Jenis variabel</h2><div class="in">
+<p><b>Variabel</b> = sesuatu yang <b>nilainya berubah-ubah</b> (mis. jumlah produk, jumlah tenaga kerja, motivasi pegawai)</p>
+<table class='t'>
+<tr><td class='k'>Dependen</td><td>perhatian utama; tujuan: pahami mengapa bervariasi (dijelaskan, diprediksi, ditetapkan); bisa &gt; 1</td></tr>
+<tr><td class='k'>Independen</td><td>mempengaruhi VD</td></tr>
+<tr><td class='k'>Moderasi</td><td>pengaruh ketergantungan kuat pada hubungan VI&ndash;VD; <b>mengubah pola</b> hubungan; menentukan ada / tidaknya hubungan</td></tr>
+<tr><td class='k'>Mediasi (intervening)</td><td>gambarkan <b>proses bagaimana</b> VI mempengaruhi VD; tidak menambah penjelasan variasi VD</td></tr></table>
+<p><b>VI sah jika:</b> covary &middot; mendahului VD &middot; tak ada faktor lain penyebab variasi VD &middot; ada penjelasan logis (teoritis)</p><svg class='fig' viewBox='0 0 300 176' role='img' aria-label='Variabel independen, moderasi, mediasi'><text x='4' y='9' font-size='8' font-weight='600' style='fill:#5A3BE0'>Independen &rarr; dependen</text><rect x='4' y='14' width='96' height='22' fill='#C8F3EC' stroke='#111' stroke-width='2'/><text x='52.0' y='27.7' font-size='7.6' text-anchor='middle' font-weight="600">Besar dana promosi</text><rect x='204' y='14' width='92' height='22' fill='#FFE14D' stroke='#111' stroke-width='2'/><text x='250.0' y='27.7' font-size='7.6' text-anchor='middle' font-weight="600">Volume penjualan</text><path d='M100 25H202' stroke='#111' stroke-width='2' marker-end='url(#ah)'/><text x='52' y='46' font-size='7.2' text-anchor='middle'>VI</text><text x='250' y='46' font-size='7.2' text-anchor='middle'>VD</text><text x='4' y='60' font-size='8' font-weight='600' style='fill:#5A3BE0'>Moderasi (mengubah pola hubungan VI&ndash;VD)</text><rect x='104' y='66' width='92' height='20' fill='#FFB300' stroke='#111' stroke-width='2'/><text x='150.0' y='78.7' font-size='7.6' text-anchor='middle' font-weight="600">Minat operator</text><rect x='4' y='98' width='96' height='22' fill='#C8F3EC' stroke='#111' stroke-width='2'/><text x='52.0' y='111.7' font-size='7.6' text-anchor='middle' font-weight="600">Ketersediaan SOP</text><rect x='204' y='98' width='92' height='22' fill='#FFE14D' stroke='#111' stroke-width='2'/><text x='250.0' y='111.7' font-size='7.6' text-anchor='middle' font-weight="600">Jumlah reject</text><path d='M100 109H202' stroke='#111' stroke-width='2' marker-end='url(#ah)'/><path d='M150 86V107' stroke='#111' stroke-width='2' marker-end='url(#ah)'/><text x='4' y='134' font-size='8' font-weight='600' style='fill:#5A3BE0'>Mediasi (proses VI &rarr; VD)</text><rect x='4' y='140' width='84' height='26' fill='#C8F3EC' stroke='#111' stroke-width='2'/><text x='46.0' y='151.0' font-size='7.2' text-anchor='middle' font-weight="600">Keberagaman</text><text x='46.0' y='160.0' font-size='7.2' text-anchor='middle' font-weight="600">budaya kerja</text><rect x='108' y='140' width='84' height='26' fill='#FFB300' stroke='#111' stroke-width='2'/><text x='150.0' y='151.0' font-size='7.2' text-anchor='middle' font-weight="600">Sinergi &amp;</text><text x='150.0' y='160.0' font-size='7.2' text-anchor='middle' font-weight="600">kreativitas</text><rect x='212' y='140' width='84' height='26' fill='#FFE14D' stroke='#111' stroke-width='2'/><text x='254.0' y='151.0' font-size='7.2' text-anchor='middle' font-weight="600">Efektivitas</text><text x='254.0' y='160.0' font-size='7.2' text-anchor='middle' font-weight="600">organisasi</text><g stroke='#111' stroke-width='2'><path d='M88 153H106' marker-end='url(#ah)'/><path d='M192 153H210' marker-end='url(#ah)'/></g><g font-size='7.2' text-anchor='middle'><text x='46' y='174'>t1</text><text x='150' y='174'>t2</text><text x='254' y='174'>t3</text></g></svg>
+<p class='sm'>Keinginan maju: pengaruh mutu pelatihan hanya muncul pada keinginan maju tinggi &rarr; variabel moderasi.</p></div></section>
+<section class="box g4"><h2>8 &middot; Pemodelan matematik</h2><div class="in">
+<table class='t'><tr><th>Komponen model</th><th>Arti</th></tr>
+<tr><td>Var. dependen</td><td>outcomes / ukuran efektivitas</td></tr>
+<tr><td>Var. independen</td><td>alternatif = <b>decision variables</b></td></tr>
+<tr><td>Konstanta</td><td>nilai <b>tak berubah</b> terhadap waktu</td></tr>
+<tr><td>Parameter</td><td>nilai <b>berubah</b> menurut kondisi</td></tr>
+<tr><td>Hubungan antar variabel</td><td>persamaan, pertaksamaan</td></tr>
+<tr><td>Kendala</td><td>self impose, system impose</td></tr>
+<tr><td>Kriteria (tujuan)</td><td>ukuran keberhasilan: min cost, max profit</td></tr></table>
+<p class='sm'>Pengertian variabel &amp; parameter sama; beda pada jenis. Optimisasi: variabel keputusan, variabel input, parameter; hubungan: fungsi tujuan, kriteria performansi, pembatas.</p></div></section>
+<section class="box g1"><h2>9 &middot; Contoh: kompleksitas penjadwalan</h2><div class="in">
+<div class='f'>solusi mungkin = (n!)<sup>m</sup><small>n pekerjaan, m mesin. n=5, m=5 &rarr; 24.883.200.000 alternatif; naik eksponensial = masalah NP-hard</small></div>
+<p class='sm'>Faktor: jumlah &amp; jenis pekerjaan, jumlah mesin, sistem manufaktur (flow shop, jobshop, batch), kedatangan statik / dinamik &amp; deterministik / probabilistik, kriteria jamak yang konflik.</p></div></section>
+<section class="box g2"><h2>10 &middot; Etika penulisan</h2><div class="in">
+<table class='t'><tr><th>Misconduct</th><th>Arti</th></tr>
+<tr><td><b>Fabrication</b></td><td>membuat-buat data / hasil lalu melaporkannya</td></tr>
+<tr><td><b>Falsification</b></td><td>manipulasi material, alat, proses; hilangkan / ubah data</td></tr>
+<tr><td><b>Plagiarism</b></td><td>pakai ide, proses, hasil, kata orang lain tanpa pengakuan (Latin <i>plagiarus</i> = kidnapper)</td></tr></table>
+<table class='t'><tr><th>Quotation</th><th>Parafrase</th><th>Peringkasan</th></tr>
+<tr><td>kata demi kata, persis; seminimal mungkin; halaman asal, tanda kutip, nama &amp; tahun</td><td>tulis ulang dengan <b>kalimat sendiri</b></td><td>sarikan <b>inti</b> maksud penulis</td></tr></table>
+<p class='sm'>Kontrak implisit: isi asli dari penulis, yang bukan darinya dirujuk jelas. Gaya sitasi tugas akhir / tesis: <b>Harvard Style</b>. Semua variabel, parameter, hubungan harus berdasar literatur.</p></div></section>
+</main>
+<p class="foot">Dirangkum dari slide kuliah TI5004 (Materi 4). Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>

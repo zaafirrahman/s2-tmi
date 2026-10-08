@@ -29,10 +29,13 @@ h1,h2,h3{font-family:var(--disp);font-weight:var(--hw);margin:0}
 header.hd{position:relative;margin-bottom:34px}
 header.hd h1{font-size:clamp(44px,8.5vw,92px);line-height:.95;letter-spacing:-.01em}
 header.hd .sub{margin:12px 0 0;font-size:18px;color:var(--mut)}
-.stk{position:absolute;right:0;top:-8px;display:flex;gap:6px}
-.stk svg{width:80px;height:80px}
-.stk svg:nth-child(1){transform:rotate(-8deg)}.stk svg:nth-child(2){transform:rotate(6deg)}.stk svg:nth-child(3){transform:rotate(-3deg)}
-@media(max-width:900px){.stk{display:none}}
+.cs{position:absolute;top:2px;right:0;display:block;width:92px;text-decoration:none;transform:rotate(6deg);transition:transform .15s,filter .15s;filter:drop-shadow(4px 4px 0 var(--p))}
+.cs:hover{transform:rotate(2deg) translate(-2px,-2px) scale(1.06);filter:drop-shadow(6px 6px 0 var(--teal))}
+.cs svg{display:block;width:100%;height:auto}
+.cs:focus-visible{outline:3px solid var(--acc);outline-offset:4px}
+@media(max-width:900px){header.hd{padding-right:106px}}
+@media(max-width:640px){.cs{width:58px;top:0;filter:drop-shadow(3px 3px 0 var(--p))}header.hd{padding-right:66px}}
+@media(prefers-reduced-motion:reduce){.cs{transition:none}}
 
 /* surfaces */
 .card{background:#fff;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--p);padding:22px}
@@ -181,7 +184,7 @@ details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);fon
     <header class="hd">
       <h1>Materi 2</h1>
       <p class="sub">TI5004 / Metodologi Penelitian dan Literasi Digital · Proses Penelitian</p>
-      <div class="stk" aria-hidden="true"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><circle cx='44' cy='44' r='28' fill='#00C2A8' fill-opacity='.45'/><path d='M64 64L90 90' stroke-width='7'/><path d='M30 38C34 30 40 27 47 27' stroke-width='3'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M8 28Q28 20 50 30V84Q28 74 8 82Z' fill='#FFB300'/><path d='M92 28Q72 20 50 30V84Q72 74 92 82Z' fill='#6C4DF6' fill-opacity='.45'/><path d='M18 42Q30 38 40 44M18 54Q30 50 40 56' stroke-width='2.5'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M14 18H86Q92 18 92 24V62Q92 68 86 68H48L28 86V68H14Q8 68 8 62V24Q8 18 14 18Z' fill='#FFB300'/><text x='50' y='57' text-anchor='middle' font-family='Georgia,serif' font-size='46' font-weight='700' fill='#111' stroke='none'>?</text></svg></div>
+      <a class="cs" href="cheatsheet2.html" aria-label="Buka cheat sheet Materi 2" title="Cheat sheet Materi 2"><svg viewBox="0 0 90 112" aria-hidden="true"><path d="M5 4H66L85 23V108H5Z" fill="#fff" stroke="#111" stroke-width="4" stroke-linejoin="round"/><path d="M66 4V23H85" fill="#FFE14D" stroke="#111" stroke-width="4" stroke-linejoin="round"/><path d="M16 36H52M16 46H72" stroke="#111" stroke-width="3" stroke-linecap="round" opacity=".35"/><rect x="11" y="56" width="68" height="36" fill="#FFB300" stroke="#111" stroke-width="3" transform="rotate(-4 45 74)"/><text x="45" y="71" text-anchor="middle" font-family="Bricolage Grotesque,Arial Black,sans-serif" font-weight="800" font-size="15" fill="#111" transform="rotate(-4 45 74)">cheat</text><text x="45" y="87" text-anchor="middle" font-family="Bricolage Grotesque,Arial Black,sans-serif" font-weight="800" font-size="15" fill="#111" transform="rotate(-4 45 74)">sheet</text></svg></a>
     </header>
 
     <div class="card">
@@ -271,6 +274,7 @@ details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);fon
       <button class="btn" id="againWrong">Ulangi soal yang salah</button>
       <button class="btn ghost" id="againAll">Ulangi dengan pengaturan sama</button>
       <button class="btn ghost" id="toMenu">Ubah pengaturan</button>
+      <a class="btn ghost" href="cheatsheet2.html">Buka cheat sheet</a>
       <a class="btn ghost" href="metlit.html">Daftar materi</a>
     </div>
   </section>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 1 | Metlit Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBFAFF;--ink:#111;--mut:#4B4B4B;--acc:#5A3BE0;--p:#6C4DF6;--s:#FFB300;--y:#FFE14D;--teal:#00C2A8;--tint:#E6E0FF;--amb:#FFF0C2;--tt:#C8F3EC;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans','Liberation Sans',Arial,Helvetica,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(108,77,246,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(108,77,246,.14) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut)}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--p);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#fff}.box.g2{--g:var(--s);--gi:var(--ink)}.box.g3{--g:var(--y);--gi:var(--ink)}.box.g4{--g:var(--acc);--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600}
+.t td.c,.t th.c{text-align:center}
+.t td.k{background:var(--tint);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tt)}
+.chip.p{background:var(--tint)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.two>div{border:2px solid var(--ink);padding:4px 7px;font-size:12.4px;background:#fff}
+.two h3{margin:0 0 3px;font:800 14px var(--disp)}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--amb)}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8.5pt;margin:2px 0 0}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .two>div{font-size:7pt;padding:2px 4px;border-width:1px}.two h3{font-size:8pt}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt}
+ .fig{margin:3px 0}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:0.84">
+<svg class="defs" aria-hidden="true"><defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#111"/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="metlit.html">Metlit</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet 1</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 1</h1><p class="sub">TI5004 / Metodologi Penelitian dan Literasi Digital · Hakekat Penelitian</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan1.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet1.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; Definisi penelitian</h2><div class="in">
+<ul><li><b>Krishnaswamy (2006):</b> penyelidikan <span class='hl'>sistematik dan kritis</span> untuk memahami fenomena atau memecahkan masalah</li>
+<li><b>Sekaran &amp; Bougie (2013):</b> usaha sistematik &amp; terorganisasi menyelidiki masalah spesifik / fenomena. Jika jawaban sudah ada di literatur, <b>bukan penelitian</b></li>
+<li><b>Riset</b> = inquiry terorganisasi, sistematis, berbasis data, kritis, ilmiah. <b>Riset ilmiah</b> = langkah logis + metoda rigorous (identifikasi masalah, kumpulkan &amp; analisis data, simpulan valid)</li>
+<li>Dalam kerja: pendekatan penelitian memungkinkan solusi yang efektif; thesis = bentuk penelitian formal</li></ul></div></section>
+<section class="box g2"><h2>2 &middot; Basic vs applied</h2><div class="in">
+<table class='t'><tr><th></th><th>Basic (fundamental)</th><th>Applied</th></tr>
+<tr><td>Tujuan</td><td>memahami fenomena, bangun teori umum</td><td>memecahkan masalah tertentu saat ini</td></tr>
+<tr><td>Pemicu</td><td>curiosity</td><td>need / problem</td></tr>
+<tr><td>Hasil</td><td>theory / explanation</td><td>product / services / method</td></tr>
+<tr><td>Sifat</td><td>neutral, public domain</td><td>purposive, private domain</td></tr>
+<tr><td>Berlaku</td><td>umum</td><td>spesifik</td></tr>
+<tr><td>Sukses</td><td>publikasi jurnal; <b>norma absolut</b></td><td>berguna bagi keputusan sponsor; <b>norma sponsor</b></td></tr>
+<tr><td>Sebutan</td><td><b>Discovery</b></td><td><b>Invention</b></td></tr></table></div></section>
+<section class="box g3"><h2>3 &middot; Jenis penelitian (Kumar 2011)</h2><div class="in">
+<div class='chips'><span class='chip p'>Aplikasi: pure / applied</span><span class='chip p'>Tujuan: descriptive, correlational, explanatory, exploratory</span><span class='chip p'>Mode of enquiry: quantitative / qualitative</span></div>
+<table class='t'><tr><th>Jenis</th><th>Tema</th></tr>
+<tr><td><b>Descriptive</b></td><td>gambarkan secara sistematis situasi, masalah, fenomena, program</td></tr>
+<tr><td><b>Correlational</b></td><td>temukan / tetapkan ada tidaknya hubungan atau saling-ketergantungan</td></tr>
+<tr><td><b>Explanatory</b></td><td>jelaskan <b>mengapa &amp; bagaimana</b> hubungan terbentuk</td></tr>
+<tr><td><b>Exploratory</b></td><td>area yang belum banyak diketahui / uji kelayakan (feasibility, pilot study)</td></tr></table></div></section>
+<section class="box g4"><h2>4 &middot; Kuantitatif vs kualitatif</h2><div class="in">
+<table class='t'><tr><th></th><th>Kuantitatif</th><th>Kualitatif</th></tr>
+<tr><td>Filosofi</td><td>rasionalisme</td><td>empirisme (pengalaman indrawi)</td></tr>
+<tr><td>Pendekatan</td><td>terstruktur, kaku, predetermined</td><td>tak terstruktur, fleksibel, terbuka</td></tr>
+<tr><td>Tujuan</td><td>kuantifikasi variasi</td><td>deskripsi variasi</td></tr>
+<tr><td>Variabel</td><td>ukur / klasifikasi</td><td>deskripsi</td></tr>
+<tr><td>Sampel</td><td>besar</td><td>sedikit kasus</td></tr>
+<tr><td>Fokus</td><td>sempit, banyak responden</td><td>banyak isu, sedikit responden</td></tr>
+<tr><td>Nilai</td><td>reliability &amp; objectivity (value-free)</td><td>authenticity (tak klaim value-free)</td></tr>
+<tr><td>Topik</td><td>prevalence, extent; regularitas &amp; teori</td><td>pengalaman, makna, persepsi, perasaan</td></tr>
+<tr><td>Analisis</td><td>frekuensi, cross-tab, statistik</td><td>identifikasi tema</td></tr>
+<tr><td>Laporan</td><td>analitis, inferensi</td><td>deskriptif, naratif</td></tr></table></div></section>
+<section class="box g1"><h2>5 &middot; Ilmu &amp; metoda ilmiah</h2><div class="in">
+<ul><li><b>Ilmu</b> = pengetahuan tersusun konsisten, kebenarannya teruji empiris. <b>Pragmatisme:</b> hipotesis diterima selama tak ada fakta yang menolak; cari kebenaran yang bermanfaat, bukan absolut</li>
+<li><b>Metoda ilmiah</b> = prosedur sistematis mendapat ilmu; penelitian = <b>operasionalisasi</b> metoda ilmiah; karya ilmiah = demonstrasi argumen penalaran</li>
+<li>5 langkah: perumusan masalah &rarr; kerangka berpikir &rarr; hipotesis &rarr; pengujian &rarr; kesimpulan</li>
+<li>Berpikir: <b>speculative</b> (pengalaman, intuisi) vs <b>critical / analytical</b> (teliti, mendalam); ilmiah didominasi analytical</li>
+<li>Analytical: <b>redefinition</b> (istilah tepat, tak ambigu), <b>explication</b> (bahasa simbolik), <b>illustration</b> (arti sesuai penggunaan)</li></ul>
+<div class='f'>proporsi cacat = (item cacat / item total) &times; 100%<small>contoh explication</small></div></div></section>
+<section class="box g2"><h2>6 &middot; Deduktif vs induktif</h2><div class="in"><svg class='fig' viewBox='0 0 300 70' role='img' aria-label='Deduktif dan induktif'><g stroke='#111' stroke-width='2'><rect x='6' y='4' width='80' height='18' fill='#E6E0FF'/><rect x='6' y='48' width='80' height='18' fill='#C8F3EC'/><rect x='170' y='4' width='80' height='18' fill='#E6E0FF'/><rect x='170' y='48' width='80' height='18' fill='#C8F3EC'/></g><g font-size='7.8' text-anchor='middle' font-weight='600'><text x='46' y='16'>Teori umum</text><text x='46' y='60'>Kasus khusus</text><text x='210' y='16'>Teori umum</text><text x='210' y='60'>Kasus 1 ... n</text></g><g stroke='#111' stroke-width='2.2'><path d='M46 22V46' marker-end='url(#ah)'/><path d='M210 46V24' marker-end='url(#ah)'/></g><g font-size='7.6'><text x='54' y='31'>Deduktif</text><text x='54' y='41' style='fill:#5A3BE0'>koherensi</text><text x='218' y='31'>Induktif</text><text x='218' y='41' style='fill:#5A3BE0'>korespondensi</text></g></svg>
+<table class='t'><tr><th></th><th>Isi</th></tr>
+<tr><td class='k'>Deduktif</td><td>umum &rarr; khusus; <b>silogisme</b> (premis mayor, premis minor, kesimpulan); tepat jika premis benar &amp; kesimpulan valid; matematika; <b>hypothetico-deductive</b> (Popper): kerangka teoritis &rarr; hipotesis &rarr; deduksi; mode kuantitatif</td></tr>
+<tr><td class='k'>Induktif</td><td>khusus (banyak kasus individual) &rarr; umum; mulai dari data / fakta &rarr; hipotesis &amp; teori; mode kualitatif</td></tr>
+<tr><td class='k'>Gabungan</td><td><b>logico-hypothetico-verifikatif</b>: hipotesis dari induksi, diperiksa dengan deduksi</td></tr></table>
+<p class='sm'>Empirical science (fisika, biologi, sosial) &rarr; hypothetico-deductive; formal science (matematika) &rarr; metode aksiomatik.</p></div></section>
+<section class="box g3"><h2>7 &middot; Ciri riset &amp; alur penelitian ilmiah</h2><div class="in">
+<ul><li>Dimulai dari pertanyaan &middot; perlu rencana &middot; pertanyaan jelas &middot; selesaikan masalah utama lewat <b>subproblem</b> &middot; ikuti arahan hipotesis &middot; terkait fakta &amp; interpretasi &middot; <b>melingkar</b></li></ul>
+<div class='chips'><span class='chip y'>1 Deskripsi masalah</span><span class='chip y'>2 Kerangka teoritis</span><span class='chip y'>3 Hipotesis</span><span class='chip y'>4 Metodologi</span><span class='chip y'>5 Hasil</span><span class='chip y'>6 Kesimpulan &amp; saran</span></div>
+<p class='sm'>Deskripsi masalah: latar belakang, identifikasi, pembatasan, perumusan, tujuan, kegunaan. Rumusan baik = setengah jawaban.</p></div></section>
+<section class="box g4"><h2>8 &middot; 9 karakteristik penelitian</h2><div class="in">
+<table class='t'>
+<tr><td class='k'>Purposiveness</td><td>tujuan jelas, terfokus</td></tr>
+<tr><td class='k'>Rigor</td><td>cermat, teliti, konsisten; teori &amp; metodologi kokoh</td></tr>
+<tr><td class='k'>Testability</td><td>hipotesis dapat diuji secara logis dengan data</td></tr>
+<tr><td class='k'>Replicability</td><td>dapat diulang di situasi serupa</td></tr>
+<tr><td class='k'>Accuracy</td><td>tingkat kepercayaan</td></tr>
+<tr><td class='k'>Precision &amp; confidence</td><td>presisi = kedekatan dengan realitas (confidence interval); confidence = probabilitas estimasi benar (confidence level)</td></tr>
+<tr><td class='k'>Objectivity</td><td>simpulan dari analisis data, bukan emosi / opini</td></tr>
+<tr><td class='k'>Generalizability</td><td>lingkup keberlakuan; hasil terapan biasanya terbatas</td></tr>
+<tr><td class='k'>Parsimony</td><td>penjelasan sederhana lebih disukai</td></tr></table></div></section>
+<section class="box g1"><h2>9 &middot; Kesulitan &amp; norma absolut</h2><div class="in">
+<ul><li>Sulit 100% ilmiah (ukur hal subyektif: feelings, attitudes, perception); tak semua kriteria terpenuhi; sampel representatif sulit</li></ul>
+<table class='t'><tr><th colspan='2'>5 norma absolut</th></tr>
+<tr><td class='k'>Universalism</td><td>dinilai dari kaidah ilmiah, bukan individu / organisasi / negara; bukti bisa ditantang</td></tr>
+<tr><td class='k'>Organized skepticism</td><td>jangan terima gagasan baru tanpa pertimbangan kritis</td></tr>
+<tr><td class='k'>Disinterestedness</td><td>netral, terbuka, tak fanatik</td></tr>
+<tr><td class='k'>Communalism</td><td>pengetahuan milik bersama; metodologi dijelaskan rinci; diakui setelah dikaji &amp; dipublikasi</td></tr>
+<tr><td class='k'>Honesty</td><td>jujur di semua aspek</td></tr></table></div></section>
+<section class="box g2"><h2>10 &middot; Riset engineering &amp; sikap peneliti</h2><div class="in">
+<ul><li>Engineering = aplikasi sains pada sistem nyata untuk manfaat manusia; ikuti metode ilmiah, verifikasi independen oleh pakar lain</li>
+<li><b>Thiel (2014):</b> berlaku pada sistem manusia, practical outcomes, bermanfaat bagi kemanusiaan, berdasar etika, pertimbangkan lingkungan, uji berstandar industri</li>
+<li><b>Penelitian baik:</b> tujuan jelas &middot; proses rinci &middot; rancangan seksama &middot; batasan disampaikan jujur &middot; etika tinggi &middot; temuan jernih &middot; simpulan terjustifikasi</li>
+<li><b>Sikap peneliti:</b> berdasar fakta; cari teori yang tak terbantahkan; sadar bisa salah (simpulan sementara); terbuka kritik &amp; koreksi; bangun model dari teori yang diterima luas</li>
+<li>Thesis: mampu temukan masalah, susun metode, jalankan untuk dapat solusi, beri rencana implementasi</li></ul></div></section>
+<section class="box g3"><h2>11 &middot; Cone of science</h2><div class="in"><svg class='fig' viewBox='0 0 300 123' role='img' aria-label='Cone of science'><polygon points='33.0,3 47.0,3 49.5,16 30.5,16' fill='#FFB300' stroke='#111' stroke-width='1.4'/><text x='55.5' y='12.5' font-size='7'><tspan font-weight='600'>Create (technology)</tspan> &rarr; improve man's living</text><polygon points='30.5,16 49.5,16 52.0,29 28.0,29' fill='#FFB300' stroke='#111' stroke-width='1.4'/><text x='58.0' y='25.5' font-size='7'><tspan font-weight='600'>Control</tspan> &rarr; harness knowledge</text><polygon points='28.0,29 52.0,29 54.5,42 25.5,42' fill='#FFB300' stroke='#111' stroke-width='1.4'/><text x='60.5' y='38.5' font-size='7'><tspan font-weight='600'>Predict</tspan> &rarr; gain foreknowledge</text><polygon points='25.5,42 54.5,42 57.0,55 23.0,55' fill='#FFB300' stroke='#111' stroke-width='1.4'/><text x='63.0' y='51.5' font-size='7'><tspan font-weight='600'>Explain</tspan> &rarr; advance knowledge</text><polygon points='23.0,55 57.0,55 59.5,68 20.5,68' fill='#FFE14D' stroke='#111' stroke-width='1.4'/><text x='65.5' y='64.5' font-size='7'><tspan font-weight='600'>THEORY</tspan> &rarr; create new knowledge</text><polygon points='20.5,68 59.5,68 62.0,81 18.0,81' fill='#E6E0FF' stroke='#111' stroke-width='1.4'/><text x='68.0' y='77.5' font-size='7'><tspan font-weight='600'>Validate, verify</tspan> &rarr; dengan data</text><polygon points='18.0,81 62.0,81 64.5,94 15.5,94' fill='#E6E0FF' stroke='#111' stroke-width='1.4'/><text x='70.5' y='90.5' font-size='7'><tspan font-weight='600'>Formulate, propose</tspan> &rarr; hipotesis, model, prinsip</text><polygon points='15.5,94 64.5,94 67.0,107 13.0,107' fill='#C8F3EC' stroke='#111' stroke-width='1.4'/><text x='73.0' y='103.5' font-size='7'><tspan font-weight='600'>Enquire critically, think creatively</tspan> &rarr; konsep / construct</text><polygon points='13.0,107 67.0,107 69.5,120 10.5,120' fill='#C8F3EC' stroke='#111' stroke-width='1.4'/><text x='75.5' y='116.5' font-size='7'><tspan font-weight='600'>Study, observe</tspan> &rarr; fenomena, pengetahuan lampau</text></svg></div></section>
+<section class="box g4"><h2>12 &middot; Filsafat ilmu</h2><div class="in">
+<table class='t'><tr><th>Cabang</th><th>Tanya</th><th>Isi</th></tr>
+<tr><td><b>Ontologi</b></td><td>apa yang dikaji</td><td>hakikat objek; ilmu pilih probabilitas; asumsi</td></tr>
+<tr><td><b>Epistemologi</b></td><td>bagaimana mendapat ilmu</td><td>metoda ilmiah &amp; penulisan ilmiah</td></tr>
+<tr><td><b>Aksiologi</b></td><td>untuk apa ilmu</td><td>ilmu &amp; moral, tanggung jawab ilmuwan</td></tr></table>
+<table class='t'><tr><th>Kriteria kebenaran</th><th>Arti</th></tr>
+<tr><td>Religi</td><td>kebenaran ilahiyah, landasan iman</td></tr>
+<tr><td>Pragmatis</td><td>terbukti empiris / berguna praktis</td></tr>
+<tr><td>Korespondensi</td><td>sesuai objek faktual</td></tr>
+<tr><td>Koherensi</td><td>konsisten dengan pernyataan benar sebelumnya (matematika: aksioma &rarr; teorema)</td></tr></table>
+<ul><li>Sumber pengetahuan: wahyu &middot; intuisi &middot; fakta (induktif / empiricism) &middot; rasio (deduktif / rationalism)</li>
+<li>Berpikir filsafat: <b>menyeluruh</b>, <b>fundamental</b> (skeptis), <b>spekulatif</b> (pilih yang andal)</li>
+<li>Sarana berpikir ilmiah: bahasa, penalaran, matematika (deduktif) &amp; statistika (induktif, uji hipotesis)</li>
+<li>Asumsi: Newton (zat, gerak, ruang, waktu mutlak) vs Einstein (relatif, E=mc<sup>2</sup>). Syarat: relevan &amp; operasional, dari keadaan <i>sebagaimana adanya</i>, konsisten &amp; eksplisit</li>
+<li>Asumsi LP: divisibility, proportionality, additivity, certainty, non-negative</li>
+<li>Batas ilmu: terbatas pengalaman yang dapat dibuktikan; benar / salah, bukan baik / buruk; spesialisasi</li></ul></div></section>
+<section class="box g1"><h2>13 &middot; Evaluasi alat ukur</h2><div class="in"><svg class='fig' viewBox='0 0 300 84' role='img' aria-label='Valid dan reliable'><circle cx='50' cy='33' r='26' fill='#fff' stroke='#111' stroke-width='1.4'/><circle cx='50' cy='33' r='17' fill='#E6E0FF' stroke='#111' stroke-width='1.4'/><circle cx='50' cy='33' r='8' fill='#FFE14D' stroke='#111' stroke-width='1.4'/><circle cx='62' cy='38' r='2.3' fill='#111'/><circle cx='64' cy='36' r='2.3' fill='#111'/><circle cx='60' cy='39' r='2.3' fill='#111'/><circle cx='63' cy='40' r='2.3' fill='#111'/><text x='50' y='77' font-size='8' text-anchor='middle' font-weight='600'>Reliable, tidak valid</text><circle cx='150' cy='33' r='26' fill='#fff' stroke='#111' stroke-width='1.4'/><circle cx='150' cy='33' r='17' fill='#E6E0FF' stroke='#111' stroke-width='1.4'/><circle cx='150' cy='33' r='8' fill='#FFE14D' stroke='#111' stroke-width='1.4'/><circle cx='132' cy='28' r='2.3' fill='#111'/><circle cx='166' cy='34' r='2.3' fill='#111'/><circle cx='140' cy='56' r='2.3' fill='#111'/><circle cx='158' cy='50' r='2.3' fill='#111'/><text x='150' y='77' font-size='8' text-anchor='middle' font-weight='600'>Valid, tidak reliable</text><circle cx='250' cy='33' r='26' fill='#fff' stroke='#111' stroke-width='1.4'/><circle cx='250' cy='33' r='17' fill='#E6E0FF' stroke='#111' stroke-width='1.4'/><circle cx='250' cy='33' r='8' fill='#FFE14D' stroke='#111' stroke-width='1.4'/><circle cx='250' cy='32' r='2.3' fill='#111'/><circle cx='252' cy='34' r='2.3' fill='#111'/><circle cx='249' cy='33' r='2.3' fill='#111'/><circle cx='251' cy='31' r='2.3' fill='#111'/><text x='250' y='77' font-size='8' text-anchor='middle' font-weight='600'>Valid &amp; reliable</text></svg><p class='sm'>Valid = mengukur konsep yang ingin diukur. Reliable = konsisten / andal.</p></div></section>
+<section class="box g2"><h2>14 &middot; 5 tingkat AI</h2><div class="in">
+<div class='chips'><span class='chip p'>1 LLM</span><span class='chip p'>2 Agentic</span><span class='chip p'>3 Multi agent</span><span class='chip p'>4 AGI</span><span class='chip p'>5 ASI</span></div>
+<p class='sm'>LLM: pahami &amp; hasilkan teks (ChatGPT, Gemini, Claude). Agentic: rencanakan &amp; jalankan tugas mandiri. Multi agent: beberapa agen terspesialisasi bekerja sama. AGI: kognitif setara / melampaui manusia. ASI: jauh melampaui manusia tercerdas.</p></div></section>
+</main>
+<p class="foot">Dirangkum dari slide kuliah TI5004 (Materi 1). Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>
