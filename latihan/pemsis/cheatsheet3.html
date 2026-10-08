@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 3 | Pemsis Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F8FCF8;--ink:#111;--mut:#4B4B4B;--acc:#0B7F43;--p:#12A35B;--s:#FF5C9E;--y:#FFE14D;--tint:#D4F1DF;--pink:#FFDDEB;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(18,163,91,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(18,163,91,.15) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut)}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--p);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#fff}.box.g2{--g:var(--s);--gi:var(--ink)}.box.g3{--g:var(--y);--gi:var(--ink)}.box.g4{--g:var(--acc);--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600}
+.t td.c,.t th.c{text-align:center}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tint)}
+.chip.p{background:var(--pink)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.two>div{border:2px solid var(--ink);padding:4px 7px;font-size:12.4px;background:#fff}
+.two h3{margin:0 0 3px;font:800 14px var(--disp)}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--pink)}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+/* cetak / PDF */
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8.5pt;margin:2px 0 0}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .two>div{font-size:7pt;padding:2px 4px;border-width:1px}.two h3{font-size:8pt}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt}
+ .fig{margin:3px 0}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:1.03">
+<svg class='defs' aria-hidden='true'><defs><marker id='ah' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#111'/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="pemsis.html">Pemsis</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet Materi 3</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 3</h1><p class="sub">TI5003 / Pemodelan dan Berpikir Sistem &middot; Problem Formulation &amp; SSM</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan3.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet3.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; Hard vs Soft thinking</h2><div class="in"><table class='t'><tr><th></th><th>Hard</th><th>Soft</th></tr>
+ <tr><td>Fokus</td><td>OPTIMIZING</td><td>LEARNING</td></tr>
+ <tr><td>Masalah</td><td>well structured, terdefinisi</td><td>unstructured, &lsquo;messy&rsquo;</td></tr>
+ <tr><td>Realitas</td><td>objektif</td><td>stakeholders menafsirkan beda</td></tr>
+ <tr><td>Penekanan</td><td>faktor teknis</td><td>faktor manusia</td></tr>
+ <tr><td>Luaran</td><td>solusi ideal</td><td>pemahaman &amp; pembelajaran</td></tr>
+ <tr><td>Metode</td><td>OR, System Eng., System Analysis, System Dynamics</td><td>PSM: SSM Checkland, SODA Eden, Strategic Choice</td></tr>
+ <tr><td>Keputusan</td><td><b>operasional</b></td><td><b>strategis</b></td></tr></table></div></section>
+<section class="box g2"><h2>2 &middot; Sifat PSM</h2><div class="in"><ol><li>Menstrukturkan isu, bukan pemecahan masalah sempit</li><li>Memfasilitasi dialog stakeholders &rarr; <i>shared perception</i></li>
+ <li><span class='hl'>What dulu, baru How</span></li><li>Resolusi dimunculkan dari stakeholders sendiri</li><li>Analis = <b>fasilitator &amp; resource person</b></li></ol>
+ <p class='sm'>Urutan What: hakikat isu &rarr; tujuan (world views) &rarr; definisi sistem &rarr; perubahan desirable &amp; feasible &rarr; (How) cara mewujudkan.</p></div></section>
+<section class="box g3"><h2>3 &middot; Symptom, Problem, Cause</h2><div class="in"><svg class='fig' viewBox='0 0 300 160' role='img' aria-label='Symptom problem cause'>
+<ellipse cx='110' cy='38' rx='100' ry='32' fill='#12A35B' stroke='#111' stroke-width='2.5'/>
+<text x='110' y='35' font-size='11' text-anchor='middle' font-weight='700' style='fill:#fff'>SYMPTOM</text>
+<text x='110' y='48' font-size='8' text-anchor='middle' style='fill:#fff'>apa yang tampak (pegal, lemas)</text>
+<rect x='100' y='68' width='20' height='34' fill='#B5651D' stroke='#111' stroke-width='2'/>
+<path d='M4 102H216' stroke='#111' stroke-width='2.5'/>
+<g stroke='#111' stroke-width='2.4' fill='none'><path d='M110 102V122M110 108L80 130M110 108L140 130M110 112L52 138M110 112L170 138'/></g>
+<text x='132' y='88' font-size='9.5' font-weight='700'>PROBLEM</text>
+<text x='132' y='99' font-size='8'>apa yang terjadi</text>
+<text x='226' y='62' font-size='8.5'>gap dari tujuan</text><text x='226' y='73' font-size='8.5'>atau standar</text><text x='226' y='84' font-size='8.5'>(demam)</text>
+<path d='M222 70H122' stroke='#111' stroke-width='1.2' stroke-dasharray='3 3' marker-end='url(#ah)'/>
+<text x='110' y='154' font-size='9.5' text-anchor='middle' font-weight='700'>CAUSES: mengapa terjadi (infeksi)</text>
+</svg><p><b>Problem situation</b> = konteks agregat semua aspek: people, world views, goals, relationships, resources, processes, structures, conflicts, uncertainties, actions-reactions, controls &rarr; consequences.</p></div></section>
+<section class="box g4"><h2>4 &middot; Siapa pemilik masalah?</h2><div class="in"><p>Problem owner (biasanya decision maker):</p><ul><li><b>dissatisfied</b> dengan keadaan / punya target</li><li><b>capable of judging</b> tujuan sudah tercapai</li><li><b>has control</b> atas sebagian aspek situasi</li></ul>
+ <p class='sm'>Tak puas tapi tak punya kendali &rarr; bukan problem owner.</p>
+ <table class='t'><tr><th>Peran</th><th>Inti</th></tr>
+ <tr><td>Owner</td><td>kendali pilihan tindakan</td></tr>
+ <tr><td>User</td><td>menjalankan keputusan, tak berwenang mengubah</td></tr>
+ <tr><td>Customer</td><td>penerima manfaat / korban konsekuensi</td></tr>
+ <tr><td>Analyst</td><td>menganalisis &amp; menyusun solusi untuk disetujui owner</td></tr></table></div></section>
+<section class="box g1"><h2>5 &middot; 6 elemen masalah</h2><div class="in"><svg class='fig' viewBox='0 0 300 140' role='img' aria-label='Enam elemen masalah'>
+<rect x='96' y='52' width='78' height='42' fill='#D4F1DF' stroke='#111' stroke-width='2.8'/><text x='135' y='77' font-size='11' text-anchor='middle' font-weight='700'>SISTEM</text>
+<path d='M135 8V52' stroke='#111' stroke-width='2.6' marker-end='url(#ah)'/><text x='139' y='20' font-size='8.5' font-weight='600'>5 Control inputs</text><text x='139' y='30' font-size='7.5'>(terkendali)</text>
+<path d='M4 73H96' stroke='#111' stroke-width='2.6' marker-end='url(#ah)'/><text x='4' y='62' font-size='8.5' font-weight='600'>6 Context</text><text x='4' y='94' font-size='7.5'>(tak terkendali)</text>
+<path d='M174 73H206' stroke='#111' stroke-width='2.6' marker-end='url(#ah)'/><text x='148' y='108' font-size='8.5' font-weight='600'>4 Performance measure</text><text x='156' y='118' font-size='7.5'>(output variable)</text>
+<rect x='208' y='52' width='88' height='42' fill='#FFE14D' stroke='#111' stroke-width='2.2'/><text x='252' y='68' font-size='8.5' text-anchor='middle' font-weight='600'>2 Objective</text><text x='252' y='80' font-size='8.5' text-anchor='middle' font-weight='600'>3 Criterion</text><text x='252' y='90' font-size='7' text-anchor='middle'>(objective function)</text>
+<circle cx='62' cy='24' r='9' fill='#FF5C9E' stroke='#111' stroke-width='2'/><text x='76' y='20' font-size='8.5' font-weight='600'>1 Decision</text><text x='76' y='30' font-size='8.5' font-weight='600'>maker</text>
+</svg><ul><li><b>Decision criterion</b> = aturan memilih (mis. minimasi biaya total, feasible)</li><li><b>Performance measure</b> = nilai output (mis. total biaya Rp)</li>
+ <li><b>Control input</b> = variabel keputusan (LP: jumlah produk A, B, C)</li><li><b>Context</b> = kendala (LP: permintaan, kapasitas, harga bahan baku, regulasi)</li></ul>
+ <p class='sm'>Kasus LOD: DM = LOD Manager; control = ukuran batch &amp; cutoff order besar/kecil; context = operasi LOD &amp; refinery.</p></div></section>
+<section class="box g2"><h2>6 &middot; Sistem S, M, O</h2><div class="in"><svg class='fig' viewBox='0 0 300 64' role='img' aria-label='Sistem S M O'>
+<rect x='3' y='8' width='86' height='46' fill='#D4F1DF' stroke='#111' stroke-width='2.4'/><text x='46' y='28' font-size='9' text-anchor='middle' font-weight='700'>S</text><text x='46' y='41' font-size='7.8' text-anchor='middle'>sistem yg diminati</text>
+<path d='M89 31H106' stroke='#111' stroke-width='2' marker-end='url(#ah)'/>
+<rect x='107' y='8' width='86' height='46' fill='#FFE14D' stroke='#111' stroke-width='2.4'/><text x='150' y='28' font-size='9' text-anchor='middle' font-weight='700'>M</text><text x='150' y='41' font-size='7.8' text-anchor='middle'>model matematik S</text>
+<path d='M193 31H210' stroke='#111' stroke-width='2' marker-end='url(#ah)'/>
+<rect x='211' y='8' width='86' height='46' fill='#FFDDEB' stroke='#111' stroke-width='2.4'/><text x='254' y='28' font-size='9' text-anchor='middle' font-weight='700'>O</text><text x='254' y='41' font-size='7.8' text-anchor='middle'>solusi lebih baik</text>
+</svg><p class='sm'>S: sistem yang diminati &middot; M: model matematik dari S (uji rencana &amp; dampak perubahan input) &middot; O: pakai M sebagai input &rarr; <i>improved solution</i>.</p></div></section>
+<section class="box g3"><h2>7 &middot; Merangkum situasi</h2><div class="in"><table class='t'><tr><th>Alat</th><th>Inti</th></tr>
+ <tr><td>Mind map</td><td>visualisasi pikiran tentang isu: aspek, tujuan, ketakutan, aksi-reaksi</td></tr>
+ <tr><td>Cognitive map</td><td>Eden (1983) dari Kelly; <b>persepsi subjektif 1 individu</b>; konstruk &ldquo;A &hellip; kontras&rdquo; + panah arah</td></tr>
+ <tr><td>Rich picture</td><td>kartun (Checkland); <b>tak pernah selesai</b>; bukan deskripsi sistem, tapi situasi problematik</td></tr></table>
+ <ul><li><b>Hard facts:</b> struktur fisik, proses, data, statistik</li><li><b>Soft facts:</b> opini, gosip, hubungan, kekuasaan, perceived agenda (&ldquo;iklim&rdquo;)</li>
+ <li>RPD memuat <b>Structure</b> (lambat berubah), <b>Process</b> (aliran), <b>Concerns</b> (thought bubble)</li>
+ <li class='hl'>Salah: RPD dipaksa jadi flow chart / aliran material / precedence</li></ul></div></section>
+<section class="box g4"><h2>8 &middot; Tujuh langkah SSM</h2><div class="in"><svg class='fig' viewBox='0 0 300 196' role='img' aria-label='Tujuh langkah SSM'>
+<rect x='6' y='10' width='88' height='42' fill='#fff' stroke='#111' stroke-width='2.2'/><text x='50' y='27' font-size='8.5' text-anchor='middle' font-weight='700'>1 Situasi</text><text x='50' y='39' font-size='8' text-anchor='middle'>problematik</text>
+<path d='M94 31H104' stroke='#111' stroke-width='2' marker-end='url(#ah)'/>
+<rect x='106' y='10' width='88' height='42' fill='#fff' stroke='#111' stroke-width='2.2'/><text x='150' y='27' font-size='8.5' text-anchor='middle' font-weight='700'>2 Gambarkan</text><text x='150' y='39' font-size='8' text-anchor='middle'>(rich picture)</text>
+<text x='204' y='28' font-size='8.5' font-weight='700' style='fill:#0B7F43'>REAL WORLD</text>
+<path d='M6 70H294' stroke='#111' stroke-width='1.4' stroke-dasharray='5 4'/>
+<path d='M150 52V61H50V78' fill='none' stroke='#111' stroke-width='2' marker-end='url(#ah)'/>
+<rect x='6' y='78' width='88' height='42' fill='#D4F1DF' stroke='#111' stroke-width='2.2'/><text x='50' y='95' font-size='8.5' text-anchor='middle' font-weight='700'>3 Root</text><text x='50' y='107' font-size='8' text-anchor='middle'>definition (CATWOE)</text>
+<path d='M94 99H104' stroke='#111' stroke-width='2' marker-end='url(#ah)'/>
+<rect x='106' y='78' width='88' height='42' fill='#D4F1DF' stroke='#111' stroke-width='2.2'/><text x='150' y='95' font-size='8.5' text-anchor='middle' font-weight='700'>4 Model</text><text x='150' y='107' font-size='8' text-anchor='middle'>konseptual</text>
+<text x='204' y='92' font-size='8.5' font-weight='700' style='fill:#0B7F43'>SYSTEMS</text><text x='204' y='103' font-size='8.5' font-weight='700' style='fill:#0B7F43'>THINKING</text>
+<path d='M6 138H294' stroke='#111' stroke-width='1.4' stroke-dasharray='5 4'/>
+<path d='M150 120V129H50V146' fill='none' stroke='#111' stroke-width='2' marker-end='url(#ah)'/>
+<rect x='6' y='146' width='88' height='42' fill='#fff' stroke='#111' stroke-width='2.2'/><text x='50' y='163' font-size='8.5' text-anchor='middle' font-weight='700'>5 Komparasi</text><text x='50' y='175' font-size='8' text-anchor='middle'>model vs dunia nyata</text>
+<path d='M94 167H104' stroke='#111' stroke-width='2' marker-end='url(#ah)'/>
+<rect x='106' y='146' width='88' height='42' fill='#fff' stroke='#111' stroke-width='2.2'/><text x='150' y='163' font-size='8.5' text-anchor='middle' font-weight='700'>6 Perubahan</text><text x='150' y='175' font-size='7.6' text-anchor='middle'>desirable &amp; feasible</text>
+<path d='M194 167H204' stroke='#111' stroke-width='2' marker-end='url(#ah)'/>
+<rect x='206' y='146' width='88' height='42' fill='#FFE14D' stroke='#111' stroke-width='2.2'/><text x='250' y='163' font-size='8.5' text-anchor='middle' font-weight='700'>7 Aksi</text><text x='250' y='175' font-size='8' text-anchor='middle'>perbaiki situasi</text>
+<path d='M250 146V132H282V40H196' fill='none' stroke='#FF5C9E' stroke-width='1.8' stroke-dasharray='4 3' marker-end='url(#ah)'/>
+<text x='262' y='128' font-size='7.5' style='fill:#B3124F'>iterasi</text>
+</svg><ul><li>SSM = proses inkuiri, <b>learning</b> bukan optimizing, situation-oriented</li><li>Inti: bandingkan <b>dunia apa adanya</b> dengan <b>model dunia yang mungkin</b></li>
+ <li><b>Holon</b> = keseluruhan abstrak yg dikonstruksi; SSM memakai <i>human activity system</i></li></ul></div></section>
+<section class="box g1"><h2>9 &middot; CATWOE &amp; root definition</h2><div class="in"><table class='t'><tr><th class='c'>C</th><td><b>Customer</b>: penerima dampak transformasi</td></tr>
+ <tr><th class='c'>A</th><td><b>Actor</b>: pelaku transformasi</td></tr><tr><th class='c'>T</th><td><b>Transformation</b>: input &rarr; output</td></tr>
+ <tr><th class='c'>W</th><td><b>Weltanschauung</b>: sudut pandang pemberi makna</td></tr>
+ <tr><th class='c'>O</th><td><b>Owner</b>: otoritas tertinggi, bisa meniadakan sistem</td></tr>
+ <tr><th class='c'>E</th><td><b>Environment</b>: dari luar, memengaruhi tapi tak dikendalikan</td></tr></table>
+ <div class='f'>A system to do X by Y to achieve Z</div>
+ <p class='sm'>Root definition: issue-based, primary-task based, atau campuran. Satu situasi bisa punya beberapa RD (beda tema/sudut pandang).</p></div></section>
+<section class="box g2"><h2>10 &middot; L4 model konseptual</h2><div class="in"><ol><li>Tulis aktivitas transformasi, <b>kata kerja imperatif</b>, <span class='hl'>7 &plusmn; 2</span> aktivitas, skala sama</li><li>Pilih yang bisa paralel</li><li>Tempatkan pada garis, tunjukkan <b>ketergantungan</b></li>
+ <li>Susun ulang agar panah tak bersilang; tambah ukuran kinerja &amp; lingkungan (CATWOE)</li><li>Cek 9 karakteristik sistem</li></ol>
+ <div class='chips'><span class='chip'>tujuan berkelanjutan</span><span class='chip'>ukuran kinerja</span><span class='chip'>pengambilan keputusan</span><span class='chip'>subsistem</span><span class='chip'>komponen berinteraksi</span><span class='chip'>lingkungan</span><span class='chip'>batas</span><span class='chip'>sumber daya</span><span class='chip'>kontinuitas</span></div></div></section>
+<section class="box g3"><h2>11 &middot; L5 &ndash; L7: kembali ke dunia nyata</h2><div class="in"><table class='t'><tr><th>Aktivitas model</th><th>Ada di nyata?</th><th>Bagaimana</th><th>Kriteria</th><th>Ide ubah</th></tr><tr><td class='c'>1 &hellip;</td><td></td><td></td><td></td><td></td></tr></table>
+ <ul><li><b>L5:</b> komparasi; paling umum = pertanyaan terstruktur dengan <b>matriks</b> (di atas)</li>
+ <li><b>L6:</b> perubahan <i>systemically desirable</i> &amp; <i>culturally feasible</i>; evaluasi kelayakan:
+ CATWOE/perspektif/skala lain, analisis <b>owner</b> (siapa berotoritas), <b>sistem sosial</b> (peran, norma, nilai), <b>politikal</b> (kekuasaan)</li>
+ <li><b>L7:</b> aksi; akhir satu siklus atau awal siklus baru; terkait manajemen perubahan</li></ul></div></section>
+<section class="box g4"><h2>12 &middot; Kapan SSM? Pro &amp; kontra</h2><div class="in"><p><b>Cocok</b> bila tujuan tak tunggal; sudut pandang, asumsi, logika, stakeholders beda; situasi membingungkan.</p>
+ <ul><li><b>Kritik:</b> tak punya metode riel membangun sistem; open-ended &rarr; sukar dikelola</li>
+ <li>Asumsi semua orang setara &rarr; abaikan <b>kekuasaan</b> atasan; risiko <b>manipulasi konsultan</b></li>
+ <li>Terlalu idealis / &ldquo;niceness&rdquo; (cocok akademisi, bukan manajer)</li>
+ <li><b>Pencegahan:</b> reviewer / evaluator independen (internal atau eksternal)</li></ul></div></section>
+
+</main>
+<p class="foot">Dirangkum dari slide kuliah TI5003. Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>

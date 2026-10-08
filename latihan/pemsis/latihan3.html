@@ -171,6 +171,13 @@ details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);fon
 svg.defs{position:absolute;width:0;height:0}
 .stk svg{width:90px;height:90px}
 
+
+.cs{position:absolute;top:2px;right:0;display:block;width:92px;text-decoration:none;transform:rotate(6deg);transition:transform .15s,filter .15s;filter:drop-shadow(4px 4px 0 var(--teal))}
+.cs:hover{transform:rotate(2deg) translate(-2px,-2px) scale(1.06);filter:drop-shadow(6px 6px 0 var(--red))}
+.cs svg{display:block;width:100%;height:auto}
+.cs:focus-visible{outline:3px solid var(--acc);outline-offset:4px}
+@media(max-width:640px){.cs{width:58px;top:0;filter:drop-shadow(3px 3px 0 var(--teal))}header.hd{padding-right:66px}}
+@media(prefers-reduced-motion:reduce){.cs{transition:none}}
 </style>
 </head>
 <body>
@@ -183,7 +190,7 @@ svg.defs{position:absolute;width:0;height:0}
     <header class="hd">
       <h1>Materi 3</h1>
       <p class="sub">TI5003 / Pemodelan dan Berpikir Sistem &middot; Problem Formulation SSM</p>
-      <div class="stk" aria-hidden="true"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M26 76C6 76 4 48 26 46C26 26 54 20 64 38C84 30 98 50 84 64C96 72 88 76 78 76Z' fill='#FFD93D' fill-opacity='.7'/><text x='50' y='67' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='#111' stroke='none'>?</text></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M50 14A36 36 0 0 1 86 50' stroke-width='5' marker-end='url(#ah)'/><path d='M50 86A36 36 0 0 1 14 50' stroke-width='5' marker-end='url(#ah)'/><circle cx='50' cy='50' r='15' fill='#FF5C9E' stroke-width='3'/><text x='50' y='58' text-anchor='middle' font-family='Georgia,serif' font-size='22' font-weight='700' fill='#111' stroke='none'>R</text></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='34' width='22' height='32' fill='#FFD93D' stroke-width='3'/><rect x='38' y='22' width='26' height='56' fill='#12A35B' stroke-width='3'/><rect x='77' y='34' width='20' height='32' fill='#FF5C9E' stroke-width='3'/><path d='M25 50H36M64 50H75' stroke-width='3' marker-end='url(#ah)'/></svg></div>
+      <a class="cs" href="cheatsheet3.html" aria-label="Buka cheat sheet Materi 3" title="Cheat sheet Materi 3"><svg viewBox="0 0 90 112" aria-hidden="true"><path d="M5 4H66L85 23V108H5Z" fill="#fff" stroke="#111" stroke-width="4" stroke-linejoin="round"/><path d="M66 4V23H85" fill="#FFE14D" stroke="#111" stroke-width="4" stroke-linejoin="round"/><path d="M16 36H52M16 46H72" stroke="#111" stroke-width="3" stroke-linecap="round" opacity=".35"/><rect x="11" y="56" width="68" height="36" fill="#FF5C9E" stroke="#111" stroke-width="3" transform="rotate(-4 45 74)"/><text x="45" y="71" text-anchor="middle" font-family="Bricolage Grotesque,Arial Black,sans-serif" font-weight="800" font-size="15" fill="#111" transform="rotate(-4 45 74)">cheat</text><text x="45" y="87" text-anchor="middle" font-family="Bricolage Grotesque,Arial Black,sans-serif" font-weight="800" font-size="15" fill="#111" transform="rotate(-4 45 74)">sheet</text></svg></a>
     </header>
 
     <div class="card">
@@ -275,6 +282,7 @@ svg.defs{position:absolute;width:0;height:0}
       <button class="btn" id="againWrong">Ulangi soal yang salah</button>
       <button class="btn ghost" id="againAll">Ulangi dengan pengaturan sama</button>
       <button class="btn ghost" id="toMenu">Ubah pengaturan</button>
+      <a class="btn ghost" href="cheatsheet3.html">Buka cheat sheet</a>
       <a class="btn ghost" href="pemsis.html">Daftar materi</a>
     </div>
   </section>

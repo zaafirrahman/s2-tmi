@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latihan UTS Optim Paket 3 (Hard) | EZ Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F8FAFF;--ink:#111;--mut:#4B4B4B;--acc:#2448D8;--p:#2F5BFF;--s:#FF8A1F;--seltint:#DCE5FF;--red:#FF4B3E;--teal:#12A594;--yel:#FFE14D;--oktint:#CDEFE9;--badtint:#FFDAD6;--okink:#0B6F62;--badink:#B3261B;--line:#D8D8D0;--disp:'Bricolage Grotesque',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;--hw:800}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background-color:var(--bg);color:var(--ink);font:400 16px/1.5 var(--body);padding:32px clamp(16px,5vw,64px) 56px;overflow-x:hidden;background-image:linear-gradient(rgba(47,91,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(47,91,255,.13) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:900px;margin:0 auto}
+.hidden{display:none!important}
+.defs{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+button{font:inherit;color:inherit;cursor:pointer;border-radius:0}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:4px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+h1,h2,h3{font-family:var(--disp);font-weight:var(--hw);margin:0}
+
+/* top */
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.back{font-family:var(--disp);font-weight:var(--hw);font-size:20px;line-height:1.2;color:var(--acc);text-decoration:none;border-bottom:2px solid transparent}
+.back:hover{border-bottom-color:var(--acc)}
+.tag{font-family:var(--disp);font-weight:var(--hw);font-size:20px}
+
+/* header start */
+header.hd{position:relative;margin-bottom:34px}
+header.hd h1{font-size:clamp(44px,8.5vw,92px);line-height:.95;letter-spacing:-.01em}
+header.hd .sub{margin:12px 0 0;font-size:18px;color:var(--mut)}
+.stk{position:absolute;right:0;top:-8px;display:flex;gap:6px}
+.stk svg{width:80px;height:80px}
+.stk svg:nth-child(1){transform:rotate(-8deg)}.stk svg:nth-child(2){transform:rotate(6deg)}.stk svg:nth-child(3){transform:rotate(-3deg)}
+@media(max-width:900px){.stk{display:none}}
+
+/* surfaces */
+.card{background:#fff;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--p);padding:22px}
+.card.flat{box-shadow:6px 6px 0 var(--ink)}
+.sec{font-family:var(--disp);font-weight:var(--hw);font-size:24px;margin:26px 0 12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sec:first-child{margin-top:0}
+.sec small{font:500 14px var(--body);color:var(--mut)}
+
+/* score rule tiles */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:520px){.rules{grid-template-columns:1fr}}
+.rule{border:3px solid var(--ink);padding:10px 14px;display:flex;align-items:baseline;gap:12px;background:#fff}
+.rule b{font-family:var(--disp);font-weight:var(--hw);font-size:34px;line-height:1}
+.rule span{font-size:15px;color:var(--ink)}
+.rule.p{background:var(--oktint)} .rule.m{background:var(--badtint)} .rule.z{background:#EDEDE6}
+.rulenote{margin:10px 0 0;font-size:14px;color:var(--mut)}
+
+/* chapters */
+.chapters{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.chap{display:flex;gap:12px;align-items:flex-start;text-align:left;border:3px solid var(--ink);background:#fff;padding:12px 14px;transition:transform .12s,box-shadow .12s}
+.chap:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--s)}
+.chap[aria-pressed="true"]{background:var(--seltint)}
+.chap .box{width:22px;height:22px;border:3px solid var(--ink);background:#fff;flex:none;margin-top:1px;display:grid;place-items:center}
+.chap[aria-pressed="true"] .box{background:var(--ink)}
+.chap[aria-pressed="true"] .box::after{content:"";width:10px;height:5px;border-left:3px solid #fff;border-bottom:3px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.chap b{display:block;font-weight:600;font-size:15px;line-height:1.3}
+.chap span span{font-size:13px;color:var(--mut)}
+
+/* toggles */
+.opts-row{display:flex;flex-wrap:wrap;gap:12px}
+.toggle{display:flex;align-items:center;gap:12px;border:3px solid var(--ink);background:#fff;padding:8px 14px 8px 10px;font-size:15px}
+.toggle .sw{width:42px;height:24px;border:3px solid var(--ink);background:#fff;position:relative;flex:none}
+.toggle .sw::after{content:"";position:absolute;top:1px;left:1px;width:14px;height:14px;background:var(--ink);transition:transform .12s}
+.toggle[aria-pressed="true"]{background:var(--seltint)}
+.toggle[aria-pressed="true"] .sw{background:var(--p)}
+.toggle[aria-pressed="true"] .sw::after{transform:translateX(18px)}
+
+.startbar{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-top:28px;padding-top:20px;border-top:3px dashed var(--ink)}
+.summary{font-size:16px;max-width:46ch}
+
+/* buttons */
+.btn{display:inline-block;border:3px solid var(--ink);background:var(--s);color:var(--ink);font-family:var(--disp);font-weight:var(--hw);font-size:19px;line-height:1.1;padding:12px 22px;box-shadow:4px 4px 0 var(--ink);text-decoration:none;transition:transform .12s,box-shadow .12s}
+.btn:hover:not(:disabled){transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active:not(:disabled){transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn.ghost{background:#fff}
+.btn:disabled{background:#E6E6DE;color:#77776F;box-shadow:none;cursor:not-allowed;border-color:#77776F}
+
+/* hud */
+.hud{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin-bottom:12px}
+.stat{display:flex;flex-direction:column;line-height:1.2}
+.stat small{color:var(--mut);font-size:13px}
+.stat .v{font-weight:700;font-size:22px}
+.stat.right{text-align:right;align-items:flex-end}
+.timer{font-size:30px;font-weight:700;border:3px solid var(--ink);background:#fff;padding:6px 16px;min-width:140px;text-align:center;box-shadow:4px 4px 0 var(--ink)}
+.timer.warn{background:var(--yel)}
+.timer.crit{background:var(--red);animation:pulse 1s steps(2,end) infinite}
+@keyframes pulse{50%{opacity:.65}}
+.strip{display:flex;gap:2px;height:20px;align-items:flex-end;margin:6px 0 18px}
+.strip i{flex:1;min-width:2px;height:35%;background:var(--line)}
+.strip i.ok{background:var(--teal);height:100%}
+.strip i.bad{background:var(--red);height:70%}
+.strip i.cur{background:var(--ink);height:100%}
+
+/* question */
+.qmeta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip{font-size:13px;font-weight:600;border:2px solid var(--ink);padding:2px 10px;background:var(--seltint)}
+.chip.t{background:var(--yel)}
+.qtext{font-family:var(--disp);font-weight:var(--hw);font-size:clamp(21px,3.6vw,28px);line-height:1.2;margin:0 0 20px}
+.options{display:grid;gap:12px}
+.opt{display:flex;gap:14px;align-items:flex-start;text-align:left;width:100%;border:3px solid var(--ink);background:#fff;padding:12px 14px;box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.opt .k{flex:none;width:32px;height:32px;border:3px solid var(--ink);display:grid;place-items:center;font-weight:700;font-size:15px;background:#fff}
+.opt .t{padding-top:3px;flex:1}
+.opt .mk{font-size:13px;font-weight:600;padding-top:5px;white-space:nowrap}
+.options:not(.locked) .opt:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.opt.ok{background:var(--oktint)} .opt.ok .k{background:var(--teal)} .opt.ok .mk{color:var(--okink)}
+.opt.bad{background:var(--badtint)} .opt.bad .k{background:var(--red)} .opt.bad .mk{color:var(--badink)}
+.options.locked .opt{cursor:default;box-shadow:none}
+.options.locked .opt:not(.ok):not(.bad){opacity:.5}
+.feedback{margin-top:18px;border:3px solid var(--ink);padding:14px 16px;display:none}
+.feedback.show{display:block}
+.feedback.ok{background:var(--oktint)} .feedback.bad{background:var(--badtint)}
+.feedback h3{font-size:22px;margin-bottom:4px}
+.feedback p{margin:4px 0 0;font-size:15px}
+.feedback .ans{font-weight:600}
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap}
+.hint{font-size:14px;color:var(--mut)}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(17,17,17,.6);display:grid;place-items:center;padding:20px;z-index:20}
+.modal .box{background:#fff;border:3px solid var(--ink);box-shadow:8px 8px 0 var(--p);padding:22px;max-width:420px;width:100%}
+.modal h3{font-size:26px;margin-bottom:8px}
+.modal p{margin:0 0 18px;color:var(--mut)}
+.modal .row{display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap}
+
+/* result */
+.res-head{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+@media(max-width:620px){.res-head{grid-template-columns:1fr;justify-items:start}}
+.scorebox{border:3px solid var(--ink);background:var(--yel);box-shadow:6px 6px 0 var(--ink);padding:14px 26px 12px;text-align:center;min-width:190px}
+.scorebox .big{font-family:var(--disp);font-weight:var(--hw);font-size:92px;line-height:1;display:block}
+.scorebox small{font-size:14px;font-weight:600}
+.res-head h2{font-size:clamp(30px,5.5vw,46px);line-height:1}
+.res-head p{margin:10px 0 0;color:var(--mut)}
+.stack{display:flex;height:22px;border:3px solid var(--ink);margin-top:22px;background:#fff}
+.stack i{display:block;height:100%}
+.stack .g{background:var(--teal)} .stack .r{background:var(--red)} .stack .b{background:var(--line)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--mut);margin-top:10px}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border:2px solid var(--ink);margin-right:6px;vertical-align:-1px;background:var(--c)}
+.formula{margin:18px 0 0;border:3px dashed var(--ink);padding:10px 14px;font-size:14.5px;background:#fff}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:22px}
+.kpi{border:3px solid var(--ink);padding:10px 12px;background:#fff}
+.kpi small{display:block;color:var(--mut);font-size:13px}
+.kpi b{font-size:22px}
+.kpi.ok{background:var(--oktint)} .kpi.bad{background:var(--badtint)}
+.recap{display:grid;gap:14px}
+.rrow{display:grid;grid-template-columns:minmax(120px,230px) 1fr 64px;gap:14px;align-items:center}
+@media(max-width:560px){.rrow{grid-template-columns:1fr 60px}.rrow .bar{grid-column:1/-1;order:3}}
+.rrow .nm b{display:block;font-weight:600;font-size:15px;line-height:1.25}
+.rrow .nm small{color:var(--mut);font-size:13px}
+.bar{height:18px;display:flex;border:3px solid var(--ink);background:#fff}
+.bar i{display:block;height:100%}
+.bar .g{background:var(--teal)} .bar .r{background:var(--red)}
+.rrow .sc{text-align:right;font-weight:700;font-size:15px}
+.insight{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.insight{grid-template-columns:1fr}}
+.ins{border:3px solid var(--ink);padding:12px 14px;font-size:15px}
+.ins b{display:block;margin-bottom:2px}
+.ins.good{background:var(--oktint)} .ins.weak{background:var(--badtint)}
+.review{display:grid;gap:12px;margin-top:14px}
+.rv{border:3px solid var(--ink);border-left-width:10px;border-left-color:var(--red);padding:11px 14px;background:#fff;font-size:15px}
+.rv .q{font-weight:600;margin-bottom:6px}
+.rv .y{color:var(--badink)} .rv .c{color:var(--okink);font-weight:600}
+.rv .e{color:var(--mut);margin-top:4px}
+.actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+details summary{cursor:pointer;font-family:var(--disp);font-weight:var(--hw);font-size:22px;padding:2px 0}
+.mt{margin-top:22px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;position:relative;z-index:2}.crumbs a{text-decoration:none}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}.crumbs [aria-current]{opacity:.65}.crumbs{margin-bottom:26px;font:800 18px/1.2 var(--disp)}.crumbs a{color:var(--acc)}.crumbs span[aria-hidden]{color:#111}
+.lvl{display:inline-block;border:2px solid #111;padding:1px 10px;font:800 14px/1.5 var(--disp);letter-spacing:.02em;text-transform:uppercase;vertical-align:middle;color:#111}
+.lvl.l1{background:#12A594}.lvl.l2{background:#FFE14D}.lvl.l3{background:#FF4B3E}.lvl.l4{background:#111;color:#fff}
+.lvlrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:10px 0 0;font-size:15px;color:var(--mut)}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="3.2" markerHeight="3.2" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#111"/></marker></svg>
+<div class="wrap">
+<nav class="crumbs" id="crumbs" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="optim.html">Optim</a><span aria-hidden="true">/</span><a href="uts.html">Latihan UTS</a><span aria-hidden="true">/</span><span aria-current="page">Paket 3 · Hard</span></nav>
+
+  <!-- START -->
+  <section id="start">
+    <header class="hd">
+      <h1>Paket 3</h1>
+      <p class="sub">TI5001 / Optimisasi &amp; Intelejensia Komputasional</p>
+      <p class="lvlrow"><span class="lvl l3">Hard</span><span>Hitungan multi-langkah, perbedaan konsep yang mirip, dan kasus yang butuh penilaian.</span></p>
+      <div class="stk" aria-hidden="true"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><g transform='rotate(-20 50 50)'><ellipse cx='50' cy='50' rx='42' ry='26' fill='#2F5BFF' fill-opacity='.2' stroke-width='3'/><ellipse cx='50' cy='50' rx='27' ry='15' fill='#FFD93D' fill-opacity='.5' stroke-width='3'/><ellipse cx='50' cy='50' rx='10' ry='5' fill='#FF8A1F' stroke-width='3'/></g><path d='M10 18L28 36L40 44' stroke-width='3' stroke-dasharray='6 6' marker-end='url(#ah)'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M12 14Q50 126 88 14' fill='#2F5BFF' fill-opacity='.22'/><path d='M4 86H96' stroke-width='3'/><circle cx='50' cy='70' r='7' fill='#FF8A1F' stroke-width='3'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M8 20Q50 110 92 20' stroke-width='3'/><path d='M20.6 43L33.2 57.8L43.3 63.9L50 65' stroke-width='2.5' stroke-dasharray='5 5'/><circle cx='20.6' cy='43' r='5' fill='#2F5BFF' stroke-width='3'/><circle cx='33.2' cy='57.8' r='5' fill='#FFD93D' stroke-width='3'/><circle cx='43.3' cy='63.9' r='5' fill='#FFD93D' stroke-width='3'/><circle cx='50' cy='66' r='6' fill='#FF8A1F' stroke-width='3'/></svg></div>
+    </header>
+
+    <div class="card">
+      <div class="sec">Aturan skor</div>
+      <div class="rules">
+        <div class="rule p"><b>+3</b><span>jawaban benar</span></div>
+        <div class="rule m"><b>−1</b><span>jawaban salah</span></div>
+        <div class="rule z"><b>0</b><span>tidak dijawab</span></div>
+      </div>
+      <p class="rulenote">Poin dinormalkan ke skala 0 sampai 100. Skor 25 setara tidak menjawab sama sekali atau menebak acak.</p>
+
+      <div class="sec" style="margin-top:30px">Pilih bab <small id="selCount"></small></div>
+      <div class="chapters" id="chapters"></div>
+
+      <div class="sec" style="margin-top:30px">Pengaturan</div>
+      <div class="opts-row">
+        <button class="toggle" id="tgQ" aria-pressed="true"><span class="sw"></span>Acak urutan soal</button>
+        <button class="toggle" id="tgO" aria-pressed="true"><span class="sw"></span>Acak urutan pilihan</button>
+      </div>
+
+      <div class="startbar">
+        <div class="summary" id="summary"></div>
+        <button class="btn" id="startBtn">Mulai kuis</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="hidden">
+    <div class="topbar"><span class="tag">Latihan UTS Paket 3 · Hard</span></div>
+    <div class="hud">
+      <div class="stat"><small>Soal</small><span class="v num" id="hudQ">1/1</span></div>
+      <div class="timer num" id="timer" role="timer" aria-live="off">30:00</div>
+      <div class="stat right"><small>Poin (<span id="hudOk">0</span> benar, <span id="hudBad">0</span> salah)</small><span class="v num" id="hudPts">0</span></div>
+    </div>
+    <div class="strip" id="strip" aria-hidden="true"></div>
+    <div class="card flat">
+      <div class="qmeta"><span class="chip" id="qBab"></span><span class="chip t" id="qType"></span></div>
+      <p class="qtext" id="qText"></p>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+      <div class="navrow">
+        <button class="btn ghost" id="finishBtn">Selesaikan sekarang</button>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <span class="hint" id="hint">Tekan W, A, S, D untuk menjawab</span>
+          <button class="btn" id="nextBtn" disabled>Berikutnya</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="hidden">
+    <div class="topbar"><span class="tag">Hasil Paket 3 · Hard</span></div>
+    <div class="card">
+      <div class="res-head">
+        <div class="scorebox"><span class="big num" id="scoreBig">0</span><small>skor dari 100</small></div>
+        <div>
+          <h2 id="grade"></h2>
+          <p id="gradeSub"></p>
+        </div>
+      </div>
+      <div class="stack" id="stack" aria-hidden="true"></div>
+      <div class="legend"><span style="--c:var(--teal)">Benar</span><span style="--c:var(--red)">Salah</span><span style="--c:var(--line)">Tidak dijawab</span></div>
+      <p class="formula" id="formula"></p>
+      <div class="kpis" id="kpis"></div>
+    </div>
+
+    <div class="card mt">
+      <h2 style="font-size:28px;margin-bottom:16px">Rekap per bab</h2>
+      <div class="recap" id="recap"></div>
+      <div class="insight" id="insight"></div>
+    </div>
+
+    <div class="card mt">
+      <h2 style="font-size:28px;margin-bottom:16px">Rekap per jenis soal</h2>
+      <div class="recap" id="recapType"></div>
+    </div>
+
+    <div class="card mt">
+      <details id="revBox">
+        <summary id="revSum">Tinjau soal yang salah</summary>
+        <div class="review" id="review"></div>
+      </details>
+    </div>
+
+    <div class="actions">
+      <button class="btn" id="againWrong">Ulangi soal yang salah</button>
+      <button class="btn ghost" id="againAll">Ulangi dengan pengaturan sama</button>
+      <button class="btn ghost" id="toMenu">Ubah pengaturan</button>
+      <a class="btn ghost" href="uts.html">Daftar paket</a>
+    </div>
+  </section>
+</div>
+
+<div class="modal hidden" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="box">
+    <h3 id="mTitle">Selesaikan sekarang?</h3>
+    <p id="mText"></p>
+    <div class="row"><button class="btn ghost" id="mNo">Lanjut mengerjakan</button><button class="btn" id="mYes">Selesaikan</button></div>
+  </div>
+</div>
+
+<script>
+/* ===== Data: tiap soal {id, bab, type, q, o:[4 pilihan], a:indeks benar, e:bahasan} ===== */
+const BAB = [{"id": 2, "short": "Bab 2", "name": "Dasar-Dasar Kalkulus dan Aljabar"}, {"id": 3, "short": "Bab 3", "name": "Konsep Dasar dalam Optimisasi"}, {"id": 4, "short": "Bab 4", "name": "Pemecahan Analitik Tak Berpembatas"}, {"id": 5, "short": "Bab 5", "name": "Pemecahan Analitik Berpembatas (Persamaan dan Pertidaksamaan)"}, {"id": 6, "short": "Bab 6", "name": "Metode Numerik Variabel Tunggal"}, {"id": 7, "short": "Bab 7", "name": "Metode Numerik Variabel Majemuk"}];
+const ITEMS = [{"id": "H01", "bab": 2, "type": "Hitungan", "q": "Sistem 2x₁ + x₂ = 4 dan 5x₁ + 3x₂ = 11 diselesaikan dengan x = A⁻¹b. Nilai x₂ adalah…", "o": ["1", "3", "2", "−2"], "a": 2, "e": "A = [2 1; 5 3], det = 1, A⁻¹ = [3 −1; −5 2]. x = A⁻¹b = (3·4 − 11, −5·4 + 2·11) = (1, 2)."}, {"id": "H02", "bab": 2, "type": "Hitungan", "q": "Newton-Raphson untuk f(x) = x² − 9 dengan x₀ = 6. Nilai x₁ adalah…", "o": ["5,56", "3,75", "8,25", "−7,5"], "a": 1, "e": "f(6) = 27 dan f′(6) = 12 ⇒ x₁ = 6 − 27/12 = 3,75."}, {"id": "H03", "bab": 2, "type": "Hitungan", "q": "Determinan matriks A = [2 0 1; 1 3 2; 0 1 1] adalah…", "o": ["1", "5", "3", "−3"], "a": 2, "e": "Ekspansi baris 1: 2(3·1 − 2·1) − 0 + 1(1·1 − 3·0) = 2·1 + 1 = 3."}, {"id": "H04", "bab": 2, "type": "Interpretasi hasil", "q": "Bisection untuk f(x) = x² − x − 6 dengan a₀ = 1, b₀ = 4 (f(a₀) = −6, f(b₀) = 6) konvergen ke x = 3. Mengapa akar x = −2 tidak ditemukan?", "o": ["karena bisection hanya mencari akar positif", "karena f(−2) tidak sama dengan nol", "karena ε terlalu besar", "karena −2 di luar interval awal [1, 4]"], "a": 3, "e": "Bisection hanya mencari akar di dalam interval awal. f(−2) = 0 sebenarnya, tetapi −2 tidak termuat di [1, 4]."}, {"id": "H05", "bab": 2, "type": "Konsep", "q": "Kofaktor cᵢⱼ dari suatu matriks didefinisikan sebagai…", "o": ["det Mᵢⱼ tanpa tanda", "(−1)^i · det Mᵢⱼ", "(−1)^(i+j) · det Mᵢⱼ", "(−1)^(i+j) · aᵢⱼ"], "a": 2, "e": "Kofaktor = tanda (−1)^(i+j) dikalikan determinan minor Mᵢⱼ."}, {"id": "H06", "bab": 2, "type": "Konsep", "q": "Invers matriks A dihitung dengan…", "o": ["matriks kofaktor (tanpa transpos) dibagi det A", "transpos A dibagi det A", "matriks minor dibagi det A", "transpos matriks kofaktor dibagi det A"], "a": 3, "e": "A⁻¹ = Cᵀ / det A."}, {"id": "H07", "bab": 2, "type": "Konsep", "q": "Polinomial derajat n memiliki…", "o": ["n akar, beberapa dapat berulang", "tepat n akar yang semuanya berbeda", "paling sedikit satu akar yang rasional", "tepat satu akar real, sisanya kompleks"], "a": 0, "e": "Menurut materi, polinomial derajat n memiliki n akar dengan kemungkinan akar berulang."}, {"id": "H08", "bab": 2, "type": "Konsep", "q": "Berbeda dengan bisection, Newton-Raphson untuk mencari akar memerlukan…", "o": ["dua titik bertanda berlawanan", "turunan f′(x) dan titik awal x₀", "turunan kedua f″(x)", "fungsi yang cembung"], "a": 1, "e": "Newton-Raphson memakai f′(x) dan satu titik awal. Bisection memerlukan dua titik dengan f berlawanan tanda."}, {"id": "H09", "bab": 3, "type": "Konsep", "q": "Solusi optimal lokal adalah solusi layak yang…", "o": ["terbaik di antara semua solusi layak dalam himpunan", "terbaik di antara seluruh solusi yang tidak layak", "terbaik di antara solusi layak di sekitarnya", "terletak tepat di batas himpunan pembatas S"], "a": 2, "e": "Lokal: terbaik hanya di sekitarnya. Global: terbaik di seluruh himpunan pembatas."}, {"id": "H10", "bab": 3, "type": "Konsep", "q": "Pada model minimisasi dengan f cembung dan S cembung, solusi optimal lokal x* adalah…", "o": ["minimum global", "hanya minimum lokal", "titik belok", "tidak ada jaminan apa pun"], "a": 0, "e": "Pada model optimisasi cembung, optimum lokal = optimum global."}, {"id": "H11", "bab": 3, "type": "Konsep", "q": "Pada Z = f(x) + c, hubungan solusi dan nilai optimal terhadap model Z′ = f(x) adalah…", "o": ["x* bergeser sebesar c dan Z* tetap", "x* sama dan Z* = f(x*) + c", "x* sama dan Z* = f(x*) − c", "x* menjadi x* + c"], "a": 1, "e": "Konstanta tidak mengubah x*, hanya menambah nilai optimal sebesar c."}, {"id": "H12", "bab": 3, "type": "Konsep", "q": "Himpunan solusi dengan x₁, x₂ ≥ 0 dan keduanya harus bilangan bulat (titik-titik diskrit)…", "o": ["cembung karena terbatas", "cembung karena berbentuk polihedral", "cembung karena semua pembatasnya linier", "bukan himpunan cembung"], "a": 3, "e": "Garis antara dua titik bulat melewati titik non-bulat yang bukan anggota himpunan."}, {"id": "H13", "bab": 3, "type": "Konsep", "q": "Klasifikasi f(x) = x² + 2x + 3, g(x) = −x² − 2x + 3, dan h(x) = 3x + 2 berturut-turut adalah…", "o": ["cembung; cekung; cembung dan cekung", "cekung; cembung; cekung", "cembung; cembung; cembung", "cembung; cekung; tak cembung dan tak cekung"], "a": 0, "e": "f″ = 2 &gt; 0, g″ = −2 &lt; 0, dan h linier (cembung sekaligus cekung)."}, {"id": "H14", "bab": 3, "type": "Hitungan", "q": "Untuk f(x₁, x₂) = x₁³ + 2x₂² + 3x₁ + 4x₂ + 5, H = [6x₁ 0; 0 4]. Pada x₁ = 2, determinan leading principal minor orde 1 dan 2 berturut-turut…", "o": ["12 dan 24", "6 dan 24", "2 dan 8", "12 dan 48"], "a": 3, "e": "H = [12 0; 0 4]. Minor orde 1 = 12 dan minor orde 2 = 12·4 − 0 = 48."}, {"id": "H15", "bab": 3, "type": "Interpretasi hasil", "q": "Matriks simetris Q = [1 0 0; 0 0 0; 0 0 1] memiliki determinan leading principal minor orde 1, 2, 3 berturut-turut +1, 0, 0. Kesimpulan…", "o": ["definit positif", "semidefinit negatif", "tak definit", "semidefinit positif"], "a": 3, "e": "Tanda (+, 0, 0) adalah tak negatif seluruhnya, jadi semidefinit positif, bukan definit positif."}, {"id": "H16", "bab": 3, "type": "Interpretasi hasil", "q": "Determinan leading principal minor orde 1, 2, 3 suatu matriks simetris 3 × 3 bertanda −, +, −. Matriks tersebut…", "o": ["definit positif", "semidefinit negatif", "definit negatif", "tak definit"], "a": 2, "e": "Orde ganjil negatif dan orde genap positif ⇒ definit negatif."}, {"id": "H17", "bab": 3, "type": "Kasus", "q": "Seorang analis menyimpulkan f(x) = x³ + 3x² cembung di seluruh R karena f″(x) = 6x + 6 bernilai positif untuk x &gt; −1. Tanggapan yang tepat…", "o": ["benar, karena f″ positif untuk sebagian besar nilai x", "keliru: f cekung pada seluruh R karena f″ = 6x + 6", "keliru: f″ &lt; 0 untuk x &lt; −1, jadi f tak cembung dan tak cekung", "benar, karena f″ = 0 hanya terjadi di titik x = −1"], "a": 2, "e": "Kecembungan pada seluruh S menuntut f″ ≥ 0 untuk semua x ∈ S. Di sini f″ berubah tanda di x = −1."}, {"id": "H18", "bab": 4, "type": "Hitungan", "q": "f(x₁, x₂) = x₁² + 2x₂² − 4x₁ − 8x₂. Nilai f pada titik stasionernya adalah…", "o": ["−12", "−4", "12", "−8"], "a": 0, "e": "Titik stasioner (2, 2). f = 4 + 8 − 8 − 16 = −12."}, {"id": "H19", "bab": 4, "type": "Hitungan", "q": "f(x₁, x₂) = x₁³ − x₂² − 3x₁ − 2x₂. Nilai f di titik maksimum lokalnya adalah…", "o": ["−1", "1", "3", "5"], "a": 2, "e": "Titik stasioner (1, −1) dan (−1, −1). Maksimum lokal di (−1, −1): f = −1 − 1 + 3 + 2 = 3. Titik (1, −1) adalah titik belok dengan f = −1."}, {"id": "H20", "bab": 4, "type": "Interpretasi hasil", "q": "Di titik stasioner x* diperoleh H(x*) = [2 0; 0 −2]. Kesimpulan yang benar…", "o": ["titik belok (pelana), bukan titik optimum", "minimum lokal karena minor orde 1 positif", "maksimum lokal karena minor orde 2 negatif", "semidefinit positif"], "a": 0, "e": "Minor orde 1 = 2 &gt; 0 dan orde 2 = −4 &lt; 0 ⇒ H tak definit ⇒ titik belok."}, {"id": "H21", "bab": 4, "type": "Interpretasi hasil", "q": "f(x) = x⁴/4 − x³/3 punya titik stasioner x = 1 dan x = 0. Hasil: f″(1) = 1, f″(0) = 0, f⁽³⁾(0) = −2. Pernyataan yang benar…", "o": ["x = 1 minimum, x = 0 maksimum lokal", "x = 1 minimum lokal, x = 0 titik belok", "keduanya minimum lokal", "x = 0 minimum karena f″(0) = 0 tak negatif"], "a": 1, "e": "f″(1) &gt; 0 ⇒ minimum lokal. Di x = 0, turunan tak nol pertama adalah ke-3 (ganjil) ⇒ titik belok."}, {"id": "H22", "bab": 4, "type": "Kasus", "q": "Seorang analis menyatakan x = 1 adalah minimum global f(x) = x³ − 3x karena f″(1) = 6 &gt; 0. Tanggapan…", "o": ["benar, karena f″(1) positif sehingga x = 1 minimum global", "keliru: x = 1 sebenarnya adalah titik maksimum lokal", "benar, karena x = 1 adalah titik stasioner satu-satunya", "keliru: hanya minimum lokal, f″ = 6x berubah tanda"], "a": 3, "e": "Minimum global memerlukan f cembung. Di sini f″ = 6x berubah tanda."}, {"id": "H23", "bab": 4, "type": "Konsep", "q": "Perbedaan kondisi perlu dan kondisi cukup pada optimisasi tak berpembatas…", "o": ["perlu: ∇f = 0. Cukup: kedefinitan Hessian di x*", "perlu: Hessian definit. Cukup: ∇f(x*) = 0 saja", "keduanya sama: hanya ∇f(x*) = 0 yang diperlukan", "perlu: f cembung. Cukup: ∇f(x*) = 0 saja"], "a": 0, "e": "Gradien nol diperlukan, tetapi jenis titik ditentukan oleh Hessian."}, {"id": "H24", "bab": 4, "type": "Konsep", "q": "Pada fungsi satu variabel, jika turunan tak nol pertama di x* adalah turunan berorde ganjil, maka x* adalah…", "o": ["titik belok", "maksimum lokal", "minimum lokal", "tidak dapat ditentukan"], "a": 0, "e": "Turunan ke-n tak nol dengan n ganjil ⇒ titik belok."}, {"id": "H25", "bab": 4, "type": "Konsep", "q": "Jika Hessian H(x) definit negatif untuk semua x, titik stasioner x* adalah…", "o": ["minimum global", "hanya maksimum lokal", "maksimum global", "titik belok"], "a": 2, "e": "H definit negatif di mana-mana ⇒ f cekung ⇒ titik stasioner adalah maksimum global."}, {"id": "H26", "bab": 5, "type": "Hitungan", "q": "Maksimumkan f = −x₁² − x₂² + 4x₁ + 4x₂ dengan x₁ + x₂ = 1, memakai L = f − λ(x₁ + x₂ − 1). Hasilnya…", "o": ["x₁ = 1/2 dan λ = −3", "x₁ = 1 dan λ = 2", "x₁ = 1/2 dan λ = 1", "x₁ = 1/2 dan λ = 3"], "a": 3, "e": "−2x₁ + 4 − λ = 0 dan −2x₂ + 4 − λ = 0 ⇒ x₁ = x₂. Dari x₁ + x₂ = 1: x₁ = 1/2 ⇒ λ = −1 + 4 = 3."}, {"id": "H27", "bab": 5, "type": "Hitungan", "q": "Determinan H^B = [0 1 1; 1 −3 0; 1 0 −3] adalah…", "o": ["6", "−6", "9", "3"], "a": 0, "e": "det = 0 − 1·(1·(−3) − 0·1) + 1·(1·0 − (−3)·1) = 3 + 3 = 6."}, {"id": "H28", "bab": 5, "type": "Interpretasi hasil", "q": "Untuk m = 1 dan n = 3, determinan dua leading principal minor terakhir H^B adalah −4 dan −12. Kesimpulan…", "o": ["titik maksimum, karena tandanya sama", "titik minimum, karena kedua minor bertanda (−1)^m = −", "titik maksimum, karena −12 &lt; 0", "titik belok, karena tanda sama"], "a": 1, "e": "Minimum: semua minor yang diperiksa bertanda (−1)^m. Maksimum: bergantian mulai (−1)^(m+1)."}, {"id": "H29", "bab": 5, "type": "Interpretasi hasil", "q": "Pada Contoh 2 (maksimisasi), det(Δ) = −3μ² − 12μ − 12 = 0 memberi μ = −2 (ganda). Kesimpulan…", "o": ["titik minimum, karena determinannya negatif", "titik belok", "titik maksimum, karena semua akar μ negatif", "tidak dapat disimpulkan"], "a": 2, "e": "Akar μ negatif → maksimum. Akar μ positif → minimum."}, {"id": "H30", "bab": 5, "type": "Interpretasi hasil", "q": "Pada maksimisasi dengan 3 pembatas, kasus λ₁ ≠ 0; λ₂ = 0; λ₃ ≠ 0 menghasilkan x = (5, 0) dengan λ₁ = −8, λ₂ = 0, λ₃ = −10, dan layak. Kesimpulan…", "o": ["memenuhi kondisi perlu karena titiknya layak", "memenuhi kondisi perlu karena λ₂ bernilai nol", "tidak layak karena λ₃ tidak sama dengan nol", "tidak memenuhi kondisi perlu, ada λ negatif"], "a": 3, "e": "Maksimisasi mensyaratkan semua λᵢ ≥ 0. Layak saja belum cukup."}, {"id": "H31", "bab": 5, "type": "Interpretasi hasil", "q": "Dari 8 kasus pada Contoh 3, hanya x = (1, 1) dengan λ = (0, 0, 0) yang memenuhi kondisi perlu. Karena f cekung dan S cembung, kesimpulan akhirnya…", "o": ["x = (1, 1) hanya maksimum lokal", "x = (1, 1) adalah minimum global", "tidak ada solusi optimal", "x = (1, 1) adalah maksimum global"], "a": 3, "e": "Kondisi perlu terpenuhi dan kondisi cukup (cekung + cembung) terpenuhi ⇒ maksimum global."}, {"id": "H32", "bab": 5, "type": "Kasus", "q": "Memaksimumkan f = −(x₁−3)² − (x₂−3)² dengan x₁ + x₂ ≤ 5. Seorang analis menetapkan λ = 0 dan memperoleh x = (3, 3). Mengapa solusi ini ditolak?", "o": ["karena nilai λ = 0 tidak diperbolehkan dalam KKT", "karena fungsi tujuan f bukan fungsi cekung", "karena (3, 3) bukan titik stasioner dari fungsi f", "karena (3, 3) melanggar x₁ + x₂ ≤ 5 (tidak layak)"], "a": 3, "e": "3 + 3 = 6 &gt; 5. Pada kasus λ = 0 titik stasioner f tidak layak. Solusi sebenarnya (2,5; 2,5) dengan λ = 1."}, {"id": "H33", "bab": 5, "type": "Konsep", "q": "Pada kondisi cukup H^B untuk minimum, tanda determinan n − m leading principal minor terakhir adalah…", "o": ["bergantian mulai (−1)^(m+1)", "selalu positif", "(−1)^m untuk semuanya", "bergantian mulai (−1)^m"], "a": 2, "e": "Minimum: tanda sama, yaitu (−1)^m. Maksimum: bergantian mulai (−1)^(m+1)."}, {"id": "H34", "bab": 5, "type": "Konsep", "q": "Akar-akar μ dari det(Δ) = 0, dengan Δ = [0 P; Pᵗ Q − μI], dipakai untuk…", "o": ["menentukan nilai pengali Lagrange λ pada titik", "menentukan jenis titik stasioner (μ &gt; 0 minimum, μ &lt; 0 maksimum)", "menghitung nilai fungsi tujuan optimum f(x*)", "menemukan titik-titik stasioner dari fungsi L"], "a": 1, "e": "Ini kondisi cukup alternatif selain Hessian bordered."}, {"id": "H35", "bab": 5, "type": "Konsep", "q": "Perbandingan tanda λ pada KKT (dengan gᵢ ≤ 0 dan L = f − Σλᵢgᵢ)…", "o": ["maksimisasi: λᵢ ≤ 0, minimisasi: λᵢ ≥ 0", "maksimisasi: λᵢ ≥ 0, minimisasi: λᵢ ≤ 0", "keduanya λᵢ ≥ 0", "keduanya bebas tanda"], "a": 1, "e": "Menurut materi, maksimisasi λᵢ ≥ 0 dan minimisasi λᵢ ≤ 0."}, {"id": "H36", "bab": 5, "type": "Konsep", "q": "Dengan 4 pembatas pertidaksamaan, banyaknya kombinasi kasus (λᵢ = 0 atau ≠ 0) adalah…", "o": ["8", "4", "24", "16"], "a": 3, "e": "2⁴ = 16."}, {"id": "H37", "bab": 6, "type": "Hitungan", "q": "Golden section untuk meminimumkan f(x) = (x − 3)² pada [0, 10] dengan γ = 0,618. Interval ketidakpastian setelah iterasi 1 adalah…", "o": ["[3,82; 10]", "[0; 6,18]", "[0; 3,82]", "[6,18; 10]"], "a": 1, "e": "u = 3,82 dan v = 6,18. f(u) = 0,67 &lt; f(v) = 10,11 ⇒ minimisasi, b = v. Interval [0; 6,18]."}, {"id": "H38", "bab": 6, "type": "Interpretasi hasil", "q": "Fibonacci search pada [−1, 2] dengan l = 0,01: (b − a)/l = 300, F₁₂ = 233, F₁₃ = 377. Mengapa dipilih n = 13?", "o": ["karena F₁₃ = 377 &gt; 300, sedangkan F₁₂ = 233 &lt; 300", "karena F₁₃ = 377 lebih kecil dari 300", "karena n harus ganjil", "karena F₁₂ = 233 sudah cukup dan 13 hanya cadangan"], "a": 0, "e": "Syarat Fₙ &gt; (b − a)/l, dengan n terkecil yang memenuhi."}, {"id": "H39", "bab": 6, "type": "Interpretasi hasil", "q": "Bisection minimisasi, k = 9: a = 0,9922, b = 1,0039, m = 0,9980, f′(m) = −0,0039, ε = 0,001. Tindakannya…", "o": ["lanjutkan, interval berikutnya [0,9980; 1,0039]", "berhenti, karena f′(m) negatif", "lanjutkan, interval berikutnya [0,9922; 0,9980]", "berhenti, karena b − a &lt; 0,01"], "a": 0, "e": "|f′(m)| = 0,0039 &gt; ε ⇒ lanjutkan. f′ &lt; 0 pada minimisasi ⇒ a(k+1) = m."}, {"id": "H40", "bab": 6, "type": "Kasus", "q": "Direct search untuk minimisasi dengan arah awal d = 1 menemukan f(x(1) + λ) &gt; f(x(1)). Langkah berikutnya…", "o": ["berhenti, x(1) pasti optimal", "perkecil λ menjadi 0", "ubah arah menjadi d = −1 dan lanjutkan", "tetap d = 1 dan lanjutkan"], "a": 2, "e": "Menurut materi, jika tidak membaik pada d = 1, tetapkan d = −1 dan lanjutkan ke langkah 1."}, {"id": "H41", "bab": 6, "type": "Kasus", "q": "Fungsi f memiliki dua lembah pada [a, b], sehingga tidak unimodal. Jika dipakai golden section…", "o": ["pasti menemukan minimum global karena γ = 0,618", "belum dijamin minimum global (asumsi unimodal dilanggar)", "tidak dapat dijalankan sama sekali tanpa unimodal", "pasti menemukan maksimum karena ada dua lembah"], "a": 1, "e": "Semua metode numerik pada materi mengasumsikan fungsi unimodal."}, {"id": "H42", "bab": 6, "type": "Konsep", "q": "Kriteria henti metode Newton satu variabel adalah…", "o": ["f(x(k)) = 0 dengan ketelitian ε saja", "|x(k+1) − x(k)| &lt; ε atau |f′(x)| &lt; ε", "panjang interval b − a lebih kecil dari l", "panjang langkah λ lebih kecil dari ε saja"], "a": 1, "e": "Newton berhenti jika langkahnya atau turunannya sudah cukup kecil."}, {"id": "H43", "bab": 6, "type": "Konsep", "q": "Beda utama Fibonacci dan golden section…", "o": ["Fibonacci: rasio bilangan Fibonacci berubah tiap iterasi, n ditetapkan di awal. Golden section: γ = 0,618 tetap", "Fibonacci: berbasis turunan fungsi. Golden section: hanya memakai evaluasi nilai fungsi tujuan", "Golden section: perlu ε sebagai konstanta pembeda. Fibonacci: tidak memerlukan konstanta apa pun", "Keduanya identik: rasio pembagian interval sama pada setiap iterasi dan sama-sama tetap"], "a": 0, "e": "Fibonacci: rasio Fₙ₋ₖ/Fₙ₋ₖ₊₁ berubah. Golden section: rasio γ konstan."}, {"id": "H44", "bab": 6, "type": "Konsep", "q": "Setiap iterasi dichotomous search memperkecil interval ketidakpastian menjadi sekitar…", "o": ["setengahnya (ditambah ε/2)", "0,618 kali dari panjang awal", "sepertiga dari panjang awal", "tetap sama seperti semula"], "a": 0, "e": "Interval baru adalah [a, v] atau [u, b], panjangnya (b − a)/2 + ε/2."}, {"id": "H45", "bab": 7, "type": "Hitungan", "q": "f(x₁, x₂) = (x₁ − 1)² + (2x₁ − x₂)². Cyclic coordinate iterasi 2 dimulai dari y = (0,2; 0,4) dengan arah d₁ = (1, 0). Panjang langkah λ₁ adalah…", "o": ["−0,16", "0,8", "0,16", "0,2"], "a": 2, "e": "f(0,2 + λ; 0,4) = (λ − 0,8)² + (2λ)². Turunan: 2(λ − 0,8) + 8λ = 10λ − 1,6 = 0 ⇒ λ = 0,16."}, {"id": "H46", "bab": 7, "type": "Interpretasi hasil", "q": "Pada iterasi 3 gradient search diperoleh ∇f(x(3)) = (−1,6; 0) dengan ε = 0,001. Arah d(3) dan tindakannya…", "o": ["d(3) = (−1; 0), berhenti", "d(3) = (1; 0), lanjutkan iterasi", "d(3) = (0; 1), lanjutkan", "d(3) = (1; 0), berhenti"], "a": 1, "e": "‖∇f‖ = 1,6 &gt; ε ⇒ lanjutkan. d = −∇f/‖∇f‖ = (1; 0)."}, {"id": "H47", "bab": 7, "type": "Kasus", "q": "Seorang mahasiswa menghentikan gradient search ketika ‖x(k+1) − x(k)‖ &lt; ε padahal ‖∇f(x(k))‖ masih besar. Penilaian berdasarkan materi…", "o": ["benar, itu kriteria standar pada gradient search", "benar, kedua kriteria selalu saling ekuivalen", "salah, harus memakai |f(x(k+1)) − f(x(k))| &lt; ε", "kurang sesuai: kriteria hentinya ‖∇f(x(k))‖ &lt; ε"], "a": 3, "e": "Langkah yang kecil tidak menjamin gradien kecil. Kriteria pada materi adalah ‖∇f‖ &lt; ε."}, {"id": "H48", "bab": 7, "type": "Konsep", "q": "Pada cyclic coordinate, titik awal pencarian untuk sumbu j + 1 adalah…", "o": ["x(k), yaitu titik awal iterasi", "y(j+1) = y(j) + λⱼdⱼ", "y(1), yaitu titik awal sumbu pertama", "y(j) − λⱼdⱼ, arah berlawanan"], "a": 1, "e": "Setiap pencarian dimulai dari hasil pencarian sumbu sebelumnya."}, {"id": "H49", "bab": 7, "type": "Konsep", "q": "Perbedaan arah pencarian cyclic coordinate dan gradient search…", "o": ["cyclic: arah sumbu tetap dⱼ; gradient: −∇f(x(k)) berubah", "cyclic: arah −∇f; gradient search: arah sumbu tetap", "keduanya memakai arah pencarian yang persis sama", "cyclic coordinate memakai arah yang dipilih acak"], "a": 0, "e": "Arah cyclic coordinate adalah vektor satuan sumbu. Arah gradient search mengikuti gradien."}, {"id": "H50", "bab": 7, "type": "Konsep", "q": "Metode multi-variabel berbasis turunan menurut daftar pada materi adalah…", "o": ["cyclic coordinate dan Newton", "Newton dan gradient search", "Hooke-Jeeves dan Rosenbrock", "cyclic coordinate dan Rosenbrock"], "a": 1, "e": "Berbasis turunan: Newton dan gradient search. Berbasis evaluasi fungsi: cyclic coordinate, Hooke-Jeeves, Rosenbrock."}];
+
+/* ===== util ===== */
+const $ = s => document.querySelector(s);
+const TOTAL_SECONDS = 30*60, PTS_OK = 3, PTS_BAD = -1;
+const LETTERS = ["W","A","S","D"];
+const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const mmss = s => { s=Math.max(0,s); return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0"); };
+const fmt = v => (v>0?"+":v<0?"−":"")+Math.abs(v);
+const babOf = id => BAB.find(b=>b.id===id);
+const cfg = { babs:new Set(BAB.map(b=>b.id)), shufQ:true, shufO:true };
+let S = null, tick = null;
+
+/* ===== layar awal ===== */
+function renderChapters(){
+  const box=$("#chapters"); box.innerHTML="";
+  BAB.forEach(b=>{
+    const n=ITEMS.filter(x=>x.bab===b.id).length;
+    const el=document.createElement("button");
+    el.className="chap"; el.setAttribute("aria-pressed",cfg.babs.has(b.id));
+    el.innerHTML=`<span class="box"></span><span><b>${b.short}: ${b.name}</b><span>${n} soal</span></span>`;
+    el.onclick=()=>{ cfg.babs.has(b.id)?cfg.babs.delete(b.id):cfg.babs.add(b.id); renderChapters(); updateSummary(); };
+    box.appendChild(el);
+  });
+}
+function updateSummary(){
+  const n=ITEMS.filter(x=>cfg.babs.has(x.bab)).length;
+  $("#selCount").textContent=`${cfg.babs.size} dari ${BAB.length} bab dipilih`;
+  $("#summary").innerHTML = n ? `<b>${n} soal</b> dalam 30 menit, rata-rata <b>${Math.round(TOTAL_SECONDS/n)} detik</b> per soal. Poin maksimum <b>+${n*PTS_OK}</b>.` : "Pilih minimal satu bab.";
+  $("#startBtn").disabled = !n;
+}
+$("#tgQ").onclick=e=>{cfg.shufQ=!cfg.shufQ;e.currentTarget.setAttribute("aria-pressed",cfg.shufQ);};
+$("#tgO").onclick=e=>{cfg.shufO=!cfg.shufO;e.currentTarget.setAttribute("aria-pressed",cfg.shufO);};
+
+function buildItems(){
+  let items=ITEMS.filter(x=>cfg.babs.has(x.bab)).map(x=>({...x,o:x.o.slice()}));
+  return cfg.shufQ?shuffle(items):items;
+}
+function permuteOptions(items){
+  return items.map(it=>{ const idx=shuffle([0,1,2,3]); return {...it,o:idx.map(i=>it.o[i]),a:idx.indexOf(it.a)}; });
+}
+function show(id){ $("#crumbs").classList.toggle("hidden",id==="quiz"); ["start","quiz","result"].forEach(s=>$("#"+s).classList.toggle("hidden",s!==id)); window.scrollTo(0,0); }
+
+/* ===== sesi ===== */
+function startSession(items){
+  if(cfg.shufO) items=permuteOptions(items);
+  S={items,ans:items.map(()=>null),i:0,start:Date.now(),end:Date.now()+TOTAL_SECONDS*1000,done:false};
+  $("#strip").innerHTML=items.map(()=>"<i></i>").join("");
+  show("quiz"); renderQ(); clearInterval(tick); tick=setInterval(onTick,250); onTick();
+}
+function onTick(){
+  if(!S||S.done) return;
+  const left=Math.ceil((S.end-Date.now())/1000), t=$("#timer");
+  t.textContent=mmss(left);
+  t.classList.toggle("warn",left<=300&&left>60); t.classList.toggle("crit",left<=60);
+  if(left<=0) finish(true);
+}
+function counts(){
+  let ok=0,bad=0;
+  S.items.forEach((it,i)=>{ if(S.ans[i]!==null){ S.ans[i]===it.a?ok++:bad++; } });
+  return {ok,bad,pts:ok*PTS_OK+bad*PTS_BAD};
+}
+function paintStrip(){
+  const els=$("#strip").children;
+  S.items.forEach((it,i)=>{
+    const a=S.ans[i]; let c="";
+    if(a!==null) c = a===it.a ? "ok":"bad"; else if(i===S.i) c="cur";
+    els[i].className=c;
+  });
+}
+function renderQ(){
+  const it=S.items[S.i], a=S.ans[S.i], b=babOf(it.bab);
+  $("#hudQ").textContent=`${S.i+1}/${S.items.length}`;
+  $("#qBab").textContent=`${b.short}: ${b.name}`;
+  $("#qType").textContent=it.type;
+  $("#qText").innerHTML=it.q;
+  const box=$("#options"); box.innerHTML=""; box.classList.toggle("locked",a!==null);
+  it.o.forEach((t,i)=>{
+    const el=document.createElement("button");
+    el.className="opt";
+    let mk="";
+    if(a!==null){ if(i===it.a){ el.classList.add("ok"); mk=`<span class="mk">${a===it.a?"Jawabanmu, benar":"Jawaban benar"}</span>`; } else if(i===a){ el.classList.add("bad"); mk=`<span class="mk">Jawabanmu, salah</span>`; } el.disabled=true; }
+    el.innerHTML=`<span class="k">${LETTERS[i]}</span><span class="t">${t}</span>${mk}`;
+    el.onclick=()=>answer(i);
+    box.appendChild(el);
+  });
+  const fb=$("#feedback"); fb.className="feedback";
+  if(a!==null) showFeedback();
+  const last=S.i===S.items.length-1;
+  $("#nextBtn").textContent= last?"Lihat hasil":(a===null?"Lewati":"Berikutnya");
+  $("#nextBtn").disabled = false;
+  $("#nextBtn").classList.toggle("ghost", a===null && !last);
+  $("#hint").textContent = a===null ? "Tekan W, A, S, D untuk menjawab, Enter untuk lewati" : "Tekan Enter untuk lanjut";
+  const c=counts(); $("#hudOk").textContent=c.ok; $("#hudBad").textContent=c.bad; $("#hudPts").textContent=fmt(c.pts);
+  paintStrip();
+}
+function showFeedback(){
+  const it=S.items[S.i], a=S.ans[S.i], fb=$("#feedback"), good=a===it.a;
+  fb.className="feedback show "+(good?"ok":"bad");
+  fb.innerHTML = good
+    ? `<h3>Benar, +3 poin</h3><p>${it.e}</p>`
+    : `<h3>Salah, −1 poin</h3><p class="ans">Jawaban benar: ${LETTERS[it.a]}. ${it.o[it.a]}</p><p>${it.e}</p>`;
+}
+function answer(i){
+  if(!S||S.done||S.ans[S.i]!==null) return;
+  S.ans[S.i]=i; renderQ();
+}
+function next(){
+  if(S.i===S.items.length-1) finish(false); else { S.i++; renderQ(); window.scrollTo({top:0}); }
+}
+$("#nextBtn").onclick=next;
+document.addEventListener("keydown",e=>{
+  const modalOpen=!$("#modal").classList.contains("hidden");
+  if(modalOpen){ if(e.key==="Escape") $("#modal").classList.add("hidden"); return; }
+  if(!S||S.done||$("#quiz").classList.contains("hidden")) return;
+  const k=e.key.toLowerCase(), m={w:0,a:1,s:2,d:3,"1":0,"2":1,"3":2,"4":3};
+  if(k in m) answer(m[k]); else if((k==="enter"||k==="arrowright")){ e.preventDefault(); next(); }
+});
+
+/* modal selesai */
+$("#finishBtn").onclick=()=>{
+  const un=S.ans.filter(a=>a===null).length;
+  $("#mText").textContent = un? `Masih ada ${un} soal belum dijawab. Soal kosong bernilai 0 poin.` : "Semua soal sudah dijawab.";
+  $("#modal").classList.remove("hidden"); $("#mYes").focus();
+};
+$("#mNo").onclick=()=>$("#modal").classList.add("hidden");
+$("#mYes").onclick=()=>{ $("#modal").classList.add("hidden"); finish(false); };
+
+/* ===== hasil ===== */
+function recapRows(keyOf, labelOf, subOf){
+  const keys=[...new Set(S.items.map(keyOf))];
+  return keys.map(k=>{
+    const idx=S.items.map((it,i)=>keyOf(it)===k?i:-1).filter(i=>i>=0);
+    const o=idx.filter(i=>S.ans[i]!==null&&S.ans[i]===S.items[i].a).length;
+    const w=idx.filter(i=>S.ans[i]!==null&&S.ans[i]!==S.items[i].a).length;
+    return {k,label:labelOf(k),sub:subOf(k),t:idx.length,o,w,e:idx.length-o-w,p:Math.round(o/idx.length*100)};
+  });
+}
+const rowHtml = r => `
+  <div class="rrow">
+    <div class="nm"><b>${r.label}</b><small>${r.sub}benar ${r.o}, salah ${r.w}${r.e?`, kosong ${r.e}`:""}</small></div>
+    <div class="bar" title="${r.o} benar, ${r.w} salah, ${r.e} kosong"><i class="g" style="width:${r.o/r.t*100}%"></i><i class="r" style="width:${r.w/r.t*100}%"></i></div>
+    <div class="sc num">${r.o}/${r.t}</div>
+  </div>`;
+
+function finish(timeUp){
+  if(S.done) return; S.done=true; clearInterval(tick);
+  const used=Math.min(TOTAL_SECONDS,Math.round((Date.now()-S.start)/1000));
+  const n=S.items.length, {ok,bad,pts}=counts(), blank=n-ok-bad;
+  const min=n*PTS_BAD, max=n*PTS_OK;
+  const score=Math.round((pts-min)/(max-min)*100);
+  const grade = score>=85?"Sangat baik": score>=70?"Baik": score>=55?"Cukup":"Perlu latihan lagi";
+  $("#scoreBig").textContent=score;
+  $("#grade").textContent=grade;
+  $("#gradeSub").textContent=(timeUp?"Waktu habis. ":"")+`Kamu menjawab benar ${ok} dari ${n} soal.`;
+  $("#stack").innerHTML=`<i class="g" style="width:${ok/n*100}%"></i><i class="r" style="width:${bad/n*100}%"></i><i class="b" style="width:${blank/n*100}%"></i>`;
+  $("#formula").innerHTML=`Poin mentah: ${ok} × 3 + ${bad} × (−1) + ${blank} × 0 = <b class="num">${fmt(pts)}</b>, dari rentang ${fmt(min)} sampai ${fmt(max)}. Skor = (${fmt(pts)} − (${fmt(min)})) ÷ ${max-min} × 100 = <b class="num">${score}</b>.`;
+  const answered=ok+bad, acc=answered?Math.round(ok/answered*100):0, avg=answered?Math.round(used/answered):null;
+  $("#kpis").innerHTML=`
+    <div class="kpi ok"><small>Benar</small><b class="num">${ok}</b></div>
+    <div class="kpi bad"><small>Salah</small><b class="num">${bad}</b></div>
+    <div class="kpi"><small>Tidak dijawab</small><b class="num">${blank}</b></div>
+    <div class="kpi"><small>Poin mentah</small><b class="num">${fmt(pts)}</b></div>
+    <div class="kpi"><small>Akurasi (yang dijawab)</small><b class="num">${acc}%</b></div>
+    <div class="kpi"><small>Waktu terpakai</small><b class="num">${mmss(used)}</b></div>
+    <div class="kpi"><small>Rata-rata per soal</small><b class="num">${avg===null?"-":avg+" dtk"}</b></div>`;
+  const rows=recapRows(it=>it.bab, k=>babOf(k).name, k=>babOf(k).short+": ").sort((a,b)=>a.k-b.k);
+  $("#recap").innerHTML=rows.map(rowHtml).join("");
+  const ins=$("#insight");
+  if(rows.length>1){
+    const best=rows.reduce((a,b)=>b.p>a.p?b:a), worst=rows.reduce((a,b)=>b.p<a.p?b:a);
+    ins.innerHTML=`<div class="ins good"><b>Paling kuat</b>${babOf(best.k).short}: ${best.label} (${best.p}% benar)</div>
+                   <div class="ins weak"><b>Perlu diulang</b>${babOf(worst.k).short}: ${worst.label} (${worst.p}% benar)</div>`;
+  } else ins.innerHTML="";
+  $("#recapType").innerHTML=recapRows(it=>it.type, k=>k, k=>"").sort((a,b)=>b.t-a.t).map(rowHtml).join("");
+  const wrong=S.items.map((it,i)=>({it,i})).filter(x=>S.ans[x.i]!==null&&S.ans[x.i]!==x.it.a);
+  $("#revSum").textContent=`Tinjau soal yang salah (${wrong.length})`;
+  $("#review").innerHTML = wrong.length ? wrong.map(({it,i})=>`
+    <div class="rv"><div class="q">${babOf(it.bab).short}: ${it.q}</div>
+    <div class="y">Jawabanmu: ${LETTERS[S.ans[i]]}. ${it.o[S.ans[i]]}</div>
+    <div class="c">Jawaban benar: ${LETTERS[it.a]}. ${it.o[it.a]}</div>
+    <div class="e">${it.e}</div></div>`).join("") : `<p style="margin:0;color:var(--mut)">Tidak ada jawaban salah.</p>`;
+  $("#revBox").open = false;
+  const redo = S.items.filter((it,i)=>S.ans[i]===null||S.ans[i]!==it.a).length;
+  $("#againWrong").disabled = redo===0;
+  $("#againWrong").textContent = `Ulangi soal yang salah dan kosong (${redo})`;
+  show("result");
+}
+$("#againWrong").onclick=()=>{
+  // ambil ulang dari data asli supaya urutan pilihan tidak teracak dua kali
+  const ids=S.items.filter((it,i)=>S.ans[i]===null||S.ans[i]!==it.a).map(it=>it.id);
+  const items=ids.map(id=>{ const x=ITEMS.find(z=>z.id===id); return {...x,o:x.o.slice()}; });
+  startSession(cfg.shufQ?shuffle(items):items);
+};
+$("#againAll").onclick=()=>startSession(buildItems());
+$("#toMenu").onclick=()=>{ S=null; show("start"); };
+$("#startBtn").onclick=()=>startSession(buildItems());
+
+renderChapters(); updateSummary();
+</script>
+</body>
+</html>

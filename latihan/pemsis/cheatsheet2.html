@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 2 | Pemsis Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F8FCF8;--ink:#111;--mut:#4B4B4B;--acc:#0B7F43;--p:#12A35B;--s:#FF5C9E;--y:#FFE14D;--tint:#D4F1DF;--pink:#FFDDEB;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(18,163,91,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(18,163,91,.15) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut)}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--p);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#fff}.box.g2{--g:var(--s);--gi:var(--ink)}.box.g3{--g:var(--y);--gi:var(--ink)}.box.g4{--g:var(--acc);--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600}
+.t td.c,.t th.c{text-align:center}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tint)}
+.chip.p{background:var(--pink)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.two>div{border:2px solid var(--ink);padding:4px 7px;font-size:12.4px;background:#fff}
+.two h3{margin:0 0 3px;font:800 14px var(--disp)}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--pink)}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+/* cetak / PDF */
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8.5pt;margin:2px 0 0}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .two>div{font-size:7pt;padding:2px 4px;border-width:1px}.two h3{font-size:8pt}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt}
+ .fig{margin:3px 0}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:1.07">
+<svg class='defs' aria-hidden='true'><defs><marker id='ah' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#111'/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="pemsis.html">Pemsis</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet Materi 2</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 2</h1><p class="sub">TI5003 / Pemodelan dan Berpikir Sistem &middot; System Concept</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan2.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet2.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; Definisi sistem</h2><div class="in"><ul><li>Sistem = <span class='hl'>organized assembly of components</span>; sistem melakukan sesuatu; tiap komponen berkontribusi &amp; terpengaruh</li>
+ <li>Kelompok komponen membentuk <b>subsistem</b>; ada <b>lingkungan</b> di luar batas</li>
+ <li>Diidentifikasi seseorang sebagai sesuatu yang menarik minat</li>
+ <li><b>Systemic</b> (melihat dari peran dalam sistem) &ne; <b>systematic</b> (prosedural, teratur)</li></ul></div></section>
+<section class="box g2"><h2>2 &middot; Sudut pandang</h2><div class="in"><div class='two'><div><h3>Out-there</h3>sistem ada independen dari pengamat<br><span class='sm'>mis. tata surya</span></div>
+ <div><h3>Inside-us</h3>sistem = konstruk mental pengamat<br><span class='sm'>mis. sistem tenaga listrik, estuary</span></div></div>
+ <p>Definisi sistem <b>subyektif</b>: tidak ada yang &ldquo;benar/salah&rdquo;, valid bagi pembuatnya, bergantung <span class='hl'>tujuan</span>.</p>
+ <div class='chips'><span class='chip'>Natural: tata surya, biologis</span><span class='chip'>Abstrak: sistem bilangan, informasi</span><span class='chip'>Aktivitas manusia: sosial, bisnis</span></div></div></section>
+<section class="box g3"><h2>3 &middot; Mendeskripsikan sistem</h2><div class="in"><svg class='fig' viewBox='0 0 300 140' role='img' aria-label='Deskripsi sistem'>
+<rect x='3' y='3' width='294' height='134' fill='none' stroke='#111' stroke-width='1.5' stroke-dasharray='5 4'/><text x='9' y='15' font-size='8.5'>LINGKUNGAN</text>
+<rect x='84' y='24' width='134' height='92' fill='#D4F1DF' stroke='#111' stroke-width='2.8'/><text x='151' y='37' font-size='8.5' text-anchor='middle' font-weight='600'>SISTEM</text>
+<circle cx='118' cy='66' r='13' fill='#fff' stroke='#111' stroke-width='2'/><text x='118' y='69' font-size='7.5' text-anchor='middle'>komp.</text>
+<circle cx='184' cy='66' r='13' fill='#fff' stroke='#111' stroke-width='2'/><text x='184' y='69' font-size='7.5' text-anchor='middle'>komp.</text>
+<circle cx='151' cy='98' r='13' fill='#fff' stroke='#111' stroke-width='2'/><text x='151' y='101' font-size='7.5' text-anchor='middle'>komp.</text>
+<path d='M131 66H171M124 77L141 89M178 77L161 89' stroke='#111' stroke-width='1.8' marker-end='url(#ah)' marker-start='url(#ah)'/>
+<path d='M6 70H84' stroke='#111' stroke-width='2.6' marker-end='url(#ah)'/><text x='6' y='62' font-size='8.5'>INPUT</text><text x='6' y='86' font-size='7.5'>memengaruhi sistem,</text><text x='6' y='95' font-size='7.5'>tak dipengaruhi</text>
+<path d='M218 70H294' stroke='#111' stroke-width='2.6' marker-end='url(#ah)'/><text x='246' y='62' font-size='8.5'>OUTPUT</text><text x='224' y='86' font-size='7.5'>dipengaruhi sistem</text>
+</svg><ul><li>Dideskripsikan oleh: <b>pengamat, tujuan, lingkungan, input, output, komponen</b></li>
+ <li>Aspek teknikal, ekonomik, sosio-psikologis saling terkait &rarr; <i>multi-aspect system</i> &rarr; analisis terpadu</li>
+ <li><b>Hirarki:</b> sistem yang melingkupi = lingkungan <i>dan</i> dapat mengontrol sistem yang dilingkupi</li></ul></div></section>
+<section class="box g4"><h2>4 &middot; Status &amp; perilaku</h2><div class="in"><ul><li><b>Variabel status:</b> numerik (kecepatan) atau kategorial (lampu merah/hijau)</li>
+ <li><b>Status</b> = nilai semua variabel status pada saat t</li>
+ <li><b>Perilaku</b> = <span class='hl'>pola perubahan</span> variabel status sepanjang waktu</li>
+ <li><b>Emergent property:</b> muncul dari interaksi, bukan dari komponen individu (mis. kepadatan lalu lintas)</li></ul></div></section>
+<section class="box g1"><h2>5 &middot; Klasifikasi sistem</h2><div class="in"><table class='t'><tr><th>Pasangan</th><th>Penjelasan</th></tr>
+ <tr><td><b>Diskrit</b></td><td>status berubah di titik waktu tertentu (antrian bank)</td></tr>
+ <tr><td><b>Kontinu</b></td><td>berubah terus-menerus (suhu, level air)</td></tr>
+ <tr><td><b>Deterministik</b></td><td>perilaku terprediksi</td></tr>
+ <tr><td><b>Stokastik</b></td><td>ada input acak, tak sepenuhnya terprediksi</td></tr>
+ <tr><td><b>Steady state</b></td><td>ekuilibrium jangka panjang</td></tr>
+ <tr><td><b>Transient</b></td><td>masih dipengaruhi nilai awal</td></tr>
+ <tr><td><b>Terbuka</b></td><td>menerima input &amp; memberi output</td></tr>
+ <tr><td><b>Tertutup</b></td><td>tak terima/beri apa pun ke lingkungan</td></tr></table></div></section>
+<section class="box g2"><h2>6 &middot; Sistem antrian</h2><div class="in"><div class='f'>beban = &lambda; / &mu;<small>&lambda; = laju kedatangan, &mu; = laju layanan &middot; waktu antar kedatangan = 1/&lambda;, waktu layanan = 1/&mu;</small></div>
+ <p class='sm'>Contoh: antar kedatangan 5 mnt, layanan 4 mnt &rarr; &lambda; = 0,2 ; &mu; = 0,25 &rarr; beban = <b>0,8</b></p></div></section>
+<section class="box g3"><h2>7 &middot; Feedback: positif vs negatif</h2><div class="in"><svg class='fig' viewBox='0 0 300 118' role='img' aria-label='Loop R dan B'>
+<g fill='none' stroke='#111' stroke-width='3.4' stroke-linecap='round'>
+<path d='M75 14A38 38 0 0 1 113 52' marker-end='url(#ah)'/><path d='M75 90A38 38 0 0 1 37 52' marker-end='url(#ah)'/>
+<path d='M225 14A38 38 0 0 1 263 52' marker-end='url(#ah)'/><path d='M225 90A38 38 0 0 1 187 52' marker-end='url(#ah)'/></g>
+<circle cx='75' cy='52' r='15' fill='#FF5C9E' stroke='#111' stroke-width='2.5'/><text x='75' y='58' font-size='17' text-anchor='middle' font-weight='700'>R</text>
+<circle cx='225' cy='52' r='15' fill='#FFE14D' stroke='#111' stroke-width='2.5'/><text x='225' y='58' font-size='17' text-anchor='middle' font-weight='700'>B</text>
+<text x='75' y='108' font-size='9' text-anchor='middle' font-weight='600'>Positif (self-reinforcing)</text>
+<text x='225' y='108' font-size='9' text-anchor='middle' font-weight='600'>Negatif (self-correcting)</text>
+</svg><ul><li><b>Positif:</b> memperbesar selisih keadaan dari acuan, cenderung tak stabil (tumbuh atau meledak)</li>
+ <li><b>Negatif:</b> mengecilkan selisih, <span class='hl'>goal seeking</span>, mencari keseimbangan</li></ul></div></section>
+<section class="box g4"><h2>8 &middot; Kendali sistem</h2><div class="in"><p><b>3 syarat:</b> ada <u>target</u> &middot; sistem <u>mampu</u> mencapainya &middot; ada <u>sarana</u> memengaruhi (keputusan, aturan keputusan, kondisi awal)</p><svg class='fig' viewBox='0 0 300 150' role='img' aria-label='Open loop dan closed loop'>
+<text x='4' y='12' font-size='9.5' font-weight='600'>Closed loop (feedback)</text>
+<rect x='4' y='24' width='52' height='26' fill='#fff' stroke='#111' stroke-width='2'/><text x='30' y='41' font-size='9' text-anchor='middle'>Tujuan</text>
+<path d='M56 37H76' stroke='#111' stroke-width='2' marker-end='url(#ah)'/>
+<circle cx='86' cy='37' r='9' fill='#FFE14D' stroke='#111' stroke-width='2'/><text x='86' y='41' font-size='12' text-anchor='middle' font-weight='700'>&minus;</text>
+<path d='M95 37H112' stroke='#111' stroke-width='2' marker-end='url(#ah)'/>
+<rect x='112' y='24' width='62' height='26' fill='#D4F1DF' stroke='#111' stroke-width='2'/><text x='143' y='41' font-size='9' text-anchor='middle'>Pengendali</text>
+<path d='M174 37H194' stroke='#111' stroke-width='2' marker-end='url(#ah)'/>
+<rect x='194' y='24' width='52' height='26' fill='#D4F1DF' stroke='#111' stroke-width='2'/><text x='220' y='41' font-size='9' text-anchor='middle'>Sistem</text>
+<path d='M246 37H292' stroke='#111' stroke-width='2' marker-end='url(#ah)'/><text x='256' y='31' font-size='8.5'>Output</text>
+<path d='M268 37V64H86V47' fill='none' stroke='#FF5C9E' stroke-width='2.4' marker-end='url(#ah)'/><text x='120' y='60' font-size='8' style='fill:#B3124F'>selisih tujuan &minus; pencapaian aktual</text>
+<text x='4' y='98' font-size='9.5' font-weight='600'>Open loop (forward)</text>
+<rect x='4' y='108' width='78' height='26' fill='#fff' stroke='#111' stroke-width='2'/><text x='43' y='125' font-size='9' text-anchor='middle'>Resep / aturan</text>
+<path d='M82 121H120' stroke='#111' stroke-width='2' marker-end='url(#ah)'/>
+<rect x='120' y='108' width='52' height='26' fill='#D4F1DF' stroke='#111' stroke-width='2'/><text x='146' y='125' font-size='9' text-anchor='middle'>Sistem</text>
+<path d='M172 121H214' stroke='#111' stroke-width='2' marker-end='url(#ah)'/><text x='218' y='124' font-size='9'>Output</text>
+<text x='4' y='147' font-size='8' style='fill:#4B4B4B'>tanpa melihat respons aktual sistem</text>
+</svg><table class='t'><tr><th>Jenis</th><th>Inti</th><th>Contoh</th></tr>
+ <tr><td>Open loop</td><td>prediksi respons, tak lihat respons aktual</td><td>pemanggang timer</td></tr>
+ <tr><td>Feedback</td><td>koreksi dari selisih tujuan &amp; hasil, cepat</td><td>termostat, cruise control</td></tr>
+ <tr><td>Feed-forward</td><td>prediksi dampak perubahan input</td><td>ramalan permintaan</td></tr>
+ <tr><td>Self-regulation</td><td>mekanisme internal, lebih lambat, tanpa input terkendali</td><td>suhu tubuh, ekosistem</td></tr></table></div></section>
+<section class="box g1"><h2>9 &middot; Delay &amp; building blocks</h2><div class="in"><div class='chips'><span class='chip y'>reinforcing process</span><span class='chip y'>balancing process</span><span class='chip y'>delay</span></div>
+ <ul><li><b>Delay</b> = selisih waktu antara awal aliran masuk &amp; keluar proses konversi</li>
+ <li>Bisa pada aliran <b>material, energi, informasi</b></li>
+ <li>Delay &rarr; respons transien, <span class='hl'>osilasi</span> di sekitar sasaran</li></ul></div></section>
+<section class="box g2"><h2>10 &middot; 6 pola perilaku sistem</h2><div class="in"><div class='grid2'><svg class='fig' viewBox='0 0 130 92' role='img' aria-label='Eksponensial (loop +)'><path d='M10 6V72H124' fill='none' stroke='#111' stroke-width='1.6'/><polyline points='12.0,72.0 13.6,71.9 15.2,71.8 16.8,71.6 18.4,71.5 20.0,71.3 21.6,71.2 23.2,71.0 24.8,70.9 26.4,70.7 28.0,70.5 29.6,70.3 31.2,70.1 32.8,69.9 34.4,69.7 36.0,69.5 37.6,69.3 39.2,69.0 40.8,68.7 42.4,68.5 44.0,68.2 45.6,67.9 47.2,67.6 48.8,67.3 50.4,66.9 52.0,66.6 53.6,66.2 55.2,65.8 56.8,65.4 58.4,65.0 60.0,64.5 61.6,64.0 63.2,63.5 64.8,63.0 66.4,62.5 68.0,61.9 69.6,61.3 71.2,60.7 72.8,60.1 74.4,59.4 76.0,58.7 77.6,57.9 79.2,57.2 80.8,56.3 82.4,55.5 84.0,54.6 85.6,53.7 87.2,52.7 88.8,51.7 90.4,50.6 92.0,49.5 93.6,48.3 95.2,47.1 96.8,45.8 98.4,44.4 100.0,43.0 101.6,41.6 103.2,40.0 104.8,38.4 106.4,36.7 108.0,35.0 109.6,33.1 111.2,31.2 112.8,29.1 114.4,27.0 116.0,24.8 117.6,22.5 119.2,20.0 120.8,17.5 122.4,14.8 124.0,12.0' fill='none' stroke='#FF5C9E' stroke-width='2.6' stroke-linejoin='round'/><text x='65' y='86' font-size='8.2' text-anchor='middle'>Eksponensial (loop +)</text></svg><svg class='fig' viewBox='0 0 130 92' role='img' aria-label='Goal seeking (loop −)'><path d='M10 6V72H124' fill='none' stroke='#111' stroke-width='1.6'/><path d='M10 12.0H124' stroke='#111' stroke-width='1' stroke-dasharray='3 3'/><polyline points='12.0,67.2 13.6,64.1 15.2,61.2 16.8,58.5 18.4,55.9 20.0,53.5 21.6,51.2 23.2,49.0 24.8,46.9 26.4,45.0 28.0,43.2 29.6,41.4 31.2,39.8 32.8,38.3 34.4,36.8 36.0,35.4 37.6,34.1 39.2,32.9 40.8,31.7 42.4,30.6 44.0,29.6 45.6,28.6 47.2,27.7 48.8,26.8 50.4,26.0 52.0,25.2 53.6,24.5 55.2,23.8 56.8,23.1 58.4,22.5 60.0,21.9 61.6,21.4 63.2,20.9 64.8,20.4 66.4,19.9 68.0,19.5 69.6,19.1 71.2,18.7 72.8,18.3 74.4,17.9 76.0,17.6 77.6,17.3 79.2,17.0 80.8,16.7 82.4,16.5 84.0,16.2 85.6,16.0 87.2,15.8 88.8,15.6 90.4,15.4 92.0,15.2 93.6,15.0 95.2,14.8 96.8,14.7 98.4,14.5 100.0,14.4 101.6,14.3 103.2,14.1 104.8,14.0 106.4,13.9 108.0,13.8 109.6,13.7 111.2,13.6 112.8,13.5 114.4,13.4 116.0,13.3 117.6,13.3 119.2,13.2 120.8,13.1 122.4,13.1 124.0,13.0' fill='none' stroke='#12A35B' stroke-width='2.6' stroke-linejoin='round'/><text x='65' y='86' font-size='8.2' text-anchor='middle'>Goal seeking (loop −)</text></svg><svg class='fig' viewBox='0 0 130 92' role='img' aria-label='Osilasi (loop − + delay)'><path d='M10 6V72H124' fill='none' stroke='#111' stroke-width='1.6'/><path d='M10 42.0H124' stroke='#111' stroke-width='1' stroke-dasharray='3 3'/><polyline points='12.0,69.0 13.6,67.9 15.2,65.8 16.8,62.9 18.4,59.3 20.0,55.3 21.6,50.9 23.2,46.3 24.8,41.8 26.4,37.5 28.0,33.6 29.6,30.1 31.2,27.3 32.8,25.2 34.4,23.8 36.0,23.1 37.6,23.3 39.2,24.1 40.8,25.6 42.4,27.7 44.0,30.2 45.6,33.0 47.2,36.1 48.8,39.3 50.4,42.4 52.0,45.4 53.6,48.1 55.2,50.5 56.8,52.4 58.4,53.8 60.0,54.7 61.6,55.1 63.2,55.0 64.8,54.4 66.4,53.3 68.0,51.8 69.6,50.0 71.2,48.0 72.8,45.9 74.4,43.7 76.0,41.5 77.6,39.5 79.2,37.6 80.8,36.0 82.4,34.7 84.0,33.7 85.6,33.1 87.2,32.9 88.8,33.0 90.4,33.5 92.0,34.2 93.6,35.3 95.2,36.5 96.8,37.9 98.4,39.4 100.0,41.0 101.6,42.5 103.2,43.9 104.8,45.2 106.4,46.3 108.0,47.2 109.6,47.8 111.2,48.2 112.8,48.3 114.4,48.2 116.0,47.9 117.6,47.3 119.2,46.6 120.8,45.7 122.4,44.7 124.0,43.7' fill='none' stroke='#0B7F43' stroke-width='2.6' stroke-linejoin='round'/><text x='65' y='86' font-size='8.2' text-anchor='middle'>Osilasi (loop − + delay)</text></svg><svg class='fig' viewBox='0 0 130 92' role='img' aria-label='S-shaped growth'><path d='M10 6V72H124' fill='none' stroke='#111' stroke-width='1.6'/><path d='M10 12.0H124' stroke='#111' stroke-width='1' stroke-dasharray='3 3'/><polyline points='12.0,71.6 13.6,71.5 15.2,71.4 16.8,71.3 18.4,71.2 20.0,71.1 21.6,70.9 23.2,70.7 24.8,70.5 26.4,70.3 28.0,70.0 29.6,69.7 31.2,69.3 32.8,68.9 34.4,68.4 36.0,67.8 37.6,67.2 39.2,66.4 40.8,65.6 42.4,64.6 44.0,63.5 45.6,62.3 47.2,61.0 48.8,59.5 50.4,57.9 52.0,56.1 53.6,54.2 55.2,52.2 56.8,50.0 58.4,47.8 60.0,45.5 61.6,43.2 63.2,40.8 64.8,38.5 66.4,36.2 68.0,34.0 69.6,31.8 71.2,29.8 72.8,27.9 74.4,26.1 76.0,24.5 77.6,23.0 79.2,21.7 80.8,20.5 82.4,19.4 84.0,18.4 85.6,17.6 87.2,16.8 88.8,16.2 90.4,15.6 92.0,15.1 93.6,14.7 95.2,14.3 96.8,14.0 98.4,13.7 100.0,13.5 101.6,13.3 103.2,13.1 104.8,12.9 106.4,12.8 108.0,12.7 109.6,12.6 111.2,12.5 112.8,12.4 114.4,12.4 116.0,12.3 117.6,12.3 119.2,12.2 120.8,12.2 122.4,12.2 124.0,12.1' fill='none' stroke='#FF5C9E' stroke-width='2.6' stroke-linejoin='round'/><text x='65' y='86' font-size='8.2' text-anchor='middle'>S-shaped growth</text></svg><svg class='fig' viewBox='0 0 130 92' role='img' aria-label='S-shaped + overshoot'><path d='M10 6V72H124' fill='none' stroke='#111' stroke-width='1.6'/><path d='M10 32.0H124' stroke='#111' stroke-width='1' stroke-dasharray='3 3'/><polyline points='12.0,72.0 13.6,69.8 15.2,66.8 16.8,63.3 18.4,59.3 20.0,55.0 21.6,50.5 23.2,46.0 24.8,41.5 26.4,37.2 28.0,33.1 29.6,29.4 31.2,26.1 32.8,23.1 34.4,20.7 36.0,18.7 37.6,17.3 39.2,16.3 40.8,15.8 42.4,15.7 44.0,16.0 45.6,16.7 47.2,17.7 48.8,19.0 50.4,20.4 52.0,22.0 53.6,23.7 55.2,25.5 56.8,27.3 58.4,29.0 60.0,30.6 61.6,32.2 63.2,33.6 64.8,34.8 66.4,35.9 68.0,36.7 69.6,37.4 71.2,37.9 72.8,38.2 74.4,38.4 76.0,38.3 77.6,38.1 79.2,37.8 80.8,37.4 82.4,36.9 84.0,36.3 85.6,35.6 87.2,34.9 88.8,34.3 90.4,33.6 92.0,32.9 93.6,32.3 95.2,31.7 96.8,31.2 98.4,30.7 100.0,30.3 101.6,30.0 103.2,29.8 104.8,29.6 106.4,29.5 108.0,29.5 109.6,29.6 111.2,29.7 112.8,29.8 114.4,30.0 116.0,30.2 117.6,30.4 119.2,30.7 120.8,31.0 122.4,31.2 124.0,31.5' fill='none' stroke='#0B7F43' stroke-width='2.6' stroke-linejoin='round'/><text x='65' y='86' font-size='8.2' text-anchor='middle'>S-shaped + overshoot</text></svg><svg class='fig' viewBox='0 0 130 92' role='img' aria-label='Overshoot & collapse'><path d='M10 6V72H124' fill='none' stroke='#111' stroke-width='1.6'/><path d='M12 25.2L124 67.2' stroke='#111' stroke-width='1' stroke-dasharray='3 3'/><polyline points='12.0,67.6 13.6,66.7 15.2,65.8 16.8,64.7 18.4,63.4 20.0,62.1 21.6,60.5 23.2,58.8 24.8,56.9 26.4,54.9 28.0,52.7 29.6,50.4 31.2,47.9 32.8,45.4 34.4,42.7 36.0,39.9 37.6,37.1 39.2,34.3 40.8,31.5 42.4,28.7 44.0,26.0 45.6,23.5 47.2,21.1 48.8,19.0 50.4,17.1 52.0,15.4 53.6,14.1 55.2,13.0 56.8,12.4 58.4,12.0 60.0,12.1 61.6,12.8 63.2,14.0 64.8,15.8 66.4,18.1 68.0,20.9 69.6,24.0 71.2,27.3 72.8,30.9 74.4,34.5 76.0,38.2 77.6,41.8 79.2,45.3 80.8,48.6 82.4,51.8 84.0,54.7 85.6,57.3 87.2,59.6 88.8,61.7 90.4,63.5 92.0,65.1 93.6,66.4 95.2,67.6 96.8,68.5 98.4,69.3 100.0,69.9 101.6,70.4 103.2,70.8 104.8,71.1 106.4,71.3 108.0,71.5 109.6,71.6 111.2,71.7 112.8,71.8 114.4,71.9 116.0,71.9 117.6,71.9 119.2,72.0 120.8,72.0 122.4,72.0 124.0,72.0' fill='none' stroke='#FF5C9E' stroke-width='2.6' stroke-linejoin='round'/><text x='65' y='86' font-size='8.2' text-anchor='middle'>Overshoot & collapse</text></svg></div><ul><li>Eksponensial: loop + dominan</li><li>S-shaped: loop + dan &minus; (daya dukung)</li><li>S + overshoot: <b>delay</b> di loop &minus; &rarr; osilasi di sekitar kapasitas</li>
+ <li>Overshoot &amp; collapse: daya dukung <b>menurun &amp; habis</b> (mis. Nauru, Club of Rome)</li></ul></div></section>
+<section class="box g3"><h2>11 &middot; Contoh klasik</h2><div class="in"><ul><li><b>Rantai pasok 3 eselon (Forrester, 1961):</b> permintaan konsumen +10% &rarr; fluktuasi membesar ke hulu. Sebabnya: delay material &amp; informasi + aturan pemesanan (umpan balik)</li>
+ <li><b>Nauru:</b> GDP per kapita naik tajam lalu runtuh (sumber daya habis)</li></ul></div></section>
+
+</main>
+<p class="foot">Dirangkum dari slide kuliah TI5003. Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>

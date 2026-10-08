@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 4.1 | Pemsis Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F8FCF8;--ink:#111;--mut:#4B4B4B;--acc:#0B7F43;--p:#12A35B;--s:#FF5C9E;--y:#FFE14D;--tint:#D4F1DF;--pink:#FFDDEB;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(18,163,91,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(18,163,91,.15) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut)}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--p);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#fff}.box.g2{--g:var(--s);--gi:var(--ink)}.box.g3{--g:var(--y);--gi:var(--ink)}.box.g4{--g:var(--acc);--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600}
+.t td.c,.t th.c{text-align:center}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tint)}
+.chip.p{background:var(--pink)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.two>div{border:2px solid var(--ink);padding:4px 7px;font-size:12.4px;background:#fff}
+.two h3{margin:0 0 3px;font:800 14px var(--disp)}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--pink)}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+/* cetak / PDF */
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8.5pt;margin:2px 0 0}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .two>div{font-size:7pt;padding:2px 4px;border-width:1px}.two h3{font-size:8pt}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt}
+ .fig{margin:3px 0}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:1.15">
+<svg class='defs' aria-hidden='true'><defs><marker id='ah' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#111'/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="pemsis.html">Pemsis</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet Materi 4.1</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 4.1</h1><p class="sub">TI5003 / Pemodelan dan Berpikir Sistem &middot; System Model and Diagrams</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan4.1.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet4.1.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; 7 langkah pemodelan</h2><div class="in"><svg class='fig' viewBox='0 0 300 206' role='img' aria-label='Tujuh langkah pemodelan'>
+<rect x='28' y='4' width='224' height='21' fill='#fff' stroke='#111' stroke-width='2'/><text x='140' y='18' font-size='9' text-anchor='middle' font-weight='600'>1. Identifikasi masalah (formulasi)</text><path d='M140 25V33' stroke='#111' stroke-width='2' marker-end='url(#ah)'/><rect x='28' y='33' width='224' height='21' fill='#D4F1DF' stroke='#111' stroke-width='2'/><text x='140' y='47' font-size='9' text-anchor='middle' font-weight='600'>2. Karakterisasi sistem (konseptualisasi)</text><path d='M140 54V62' stroke='#111' stroke-width='2' marker-end='url(#ah)'/><rect x='28' y='62' width='224' height='21' fill='#D4F1DF' stroke='#111' stroke-width='2'/><text x='140' y='76' font-size='9' text-anchor='middle' font-weight='600'>3. Formulasi model (matematis)</text><path d='M140 83V91' stroke='#111' stroke-width='2' marker-end='url(#ah)'/><rect x='28' y='91' width='224' height='21' fill='#FFE14D' stroke='#111' stroke-width='2'/><text x='140' y='105' font-size='9' text-anchor='middle' font-weight='600'>4. Estimasi parameter &amp; solusi</text><path d='M140 112V120' stroke='#111' stroke-width='2' marker-end='url(#ah)'/><rect x='28' y='120' width='224' height='21' fill='#FFE14D' stroke='#111' stroke-width='2'/><text x='140' y='134' font-size='9' text-anchor='middle' font-weight='600'>5. Analisis model</text><path d='M140 141V149' stroke='#111' stroke-width='2' marker-end='url(#ah)'/><rect x='28' y='149' width='224' height='21' fill='#FFDDEB' stroke='#111' stroke-width='2'/><text x='140' y='163' font-size='9' text-anchor='middle' font-weight='600'>6. Verifikasi &amp; validasi</text><path d='M140 170V178' stroke='#111' stroke-width='2' marker-end='url(#ah)'/><rect x='28' y='178' width='224' height='21' fill='#fff' stroke='#111' stroke-width='2'/><text x='140' y='192' font-size='9' text-anchor='middle' font-weight='600'>7. Implementasi</text><path d='M252 150H280V61H252' fill='none' stroke='#FF5C9E' stroke-width='1.8' stroke-dasharray='4 3' marker-end='url(#ah)'/>
+</svg></div></section>
+<section class="box g2"><h2>2 &middot; Tujuan &amp; jenis model</h2><div class="in"><div class='chips'><span class='chip y'>Simplifikasi (abstraksi)</span><span class='chip y'>Formalisasi</span><span class='chip y'>Optimisasi</span><span class='chip y'>Solvabilitas</span></div>
+ <ul><li><b>Formalisasi:</b> terima asumsi, kondisi pembatas, semesta berlaku; di luar batas &rarr; solusi tak layak</li>
+ <li>Dunia masalah: <i>realism, complexity, insolvability</i> &harr; dunia model: <i>lack of realism, simplicity, solvability</i></li></ul>
+ <table class='t'><tr><th>Tipe</th><th>Contoh</th></tr><tr><td>Iconic</td><td>maket gedung, mobil mainan</td></tr><tr><td>Analogous</td><td>monitor radar</td></tr>
+ <tr><td>Symbolic</td><td>peta, diagram alir</td></tr><tr><td>Mathematical</td><td>s = &frac12; g t&sup2;; fungsi &amp; persamaan</td></tr></table>
+ <p class='sm'>Klasifikasi: fungsi (deskriptif / prediktif / normatif) &middot; waktu (statis / dinamis) &middot; kepastian (deterministik / probabilistik).</p>
+ <p class='sm'>Model matematik dipakai karena uji nyata mengganggu, berisiko, mahal.</p></div></section>
+<section class="box g3"><h2>3 &middot; Seni pemodelan</h2><div class="in"><ul><li><b>Ockham&rsquo;s razor:</b> masukkan aspek hanya bila ada alasan kuat</li>
+ <li>Mulai <b>sederhana</b> &rarr; perkaya iteratif &rarr; contoh numerik &rarr; diagram/grafik &rarr; tinjau ulang RPD</li></ul>
+ <table class='t'><tr><th>Hambatan</th><th>Contoh</th></tr><tr><td>Persepsi</td><td>stereotyping / labeling</td></tr><tr><td>Emosional</td><td>takut salah / bodoh</td></tr><tr><td>Kultural</td><td>humor &amp; bermain dianggap tak pantas</td></tr></table>
+ <p class='note'><b>Ugly baby syndrome:</b> pemodel jatuh cinta pada modelnya.</p></div></section>
+<section class="box g4"><h2>4 &middot; Sistem relevan: struktural vs proses</h2><div class="in"><div class='two'><div><h3>Struktural</h3>situasi sudah dikenal, ada struktur umum (mis. antrian) &rarr; deskripsi cepat</div>
+ <div><h3>Proses</h3>tanpa asumsi struktur; mulai dari sudut pandang &amp; proses transformasi utama, struktur ditemukan</div></div>
+ <p><b>4 aturan</b> mengklasifikasi aspek:</p>
+ <table class='t'><tr><th>Memengaruhi?</th><th>Dipengaruhi?</th><th>Berarti</th></tr>
+ <tr><td class='c'>Ya</td><td class='c'>Ya</td><td><b>Komponen</b></td></tr>
+ <tr><td class='c'>Ya</td><td class='c'>Tidak</td><td><b>Input</b> dari lingkungan</td></tr>
+ <tr><td class='c'>Tidak</td><td class='c'>Ya</td><td><b>Output</b></td></tr>
+ <tr><td class='c'>Tidak</td><td class='c'>Tidak</td><td>tidak relevan</td></tr></table>
+ <p class='sm'>Contoh terigu: harga terigu = input; biaya total = output; persediaan rata-rata = komponen; warna seragam = tidak relevan.</p></div></section>
+<section class="box g1"><h2>5 &middot; Kontras deskripsi sistem</h2><div class="in"><ul><li><b>Karakterisasi</b> = deskripsi <b>parsial</b> (hanya fitur relevan); deskripsi total &rarr; unmanageable</li>
+ <li><b>Black box:</b> global, hanya variabel interaksi sistem&ndash;lingkungan</li><li><b>White box:</b> semua objek &amp; atribut dirinci</li>
+ <li><b>Variabel:</b> atribut interaksi antar objek &middot; <b>Parameter:</b> sifat melekat objek (diestimasi dari data)</li></ul></div></section>
+<section class="box g2"><h2>6 &middot; Jenis diagram</h2><div class="in"><table class='t'><tr><th>Diagram</th><th>Fungsi</th></tr>
+ <tr><td>Influence diagram</td><td>notasi: control input, system variable (komponen), uncontrollable input, output/performance</td></tr>
+ <tr><td>Causal loop</td><td>hubungan sebab-akibat &amp; loop</td></tr>
+ <tr><td>Flow chart</td><td>urutan logis / temporal proses</td></tr>
+ <tr><td>Precedence chart</td><td>menjadwalkan aktivitas proyek</td></tr>
+ <tr><td>Spray diagram</td><td>varian sebab-akibat, eksplorasi penyebab</td></tr>
+ <tr><td>Fault tree</td><td>penyebab potensial kegagalan</td></tr>
+ <tr><td>Decision tree</td><td>hasil dari rangkaian pilihan berkaitan</td></tr></table></div></section>
+<section class="box g3"><h2>7 &middot; Decision tree: contoh investasi</h2><div class="in"><svg class='fig' viewBox='0 0 300 156' role='img' aria-label='Pohon keputusan'>
+<g fill='none' stroke='#111' stroke-width='2'><path d='M20 78L96 42M20 78L96 118'/><path d='M102 40L196 20M102 40L196 60M102 120L196 100M102 120L196 138'/></g>
+<rect x='9' y='72' width='13' height='13' fill='#fff' stroke='#111' stroke-width='2.2'/>
+<circle cx='99' cy='41' r='6.5' fill='#FFE14D' stroke='#111' stroke-width='2'/><circle cx='99' cy='119' r='6.5' fill='#FFE14D' stroke='#111' stroke-width='2'/>
+<text x='42' y='52' font-size='8.5' font-weight='700'>Besar</text><text x='42' y='116' font-size='8.5' font-weight='700'>Kecil</text>
+<text x='84' y='22' font-size='8.5' font-weight='700' style='fill:#0B7F43'>EV 129,82</text><text x='84' y='140' font-size='8.5' font-weight='700' style='fill:#0B7F43'>EV 45,93</text>
+<text x='200' y='23' font-size='8.2'>DT 75%: +237,35</text><text x='200' y='63' font-size='8.2'>DR 25%: &minus;192,77</text>
+<text x='200' y='103' font-size='8.2'>DT 75%: +53,61</text><text x='200' y='141' font-size='8.2'>DR 25%: +22,89</text>
+</svg><div class='f'>EV = &Sigma; p &times; hasil<small>Besar: 0,75&times;237,35 + 0,25&times;(&minus;192,77) = 129,82 &middot; Kecil: 45,93</small></div>
+ <p class='sm'>Sensitif thd p: pada p(DT) = 50%, EV besar 22,29 &lt; EV kecil 38,25. Titik impas p &asymp; 54%.</p></div></section>
+<section class="box g4"><h2>8 &middot; EOQ (model persediaan)</h2><div class="in"><svg class='fig' viewBox='0 0 300 150' role='img' aria-label='Kurva biaya EOQ'><path d='M30 8V128H290' fill='none' stroke='#111' stroke-width='2' marker-end='url(#ah)'/><polyline points='56.2,15.5 59.8,28.8 63.3,39.3 66.8,47.8 70.3,54.8 73.9,60.7 77.4,65.7 80.9,70.0 84.4,73.8 88.0,77.1 91.5,80.0 95.0,82.6 98.6,84.9 102.1,87.0 105.6,89.0 109.1,90.7 112.7,92.3 116.2,93.7 119.7,95.1 123.2,96.3 126.8,97.5 130.3,98.6 133.8,99.6 137.3,100.5 140.9,101.4 144.4,102.2 147.9,103.0 151.4,103.7 155.0,104.4 158.5,105.0 162.0,105.6 165.5,106.2 169.1,106.8 172.6,107.3 176.1,107.8 179.7,108.3 183.2,108.7 186.7,109.2 190.2,109.6 193.8,110.0 197.3,110.4 200.8,110.7 204.3,111.1 207.9,111.4 211.4,111.7 214.9,112.0 218.4,112.3 222.0,112.6 225.5,112.9 229.0,113.2 232.5,113.4 236.1,113.7 239.6,113.9 243.1,114.1 246.6,114.4 250.2,114.6 253.7,114.8 257.2,115.0 260.7,115.2 264.3,115.4 267.8,115.6' fill='none' stroke='#FF5C9E' stroke-width='2.6'/><polyline points='56.2,116.5 59.8,114.9 63.3,113.4 66.8,111.8 70.3,110.3 73.9,108.7 77.4,107.2 80.9,105.6 84.4,104.1 88.0,102.5 91.5,101.0 95.0,99.5 98.6,97.9 102.1,96.4 105.6,94.8 109.1,93.3 112.7,91.7 116.2,90.2 119.7,88.6 123.2,87.1 126.8,85.5 130.3,84.0 133.8,82.4 137.3,80.9 140.9,79.3 144.4,77.8 147.9,76.2 151.4,74.7 155.0,73.1 158.5,71.6 162.0,70.0 165.5,68.5 169.1,66.9 172.6,65.4 176.1,63.8 179.7,62.3 183.2,60.8 186.7,59.2 190.2,57.7 193.8,56.1 197.3,54.6 200.8,53.0 204.3,51.5 207.9,49.9 211.4,48.4 214.9,46.8 218.4,45.3 222.0,43.7 225.5,42.2 229.0,40.6 232.5,39.1 236.1,37.5 239.6,36.0 243.1,34.4 246.6,32.9 250.2,31.3 253.7,29.8 257.2,28.2 260.7,26.7 264.3,25.1 267.8,23.6' fill='none' stroke='#12A35B' stroke-width='2.6'/><polyline points='59.8,15.8 63.3,24.7 66.8,31.7 70.3,37.1 73.9,41.5 77.4,44.9 80.9,47.7 84.4,49.9 88.0,51.6 91.5,53.0 95.0,54.1 98.6,54.8 102.1,55.4 105.6,55.8 109.1,56.0 112.7,56.0 116.2,55.9 119.7,55.7 123.2,55.4 126.8,55.0 130.3,54.5 133.8,54.0 137.3,53.4 140.9,52.7 144.4,52.0 147.9,51.2 151.4,50.4 155.0,49.5 158.5,48.6 162.0,47.7 165.5,46.7 169.1,45.7 172.6,44.7 176.1,43.6 179.7,42.6 183.2,41.5 186.7,40.4 190.2,39.2 193.8,38.1 197.3,36.9 200.8,35.7 204.3,34.5 207.9,33.3 211.4,32.1 214.9,30.9 218.4,29.6 222.0,28.3 225.5,27.1 229.0,25.8 232.5,24.5 236.1,23.2 239.6,21.9 243.1,20.6 246.6,19.3 250.2,17.9 253.7,16.6 257.2,15.3 260.7,13.9 264.3,12.5 267.8,11.2' fill='none' stroke='#111' stroke-width='3.4'/><path d='M112.0 56.0V128' stroke='#111' stroke-dasharray='4 3'/><circle cx='112.0' cy='56.0' r='4.5' fill='#FFE14D' stroke='#111' stroke-width='2'/><text x='112.0' y='141' font-size='9.5' text-anchor='middle' font-weight='600'>Q* = EOQ</text><text x='262' y='141' font-size='9'>Q</text><text x='4' y='14' font-size='9'>Biaya</text><text x='215' y='22' font-size='8.5'>Total</text><text x='214' y='72' font-size='8.5' style='fill:#0B7F43'>Simpan ½Qvr</text><text x='198' y='124' font-size='8.5' style='fill:#B3124F'>Pesan sD/Q</text></svg><div class='f'>Cost(Q) = sD/Q + &frac12; Q v r<br>EOQ = &radic;(2 s D / v r)<small>D permintaan/thn &middot; s biaya/pesan &middot; v nilai/unit &middot; r biaya simpan per $/thn &middot; Q = variabel keputusan; D,v,s,r = parameter</small></div>
+ <p class='sm'><b>Contoh:</b> D=240, v=1000, s=132, r=0,24 &rarr; EOQ &asymp; <b>16,25</b> ton, biaya &asymp; $3.900. Q=24 &rarr; $4.200 (+7,7%).<br>EOQ &prop; &radic;s: s&times;2 &rarr; EOQ &times;&radic;2 (&asymp;23). r turun &rarr; EOQ naik (r=0,20 &rarr; 17,8).</p></div></section>
+<section class="box g1"><h2>9 &middot; Validasi asumsi EOQ</h2><div class="in"><table class='t'><tr><th>Asumsi</th><th class='c'>Ok?</th></tr>
+ <tr><td>Permintaan konstan (uji grafik)</td><td class='c'>ya</td></tr><tr><td>Biaya kirim tetap per order</td><td class='c'>ya</td></tr>
+ <tr><td>Tak boleh kekurangan stok</td><td class='c'>ya (ada fleksibilitas)</td></tr>
+ <tr><td><b>Lead time = 0</b></td><td class='c'><b>tidak</b> &rarr; perlu buffer</td></tr>
+ <tr><td>Biaya simpan konstan per $ (bunga + asuransi)</td><td class='c'>ya</td></tr></table></div></section>
+<section class="box g2"><h2>10 &middot; Contoh ozon (sistem relevan)</h2><div class="in"><ul><li>Isu dipilih menurut <b>sasaran &amp; world view</b> analis (mis. Isu 2: proses deplesi ozon global; &ldquo;learning is useful&rdquo;)</li>
+ <li>Rantai: CFC dilepas &rarr; CFC di atmosfer &rarr; molekul CFC terpecah jadi <b>atom klorin</b> &rarr; klorin merusak ozon &rarr; ozon turun &rarr; <b>UV</b> ke bumi naik</li></ul></div></section>
+
+</main>
+<p class="foot">Dirangkum dari slide kuliah TI5003. Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>
