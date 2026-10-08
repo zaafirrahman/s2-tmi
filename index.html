@@ -4,7 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Repo S2 | Teknik dan Manajemen Industri</title>
-<link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0C0C0A">
+<meta name="application-name" content="Repo S2 TMI">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Repo S2 TMI">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -95,5 +103,12 @@ background:var(--amber);color:var(--ni);border:1.5px solid var(--amber);box-shad
   <p class="cap"><span class="rb" aria-hidden="true">R</span><span>Reinforcing loop: belajar, berlatih, menentukan arah riset, lalu belajar lagi.</span></p>
 </main>
 
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('sw.js').catch(function(e){console.warn('SW gagal:',e)});
+  });
+}
+</script>
 </body>
 </html>
