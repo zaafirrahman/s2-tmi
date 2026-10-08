@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 4 | Anstat Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBFBF8;--ink:#111;--mut:#4B4B4B;--acc:#E2362A;--p:#12A594;--s:#FF4B3E;--y:#FFE14D;--tint:#CDEFE9;--pink:#FFDAD6;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(18,165,148,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(18,165,148,.16) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut)}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--s);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#111}.box.g2{--g:var(--s);--gi:#111}.box.g3{--g:var(--y);--gi:#111}.box.g4{--g:#111;--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600}
+.t td.c,.t th.c{text-align:center}
+table.fx{table-layout:fixed}.fx td,.fx th{overflow-wrap:anywhere}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tint)}
+.chip.p{background:var(--pink)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.two>div{border:2px solid var(--ink);padding:4px 7px;font-size:12.4px;background:#fff}
+.two h3{margin:0 0 3px;font:800 14px var(--disp)}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--pink)}
+.ex{border:2px dashed var(--ink);padding:3px 8px;margin:6px 0;font-size:12.4px;background:#fff}
+.ex::before{content:"Contoh ";font:800 12px var(--disp);background:var(--ink);color:#fff;padding:0 5px;margin-right:4px}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8.5pt;margin:2px 0 0}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .two>div{font-size:7pt;padding:2px 4px;border-width:1px}.two h3{font-size:8pt}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .ex{font-size:7pt;padding:1px 4px;margin:3px 0;border-width:1px}.ex::before{font-size:6.5pt}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt}
+ .fig{margin:3px 0}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:1.161">
+<svg class='defs' aria-hidden='true'><defs><marker id='ah' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#111'/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="anstat.html">Anstat</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet 4</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 4</h1><p class="sub">TI5002 / Analisis Data dan Statistika &middot; Analisis Faktor Eksploratori</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan4.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet4.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; Tujuan &amp; ide dasar</h2><div class="in"><ul><li><b>2 tujuan:</b> (1) mengidentifikasi <span class='hl'>konstruksi yang mendasari data</span>; (2) <span class='hl'>mengurangi jumlah variabel</span> agar mudah ditangani</li>
+<li>Proses mentransformasi variabel orisinal &rarr; variabel baru (<b>faktor</b>) yang <b>saling tidak berkorelasi</b></li>
+<li>Faktor = kombinasi linier variabel orisinal (atau sebaliknya)</li>
+<li>Faktor <b>diurutkan</b> variansi terjelaskan menurun: F1 paling informatif, faktor terakhir paling sedikit</li>
+<li>Jumlah faktor maksimum = jumlah variabel awal (p); umumnya diambil sejumlah kecil yang dinilai mencukupi</li></ul>
+<div class='ex'>2 variabel (12 responden): var X1 12,17 + var X2 13,23 = 25,40 = var F1 25,31 + var F2 0,09. Total variansi tetap, tapi F1 membawa hampir semuanya &rarr; cukup 1 dimensi.</div></div></section>
+<section class="box g3"><h2>2 &middot; PCA vs common factor</h2><div class="in"><svg class='fig' viewBox='0 0 300 126' role='img' aria-label='PCA dan CFA'>
+<g stroke='#111' stroke-width='1.6' fill='#CDEFE9'>
+<rect x='10' y='8' width='34' height='20'/><rect x='10' y='88' width='34' height='20'/><rect x='62' y='88' width='34' height='20'/>
+<circle cx='28' cy='58' r='13' fill='#FFE14D'/><circle cx='80' cy='58' r='13' fill='#FFE14D'/>
+<rect x='170' y='8' width='34' height='20'/><rect x='215' y='8' width='34' height='20'/><rect x='260' y='8' width='34' height='20'/>
+<circle cx='200' cy='58' r='13' fill='#FFE14D'/><circle cx='260' cy='58' r='13' fill='#FFE14D'/></g>
+<g stroke='#111' stroke-width='1.4' fill='none' marker-end='url(#ah)'><path d='M28 28V44' marker-end='url(#ah)'/><path d='M27 88L27 72' marker-end='url(#ah)'/><path d='M79 88L79 72' marker-end='url(#ah)'/></g>
+<g stroke='#111' stroke-width='1.2' fill='none'><path d='M200 45L190 30' marker-end='url(#ah)'/><path d='M200 45L228 30' marker-end='url(#ah)'/><path d='M260 45L275 30' marker-end='url(#ah)'/><path d='M260 45L235 30' marker-end='url(#ah)'/></g>
+<text x='28' y='61' font-size='7.5' text-anchor='middle'>PC1</text><text x='80' y='61' font-size='7.5' text-anchor='middle'>PC2</text>
+<text x='177' y='22' font-size='8'>X1</text><text x='222' y='22' font-size='8'>X2</text><text x='267' y='22' font-size='8'>X3</text>
+<text x='200' y='61' font-size='7.5' text-anchor='middle'>CF1</text><text x='260' y='61' font-size='7.5' text-anchor='middle'>CF2</text>
+<text x='17' y='21' font-size='8'>X1</text><text x='17' y='101' font-size='8'>X2</text><text x='69' y='101' font-size='8'>X3</text>
+<text x='10' y='122' font-size='8' style='font-weight:600'>PCA: variabel &rarr; komponen</text><text x='165' y='122' font-size='8' style='font-weight:600'>CFA: faktor &rarr; variabel + e</text>
+<text x='190' y='84' font-size='8' style='fill:#B3261B'>+ error unik e</text>
+</svg>
+<div class='f'>PCA : PC<sub>m</sub> = w<sub>m1</sub>X<sub>1</sub> + w<sub>m2</sub>X<sub>2</sub> + &hellip; + w<sub>mp</sub>X<sub>p</sub><br>CFA : X<sub>p</sub> = v<sub>p1</sub>CF<sub>1</sub> + &hellip; + v<sub>pm</sub>CF<sub>m</sub> + e<sub>p</sub></div>
+<ul><li>PCA: komponen = kombinasi variabel, <b>tanpa</b> suku error</li><li>CFA: variabel dijelaskan faktor umum + error unik e</li></ul></div></section>
+<section class="box g2"><h2>3 &middot; Syarat input &amp; kecukupan data</h2><div class="in"><ul><li>Variabel awal punya <b>landasan teoritis/logis</b></li><li>Sejauh mungkin <b>metrik</b></li>
+<li>Magnitude (skala) <b>seragam</b>; jika tidak, standardisasi atau pakai <b>matriks korelasi</b> sebagai input</li></ul>
+<p><b>KMO</b> (kecukupan sampel keseluruhan):</p>
+<table class='t'><tr><th class='c'>0,90</th><td>marvelous</td><th class='c'>0,60</th><td>mediocre</td></tr>
+<tr><th class='c'>0,80</th><td>meritorious</td><th class='c'>0,50</th><td>miserable</td></tr>
+<tr><th class='c'>0,70</th><td>middling</td><th class='c'>&lt;0,50</th><td><b>unacceptable</b></td></tr></table>
+<p>Diagonal matriks korelasi <b>anti-image</b> = kecukupan tiap variabel. <span class='hl'>Jika &lt; 0,50</span> &rarr; penyertaan variabel perlu dipertimbangkan kembali.</p>
+<div class='ex'>KMO 0,74 antara 0,70 dan 0,80 &rarr; <b>middling</b>.</div></div></section>
+<section class="box g4"><h2>4 &middot; Menentukan jumlah faktor</h2><div class="in"><div class='chips'><span class='chip y'>a priori</span><span class='chip y'>nilai eigen</span><span class='chip y'>% variansi terjelaskan</span><span class='chip y'>scree plot</span></div>
+<ul><li><b>Eigen &gt; 1</b> &rarr; faktor dipertahankan</li><li><b>% variansi</b> kumulatif cukup besar</li><li><b>Scree plot:</b> pertahankan faktor sebelum titik siku (kurva mulai mendatar)</li></ul><svg class='fig' viewBox='0 0 300 140' role='img' aria-label='Scree plot'>
+<path d='M32 15V112H280' fill='none' stroke='#111' stroke-width='1.6'/>
+<path d='M32 84.0H280' stroke='#FF4B3E' stroke-width='1.4' stroke-dasharray='4 3'/><text x='283' y='87.0' font-size='8' fill='#B3261B' style='fill:#B3261B'>1</text>
+<path d='M40 34.9 L95 62.3 L150 101.4 L205 110.2 L260 111.2' fill='none' stroke='#12A594' stroke-width='2.5'/>
+<rect x='37' y='31.9' width='6' height='6' fill='#FF4B3E' stroke='#111'/><text x='40' y='124' font-size='8' text-anchor='middle'>1</text><text x='45' y='29.9' font-size='7.5'>2.7546</text><rect x='92' y='59.3' width='6' height='6' fill='#FF4B3E' stroke='#111'/><text x='95' y='124' font-size='8' text-anchor='middle'>2</text><text x='100' y='57.3' font-size='7.5'>1.7749</text><rect x='147' y='98.4' width='6' height='6' fill='#FF4B3E' stroke='#111'/><text x='150' y='124' font-size='8' text-anchor='middle'>3</text><text x='155' y='96.4' font-size='7.5'>0.3771</text><rect x='202' y='107.2' width='6' height='6' fill='#FF4B3E' stroke='#111'/><text x='205' y='124' font-size='8' text-anchor='middle'>4</text><text x='210' y='105.2' font-size='7.5'>0.065</text><rect x='257' y='108.2' width='6' height='6' fill='#FF4B3E' stroke='#111'/><text x='260' y='124' font-size='8' text-anchor='middle'>5</text><text x='265' y='106.2' font-size='7.5'>0.0285</text><text x='150' y='135' font-size='8.5' text-anchor='middle'>Component number</text><text x='36' y='12' font-size='8.5'>Eigenvalue</text><text x='160' y='62' font-size='8.5' style='font-weight:600'>siku di faktor 3 &rarr; ambil 2</text></svg>
+<div class='f'>Proporsi faktor k = eigen<sub>k</sub> / p<br>Kumulatif = &Sigma; eigen / p<small>pada matriks korelasi, total variansi = p (jumlah variabel)</small></div>
+<table class='t fx'><tr><th class='c'>Faktor</th><th class='c'>Eigen</th><th class='c'>Prop.</th><th class='c'>Kum.</th></tr>
+<tr><td class='c'>1</td><td class='c'>2,7546</td><td class='c'>0,5509</td><td class='c'>0,5509</td></tr>
+<tr><td class='c'>2</td><td class='c'>1,7749</td><td class='c'>0,3550</td><td class='c'>0,9059</td></tr>
+<tr><td class='c'>3</td><td class='c'>0,3771</td><td class='c'>0,0754</td><td class='c'>0,9813</td></tr>
+<tr><td class='c'>4</td><td class='c'>0,0650</td><td class='c'>0,0130</td><td class='c'>0,9943</td></tr>
+<tr><td class='c'>5</td><td class='c'>0,0285</td><td class='c'>0,0057</td><td class='c'>1,0000</td></tr></table>
+<p><b>Simpulan:</b> eigen &gt; 1 hanya F1 &amp; F2 &rarr; 2 faktor, 90,6% variansi. Contoh: 2,5/5 = 50%; (2,7546+1,7749)/5 = 90,6%.</p></div></section>
+<section class="box g1"><h2>5 &middot; Bobot faktor &amp; komunalitas</h2><div class="in"><div class='f'>Komunalitas h&sup2; = &Sigma; (bobot)&sup2; pada faktor yang dipertahankan<small>kuadratkan dulu, baru jumlahkan (bukan jumlah bobot)</small></div>
+<p>Komunalitas = proporsi variansi variabel yang dijelaskan faktor-faktor yang diekstraksi.</p>
+<div class='ex'>X<sub>1</sub>: (&minus;0,30)&sup2; + 0,85&sup2; = 0,09 + 0,7225 = <b>0,81</b>. Bobot 0,6 &amp; 0,8: 0,36 + 0,64 = <b>1,00</b>. X<sub>5</sub> komunalitas 0,96 &rarr; 96% variansinya terwakili.</div>
+<table class='t fx'><tr><th></th><th class='c'>F1</th><th class='c'>F2</th><th class='c'>h&sup2;</th><th class='c'>V1</th><th class='c'>V2</th></tr>
+<tr><td>X1</td><td class='c'>&minus;.30</td><td class='c'>.85</td><td class='c'>.81</td><td class='c'>&minus;.17</td><td class='c'><b>.89</b></td></tr>
+<tr><td>X2</td><td class='c'>.05</td><td class='c'>.92</td><td class='c'>.83</td><td class='c'>.18</td><td class='c'><b>.90</b></td></tr>
+<tr><td>X3</td><td class='c'>&minus;.94</td><td class='c'>.28</td><td class='c'>.94</td><td class='c'><b>&minus;.89</b></td><td class='c'>.41</td></tr>
+<tr><td>X4</td><td class='c'>.95</td><td class='c'>.23</td><td class='c'>.94</td><td class='c'><b>.97</b></td><td class='c'>.09</td></tr>
+<tr><td>X5</td><td class='c'>.94</td><td class='c'>.27</td><td class='c'>.96</td><td class='c'><b>.97</b></td><td class='c'>.13</td></tr></table>
+<p class='sm'>F1,F2 = tanpa rotasi; V1,V2 = Varimax. Variansi terjelaskan: tanpa rotasi 2,755 &amp; 1,775; varimax 2,735 &amp; 1,794 (total tetap; komunalitas tidak berubah).</p></div></section>
+<section class="box g2"><h2>6 &middot; Rotasi faktor</h2><div class="in"><svg class='fig' viewBox='0 0 300 120' role='img' aria-label='Rotasi orthogonal dan oblique'>
+<g stroke='#111' stroke-width='1.2' fill='none'><path d='M10 60H140M75 12V112'/><path d='M160 60H290M225 12V112'/></g>
+<g stroke='#12A594' stroke-width='2.4' fill='none'><path d='M75 60L122.1 82.0M75 60L97.0 12.9'/><path d='M225 60L272.1 82.0M225 60L251.0 15.0'/></g>
+<text x='124.1' y='91.0' font-size='7.5'>F1 rotasi</text><text x='100.0' y='15.9' font-size='7.5'>F2 rotasi</text>
+<text x='274.1' y='91.0' font-size='7.5'>F1 rotasi</text><text x='254.0' y='18.0' font-size='7.5'>F2 rotasi</text>
+<text x='80' y='53' font-size='8.5' style='font-weight:600'>90&deg;</text><text x='230' y='53' font-size='8.5' style='font-weight:600'>85&deg;</text>
+<text x='6' y='10' font-size='9' style='font-weight:600'>Orthogonal</text><text x='162' y='10' font-size='9' style='font-weight:600'>Oblique</text>
+<text x='112' y='56' font-size='7'>F1</text><text x='78' y='22' font-size='7'>F2</text><text x='262' y='56' font-size='7'>F1</text><text x='228' y='22' font-size='7'>F2</text>
+</svg>
+<ul><li><b>Orthogonal</b> (mis. <b>Varimax</b>): sumbu tetap tegak lurus 90&deg; &rarr; faktor tetap tak berkorelasi</li>
+<li><b>Oblique:</b> sumbu boleh membentuk sudut lain (mis. 85&deg;) &rarr; faktor boleh berkorelasi</li>
+<li>Tujuan rotasi: tiap variabel jelas masuk ke satu faktor</li></ul></div></section>
+<section class="box g3"><h2>7 &middot; Langkah membaca output (contoh 5 variabel)</h2><div class="in"><ol><li><b>Matriks korelasi:</b> cari kelompok korelasi tinggi. X4&ndash;X5 = 0,927; X3&ndash;X4 = &minus;0,832; X3&ndash;X5 = &minus;0,774 (tanda &minus; = arah berlawanan, bukan lemah); X1&ndash;X2 = 0,610; X1&ndash;X4 = &minus;0,018 &rarr; 2 kelompok</li>
+<li>Cek KMO &amp; anti-image</li><li>Tentukan jumlah faktor (eigen, % variansi, scree)</li><li>Rotasi (Varimax)</li>
+<li>Kelompokkan variabel ke faktor dengan bobot terbesar; beri nama</li><li>Cek komunalitas</li></ol>
+<table class='t fx'><tr><th>Pernyataan</th><th>Faktor (varimax)</th></tr>
+<tr><td>X1 biaya izin pusat vs daerah; X2 masalah pusat vs daerah</td><td>F2</td></tr>
+<tr><td>X3 pegawai ramah-sopan; X4 dikenal personal; X5 tak profesional &rarr; tak kembali</td><td>F1 (X3 bertanda &minus;)</td></tr></table></div></section>
+<section class="box g4"><h2>8 &middot; Skor faktor &amp; validasi</h2><div class="in"><ul><li>Skor faktor = kombinasi linier variabel standar dengan koefisien skor faktor</li></ul>
+<div class='f'>Skor F1 = &minus;0,039X<sub>1</sub> + 0,089X<sub>2</sub> &minus; 0,315X<sub>3</sub> + 0,359X<sub>4</sub> + 0,359X<sub>5</sub></div>
+<ul><li>Skor faktor dipakai sebagai <b>input analisis lanjut</b> (cluster, diskriminan, regresi berganda); variabel awal direduksi &rarr; hitungan lebih mudah</li>
+<li><b>Validasi = replicability:</b> bagi data jadi dua (atau pakai data lain terpisah), ulangi analisis, bandingkan dengan hasil awal</li></ul></div></section>
+
+</main>
+<p class="foot">Dirangkum dari slide Minggu 4 (TI5002). Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>

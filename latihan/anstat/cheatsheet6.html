@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 6 | Anstat Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBFBF8;--ink:#111;--mut:#4B4B4B;--acc:#E2362A;--p:#12A594;--s:#FF4B3E;--y:#FFE14D;--tint:#CDEFE9;--pink:#FFDAD6;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(18,165,148,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(18,165,148,.16) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut)}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--s);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#111}.box.g2{--g:var(--s);--gi:#111}.box.g3{--g:var(--y);--gi:#111}.box.g4{--g:#111;--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600}
+.t td.c,.t th.c{text-align:center}
+table.fx{table-layout:fixed}.fx td,.fx th{overflow-wrap:anywhere}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tint)}
+.chip.p{background:var(--pink)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.two>div{border:2px solid var(--ink);padding:4px 7px;font-size:12.4px;background:#fff}
+.two h3{margin:0 0 3px;font:800 14px var(--disp)}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--pink)}
+.ex{border:2px dashed var(--ink);padding:3px 8px;margin:6px 0;font-size:12.4px;background:#fff}
+.ex::before{content:"Contoh ";font:800 12px var(--disp);background:var(--ink);color:#fff;padding:0 5px;margin-right:4px}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8.5pt;margin:2px 0 0}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .two>div{font-size:7pt;padding:2px 4px;border-width:1px}.two h3{font-size:8pt}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .ex{font-size:7pt;padding:1px 4px;margin:3px 0;border-width:1px}.ex::before{font-size:6.5pt}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt}
+ .fig{margin:3px 0}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:0.922">
+<svg class='defs' aria-hidden='true'><defs><marker id='ah' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#111'/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="anstat.html">Anstat</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet 6</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 6</h1><p class="sub">TI5002 / Analisis Data dan Statistika &middot; Structural Equation Modeling</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan6.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet6.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; Apa itu SEM?</h2><div class="in"><ul><li>Teknik dependen sebelumnya: <b>satu hubungan</b> pada satu waktu &amp; error pengukuran = 0</li>
+<li><b>SEM</b>: menganalisis <span class='hl'>beberapa hubungan dependen sekaligus (simultan)</span> &rarr; efisiensi statistika; juga memodelkan variabel dengan <b>error pengukuran</b></li></ul>
+<p><b>2 karakteristik dasar:</b></p>
+<ol><li>estimasi banyak hubungan dependen yang <b>saling terkait</b></li><li>mampu merepresentasikan konsep tak teramati (<b>variabel laten</b>) &amp; memperhitungkan <b>measurement error</b></li></ol>
+<p class='sm'>Contoh sistem persamaan: Y1 = X1 + X2; Y2 = X1 + X3; Y3 = Y1 + Y2.</p></div></section>
+<section class="box g3"><h2>2 &middot; Variabel laten &amp; error pengukuran</h2><div class="in"><ul><li><b>Laten</b>: tak diamati langsung (mis. kepuasan, loyalitas); <b>manifes / indikator</b>: teramati (butir kuesioner)</li>
+<li><b>Reliability</b>: sejauh mana variabel &lsquo;bebas error&rsquo;. Validitas &ne; reliabilitas</li>
+<li><b>Measurement model</b>: hubungan variabel laten &rarr; manifes; satu konsep bisa diwakili banyak pertanyaan (mis. summated scale)</li></ul>
+<div class='f'>&beta;<sub>y|x</sub> = &beta;<sub>s</sub> &times; &rho;<sub>x</sub><small>teramati = sebenarnya &times; reliabilitas prediktor &rarr; error pengukuran melemahkan koefisien</small></div>
+<div class='ex'>&beta;<sub>s</sub> = 0,60; &rho;<sub>x</sub> = 0,80 &rarr; teramati = <b>0,48</b> (0,60/0,80 = 0,75 adalah koreksi, bukan nilai teramati).</div></div></section>
+<section class="box g2"><h2>3 &middot; Path diagram</h2><div class="in"><svg class='fig' viewBox='0 0 300 150' role='img' aria-label='Path diagram contoh'>
+<path d='M70 28L118 38' stroke='#111' stroke-width='1.8' fill='none' marker-end='url(#ah)'/><path d='M70 72L118 50' stroke='#111' stroke-width='1.8' fill='none' marker-end='url(#ah)'/><path d='M150 56L150 94' stroke='#111' stroke-width='1.8' fill='none' marker-end='url(#ah)'/><path d='M70 124L118 116' stroke='#111' stroke-width='1.8' fill='none' marker-end='url(#ah)'/><path d='M180 50L222 68' stroke='#111' stroke-width='1.8' fill='none' marker-end='url(#ah)'/><path d='M180 106L222 84' stroke='#111' stroke-width='1.8' fill='none' marker-end='url(#ah)'/>
+<ellipse cx='36' cy='25' rx='34' ry='14' fill='#CDEFE9' stroke='#111' stroke-width='1.8'/><text x='36' y='28' font-size='8' text-anchor='middle'>X1 Coworker</text><ellipse cx='36' cy='75' rx='34' ry='14' fill='#CDEFE9' stroke='#111' stroke-width='1.8'/><text x='36' y='78' font-size='8' text-anchor='middle'>X2 Work env.</text><ellipse cx='36' cy='125' rx='34' ry='14' fill='#CDEFE9' stroke='#111' stroke-width='1.8'/><text x='36' y='128' font-size='8' text-anchor='middle'>X3 Pay level</text>
+<ellipse cx='150' cy='40' rx='34' ry='14' fill='#FFE14D' stroke='#111' stroke-width='1.8'/><text x='150' y='43' font-size='8' text-anchor='middle'>Y1 Job sat.</text><ellipse cx='150' cy='110' rx='34' ry='14' fill='#FFE14D' stroke='#111' stroke-width='1.8'/><text x='150' y='113' font-size='8' text-anchor='middle'>Y2 Org. comm.</text><ellipse cx='260' cy='76' rx='38' ry='14' fill='#FFE14D' stroke='#111' stroke-width='1.8'/><text x='260' y='79' font-size='8' text-anchor='middle'>Y3 Turnover</text>
+<text x='6' y='12' font-size='8' style='font-weight:600'>eksogen</text><text x='210' y='14' font-size='8' style='font-weight:600'>endogen</text></svg>
+<table class='t'><tr><th>Simbol</th><th>Arti</th></tr>
+<tr><td>panah lurus, 1 kepala</td><td>hubungan <b>kausal langsung</b></td></tr>
+<tr><td>panah lengkung</td><td><b>korelasi</b> antar konstruk</td></tr>
+<tr><td>panah lurus, 2 kepala</td><td><b>nonrecursive / reciprocal</b></td></tr></table>
+<ul><li><b>Konstruk</b> = konsep berdasar teori, building block hubungan</li>
+<li><b>Eksogen</b> = independen, tak ada panah 1-kepala masuk. <b>Endogen</b> = dapat diprediksi konstruk lain</li>
+<li><b>Asumsi path diagram:</b> semua hubungan <b>kausal</b> &amp; <b>linier</b></li></ul></div></section>
+<section class="box g4"><h2>4 &middot; Persamaan struktural &amp; compound path</h2><div class="in"><p class='sm'>Contoh: 3 attitude (job satisfaction, org. commitment, prob. turnover) dari 3 anteseden.</p>
+<div class='f'>Job sat. = co. att. + work env.<br>Org. comm. = job sat. + pay level<br>Prob. turn. = job sat. + org. comm.</div>
+<p>Var. endogen = &beta;&middot;var. eksogen + &beta;&middot;var. endogen + error, mis.<br>Y1 = &beta;1X1 + &beta;2X2 + e1; Y3 = &beta;7Y1 + &beta;8Y2 + e3</p>
+<p><b>Korelasi = compound paths</b> (X1&rarr;Y1 koef. B, X2&rarr;Y1 koef. C, X1&harr;X2 koef. A):</p>
+<div class='f'>r<sub>x1,x2</sub> = A<br>r<sub>x1,Y1</sub> = B + AC<br>r<sub>x2,Y1</sub> = C + AB</div>
+<div class='ex'>r = 0,5; 0,6; 0,7 &rarr; A = 0,5; B + 0,5C = 0,6; C + 0,5B = 0,7 &rarr; <b>B = 0,33; C = 0,53</b></div></div></section>
+<section class="box g1"><h2>5 &middot; Notasi &amp; persamaan matriks</h2><div class="in"><svg class='fig' viewBox='0 0 300 104' role='img' aria-label='Notasi SEM'>
+<g stroke='#111' stroke-width='1.6' fill='#CDEFE9'><rect x='22' y='14' width='30' height='18'/><rect x='22' y='68' width='30' height='18'/><rect x='246' y='14' width='30' height='18'/><rect x='246' y='68' width='30' height='18'/><circle cx='105' cy='50' r='17' fill='#FFE14D'/><circle cx='195' cy='50' r='17' fill='#FFE14D'/></g>
+<g stroke='#111' stroke-width='1.4' fill='none'><path d='M92 38L54 26' marker-end='url(#ah)'/><path d='M92 62L54 76' marker-end='url(#ah)'/><path d='M122 50H176' marker-end='url(#ah)'/><path d='M208 38L244 26' marker-end='url(#ah)'/><path d='M208 62L244 76' marker-end='url(#ah)'/><path d='M195 12V31' marker-end='url(#ah)'/><path d='M4 23H20' marker-end='url(#ah)'/><path d='M4 77H20' marker-end='url(#ah)'/><path d='M296 23H278' marker-end='url(#ah)'/><path d='M296 77H278' marker-end='url(#ah)'/></g>
+<text x='37' y='26' font-size='8' text-anchor='middle'>x1</text><text x='37' y='80' font-size='8' text-anchor='middle'>x2</text><text x='261' y='26' font-size='8' text-anchor='middle'>y1</text><text x='261' y='80' font-size='8' text-anchor='middle'>y2</text>
+<text x='105' y='53' font-size='9' text-anchor='middle'>&xi;</text><text x='195' y='53' font-size='9' text-anchor='middle'>&eta;</text>
+<text x='149' y='45' font-size='8' text-anchor='middle'>&gamma;</text><text x='64' y='42' font-size='7.5'>&lambda;x</text><text x='222' y='42' font-size='7.5'>&lambda;y</text><text x='200' y='14' font-size='8'>&zeta;</text><text x='5' y='20' font-size='8'>&delta;</text><text x='5' y='74' font-size='8'>&delta;</text><text x='287' y='20' font-size='8'>&epsilon;</text><text x='287' y='74' font-size='8'>&epsilon;</text>
+<text x='105' y='98' font-size='8' text-anchor='middle'>eksogen</text><text x='195' y='98' font-size='8' text-anchor='middle'>endogen</text></svg>
+<div class='f'>&eta; = B&eta; + &Gamma;&xi; + &zeta; <small>(struktural)</small><br>Y = &Lambda;<sub>y</sub>&eta; + &epsilon; <small>(ukur endogen)</small><br>X = &Lambda;<sub>x</sub>&xi; + &delta; <small>(ukur eksogen)</small></div>
+<p class='sm'>&xi; eksogen laten &middot; &eta; endogen laten &middot; &gamma; eksogen&rarr;endogen &middot; &beta; endogen&rarr;endogen &middot; &lambda; loading &middot; &delta;,&epsilon; error ukur &middot; &zeta; error struktural &middot; &phi; korelasi antar &xi;. Contoh: &eta;1 = &beta;12&eta;2 + &gamma;11&xi;1 + &gamma;12&xi;2 + &zeta;1.</p></div></section>
+<section class="box g3"><h2>6 &middot; Peran teori &amp; strategi modeling</h2><div class="in"><ul><li>Hubungan sebab-akibat ditentukan oleh <b>justifikasi teoretis</b>, bukan hitungan. <b>4 kriteria kausal:</b> asosiasi cukup &middot; urutan waktu (sebab sebelum akibat) &middot; tak ada variabel penyebab alternatif &middot; dasar teori</li>
+<li>Risiko: <b>specification error</b>, <b>overfitting</b></li></ul>
+<table class='t'><tr><th>Strategi</th><th>Ciri / kelemahan</th></tr>
+<tr><td><b>Confirmatory</b></td><td>spesifikasi 1 model &amp; uji (works or doesn&rsquo;t). Kelemahan: <b>confirmation bias</b>; hanya satu dari beberapa model yang bisa diterima</td></tr>
+<tr><td><b>Competing models</b></td><td>bandingkan beberapa model, pilih yang paling kuat (contoh program <b>TETRAD</b>). Kelemahan: terlalu <b>black box</b></td></tr>
+<tr><td><b>Model development</b></td><td>teori hanya titik awal; SEM eksploratori &rarr; respesifikasi. Jarang dipakai (SEM dibangun untuk konfirmatori)</td></tr></table></div></section>
+<section class="box g4"><h2>7 &middot; Langkah-langkah SEM</h2><div class="in"><ol><li>Kembangkan model <b>berbasis teori</b></li><li>Bangun <b>path diagram</b></li><li><b>Konversi</b> path diagram (measurement model, persamaan struktural, matriks korelasi hipotesis)</li><li>Pilih <b>tipe matriks input</b> &amp; tinjau masalah</li><li>Nilai <b>identifikasi</b>, estimasi, <b>goodness-of-fit</b>, interpretasi</li><li><b>Modifikasi</b> model (respecification)</li></ol>
+<p class='sm'>Respecification (tambah/kurangi parameter) hanya dalam kerangka teori; model baru divalidasi silang. Interpretasi: standardized vs unstandardized coefficients.</p></div></section>
+<section class="box g1"><h2>8 &middot; Measurement vs structural model</h2><div class="in"><table class='t'><tr><th>Konstruk</th><th>Arah</th></tr>
+<tr><td><b>Formative</b></td><td>konstruk <b>dibangun</b> oleh indikator (ada indicator loadings)</td></tr>
+<tr><td><b>Reflective</b></td><td>indikator = <b>cerminan</b> konstruk</td></tr></table>
+<ul><li><b>Measurement model:</b> variabel/indikator mana mengukur konstruk mana. Beda dengan analisis faktor: tiap indikator hanya dimuat pada konstruk yang ditetapkan (L1 pada A, L2 pada B, &hellip;)</li>
+<li><b>Structural model:</b> hubungan endogen &larr; eksogen/endogen</li>
+<li>Isu penting: jumlah indikator per konstruk &middot; reliabilitas &middot; <b>two step</b> vs single step</li></ul></div></section>
+<section class="box g2"><h2>9 &middot; Input, sampel &amp; estimasi</h2><div class="in"><p><b>Asumsi input:</b> observasi independen &middot; random sampling &middot; linier &middot; normal (tidak menceng). Data lengkap (missing ditangani saat screening).</p>
+<table class='t'><tr><th>Faktor</th><th>Pedoman sampel</th></tr>
+<tr><td>model size</td><td>min <b>5</b> responden per parameter (ideal <b>10:1</b>)</td></tr>
+<tr><td>jauh dari normal</td><td><b>15:1</b></td></tr>
+<tr><td>estimasi ML</td><td>min <b>100</b>; terlalu besar &rarr; terlalu sensitif</td></tr>
+<tr><td>misspecification</td><td>sampel diperbesar</td></tr>
+<tr><td>umum</td><td><b>200</b> biasanya cukup</td></tr></table>
+<div class='ex'>20 parameter &times; 10 = <b>200</b>; &times; 5 = 100. 30 parameter, nonnormal: 15&times;30 = <b>450</b> &gt; n = 150 (kurang).</div>
+<p><b>Estimasi:</b> <span class='hl'>maximum likelihood</span> (minimalkan selisih matriks kovarians sampel dan matriks kovarians implikasi model &Sigma;(&theta;)). Proses: direct estimation &middot; bootstrapping &middot; simulation &middot; jackknifing.</p></div></section>
+<section class="box g3"><h2>10 &middot; Identifikasi (derajat bebas)</h2><div class="in"><div class='f'>df = &frac12; [ (p+q)(p+q+1) ] &minus; t<small>p = indikator endogen, q = indikator eksogen, t = koefisien yang diestimasi</small></div>
+<table class='t'><tr><th>df</th><th>Status</th><th>Arti</th></tr>
+<tr><td>&gt; 0</td><td><b>over-identified</b></td><td>tujuan yang dicapai</td></tr>
+<tr><td>= 0</td><td>just-identified</td><td>tanpa generalizability</td></tr>
+<tr><td>&lt; 0</td><td>under-identified</td><td>tak ada estimasi unik</td></tr></table>
+<table class='t'><tr><th>p+q</th><th class='c'>elemen</th><th class='c'>t</th><th class='c'>df</th><th>status</th></tr>
+<tr><td>4</td><td class='c'>10</td><td class='c'>4</td><td class='c'>6</td><td>over</td></tr>
+<tr><td>8</td><td class='c'>36</td><td class='c'>20</td><td class='c'>16</td><td>over</td></tr>
+<tr><td>6</td><td class='c'>21</td><td class='c'>21</td><td class='c'>0</td><td>just</td></tr>
+<tr><td>5</td><td class='c'>15</td><td class='c'>17</td><td class='c'>&minus;2</td><td>under</td></tr></table>
+<p><b>Solusi:</b> model dengan koefisien minimum &middot; fix error variance konstruk &middot; fix koefisien struktural yang pasti diketahui &middot; buang variabel bermasalah.</p></div></section>
+<section class="box g4"><h2>11 &middot; Goodness-of-fit &amp; offending estimates</h2><div class="in"><p><b>Offending estimates</b> (perbaiki dulu): variansi error negatif &middot; standardized coefficient &ge; atau sangat dekat 1 &middot; standard error sangat besar.</p>
+<table class='t'><tr><th>Ukuran fit</th><th>Ciri</th></tr>
+<tr><td><b>Absolute</b></td><td>fit keseluruhan; tanpa penyesuaian overfitting</td></tr>
+<tr><td><b>Incremental</b></td><td>bandingkan dengan model lain buatan peneliti</td></tr>
+<tr><td><b>Parsimonious</b></td><td>sesuaikan dengan jumlah koefisien</td></tr></table>
+<ul><li><b>Measurement model fit</b> &rarr; reliabilitas indikator (mis. <b>Cronbach&rsquo;s alpha</b>)</li><li><b>Structural model fit</b> &rarr; <b>signifikansi</b> koefisien yang diestimasi</li></ul>
+<div class='ex'>&alpha; = 0,87; 0,82; 0,84 (ukur baik); hanya 2 dari 5 koefisien struktural signifikan &rarr; struktural belum seluruhnya didukung.</div></div></section>
+<section class="box g1"><h2>12 &middot; Jika&ndash;maka (cepat)</h2><div class="in"><ul><li>Konstruk laten + banyak indikator + hubungan antar konstruk &rarr; <b>SEM</b></li>
+<li>Tidak ada panah masuk &rarr; <b>eksogen</b>; ada panah masuk &rarr; <b>endogen</b></li>
+<li>df &gt; 0 &rarr; over-identified (diinginkan); = 0 &rarr; just; &lt; 0 &rarr; under</li>
+<li>Data jauh dari normal &rarr; rasio sampel naik ke 15:1</li>
+<li>Teori kuat sebagai dasar kausal; ubah model hanya dengan alasan teori + validasi silang</li></ul></div></section>
+
+</main>
+<p class="foot">Dirangkum dari slide Minggu 6 (TI5002). Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>

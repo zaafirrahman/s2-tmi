@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 3 | Anstat Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBFBF8;--ink:#111;--mut:#4B4B4B;--acc:#E2362A;--p:#12A594;--s:#FF4B3E;--y:#FFE14D;--tint:#CDEFE9;--pink:#FFDAD6;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(18,165,148,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(18,165,148,.16) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut)}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--s);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#111}.box.g2{--g:var(--s);--gi:#111}.box.g3{--g:var(--y);--gi:#111}.box.g4{--g:#111;--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600}
+.t td.c,.t th.c{text-align:center}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tint)}
+.chip.p{background:var(--pink)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.two>div{border:2px solid var(--ink);padding:4px 7px;font-size:12.4px;background:#fff}
+.two h3{margin:0 0 3px;font:800 14px var(--disp)}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--pink)}
+.ex{border:2px dashed var(--ink);padding:3px 8px;margin:6px 0;font-size:12.4px;background:#fff}
+.ex::before{content:"Contoh ";font:800 12px var(--disp);background:var(--ink);color:#fff;padding:0 5px;margin-right:4px}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8.5pt;margin:2px 0 0}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .two>div{font-size:7pt;padding:2px 4px;border-width:1px}.two h3{font-size:8pt}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .ex{font-size:7pt;padding:1px 4px;margin:3px 0;border-width:1px}.ex::before{font-size:6.5pt}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt}
+ .fig{margin:3px 0}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:1.102">
+<svg class='defs' aria-hidden='true'><defs><marker id='ah' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#111'/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="anstat.html">Anstat</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet 3</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 3</h1><p class="sub">TI5002 / Analisis Data dan Statistika &middot; Analisis Regresi Logit</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan3.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet3.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; Mengapa logit, bukan OLS?</h2><div class="in"><ul><li>Regresi linier majemuk: Y harus <b>metrik</b></li>
+<li>Y <b>nominal</b> (sukses/gagal) &rarr; asumsi <span class='hl'>normalitas error dilanggar</span>: untuk x tertentu error hanya punya 2 kemungkinan nilai</li>
+<li>Plot kelompok usia vs proporsi CHD tidak linier, membentuk <b>huruf S</b> &rarr; didekati dengan <b>fungsi logistik</b></li></ul>
+<table class='t'><tr><th>Skala Y</th><th>Model</th></tr>
+<tr><td>metrik</td><td>regresi linier</td></tr>
+<tr><td>nominal biner</td><td><b>logit biner</b></td></tr>
+<tr><td>nominal &gt; 2 kategori</td><td><b>multinomial logit</b></td></tr>
+<tr><td>ordinal &gt; 2 kategori</td><td><b>ordered multinomial logit</b></td></tr></table></div></section>
+<section class="box g3"><h2>2 &middot; Fungsi logistik &amp; transformasi logit</h2><div class="in"><div class='f'>E(Y|X) = &pi;(x)<br>&pi;(x) = e<sup>&beta;0+&beta;1x</sup> / (1 + e<sup>&beta;0+&beta;1x</sup>)<br>g(x) = ln[ &pi;(x) / (1&minus;&pi;(x)) ] = &beta;0 + &beta;1x<small>&pi;(x) selalu di antara 0 dan 1. g(x) = ln(odds), linier dalam parameter.</small></div>
+<p><b>Properti logit g(x):</b> berbentuk linier &middot; kontinu &middot; bernilai &minus;&infin; sampai +&infin;</p><svg class='fig' viewBox='0 0 300 140' role='img' aria-label='Kurva S fungsi logistik'>
+<path d='M32 18V118H290' fill='none' stroke='#111' stroke-width='1.6'/>
+<path d='M32 68H290' stroke='#111' stroke-width='.8' stroke-dasharray='3 3'/>
+<text x='27' y='121.0' font-size='8' text-anchor='end'>0</text><text x='27' y='71.0' font-size='8' text-anchor='end'>.5</text><text x='27' y='21.0' font-size='8' text-anchor='end'>1</text><text x='32.0' y='131' font-size='8' text-anchor='middle'>20</text><text x='83.0' y='131' font-size='8' text-anchor='middle'>30</text><text x='134.0' y='131' font-size='8' text-anchor='middle'>40</text><text x='185.0' y='131' font-size='8' text-anchor='middle'>50</text><text x='236.0' y='131' font-size='8' text-anchor='middle'>60</text><text x='287.0' y='131' font-size='8' text-anchor='middle'>70</text>
+<path d='M32.0 113.6 L42.2 112.6 L52.4 111.4 L62.6 109.9 L72.8 108.0 L83.0 105.9 L93.2 103.3 L103.4 100.3 L113.6 96.8 L123.8 92.9 L134.0 88.5 L144.2 83.6 L154.4 78.5 L164.6 73.1 L174.8 67.5 L185.0 62.0 L195.2 56.6 L205.4 51.5 L215.6 46.8 L225.8 42.4 L236.0 38.6 L246.2 35.2 L256.4 32.2 L266.6 29.7 L276.8 27.6 L287.0 25.9' fill='none' stroke='#12A594' stroke-width='3'/>
+<circle cx='57.5' cy='108.0' r='3' fill='#FF4B3E' stroke='#111' stroke-width='1.2'/><circle cx='95.8' cy='105.0' r='3' fill='#FF4B3E' stroke='#111' stroke-width='1.2'/><circle cx='121.2' cy='93.0' r='3' fill='#FF4B3E' stroke='#111' stroke-width='1.2'/><circle cx='146.8' cy='85.0' r='3' fill='#FF4B3E' stroke='#111' stroke-width='1.2'/><circle cx='172.2' cy='72.0' r='3' fill='#FF4B3E' stroke='#111' stroke-width='1.2'/><circle cx='197.8' cy='55.0' r='3' fill='#FF4B3E' stroke='#111' stroke-width='1.2'/><circle cx='223.2' cy='42.0' r='3' fill='#FF4B3E' stroke='#111' stroke-width='1.2'/><circle cx='261.5' cy='38.0' r='3' fill='#FF4B3E' stroke='#111' stroke-width='1.2'/>
+<text x='160' y='139' font-size='8.5' text-anchor='middle'>AGE (x)</text>
+<text x='38' y='14' font-size='8.5'>&pi;(x)</text>
+<text x='196' y='96' font-size='8.5' style='font-weight:600'>kurva S (logistik)</text>
+<circle cx='50' cy='32' r='3' fill='#FF4B3E' stroke='#111' stroke-width='1.2'/><text x='57' y='35' font-size='8'>proporsi CHD per kelompok usia</text>
+</svg>
+<p class='sm'>Proporsi CHD per kelompok umur (Hosmer &amp; Lemeshow): 0,10 &middot; 0,13 &middot; 0,25 &middot; 0,33 &middot; 0,46 &middot; 0,63 &middot; 0,76 &middot; 0,80 (total 43/100 = 0,43).</p></div></section>
+<section class="box g2"><h2>3 &middot; Estimasi: maximum likelihood</h2><div class="in"><ul><li>Parameter &beta; <b>tidak</b> bisa dengan least square; dipakai <span class='hl'>maximum likelihood</span></li>
+<li>Cari &beta; yang memaksimalkan l(&beta;); persamaan diselesaikan <b>numerik</b> (software)</li></ul>
+<div class='f'>l(&beta;) = &Pi; &pi;(x<sub>i</sub>)<sup>y<sub>i</sub></sup> [1&minus;&pi;(x<sub>i</sub>)]<sup>1&minus;y<sub>i</sub></sup><br>L(&beta;) = ln l(&beta;) = &Sigma;{ y<sub>i</sub> ln&pi;(x<sub>i</sub>) + (1&minus;y<sub>i</sub>) ln[1&minus;&pi;(x<sub>i</sub>)] }<br>maks. L(&beta;) bila: &Sigma;[y<sub>i</sub>&minus;&pi;(x<sub>i</sub>)] = 0 dan &Sigma;x<sub>i</sub>[y<sub>i</sub>&minus;&pi;(x<sub>i</sub>)] = 0<small>di-log-kan agar mudah didiferensiasi</small></div></div></section>
+<section class="box g4"><h2>4 &middot; Uji signifikansi parameter</h2><div class="in"><p>Pertanyaan: apakah model dengan variabel x memberi informasi lebih banyak daripada model tanpa x?</p>
+<div class='f'>D = &minus;2 ln[ L(fitted) / L(saturated) ]<br>G = D(tanpa var) &minus; D(dengan var) = &minus;2 ln[ L(tanpa) / L(dengan) ]<small>saturated = jumlah parameter sama dengan jumlah data point</small></div>
+<ul><li>H<sub>0</sub>: &beta;<sub>1</sub> = 0 &rarr; <b>G ~ &chi;&sup2;</b> dengan d.o.f = 1 (kritis 3,84 pada &alpha; 5%)</li>
+<li><b>Wald:</b> <span class='hl'>W = &beta;&#770;<sub>1</sub> / SE(&beta;&#770;<sub>1</sub>)</span>, normal secara asimptotis (di SPSS dilaporkan W&sup2;, df = 1)</li>
+<li>Jika Sig. &lt; 0,05 &rarr; tolak H<sub>0</sub>: variabel berpengaruh signifikan terhadap peluang Y</li></ul>
+<div class='ex'>CHD (n=100): LL model = &minus;53,677; LL tanpa AGE = &minus;68,331 &rarr; G = &minus;2(&minus;68,331+53,677) = <b>29,31</b> &gt; 3,84 &rarr; &beta;<sub>1</sub> signifikan. W = 0,111/0,0241 = <b>4,61</b> (konstanta: &minus;5,309/1,1337 = &minus;4,68).</div></div></section>
+<section class="box g1"><h2>5 &middot; Kebaikan model</h2><div class="in"><div class='f'>R&sup2;<sub>logit</sub> = (&minus;2LL<sub>null</sub> &minus; (&minus;2LL<sub>model</sub>)) / (&minus;2LL<sub>null</sub>)<small>pseudo R&sup2;. Ukuran lain: statistik Hosmer&ndash;Lemeshow</small></div>
+<div class='ex'>&minus;2LL<sub>null</sub> = 136,662; &minus;2LL<sub>model</sub> = 107,353 &rarr; R&sup2; = 29,309/136,662 = <b>0,214</b></div>
+<p><b>Tabel klasifikasi</b> (cut value 0,5): akurasi = (benar)/(total)</p>
+<table class='t'><tr><th>Model (n=60)</th><th class='c'>benar</th><th class='c'>akurasi</th></tr>
+<tr><td>0: tanpa variabel</td><td class='c'>38/60</td><td class='c'>63,3%</td></tr>
+<tr><td>enter (4 var)</td><td class='c'>(32+10)/60</td><td class='c'>70,0%</td></tr>
+<tr><td>forward langkah 2</td><td class='c'>(31+13)/60</td><td class='c'>73,3%</td></tr></table>
+<p class='sm'>Output enter: &minus;2LL = 65,478; Cox &amp; Snell 0,200; Nagelkerke 0,273.</p></div></section>
+<section class="box g2"><h2>6 &middot; Interpretasi: odds &amp; Exp(B)</h2><div class="in"><div class='f'>odds = P(Y=1) / P(Y=0) = e<sup>&beta;'x</sup><br>g(x) = ln(odds)<br>naik 1 satuan x &rarr; odds &times; e<sup>&beta;</sup> (= Exp(B))</div>
+<table class='t'><tr><th>Exp(B)</th><th>Arti</th></tr>
+<tr><td>&gt; 1 (B positif)</td><td>variabel naik &rarr; odds Y=1 naik</td></tr>
+<tr><td>&lt; 1 (B negatif)</td><td>odds turun</td></tr>
+<tr><td>= 1 (B = 0)</td><td>tidak berpengaruh</td></tr></table>
+<ul><li>Parameter signifikan &ne; 0 &rarr; variabel berpengaruh pada probabilitas Y</li>
+<li>Interpretasi mirip regresi majemuk; efek pada odds bersifat <b>perkalian</b></li></ul>
+<div class='ex'>odds P=0,8: 0,8/0,2 = <b>4</b>. g = 0 &rarr; &pi; = e<sup>0</sup>/(1+e<sup>0</sup>) = <b>0,5</b>. Kenaikan 10 th: e<sup>0,111&times;10</sup> = e<sup>1,11</sup> = <b>3,03</b> (= 1,117<sup>10</sup>).</div></div></section>
+<section class="box g3"><h2>7 &middot; Prediksi dari model (langkah hitung)</h2><div class="in"><ol><li>Hitung logit: ĝ = b<sub>0</sub> + b<sub>1</sub>x</li><li>Odds = e<sup>ĝ</sup></li><li>Peluang &pi;&#770; = e<sup>ĝ</sup>/(1+e<sup>ĝ</sup>)</li></ol>
+<div class='ex'>ĝ(x) = &minus;5,309 + 0,111&times;AGE. AGE = 50: ĝ = 0,241; odds = 1,27; <b>&pi;&#770; = 0,56</b>. Peluang CHD menurut usia: 20 &rarr; 0,04 &middot; 30 &rarr; 0,12 &middot; 40 &rarr; 0,30 &middot; 50 &rarr; 0,56 &middot; 60 &rarr; 0,79</div>
+<p class='sm'>Peluang naik tidak konstan per tahun (kurva S), tetapi odds naik &times;1,12 per tahun.</p></div></section>
+<section class="box g4"><h2>8 &middot; Contoh kasus: minat perusahaan (n=60)</h2><div class="in"><p class='sm'>Y = minat (1 = tidak, 2 = berminat; 38 vs 22). X: ukrn (karyawan), pdptn (juta USD), usia (th), jmlproy.</p>
+<p><b>Model 0</b> (tanpa X): B = &minus;0,547; Exp(B) = 0,579 = 22/38 (odds berminat).</p>
+<table class='t'><tr><th>enter</th><th class='c'>B</th><th class='c'>Sig.</th><th class='c'>Exp(B)</th></tr>
+<tr><td>ukrn</td><td class='c'>0,089</td><td class='c'>0,024</td><td class='c'>1,093</td></tr>
+<tr><td>pdptn</td><td class='c'>0,161</td><td class='c'>0,646</td><td class='c'>1,175</td></tr>
+<tr><td>usia</td><td class='c'>0,914</td><td class='c'>0,020</td><td class='c'>2,494</td></tr>
+<tr><td>jmlproy</td><td class='c'>&minus;0,020</td><td class='c'>0,900</td><td class='c'>0,980</td></tr>
+<tr><td>konstanta</td><td class='c'>&minus;10,397</td><td class='c'>0,002</td><td class='c'>0,000</td></tr></table>
+<p>Hanya <b>ukrn</b> &amp; <b>usia</b> signifikan: +1 karyawan &rarr; odds &uarr; 9,3%; +1 th usia &rarr; odds &times; 2,5.</p>
+<p><b>Forward:</b> langkah 1 masuk ukrn (B 0,064; p 0,023) &rarr; langkah 2 masuk usia (ukrn 0,084, p 0,006; usia 0,934, p 0,016). pdptn &amp; jmlproy tidak masuk.</p></div></section>
+<section class="box g1"><h2>9 &middot; Jika&ndash;maka (cepat)</h2><div class="in"><ul><li>Jika Y metrik &rarr; regresi linier; jika Y biner &rarr; <b>logit</b>; &gt; 2 kategori &rarr; <b>multinomial</b>; ordinal &rarr; <b>ordered</b></li>
+<li>Jika Sig. &lt; 0,05 &rarr; tolak H<sub>0</sub>: &beta; = 0 (signifikan)</li>
+<li>Jika G &gt; &chi;&sup2;(1; 0,05) = 3,84 &rarr; &beta;<sub>1</sub> signifikan</li>
+<li>Jika Exp(B) &gt; 1 &rarr; odds naik; &lt; 1 &rarr; odds turun</li>
+<li>Jika &minus;2LL model jauh lebih kecil dari &minus;2LL null &rarr; pseudo R&sup2; besar</li>
+<li>Jika ingin variabel signifikan saja &rarr; forward/stepwise; semua variabel &rarr; enter</li></ul></div></section>
+
+</main>
+<p class="foot">Dirangkum dari slide Minggu 3 (TI5002). Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 2 | Anstat Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBFBF8;--ink:#111;--mut:#4B4B4B;--acc:#E2362A;--p:#12A594;--s:#FF4B3E;--y:#FFE14D;--tint:#CDEFE9;--pink:#FFDAD6;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(18,165,148,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(18,165,148,.16) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut)}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--s);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#111}.box.g2{--g:var(--s);--gi:#111}.box.g3{--g:var(--y);--gi:#111}.box.g4{--g:#111;--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600}
+.t td.c,.t th.c{text-align:center}
+table.fx{table-layout:fixed}.fx td,.fx th{overflow-wrap:anywhere}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tint)}
+.chip.p{background:var(--pink)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.two>div{border:2px solid var(--ink);padding:4px 7px;font-size:12.4px;background:#fff}
+.two h3{margin:0 0 3px;font:800 14px var(--disp)}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--pink)}
+.ex{border:2px dashed var(--ink);padding:3px 8px;margin:6px 0;font-size:12.4px;background:#fff}
+.ex::before{content:"Contoh ";font:800 12px var(--disp);background:var(--ink);color:#fff;padding:0 5px;margin-right:4px}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8.5pt;margin:2px 0 0}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .two>div{font-size:7pt;padding:2px 4px;border-width:1px}.two h3{font-size:8pt}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .ex{font-size:7pt;padding:1px 4px;margin:3px 0;border-width:1px}.ex::before{font-size:6.5pt}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt}
+ .fig{margin:3px 0}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:0.77">
+<svg class='defs' aria-hidden='true'><defs><marker id='ah' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#111'/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="anstat.html">Anstat</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet 2</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 2</h1><p class="sub">TI5002 / Analisis Data dan Statistika &middot; Regresi Linier Sederhana &amp; Majemuk</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan2.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet2.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; Regresi linier sederhana: model</h2><div class="in"><ul><li>Model hubungan <b>dependensi</b> 2 variabel: 1 prediktor (X) &amp; 1 dependen (Y). Hubungan <b>tidak deterministik</b> (statistikal: estimasi rata-rata Y)</li></ul>
+<div class='f'>Model: Y = &alpha; + &beta;x + &epsilon;<br>garis regresi: &mu;<sub>Y|x</sub> = &alpha; + &beta;x<br>garis fitted: ŷ = a + bx ; residual e<sub>i</sub> = y<sub>i</sub> &minus; ŷ<sub>i</sub></div>
+<ul><li>&alpha; intercept (ŷ saat x=0), &beta; slope (perubahan rata-rata Y per 1 satuan x); tanda b = arah hubungan</li>
+<li>&epsilon; variabel random, <span class='hl'>E(&epsilon;) = 0, berdistribusi normal</span>, var = &sigma;&sup2;</li>
+<li>Random error (&epsilon;) &ne; residual (e); a, b = estimator &alpha;, &beta;</li>
+<li>a dan b <b>variabel random</b> (dihitung dari y yang random; berubah antar sampel) &rarr; dasar inferensi</li></ul></div></section>
+<section class="box g2"><h2>2 &middot; Least squares &amp; langkah hitung</h2><div class="in"><p>Pilih a, b yang meminimalkan <b>SSE = &Sigma;e&sup2; = &Sigma;(y &minus; a &minus; bx)&sup2;</b> (turunan thd a, b = 0). &Sigma;e biasa selalu 0, jadi tidak jadi kriteria.</p>
+<div class='f'>b = S<sub>xy</sub>/S<sub>xx</sub> = &Sigma;(x&minus;x&#772;)(y&minus;ȳ) / &Sigma;(x&minus;x&#772;)&sup2;<br>b = [n&Sigma;xy &minus; &Sigma;x&Sigma;y] / [n&Sigma;x&sup2; &minus; (&Sigma;x)&sup2;]<br>a = ȳ &minus; b x&#772;</div>
+<div class='ex'>(1,2)(2,4)(3,5)(4,4)(5,5): x&#772;=3, ȳ=4; S<sub>xy</sub>=6; S<sub>xx</sub>=10 &rarr; b=<b>0,6</b>; a=4&minus;1,8=<b>2,2</b>; ŷ(6)=2,2+3,6=<b>5,8</b>. Cek: ŷ=2+3x, x=4 &rarr; 14.</div>
+<p class='sm'>SSE=2,4; SSR=3,6; SST=6 &rarr; r&sup2;=0,60; s&sup2;=2,4/3=0,80; t=2,12; F=4,5=t&sup2;.</p></div></section>
+<section class="box g3"><h2>3 &middot; Penguraian variasi &amp; r&sup2;</h2><div class="in"><svg class='fig' viewBox='0 0 300 118' role='img' aria-label='Penguraian variasi'>
+<path d='M24 10V104H210' fill='none' stroke='#111' stroke-width='1.5'/>
+<path d='M24 96L200 38' stroke='#12A594' stroke-width='3'/><path d='M24 68H200' stroke='#111' stroke-width='1.3' stroke-dasharray='4 3'/>
+<circle cx='150' cy='30' r='4' fill='#FF4B3E' stroke='#111'/>
+<path d='M150 68V30' stroke='#111' stroke-width='1.3'/><path d='M158 68V50' stroke='#12A594' stroke-width='3'/><path d='M158 50V30' stroke='#FF4B3E' stroke-width='3'/>
+<text x='164' y='62' font-size='8.5'>ŷ&minus;ȳ &rarr; SSR</text><text x='164' y='38' font-size='8.5'>y&minus;ŷ = e &rarr; SSE</text><text x='34' y='82' font-size='8.5'>garis ŷ = a + bx</text><text x='214' y='71' font-size='8.5'>rata-rata ȳ</text><text x='108' y='46' font-size='8.5'>y&minus;ȳ</text>
+<text x='108' y='56' font-size='8.5'>(SST)</text><text x='116' y='114' font-size='8.5' text-anchor='middle'>x</text></svg>
+<div class='f'>SST = SSR + SSE<br>&Sigma;(y&minus;ȳ)&sup2; = &Sigma;(ŷ&minus;ȳ)&sup2; + &Sigma;(y&minus;ŷ)&sup2;<br>r&sup2; = SSR/SST<small>persen variasi Y yang dijelaskan X; 0 &le; r&sup2; &le; 1</small></div>
+<ul><li>Tanpa X, prediksi = ȳ (error y&minus;ȳ); dengan regresi, error berkurang sebesar (ŷ&minus;ȳ)</li><li>s&sup2; = SSE/(n&minus;2) = <b>MSE</b>; s = Std. Error of the Estimate. <b>d.o.f. residual = n&minus;2</b> (2 parameter a, b diestimasi)</li><li>SSR = 60, SSE = 40 &rarr; r&sup2; = 60/100 = 0,60</li></ul></div></section>
+<section class="box g4"><h2>4 &middot; Inferensi &beta; dan &alpha;</h2><div class="in"><div class='f'>&sigma;&sup2;<sub>B</sub> = &sigma;&sup2; / &Sigma;(x&minus;x&#772;)&sup2;<br>&sigma;&sup2;<sub>A</sub> = &Sigma;x&sup2; &sigma;&sup2; / [n&Sigma;(x&minus;x&#772;)&sup2;]<br>s&sup2; = &Sigma;(y&minus;ŷ)&sup2; / (n&minus;2)  (MSE)</div>
+<p><b>&beta;:</b> CI: b &plusmn; t<sub>&alpha;/2</sub> s/&radic;S<sub>xx</sub><br>uji: <span class='hl'>T = (b &minus; &beta;) / (s/&radic;S<sub>xx</sub>)</span></p>
+<p><b>&alpha;:</b> CI: a &plusmn; t<sub>&alpha;/2</sub> s &radic;(&Sigma;x&sup2;) / &radic;(nS<sub>xx</sub>)<br>uji: T = (a &minus; &alpha;) / [ s &radic;(&Sigma;x&sup2;/(nS<sub>xx</sub>)) ]</p>
+<ul><li>t Student, d.o.f <b>n&minus;2</b>; H<sub>0</sub>: &beta;=0</li><li>Sig. &lt; &alpha; &rarr; tolak H<sub>0</sub>; CI tidak memuat 0 &harr; signifikan</li><li><b>Regresi sederhana: F = t&sup2;</b> (uji F &equiv; uji t slope)</li></ul></div></section>
+<section class="box g1"><h2>5 &middot; Contoh output: investasi vs pajak (n=10)</h2><div class="in"><table class='t'><tr><th>Output</th><th>Nilai</th><th>Hitungan</th></tr>
+<tr><td>(Const.) B</td><td>5033,884</td><td>ŷ saat pajak 0</td></tr>
+<tr><td>Pajak B (SE)</td><td>&minus;55,104 (4,385)</td><td>t = &minus;55,104/4,385 = <b>&minus;12,57</b></td></tr>
+<tr><td>Beta; CI B</td><td>&minus;0,976; (&minus;65,2; &minus;45,0)</td><td>Beta = r; CI tak memuat 0</td></tr>
+<tr><td>ANOVA</td><td>SSR 1.951.721,8; SSE 98.855,1; SST 2.050.576,9</td><td>df 1; 8; 9</td></tr>
+<tr><td>F</td><td>157,946</td><td>= t&sup2; = 157,95; Sig. 0,000</td></tr>
+<tr><td>R, R&sup2;</td><td>0,976; 0,952</td><td>r&sup2; = SSR/SST = <b>0,952</b></td></tr>
+<tr><td>Adj. R&sup2;</td><td>0,946</td><td></td></tr>
+<tr><td>MSE; s</td><td>12.356,9; 111,16</td><td>98.855,1/<b>8</b> (bukan 10)</td></tr></table>
+<ul><li>Tafsir: pajak +1 poin % &rarr; rata-rata investasi turun &asymp; 55,1 ribu US$; 95,2% variasi dijelaskan; signifikan</li><li><b>Prediksi</b> pajak 10%: 5033,884 &minus; 551,04 = <b>4482,8</b> ribu US$ (x di dalam rentang 5&ndash;30%)</li></ul></div></section>
+<section class="box g2"><h2>6 &middot; Prediksi dengan regresi</h2><div class="in"><div class='f'>CI rataan &mu;<sub>Y|x0</sub>: ŷ<sub>0</sub> &plusmn; t<sub>&alpha;/2</sub> s &radic;[1/n + (x<sub>0</sub>&minus;x&#772;)&sup2;/S<sub>xx</sub>]<br>Selang prediksi Y<sub>0</sub>: ŷ<sub>0</sub> &plusmn; t<sub>&alpha;/2</sub> s &radic;[<b>1 +</b> 1/n + (x<sub>0</sub>&minus;x&#772;)&sup2;/S<sub>xx</sub>]</div>
+<ul><li>t, d.o.f n&minus;2. Selang prediksi respons tunggal <b>lebih lebar</b> (ada suku &ldquo;1+&rdquo;); makin jauh x<sub>0</sub> dari x&#772;, makin lebar</li><li>Jangan prediksi di luar rentang x (ekstrapolasi)</li></ul></div></section>
+<section class="box g3"><h2>7 &middot; Analisis korelasi</h2><div class="in"><ul><li>Mengukur <b>kekuatan hubungan</b> dua variabel random (koefisien korelasi &rho;; asosiasi linier)</li></ul>
+<div class='f'>r = b &radic;(S<sub>xx</sub>/S<sub>yy</sub>)<br>H<sub>0</sub>: &rho;=0 &rarr; t = b/(s/&radic;S<sub>xx</sub>) atau t = r&radic;(n&minus;2)/&radic;(1&minus;r&sup2;)<br>H<sub>0</sub>: &rho;=&rho;<sub>0</sub> &rarr; z = (&radic;(n&minus;3)/2) [ ln((1+r)/(1&minus;r)) &minus; ln((1+&rho;<sub>0</sub>)/(1&minus;&rho;<sub>0</sub>)) ]</div>
+<ul><li>r bertanda sama dengan b, &minus;1 &le; r &le; 1, tak bergantung satuan; b bergantung satuan</li><li>Regresi sederhana: Beta terstandar = r; r&sup2; = koefisien determinasi</li><li>Signifikan (p kecil) &ne; prediksi bagus: cek r&sup2; (mis. p&lt;0,001 tetapi r&sup2; = 0,12 &rarr; hubungan nyata, daya prediksi rendah)</li></ul></div></section>
+<section class="box g4"><h2>8 &middot; Linierisasi data nonlinier</h2><div class="in"><table class='t'><tr><th>Fungsi</th><th>Transformasi</th><th>Regresikan</th></tr>
+<tr><td>Eksponensial y=&alpha;e<sup>&beta;x</sup></td><td>y*=ln y</td><td>y* thd x</td></tr>
+<tr><td>Power y=&alpha;x<sup>&beta;</sup></td><td>y*=log y; x*=log x</td><td>y* thd x*</td></tr>
+<tr><td>Resiprokal y=&alpha;+&beta;(1/x)</td><td>x*=1/x</td><td>y thd x*</td></tr>
+<tr><td>Hiperbola y=x/(&alpha;+&beta;x)</td><td>y*=1/y; x*=1/x</td><td>y* thd x*</td></tr></table>
+<ul><li>Pertumbuhan relatif konstan (mis. 20%/tahun) &rarr; eksponensial: ln y thd x</li><li><b>X skewed</b> (0&ndash;100, tapi 80% data di 0&ndash;10): pakai <b>log X</b>, Y tetap skala awal &rarr; tafsir <i>diminishing return</i> X</li></ul></div></section>
+<section class="box g1"><h2>9 &middot; Regresi majemuk: model &amp; matriks</h2><div class="in"><div class='f'>Y = &beta;<sub>0</sub> + &beta;<sub>1</sub>X<sub>1</sub> + &hellip; + &beta;<sub>k</sub>X<sub>k</sub> + &epsilon;<br>ŷ = b<sub>0</sub> + b<sub>1</sub>X<sub>1</sub> + &hellip; + b<sub>k</sub>X<sub>k</sub><br>SSE = (y&minus;Xb)'(y&minus;Xb) &rarr; <b>(X'X)b = X'y</b> &rarr; b = (X'X)<sup>&minus;1</sup>X'y<br>var(b) = s&sup2;(X'X)<sup>&minus;1</sup> (SE = akar diagonal)</div>
+<p class='sm'>X: n&times;(k+1), kolom pertama 1; y: n&times;1; ada k+1 parameter.</p>
+<table class='t'><tr><th>Sumber</th><th>d.f.</th><th>MS</th></tr><tr><td>Regresi SSR</td><td>k</td><td>SSR/k</td></tr><tr><td>Error SSE</td><td>n&minus;(k+1)</td><td>SSE/(n&minus;k&minus;1) = s&sup2;</td></tr><tr><td>Total SST</td><td>n&minus;1</td><td></td></tr></table>
+<div class='f'>R&sup2; = SSR/SST ; F = MSR/MSE ; R&sup2;<sub>adj</sub> = 1 &minus; (1&minus;R&sup2;)(n&minus;1)/(n&minus;k&minus;1)<small>rumus adjusted R&sup2; &amp; F standar; di slide: adjusted R&sup2; = R&sup2; dengan penalti</small></div>
+<div class='ex'>Panjang bayi n=42,k=5: SSR 28,164; SST 50,786 &rarr; R&sup2;=<b>0,555</b>; adj=1&minus;0,445&times;41/36=<b>0,493</b>; MSR=5,633; MSE=22,622/36=0,628 &rarr; F=<b>8,96</b>; s=0,79. IP (n=8,k=2): R&sup2;=0,976; adj 0,966; F=100,0.</div></div></section>
+<section class="box g2"><h2>10 &middot; Tujuan, desain &amp; 6 tahap</h2><div class="in"><table class='t'><tr><th>Prediksi</th><th>Penjelasan</th></tr><tr><td>maksimalkan kemampuan prediksi (mis. time series), boleh korbankan interpretasi</td><td>model berbasis <b>teori</b>; baca: kepentingan variabel, jenis hubungan, interrelasi antar IV</td></tr></table>
+<ul><li>Hubungan <b>statistikal</b> = estimasi rata-rata Y; <b>fungsional</b> = nilai eksak</li><li>Pilih variabel berdasar kerangka teori. <b>Specification error:</b> mengikutkan variabel tak relevan <i>atau</i> melupakan variabel relevan</li><li>Sampel minimum <b>5 &times; jumlah IV</b> (Hair, 1998): 7 IV &rarr; 35</li></ul>
+<ol><li>Masalah penelitian (tujuan, pilih var.)</li><li>Desain (sampel, power; transformasi, dummy, polynomial, interaksi)</li><li>Asumsi</li><li>Teknik estimasi (spesifikasi peneliti / sequential)</li><li>Signifikansi (R&sup2;, SE est., koef.) &amp; interpretasi (beta, multikolinearitas)</li><li>Validasi (split sample, PRESS)</li></ol></div></section>
+<section class="box g3"><h2>11 &middot; Asumsi &amp; pola residual</h2><div class="in"><div class='chips'><span class='chip y'>linieritas</span><span class='chip y'>variansi error konstan (homoskedastis)</span><span class='chip y'>independensi error</span><span class='chip y'>error normal</span></div><svg class='fig' viewBox='0 0 300 120' role='img' aria-label='Pola residual'><path d='M4 52H92' stroke='#111' stroke-width='1'/><rect x='4' y='4' width='88' height='96' fill='none' stroke='#111' stroke-width='1.2'/><circle cx='10.0' cy='43.5' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='13.7' cy='35.2' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='17.4' cy='59.2' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='21.1' cy='31.5' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='24.8' cy='53.7' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='28.5' cy='45.6' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='32.2' cy='30.8' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='35.9' cy='52.4' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='39.6' cy='29.8' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='43.3' cy='48.8' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='47.0' cy='31.4' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='50.7' cy='32.4' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='54.4' cy='48.4' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='58.1' cy='67.7' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='61.8' cy='33.9' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='65.5' cy='38.7' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='69.2' cy='58.1' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='72.9' cy='73.5' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='76.6' cy='55.7' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='80.3' cy='47.0' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='84.0' cy='74.9' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='87.7' cy='30.2' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><path d='M106 52H194' stroke='#111' stroke-width='1'/><rect x='106' y='4' width='88' height='96' fill='none' stroke='#111' stroke-width='1.2'/><circle cx='112.0' cy='50.7' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='115.7' cy='38.9' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='119.4' cy='34.1' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='123.1' cy='31.5' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='126.8' cy='32.7' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='130.5' cy='39.2' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='134.2' cy='27.6' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='137.9' cy='33.0' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='141.6' cy='33.1' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='145.3' cy='28.3' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='149.0' cy='30.8' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='152.7' cy='23.0' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='156.4' cy='23.3' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='160.1' cy='26.1' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='163.8' cy='34.6' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='167.5' cy='31.6' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='171.2' cy='31.1' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='174.9' cy='37.1' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='178.6' cy='36.9' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='182.3' cy='36.6' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='186.0' cy='47.0' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='189.7' cy='48.2' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><path d='M208 52H296' stroke='#111' stroke-width='1'/><rect x='208' y='4' width='88' height='96' fill='none' stroke='#111' stroke-width='1.2'/><circle cx='214.0' cy='50.5' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='217.7' cy='52.7' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='221.4' cy='52.3' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='225.1' cy='57.5' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='228.8' cy='56.0' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='232.5' cy='47.7' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='236.2' cy='63.1' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='239.9' cy='42.1' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='243.6' cy='49.6' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='247.3' cy='60.2' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='251.0' cy='40.0' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='254.7' cy='51.6' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='258.4' cy='33.4' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='262.1' cy='59.3' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='265.8' cy='64.2' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='269.5' cy='55.6' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='273.2' cy='71.4' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='276.9' cy='41.8' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='280.6' cy='63.2' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='284.3' cy='57.7' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='288.0' cy='57.0' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><circle cx='291.7' cy='49.1' r='1.8' fill='#12A594' stroke='#111' stroke-width='.6'/><text x='48' y='114' font-size='8' text-anchor='middle'>ideal (null plot)</text><text x='150' y='114' font-size='8' text-anchor='middle'>nonlinier</text><text x='252' y='114' font-size='8' text-anchor='middle'>heteroskedastis</text></svg>
+<ul><li>Normalitas dikenakan pada <b>error</b>, bukan pada tiap variabel independen</li><li>Plot residual vs ŷ: acak = baik; lengkung = tak linier; corong = heteroskedastis</li><li>Pelanggaran linieritas &rarr; transformasi (eksponensial, power, resiprokal, hiperbola)</li></ul></div></section>
+<section class="box g4"><h2>12 &middot; Variabel dummy &amp; interaksi</h2><div class="in"><ul><li>Variabel nonmetrik dengan <b>k kategori</b> &rarr; <b>k&minus;1 dummy</b> (indicator coding atau effect coding); kategori semua-0 = <b>kelompok kontrol</b></li>
+<li>Koefisien dummy = <b>selisih rata-rata</b> kategori itu thd kategori acuan (variabel lain tetap)</li></ul>
+<div class='ex'>Jenjang D3,S1,S2,S3 &rarr; 3 dummy. IP = 2,0 + 0,2 JamBel + 0,3 Gender (perempuan=1): mahasiswi 5 jam = 2,0+1,0+0,3 = <b>3,3</b>; laki-laki = 3,0.</div>
+<div class='f'>Moderasi: Y = b<sub>0</sub> + b<sub>1</sub>X<sub>1</sub> + b<sub>2</sub>X<sub>2</sub> + <b>b<sub>3</sub>X<sub>1</sub>X<sub>2</sub></b><small>b<sub>3</sub> = efek moderasi: efek X1 berbeda antar kelompok X2. Uji b<sub>3</sub>.</small></div>
+<p class='sm'>Mis. eksposur iklan lebih kuat pada perempuan: penjualan = b0 + b1 Eksposur + b2 Gender + b3 Eksposur&times;Gender. b3 = +0,1 &rarr; jam belajar 10% lebih efektif bagi mahasiswi.</p></div></section>
+<section class="box g1"><h2>13 &middot; Estimasi: enter vs sequential</h2><div class="in"><ul><li><b>Enter</b> (confirmatory): semua variabel masuk; kekurangan: tidak <b>parsimoni</b></li><li><b>Sequential</b> (stepwise, forward/backward): variabel sesedikit mungkin, hanya yang signifikan</li>
+<li><b>Uji F</b> = model keseluruhan (semua IV bersama); <b>uji t</b> = tiap IV. Model signifikan belum tentu semua IV signifikan; ekstrem: model signifikan tanpa satu IV signifikan &rarr; multikolinearitas tinggi</li>
+<li><b>Partial correlation:</b> korelasi X<sub>i</sub>&ndash;Y setelah efek IV lain dikeluarkan dari X<sub>i</sub> dan Y</li></ul>
+<div class='ex'>Panjang bayi (enter): F=8,964 (Sig. 0,000); R&sup2;=0,555. Sig.: usia hamil 0,000; rokok B=&minus;0,022 (0,042); tinggi ibu 0,011; usia ibu 0,719; tinggi ayah 0,997 &rarr; yang terakhir tidak signifikan. Stepwise: masuk usia hamil &rarr; tinggi ibu &rarr; rokok.</div></div></section>
+<section class="box g2"><h2>14 &middot; Beta, multikolinearitas, VIF</h2><div class="in"><ul><li>Koef. regresi (B) peka satuan; <b>Beta</b> (dari nilai standardisasi) bisa membandingkan kontribusi IV berbeda satuan</li>
+<li><b>Efek multikolinearitas:</b> sulit memisahkan efek tiap IV; membatasi R&sup2;; singularity &rarr; koef. salah estimasi</li></ul>
+<div class='f'>VIF = 1 / tolerance<small>tolerance &lt; 0,1 atau VIF &gt; 10 = bermasalah</small></div>
+<table class='t'><tr><th>tolerance</th><th class='c'>0,5</th><th class='c'>0,05</th><th class='c'>0,839&ndash;0,929</th></tr><tr><th>VIF</th><td class='c'>2</td><td class='c'>20 (&gt;10)</td><td class='c'>1,08&ndash;1,19 (aman)</td></tr></table>
+<p><b>Deteksi:</b> matriks korelasi Pearson, tolerance, VIF. <b>Remedial:</b> buang IV berkorelasi tinggi &middot; model hanya untuk prediksi &middot; pakai korelasi sederhana IV&ndash;DV &middot; metode lebih canggih</p></div></section>
+<section class="box g3"><h2>15 &middot; Validasi &amp; kehati-hatian prediksi</h2><div class="in"><ul><li><b>Validasi:</b> sampel baru, atau data yang ada: split (80% estimasi : 20% validasi) / bootstrapping</li>
+<li>Model lebih banyak IV selalu R&sup2; lebih besar &rarr; tak adil; pakai <b>adjusted R&sup2;</b> (penalti, prinsip parsimoni); adj &le; R&sup2;</li>
+<li>Prediksi: sampel bervariasi &middot; hubungan berubah seiring waktu &middot; <b>jangan di luar rentang</b> IV</li></ul></div></section>
+<section class="box g4"><h2>16 &middot; Observasi berpengaruh (influential)</h2><div class="in"><p>3 jenis: <b>outlier</b> (residual besar), <b>leverage</b> (nilai IV unik), <b>influential</b> (efek tidak proporsional pada hasil). Outlier tak harus influential.</p>
+<ul><li>Residual: normal; standardized; deleted; studentized; studentized deleted</li>
+<li><b>Hat value</b> (diag. H, Ŷ=HY) besar jika &gt; <b>2p/n</b> (sampel besar), &gt; <b>3p/n</b> (kecil); atau jarak Mahalanobis</li>
+<li><b>Cook&rsquo;s D</b> = &Sigma;(ŷ<sub>j(i)</sub>&minus;ŷ<sub>j</sub>)&sup2;/[(p+1)s&sup2;]: &gt; <b>4/(n&minus;p&minus;1)</b> atau &gt; 1. n=42, p=5: 4/36 = <b>0,111</b></li>
+<li><b>SDFBETA:</b> &plusmn;1 atau &plusmn;2 (sampel kecil); &plusmn;2&radic;n (tertulis di slide)</li>
+<li><b>COVRATIO:</b> 1 &plusmn; 3p/n &middot; <b>SDFFIT:</b> 2&radic;[(k+1)/(n&minus;k&minus;1)]</li></ul></div></section>
+
+</main>
+<p class="foot">Dirangkum dari slide Minggu 2 (sederhana &amp; majemuk) TI5002. Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 1 | Anstat Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBFBF8;--ink:#111;--mut:#4B4B4B;--acc:#E2362A;--p:#12A594;--s:#FF4B3E;--y:#FFE14D;--tint:#CDEFE9;--pink:#FFDAD6;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(18,165,148,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(18,165,148,.16) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut)}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--s);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#111}.box.g2{--g:var(--s);--gi:#111}.box.g3{--g:var(--y);--gi:#111}.box.g4{--g:#111;--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600}
+.t td.c,.t th.c{text-align:center}
+table.fx{table-layout:fixed}.fx td,.fx th{overflow-wrap:anywhere}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tint)}
+.chip.p{background:var(--pink)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.two>div{border:2px solid var(--ink);padding:4px 7px;font-size:12.4px;background:#fff}
+.two h3{margin:0 0 3px;font:800 14px var(--disp)}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--pink)}
+.ex{border:2px dashed var(--ink);padding:3px 8px;margin:6px 0;font-size:12.4px;background:#fff}
+.ex::before{content:"Contoh ";font:800 12px var(--disp);background:var(--ink);color:#fff;padding:0 5px;margin-right:4px}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8.5pt;margin:2px 0 0}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .two>div{font-size:7pt;padding:2px 4px;border-width:1px}.two h3{font-size:8pt}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .ex{font-size:7pt;padding:1px 4px;margin:3px 0;border-width:1px}.ex::before{font-size:6.5pt}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt}
+ .fig{margin:3px 0}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:0.979">
+<svg class='defs' aria-hidden='true'><defs><marker id='ah' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#111'/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="anstat.html">Anstat</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet 1</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 1</h1><p class="sub">TI5002 / Analisis Data dan Statistika &middot; Pendahuluan</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan1.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet1.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; Analisis multivariat &amp; variate</h2><div class="in"><ul><li><b>Multivariate analysis:</b> analisis simultan atas <span class='hl'>lebih dari dua variabel</span> (Hair dkk., 1984; pustaka utama Hair dkk., 2010)</li>
+<li><b>Variate</b> = kombinasi linier variabel dengan bobot yang ditentukan secara empiris</li></ul>
+<div class='f'>Nilai variate = w<sub>1</sub>X<sub>1</sub> + w<sub>2</sub>X<sub>2</sub> + &hellip; + w<sub>n</sub>X<sub>n</sub></div>
+<p class='sm'>Tujuan kuliah: konsep &amp; praktik analisis data memakai statistika multivariat dan perancangan percobaan untuk penelitian empiris kuantitatif.</p></div></section>
+<section class="box g3"><h2>2 &middot; Skala pengukuran</h2><div class="in"><table class='t'><tr><th>Skala</th><th>Fungsi</th><th>Statistik</th></tr>
+<tr><td><b>Nominal</b></td><td>kesetaraan</td><td>cacah, modus, kontingensi (chi-square, Fisher)</td></tr>
+<tr><td><b>Ordinal</b></td><td>lebih/kurang</td><td>median, persentil, rank-order corr., uji tanda, runs</td></tr>
+<tr><td><b>Interval</b></td><td>kesamaan interval</td><td>rataan, deviasi standar, korelasi, uji t, uji F</td></tr>
+<tr><td><b>Rasio</b></td><td>kesamaan rasio</td><td>koef. variasi, rataan geometris &amp; harmonis</td></tr></table>
+<div class='chips'><span class='chip p'>nominal + ordinal = nonmetrik</span><span class='chip'>interval + rasio = metrik</span></div>
+<p class='sm'>Uji parametrik tidak dapat dipakai untuk variabel nonmetrik.</p></div></section>
+<section class="box g2"><h2>3 &middot; Validitas, reliabilitas, error ukur</h2><div class="in"><ul><li><b>Validity:</b> sejauh mana ukuran mewakili secara akurat apa yang seharusnya diukur</li>
+<li><b>Reliability:</b> sejauh mana variabel teramati mengukur nilai &lsquo;sebenarnya&rsquo; dan <b>bebas error</b></li>
+<li>Setiap pengukuran tidak bebas kesalahan (penggaris vs jangka sorong; bagaimana mengukur kepuasan?). Error pengukuran <span class='hl'>memperbesar error model</span></li></ul></div></section>
+<section class="box g4"><h2>4 &middot; Kesalahan tipe I/II &amp; power</h2><div class="in"><table class='t'><tr><th></th><th>Realitas H<sub>0</sub> benar<br>(tak ada beda)</th><th>Realitas H<sub>1</sub> benar<br>(ada beda)</th></tr>
+<tr><th>Putuskan H<sub>0</sub></th><td class='c'>1&minus;&alpha;<br>(signifikansi statistik)</td><td class='c'>&beta;<br>(<b>Type 2</b> error)</td></tr>
+<tr><th>Putuskan H<sub>1</sub></th><td class='c'>&alpha;<br>(<b>Type 1</b> error)</td><td class='c'>1&minus;&beta;<br>(<b>statistical power</b>)</td></tr></table></div></section>
+<section class="box g1"><h2>5 &middot; Memilih teknik yang tepat</h2><div class="in"><p><b>3 pertimbangan:</b></p>
+<ol><li><b>Jenis data</b> (skala nominal/ordinal/interval/rasio)</li><li><b>Desain penelitian:</b> independensi sampel &middot; jumlah kelompok objek/data &middot; jumlah variabel</li><li><b>Asumsi</b> yang mendasari uji (pelanggaran &rarr; hasil tidak valid)</li></ol>
+<ul><li>Uji pengaruh metode diet &rarr; <b>uji-t</b></li><li>Rataan produktivitas 3 jenis pupuk &rarr; <b>ANOVA</b></li><li>Pengaruh media, budget, lama ekspose, bintang iklan thd penjualan &rarr; <b>multivariat</b></li></ul>
+<p class='sm'>Asumsi contoh: uji-t &rarr; populasi normal; regresi &rarr; variansi y sama untuk semua x.</p></div></section>
+<section class="box g2"><h2>6 &middot; Pedoman: data univariat</h2><div class="in"><table class='t'><tr><th>Data</th><th>Sampel</th><th>Teknik</th></tr>
+<tr><td rowspan='3'><b>Nonmetrik</b></td><td>tunggal</td><td>chi-square, Kolmogorov-Smirnov, runs</td></tr>
+<tr><td>&ge;2 independen</td><td>chi-square, rank-sum, K-S, Kruskal-Wallis</td></tr>
+<tr><td>&ge;2 dependen</td><td>uji tanda, Wilcoxon, Cochran Q</td></tr>
+<tr><td rowspan='3'><b>Metrik</b></td><td>tunggal</td><td>uji t, uji Z</td></tr>
+<tr><td>&ge;2 independen</td><td>uji t, uji Z, ANOVA</td></tr>
+<tr><td>&ge;2 dependen</td><td>uji t dipasangkan</td></tr></table></div></section>
+<section class="box g3"><h2>7 &middot; Pedoman: multivariat</h2><div class="in"><p><b>Hubungan dependen</b> (tanya: berapa var. diprediksi? skala?)</p>
+<table class='t'><tr><th>Kasus</th><th>Teknik</th></tr>
+<tr><td>hubungan majemuk dependen&ndash;independen</td><td><b>SEM</b></td></tr>
+<tr><td>beberapa dependen metrik, prediktor metrik</td><td>korelasi kanonis</td></tr>
+<tr><td>beberapa dependen metrik, prediktor nonmetrik</td><td>MANOVA</td></tr>
+<tr><td>beberapa dependen nonmetrik</td><td>korelasi kanonis + dummy</td></tr>
+<tr><td>1 dependen metrik</td><td><b>regresi majemuk</b>; analisis konjoin</td></tr>
+<tr><td>1 dependen nonmetrik</td><td>diskriminan majemuk; model probabilitas linier</td></tr></table>
+<p><b>Interdependen</b> (struktur hubungan antar&hellip;)</p>
+<table class='t'><tr><td>variabel</td><td><b>analisis faktor</b></td></tr><tr><td>responden/case</td><td><b>analisis cluster</b></td></tr>
+<tr><td>objek (atribut metrik / nonmetrik)</td><td>multidimensional scaling / analisis koresponden</td></tr></table></div></section>
+<section class="box g4"><h2>8 &middot; Data &amp; rumus matriks</h2><div class="in"><p>X<sub>ij</sub> = nilai variabel ke-j pada case ke-i (n case, p variabel; matriks X berukuran n&times;p).</p>
+<div class='f'>mean corrected: x<sub>i</sub> = X<sub>i</sub> &minus; X&#772; ; X<sub>d</sub> = X &minus; 1x&#772;'<br>centroid: x&#772;' = (1/n) 1'X<br>s<sub>X</sub> = &radic;(x'x / n) &nbsp; (slide, rumus 1)<br>s&sup2; = x<sub>d</sub>'x<sub>d</sub> / (n&minus;1)<br>cov C<sub>XY</sub> = x'y / n<br>r<sub>XY</sub> = x*'y* / n = x'y / (|x||y|) = <b>cos &theta;</b><br>standar: X<sub>s</sub> = X<sub>d</sub>D<sup>&minus;1/2</sup> (D diag. variansi)<br>&Sigma;X = 1'X ; &Sigma;X&sup2; = X'X ; &Sigma;XY = X'Y<br>B = X'X (diag = sum of square, lainnya cross product)<br>S = X'X &minus; (1/n)(X'1)(1'X) = X<sub>d</sub>'X<sub>d</sub><br>C = S/(n&minus;1) ; R = (1/(n&minus;1)) D<sup>&minus;1/2</sup> S D<sup>&minus;1/2</sup></div><svg class='fig' viewBox='0 0 300 96' role='img' aria-label='Korelasi sebagai cosinus sudut'>
+<path d='M20 80H150' stroke='#12A594' stroke-width='3' marker-end='url(#ah)'/><path d='M20 80L96 22' stroke='#FF4B3E' stroke-width='3' marker-end='url(#ah)'/>
+<path d='M60 80A40 40 0 0 0 52 58' fill='none' stroke='#111' stroke-width='1.3'/><text x='64' y='72' font-size='9'>&theta;</text>
+<text x='152' y='84' font-size='9'>x (mean corrected)</text><text x='100' y='22' font-size='9'>y</text>
+<text x='186' y='40' font-size='10' style='font-weight:600'>r<tspan font-size='7' dy='2'>XY</tspan><tspan dy='-2'> = cos &theta;</tspan></text>
+<text x='186' y='58' font-size='8.5'>r = 1: &theta; = 0&deg;</text><text x='186' y='70' font-size='8.5'>r = 0: &theta; = 90&deg;</text></svg>
+<div class='ex'>Data slide (n=15): attitude X1 &amp; intention Y: x&#772; = 4,47; &#563; = 5,13; S<sub>xx</sub> = 65,73; S<sub>xy</sub> = 25,07; S<sub>yy</sub> = 63,73 &rarr; r = 25,07/&radic;(65,73&times;63,73) = <b>0,39</b> (&theta; &asymp; 67&deg;); var X1 = 65,73/14 = 4,70.</div>
+<p class='sm'>Catatan slide: s<sub>X</sub> dengan pembagi n, sedangkan varian &amp; matriks C dengan n&minus;1.</p></div></section>
+<section class="box g1"><h2>9 &middot; Preprocessing data</h2><div class="in"><p><b>3 objektif (Sekaran, 1992):</b> getting the feel for the data &middot; testing the goodness of data &middot; testing hypothesis / menjawab pertanyaan penelitian</p>
+<p><b>Feel for the data</b> (statistik deskriptif &amp; grafik: histogram, scatterplot, boxplot, wajah Chernoff). Waspadai:</p>
+<ul><li>statistik <b>ekstrem</b> &rarr; salah input</li><li>variabilitas respons <b>sangat rendah</b> &rarr; pertanyaan tak tepat / responden tak paham</li><li>respons cenderung <b>sama</b> &rarr; pertanyaan bias</li><li>korelasi antar variabel tak sesuai logika/teori</li></ul>
+<p class='sm'>Hanya diagnostik awal; tidak menggantikan diagnostik statistikal.</p></div></section>
+<section class="box g2"><h2>10 &middot; Missing value &amp; outlier</h2><div class="in"><p><b>Missing value</b> &mdash; 3 opsi (pilih setelah cek: apakah missing bersifat random?):</p>
+<ol><li>abaikan kuesioner (delete cases)</li><li>ganti nilai (nilai tengah skala, rata-rata respons lain, atau teknik statistik)</li><li>hapus variabel dengan banyak missing</li></ol>
+<p><b>Outlier</b> 4 kelas: procedural error &middot; extraordinary event dengan penjelasan &middot; extraordinary event tanpa penjelasan &middot; kombinasi unik tanpa kejadian luar biasa</p>
+<p><b>Deteksi:</b> univariat (normalisasi, batas 3) &middot; bivariat (plot dua variabel) &middot; multivariat (jarak Mahalanobis)</p>
+<div class='note'>Jangan buru-buru dibuang (mengurangi generalizability); buang hanya jika benar-benar aberrant.</div></div></section>
+<section class="box g3"><h2>11 &middot; Goodness of data</h2><div class="in"><ul><li><b>Validitas data</b>: uji lewat confirmatory factor analysis &amp; teknik uji validitas lain</li><li><b>Reliabilitas alat ukur</b>: <span class='hl'>alpha Cronbach</span></li></ul>
+<p class='sm'>Setelah itu: uji hipotesis dengan teknik yang tepat (jenis data, desain, asumsi).</p></div></section>
+
+</main>
+<p class="foot">Dirangkum dari slide Minggu 1 (TI5002). Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>

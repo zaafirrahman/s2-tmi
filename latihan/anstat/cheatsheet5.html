@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 5 | Anstat Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBFBF8;--ink:#111;--mut:#4B4B4B;--acc:#E2362A;--p:#12A594;--s:#FF4B3E;--y:#FFE14D;--tint:#CDEFE9;--pink:#FFDAD6;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(18,165,148,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(18,165,148,.16) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut)}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--s);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#111}.box.g2{--g:var(--s);--gi:#111}.box.g3{--g:var(--y);--gi:#111}.box.g4{--g:#111;--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600}
+.t td.c,.t th.c{text-align:center}
+table.fx{table-layout:fixed}.fx td,.fx th{overflow-wrap:anywhere}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tint)}
+.chip.p{background:var(--pink)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.two>div{border:2px solid var(--ink);padding:4px 7px;font-size:12.4px;background:#fff}
+.two h3{margin:0 0 3px;font:800 14px var(--disp)}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--pink)}
+.ex{border:2px dashed var(--ink);padding:3px 8px;margin:6px 0;font-size:12.4px;background:#fff}
+.ex::before{content:"Contoh ";font:800 12px var(--disp);background:var(--ink);color:#fff;padding:0 5px;margin-right:4px}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8.5pt;margin:2px 0 0}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .two>div{font-size:7pt;padding:2px 4px;border-width:1px}.two h3{font-size:8pt}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .ex{font-size:7pt;padding:1px 4px;margin:3px 0;border-width:1px}.ex::before{font-size:6.5pt}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt}
+ .fig{margin:3px 0}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:1.025">
+<svg class='defs' aria-hidden='true'><defs><marker id='ah' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#111'/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="anstat.html">Anstat</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet 5</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 5</h1><p class="sub">TI5002 / Analisis Data dan Statistika &middot; Analisis Cluster</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan5.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet5.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; Tujuan &amp; karakteristik</h2><div class="in"><ul><li><b>Tujuan:</b> mengelompokkan <b>objek</b> (orang, perusahaan, produk) ke kelompok yang <i>manageable</i> memakai atribut pengelompok tertentu</li>
+<li>Anggota satu cluster <span class='hl'>sangat mirip</span>; antar cluster <span class='hl'>berbeda berarti</span></li></ul>
+<div class='chips'><span class='chip'>deskriptif</span><span class='chip'>eksploratori</span><span class='chip'>solusi tidak unik</span><span class='chip p'>selalu menghasilkan cluster</span><span class='chip'>sangat tergantung variabel pengelompok</span></div>
+<p class='sm'>Cluster selalu terbentuk, walau struktur &lsquo;sebenarnya&rsquo; ada atau tidak.</p></div></section>
+<section class="box g3"><h2>2 &middot; Alur metodologi</h2><div class="in"><ol><li>Ambil <b>p</b> variabel pada <b>n</b> objek &rarr; matriks <b>n&times;p</b></li>
+<li>Ubah jadi <b>matriks similaritas n&times;n</b> (pasangan objek)</li>
+<li>Pilih algoritma pengelompokan</li></ol>
+<div class='chips'><span class='chip y'>1. hierarkis: top-down (divisive) / bottom-up (agglomerative)</span><span class='chip y'>2. non-hierarkis</span><span class='chip y'>3. kombinasi</span></div>
+<p>Dasar: <b>similarity</b> (kesamaan) atau <b>dissimilarity</b> (ketidaksamaan). <b>Ukuran similaritas:</b> ukuran <b>jarak</b> &middot; koefisien <b>korelasi</b> &middot; koefisien <b>asosiasi</b>.</p>
+<div class='f'>Jarak Euclidean d(i,j) = &radic; &Sigma;<sub>k</sub> (x<sub>ik</sub> &minus; x<sub>jk</sub>)&sup2;</div>
+<div class='ex'>(0,0)&ndash;(3,4): &radic;(9+16) = <b>5</b>. B(4,5)&ndash;G(6,4): &radic;(4+1) = <b>2,24</b>.</div></div></section>
+<section class="box g2"><h2>3 &middot; Matriks jarak contoh (7 objek, 2 variabel)</h2><div class="in"><table class='t fx'><tr><th></th><th class='c'>A</th><th class='c'>B</th><th class='c'>C</th><th class='c'>D</th><th class='c'>E</th><th class='c'>F</th><th class='c'>G</th></tr>
+<tr><th>V1,V2</th><td class='c'>3,2</td><td class='c'>4,5</td><td class='c'>4,7</td><td class='c'>2,7</td><td class='c'>6,6</td><td class='c'>7,7</td><td class='c'>6,4</td></tr>
+<tr><th>A</th><td class='c'>0</td><td class='c'>3,16</td><td class='c'>5,10</td><td class='c'>5,10</td><td class='c'>5,00</td><td class='c'>6,40</td><td class='c'>3,61</td></tr>
+<tr><th>B</th><td></td><td class='c'>0</td><td class='c'>2,00</td><td class='c'>2,83</td><td class='c'>2,24</td><td class='c'>3,61</td><td class='c'>2,24</td></tr>
+<tr><th>C</th><td></td><td></td><td class='c'>0</td><td class='c'>2,00</td><td class='c'>2,24</td><td class='c'>3,00</td><td class='c'>3,61</td></tr>
+<tr><th>D</th><td></td><td></td><td></td><td class='c'>0</td><td class='c'>4,12</td><td class='c'>5,00</td><td class='c'>5,00</td></tr>
+<tr><th>E</th><td></td><td></td><td></td><td></td><td class='c'>0</td><td class='c'>1,41</td><td class='c'>2,00</td></tr>
+<tr><th>F</th><td></td><td></td><td></td><td></td><td></td><td class='c'>0</td><td class='c'>3,16</td></tr></table>
+<p class='sm'>Pasangan paling mirip (jarak terkecil) digabung lebih dulu: E&ndash;F (1,41).</p></div></section>
+<section class="box g4"><h2>4 &middot; Metode hierarkis (linkage)</h2><div class="in"><table class='t'><tr><th>Metode</th><th>Jarak antar cluster</th></tr>
+<tr><td><b>Single</b> (nearest neighbor)</td><td>jarak <b>terpendek</b> dua anggota</td></tr>
+<tr><td><b>Complete</b> (furthest neighbor)</td><td>jarak <b>terjauh</b></td></tr>
+<tr><td><b>Average</b> (between-groups)</td><td>rata-rata semua pasangan</td></tr>
+<tr><td><b>Ward</b> (error sum of squares)</td><td>meminimalkan variasi dalam cluster</td></tr>
+<tr><td><b>Centroid</b></td><td>jarak antar centroid (pusat)</td></tr></table><svg class='fig' viewBox='0 0 300 96' role='img' aria-label='Jenis linkage'>
+<ellipse cx='60' cy='48' rx='50' ry='38' fill='#CDEFE9' stroke='#111' stroke-width='1.4'/><ellipse cx='240' cy='48' rx='50' ry='38' fill='#FFDAD6' stroke='#111' stroke-width='1.4'/>
+<g fill='#111'><circle cx='30' cy='30' r='3'/><circle cx='40' cy='68' r='3'/><circle cx='75' cy='45' r='3'/><circle cx='95' cy='60' r='3'/><circle cx='205' cy='40' r='3'/><circle cx='235' cy='70' r='3'/><circle cx='265' cy='35' r='3'/><circle cx='275' cy='62' r='3'/></g>
+<path d='M95 60L205 40' stroke='#12A594' stroke-width='2.4'/><path d='M30 30L275 62' stroke='#FF4B3E' stroke-width='1.6' stroke-dasharray='5 3'/>
+<path d='M60 52L240 52' stroke='#111' stroke-width='1.2' stroke-dasharray='1 3'/><text x='150' y='40' font-size='8' text-anchor='middle' style='fill:#0B6F62;font-weight:600'>single: terpendek</text><text x='150' y='83' font-size='8' text-anchor='middle' style='fill:#B3261B;font-weight:600'>complete: terjauh</text><text x='150' y='64' font-size='7.5' text-anchor='middle'>centroid: pusat&ndash;pusat</text>
+</svg>
+<div class='ex'>{E,F} vs G, d(E,G)=2,00 &amp; d(F,G)=3,16: single = <b>2,00</b>; complete = <b>3,16</b>; average = (2,00+3,16)/2 = <b>2,58</b>.</div>
+<p class='sm'>Agglomerative: n objek &rarr; <b>n&minus;1 tahap</b> (10 objek: 9 tahap; 15 industri: 14 tahap). Tiap tahap mengurangi 1 cluster.</p></div></section>
+<section class="box g1"><h2>5 &middot; Dendrogram (single linkage, 7 objek)</h2><div class="in"><svg class='fig' viewBox='0 0 300 124' role='img' aria-label='Dendrogram single linkage'><path d='M56 108H270' stroke='#111'/><path d='M56 108v3' stroke='#111'/><text x='56' y='121' font-size='8' text-anchor='middle'>0</text><path d='M108 108v3' stroke='#111'/><text x='108' y='121' font-size='8' text-anchor='middle'>1</text><path d='M160 108v3' stroke='#111'/><text x='160' y='121' font-size='8' text-anchor='middle'>2</text><path d='M212 108v3' stroke='#111'/><text x='212' y='121' font-size='8' text-anchor='middle'>3</text><path d='M264 108v3' stroke='#111'/><text x='264' y='121' font-size='8' text-anchor='middle'>4</text><path d='M56 70H129.5V84H56' fill='none' stroke='#111' stroke-width='1.6'/><path d='M56 28H160.0V42H56' fill='none' stroke='#111' stroke-width='1.6'/><path d='M160.0 35.0H162.1V56H56' fill='none' stroke='#111' stroke-width='1.6'/><path d='M129.528 77.0H160.0V98H56' fill='none' stroke='#111' stroke-width='1.6'/><path d='M162.07999999999998 45.5H172.3V87.5H160.0' fill='none' stroke='#111' stroke-width='1.6'/><path d='M56 14H220.4V66.5H172.272' fill='none' stroke='#111' stroke-width='1.6'/><text x='46' y='17' font-size='9' text-anchor='end' style='font-weight:600'>A</text><text x='46' y='31' font-size='9' text-anchor='end' style='font-weight:600'>B</text><text x='46' y='45' font-size='9' text-anchor='end' style='font-weight:600'>C</text><text x='46' y='59' font-size='9' text-anchor='end' style='font-weight:600'>D</text><text x='46' y='73' font-size='9' text-anchor='end' style='font-weight:600'>E</text><text x='46' y='87' font-size='9' text-anchor='end' style='font-weight:600'>F</text><text x='46' y='101' font-size='9' text-anchor='end' style='font-weight:600'>G</text><circle cx='137.5' cy='77.0' r='5.5' fill='#FFE14D' stroke='#111'/><text x='137.5' y='80.0' font-size='7.5' text-anchor='middle'>1</text><circle cx='168.0' cy='87.0' r='5.5' fill='#FFE14D' stroke='#111'/><text x='168.0' y='90.0' font-size='7.5' text-anchor='middle'>2</text><circle cx='168.0' cy='35.0' r='5.5' fill='#FFE14D' stroke='#111'/><text x='168.0' y='38.0' font-size='7.5' text-anchor='middle'>3</text><circle cx='170.1' cy='45.0' r='5.5' fill='#FFE14D' stroke='#111'/><text x='170.1' y='48.0' font-size='7.5' text-anchor='middle'>4</text><circle cx='180.3' cy='66.0' r='5.5' fill='#FFE14D' stroke='#111'/><text x='180.3' y='69.0' font-size='7.5' text-anchor='middle'>5</text><circle cx='228.4' cy='40.0' r='5.5' fill='#FFE14D' stroke='#111'/><text x='228.4' y='43.0' font-size='7.5' text-anchor='middle'>6</text><text x='200' y='100' font-size='7.5'>jarak (single)</text></svg>
+<ul><li>Dendrogram menunjukkan <b>urutan &amp; jarak</b> penggabungan; angka bulat = urutan tahap</li><li>Makin ke kanan = penggabungan makin tidak mirip</li></ul></div></section>
+<section class="box g2"><h2>6 &middot; Non-hierarkis &amp; input analisis</h2><div class="in"><p><b>Non-hierarkis:</b> <span class='chip y'>sequential threshold</span> <span class='chip y'>parallel threshold</span> <span class='chip y'>optimizing</span></p>
+<p><b>Hal terkait input:</b></p>
+<ul><li><b>Satuan</b> yang digunakan &rarr; jika skala/satuan berbeda, <b>standardisasi</b> (variabel besar mendominasi jarak)</li><li>Adanya <b>outlier</b></li><li><b>Variabel pengelompok</b> (menentukan hasil)</li><li><b>Dependensi</b> antar variabel</li></ul></div></section>
+<section class="box g3"><h2>7 &middot; Menentukan jumlah cluster</h2><div class="in"><ol><li>Peneliti telah <b>menetapkan</b> jumlahnya</li><li>Berdasar <b>variabilitas error</b> (deviasi dari pusat cluster) lewat <span class='hl'>koefisien aglomerasi</span></li><li>Berdasar <b>kemudahan interpretasi</b></li></ol><svg class='fig' viewBox='0 0 300 128' role='img' aria-label='Koefisien aglomerasi'><path d='M28 12V104H290' fill='none' stroke='#111' stroke-width='1.5'/><rect x='34' y='97.8' width='13' height='6.2' fill='#12A594' stroke='#111'/><text x='40.5' y='114' font-size='7' text-anchor='middle'>1</text><rect x='52' y='94.6' width='13' height='9.4' fill='#12A594' stroke='#111'/><text x='58.5' y='114' font-size='7' text-anchor='middle'>2</text><rect x='70' y='91.8' width='13' height='12.2' fill='#12A594' stroke='#111'/><text x='76.5' y='114' font-size='7' text-anchor='middle'>3</text><rect x='88' y='86.5' width='13' height='17.5' fill='#12A594' stroke='#111'/><text x='94.5' y='114' font-size='7' text-anchor='middle'>4</text><rect x='106' y='84.1' width='13' height='19.9' fill='#12A594' stroke='#111'/><text x='112.5' y='114' font-size='7' text-anchor='middle'>5</text><rect x='124' y='82.5' width='13' height='21.5' fill='#12A594' stroke='#111'/><text x='130.5' y='114' font-size='7' text-anchor='middle'>6</text><rect x='142' y='77.4' width='13' height='26.6' fill='#12A594' stroke='#111'/><text x='148.5' y='114' font-size='7' text-anchor='middle'>7</text><rect x='160' y='75.6' width='13' height='28.4' fill='#12A594' stroke='#111'/><text x='166.5' y='114' font-size='7' text-anchor='middle'>8</text><rect x='178' y='69.9' width='13' height='34.1' fill='#12A594' stroke='#111'/><text x='184.5' y='114' font-size='7' text-anchor='middle'>9</text><rect x='196' y='67.9' width='13' height='36.1' fill='#12A594' stroke='#111'/><text x='202.5' y='114' font-size='7' text-anchor='middle'>10</text><rect x='214' y='66.2' width='13' height='37.8' fill='#12A594' stroke='#111'/><text x='220.5' y='114' font-size='7' text-anchor='middle'>11</text><rect x='232' y='59.0' width='13' height='45.0' fill='#12A594' stroke='#111'/><text x='238.5' y='114' font-size='7' text-anchor='middle'>12</text><rect x='250' y='28.1' width='13' height='75.9' fill='#FF4B3E' stroke='#111'/><text x='256.5' y='114' font-size='7' text-anchor='middle'>13</text><rect x='268' y='19.8' width='13' height='84.2' fill='#FF4B3E' stroke='#111'/><text x='274.5' y='114' font-size='7' text-anchor='middle'>14</text><text x='40' y='20' font-size='8' style='font-weight:600'>lonjakan 5,621 &rarr; 9,483 (tahap 12 &rarr; 13)</text><text x='160' y='125' font-size='8' text-anchor='middle'>tahap (stage)</text><text x='2' y='10' font-size='8'>koef.</text><path d='M164 24v20' stroke='#111' marker-end='url(#ah)'/></svg>
+<div class='note'>Berhenti sebelum lonjakan besar: koefisien naik 5,621 &rarr; 9,483 di tahap 13, maka pakai hasil sesudah tahap 12 &rarr; 15 &minus; 12 = <b>3 cluster</b>.</div>
+<p class='sm'>Tahap 1: objek 8 &amp; 15 digabung (koef. 0,773) = pasangan paling mirip. Koefisien naik terus karena yang digabung makin berbeda.</p></div></section>
+<section class="box g4"><h2>8 &middot; Interpretasi cluster (contoh 15 UKM)</h2><div class="in"><p class='sm'>Pend. = pendapatan (miliar Rp); Prod. = jumlah produk. Cluster 1 = perusahaan 4,6,7,8,9,10,11,15.</p><p><b>Centroid</b> = rata-rata tiap variabel dari anggota cluster; lalu beri <b>nama</b> sesuai profil &amp; tujuan studi.</p>
+<table class='t fx'><tr><th style='width:34%'>Cluster</th><th class='c'>Kary.</th><th class='c'>Pend.</th><th class='c'>Usia</th><th class='c'>Prod.</th></tr>
+<tr><td>1 (4,6-11,15)</td><td class='c'>33,50</td><td class='c'>2,27</td><td class='c'>3,31</td><td class='c'>3,38</td></tr>
+<tr><td>2 (1,2,12,14)</td><td class='c'>49,25</td><td class='c'>1,73</td><td class='c'>6,75</td><td class='c'>3,75</td></tr>
+<tr><td>3 (3,5,13)</td><td class='c'>47,33</td><td class='c'>4,23</td><td class='c'>4,50</td><td class='c'>6,33</td></tr></table>
+<ul><li>C1: perusahaan <b>baru berkembang</b></li><li>C2: <b>mulai menurun</b> performansinya (usia tertinggi)</li><li>C3: <b>sedang berkembang</b> (pendapatan &amp; produk tertinggi)</li></ul>
+<div class='ex'>Usia C2: (7+7+6+7)/4 = <b>6,75</b>. Produk C3: (7+7+5)/3 = <b>6,33</b> (&asymp; 1,9&times; C1). Usia 2,4,6 &rarr; centroid 4.</div></div></section>
+<section class="box g1"><h2>9 &middot; Validasi</h2><div class="in"><ul><li>Bandingkan hasil <b>algoritma berbeda</b></li><li><b>Bagi sampel</b> menjadi dua</li><li>Pakai <b>variabel yang tidak dipakai</b> untuk mengelompokkan</li><li><b>Simulasi</b></li></ul></div></section>
+<section class="box g2"><h2>10 &middot; Cluster vs teknik lain</h2><div class="in"><table class='t'><tr><th>Bandingan</th><th>Fokus / titik awal</th></tr>
+<tr><td><b>Cluster</b></td><td>mereduksi data <b>objek</b>; mulai dari grup belum berdiferensiasi, lalu dibuat sub-grup yang dapat dibedakan</td></tr>
+<tr><td><b>Faktor / komponen utama</b></td><td>mereduksi <b>variabel</b></td></tr>
+<tr><td><b>Diskriminan / logit</b></td><td>mulai dari grup yang sudah jelas (<i>well defined</i>); pertanyaan: bagaimana grup dibedakan</td></tr></table>
+<ul><li>Jika <b>tidak ada label grup</b> &rarr; cluster</li><li>Jika grup <b>sudah berlabel</b> (mis. gagal bayar/lancar) &rarr; diskriminan / regresi logistik</li><li>Jika ingin meringkas <b>variabel</b> &rarr; analisis faktor</li></ul></div></section>
+
+</main>
+<p class="foot">Dirangkum dari slide Minggu 5 (TI5002). Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>
