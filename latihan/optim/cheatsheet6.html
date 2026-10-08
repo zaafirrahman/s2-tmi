@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 6 | Optim Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F8FAFF;--ink:#111;--mut:#4B4B4B;--acc:#2448D8;--p:#2F5BFF;--s:#FF8A1F;--y:#FFE14D;--tint:#DCE5FF;--stint:#FFE6CC;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(47,91,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(47,91,255,.13) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut);max-width:70ch}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--p);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#fff}.box.g2{--g:var(--s);--gi:var(--ink)}.box.g3{--g:var(--y);--gi:var(--ink)}.box.g4{--g:var(--acc);--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in{overflow-wrap:anywhere}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600;overflow-wrap:normal}
+.t td.c,.t th.c{text-align:center}
+.t td.y{background:var(--y)}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tint)}
+.chip.p{background:var(--stint)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--stint)}
+.mx{display:inline-grid;grid-template-columns:repeat(var(--c,2),auto);gap:0 7px;border-left:1.6px solid #111;border-right:1.6px solid #111;padding:0 4px;vertical-align:middle;text-align:center;font:500 .9em/1.3 var(--mono)}
+.mx i{font-style:normal}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;font-size:.95em}
+.fr i{font-style:normal;padding:0 2px}.fr i:first-child{border-bottom:1.2px solid #111}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+/* cetak / PDF */
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8pt;margin:2px 0 0;max-width:none}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt;margin-top:3px}
+ .fig{margin:3px 0}
+ .mx{border-left-width:1px;border-right-width:1px}
+ .fr i:first-child{border-bottom-width:.8px}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:1.12">
+<svg class='defs' aria-hidden='true'><defs><marker id='ah' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#111'/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="optim.html">Optim</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet Materi 6</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 6</h1><p class="sub">TI5001 / Optimisasi &amp; Intelejensia Komputasional &middot; Metode Numerik Single</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan6.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet6.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; Konsep dasar</h2><div class="in"><svg class='fig' viewBox='0 0 300 84' role='img' aria-label='Interval ketidakpastian'>
+<path d='M10 70Q150 -30 290 70' fill='none' stroke='#2F5BFF' stroke-width='3'/>
+<path d='M10 78H290' stroke='#111'/>
+<g stroke='#111' stroke-width='1.3' stroke-dasharray='3 3'><path d='M100 20V78M200 20V78'/></g>
+<rect x='100' y='74' width='100' height='8' fill='#FF8A1F' stroke='#111'/>
+<text x='100' y='14' font-size='9' text-anchor='middle'>a</text><text x='200' y='14' font-size='9' text-anchor='middle'>b</text>
+<text x='150' y='70' font-size='8.5' text-anchor='middle'>[a, b] memuat optimum</text>
+</svg><ul><li><b>Unimodal</b>: fungsi punya satu puncak atau satu lembah (asumsi metode numerik)</li><li><b>Interval ketidakpastian</b>: interval tempat optimum berada; dipersempit sampai panjang akhir <span class='hl'>l</span></li><li>Bila tidak unimodal (mis. dua lembah) &rarr; sebagian interval bisa dibuang salah &rarr; hanya optimal lokal</li></ul></div></section>
+<section class="box g2"><h2>2 &middot; Peta &amp; perbandingan metode</h2><div class="in"><table class='t'><tr><th>Metode</th><th>Basis</th><th>Input</th><th>f baru</th></tr><tr><td>Direct search<br><span class='sm'>tak berpembatas</span></td><td>nilai f</td><td>x<sup>(1)</sup>, l</td><td class='c'>1</td></tr><tr><td>Newton<br><span class='sm'>tak berpembatas</span></td><td>f&prime;, f&Prime;</td><td>x<sup>(1)</sup>, &epsilon;</td><td class='c'>&ndash;</td></tr><tr><td>Dichotomous<br><span class='sm'>a&le;x&le;b</span></td><td>nilai f</td><td>[a,b], &epsilon;, l</td><td class='c'>2</td></tr><tr><td>Fibonacci<br><span class='sm'>a&le;x&le;b</span></td><td>nilai f</td><td>[a,b], &epsilon;, l</td><td class='c'>1</td></tr><tr><td>Golden section<br><span class='sm'>a&le;x&le;b</span></td><td>nilai f</td><td>[a,b], l</td><td class='c'>1</td></tr><tr><td>Bisection<br><span class='sm'>a&le;x&le;b</span></td><td>f&prime;</td><td>[a,b], &epsilon;</td><td class='c'>&ndash;</td></tr></table><p class='sm'>Direct search &amp; Newton butuh titik awal; metode lain butuh interval [a,b].</p></div></section>
+<section class="box g3"><h2>3 &middot; Direct search</h2><div class="in"><ul><li>Langkah <b>&lambda; = l/2</b>; arah d=+1 (kanan) / &minus;1 (kiri)</li><li>Mulai x<sup>(1)</sup>: bila f(x+&lambda;d) membaik &rarr; maju; jika memburuk &rarr; balik d=&minus;1; jika sama &rarr; berhenti</li><li>x<sup>(k+1)</sup>=x<sup>(k)</sup>+&lambda;d selama membaik; berhenti saat f(x+&lambda;d) tak lebih baik</li></ul><p>Slide: min (x&minus;1)&sup2;, l=0,01 (&lambda;=0,005), x<sup>(1)</sup>=3: f(3,005)=4,020 &gt; f(3)=4 &rarr; d=&minus;1; 401 iterasi; berhenti di x=1,000 &rarr; interval <b>[0,995; 1,005]</b> (panjang 2&lambda;=l)</p><p class='sm'>&dagger; (x&minus;2)&sup2;, x<sup>(1)</sup>=5, &lambda;=0,05: x=5&minus;0,05k; berhenti di x=2,00 (k=60), interval [1,95; 2,05].</p></div></section>
+<section class="box g4"><h2>4 &middot; Newton (optimisasi)</h2><div class="in"><p>Pendekatan kuadratik di x<sup>(k)</sup>:</p><div class='f'>q(x) = f + f&prime;(x&minus;x<sup>(k)</sup>) + &frac12;f&Prime;(x&minus;x<sup>(k)</sup>)&sup2;</div><div class='f'>x<sup>(k+1)</sup> = x<sup>(k)</sup> &minus; f&prime;(x<sup>(k)</sup>) / f&Prime;(x<sup>(k)</sup>)<small>dari q&prime;(x)=0. Henti: |x<sup>(k+1)</sup>&minus;x<sup>(k)</sup>|&lt;&epsilon; atau |f&prime;|&lt;&epsilon;</small></div><p>Syarat: f dapat diturunkan 2&times;, titik awal; f&Prime;(x<sup>(k)</sup>)=0 &rarr; pembagian nol (mis. x&#8308;&minus;2x di x=0)</p><p>Slide: min (x&minus;1)&sup2;, f&prime;=2(x&minus;1), f&Prime;=2, x<sup>(1)</sup>=0: x<sup>(2)</sup>=0&minus;(&minus;2)/2=<b>1</b>; x<sup>(3)</sup>=1 &rarr; stop</p><p>&dagger; 3x&sup2;&minus;6x+2 dari 10: 10&minus;54/6=1 (kuadrat: 1 langkah). x&sup3; di x=1: f=1, f&prime;=3, f&Prime;=6 &rarr; x=1&minus;3/6=0,5</p><p class='sm'>Newton optimisasi: f&prime;/f&Prime;. Newton-Raphson akar: f/f&prime;.</p></div></section>
+<section class="box g1"><h2>5 &middot; Dichotomous search</h2><div class="in"><svg class='fig' viewBox='0 0 300 78' role='img' aria-label='Titik u v dan pemakaian ulang'>
+<g stroke='#111' stroke-width='2.4'><path d='M10 16H290'/><path d='M10 56H290'/></g>
+<g fill='#fff' stroke='#111' stroke-width='2'><circle cx='10' cy='16' r='4'/><circle cx='290' cy='16' r='4'/><circle cx='10' cy='56' r='4'/><circle cx='290' cy='56' r='4'/></g>
+<circle cx='115' cy='16' r='5' fill='#FFE14D' stroke='#111' stroke-width='2'/><circle cx='185' cy='16' r='5' fill='#FF8A1F' stroke='#111' stroke-width='2'/>
+<text x='115' y='9' font-size='8.5' text-anchor='middle'>u</text><text x='185' y='9' font-size='8.5' text-anchor='middle'>v</text>
+<text x='10' y='30' font-size='8.5'>a</text><text x='284' y='30' font-size='8.5'>b</text>
+<text x='150' y='30' font-size='8.5' text-anchor='middle'>min: f(u)&#8804;f(v) &#8594; buang kanan v</text>
+<path d='M10 56H185' stroke='#2F5BFF' stroke-width='5'/>
+<circle cx='115' cy='56' r='5' fill='#FF8A1F' stroke='#111' stroke-width='2'/>
+<text x='115' y='72' font-size='8.5' text-anchor='middle'>u lama = v baru (dipakai ulang)</text>
+</svg><div class='f'>u = a + (b&minus;a)/2 &minus; &epsilon;/2 ; v = a + (b&minus;a)/2 + &epsilon;/2<small>&epsilon; = konstanta pembeda; henti jika b&minus;a &lt; l; 2 evaluasi baru per iterasi</small></div><p>Slide: min (x&minus;1)&sup2;, [&minus;1,2], &epsilon;=0,0001, l=0,01</p><table class='t'><tr><th>k</th><th>u</th><th>v</th><th>f(u)</th><th>f(v)</th></tr><tr><td>1</td><td class='c'>0,5</td><td class='c'>0,5001</td><td class='c'>0,25005</td><td class='c'>0,24995</td></tr><tr><td>2</td><td class='c'>1,2499</td><td class='c'>1,25</td><td class='c'>0,062463</td><td class='c'>0,062513</td></tr></table><p class='sm'>k=1 [&minus;1;2]: f(u)&gt;f(v) &rarr; [u,b]=[0,5;2]. k=2: f(u)=0,062463 &le; f(v)=0,062513 &rarr; [a,v]=[0,5;1,25]. 10 iterasi: [0,9980; 1,0039]. &dagger; maks &minus;(x&minus;3)&sup2;, [0,4], &epsilon;=0,02: u=1,99, v=2,01; f(u)&lt;f(v) &rarr; [1,99;4].</p></div></section>
+<section class="box g2"><h2>6 &middot; Fibonacci search</h2><div class="in"><p>F<sub>0</sub>=F<sub>1</sub>=1, F<sub>n</sub>=F<sub>n&minus;1</sub>+F<sub>n&minus;2</sub>: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987 (n=0..15)</p><div class='f'>pilih n: F<sub>n</sub> &gt; (b&minus;a)/l<small>(l &gt; &epsilon;)</small></div><div class='f'>u = a + F<sub>n&minus;k&minus;1</sub>/F<sub>n&minus;k+1</sub>&middot;(b&minus;a) ; v = a + F<sub>n&minus;k</sub>/F<sub>n&minus;k+1</sub>&middot;(b&minus;a)</div><ul><li>min: f(u)&le;f(v) &rarr; b=v, v&larr;u lama, hitung u baru. Else a=u, u&larr;v lama, hitung v baru (1 evaluasi baru)</li><li>Iterasi k=n: u=v &rarr; pakai v=u+&epsilon; (itulah fungsi &epsilon;)</li></ul><p>Slide: [&minus;1,2], l=0,01: (b&minus;a)/l=300 &rarr; F<sub>12</sub>=233&lt;300&lt;F<sub>13</sub>=377 &rarr; <b>n=13</b>. u<sub>1</sub>=0,1459, v<sub>1</sub>=0,8541 &rarr; akhir [0,9973; 1,0053]</p><p class='sm'>[&minus;2,8], l=0,1: 100 &rarr; n=11 (F<sub>10</sub>=89&lt;100). b&minus;a=10, l=0,01: 1000 &rarr; n=16 (F<sub>15</sub>=987).</p></div></section>
+<section class="box g3"><h2>7 &middot; Golden section</h2><div class="in"><div class='f'>u = a + (1&minus;&gamma;)(b&minus;a) ; v = a + &gamma;(b&minus;a)<small>&gamma;=0,618 (golden ratio); &gamma;&sup2;=1&minus;&gamma;&asymp;0,382; henti b&minus;a&lt;l; tanpa n, tanpa &epsilon;</small></div><ul><li>min: f(u)&le;f(v) &rarr; a tetap, b=v, v&larr;u lama, u baru = a+(1&minus;&gamma;)(b&minus;a)</li><li>f(u)&gt;f(v) &rarr; a=u, b tetap, u&larr;v lama, v baru = a+&gamma;(b&minus;a)</li><li>Titik lama dipakai ulang &rarr; <b>1 evaluasi baru/iterasi</b></li></ul><p>Slide: [&minus;1,2]: u<sub>1</sub>=0,1460, v<sub>1</sub>=0,8540, f=0,7293 &gt; 0,0213 &rarr; a=0,146, u<sub>2</sub>=0,8542 (=v<sub>1</sub>), v<sub>2</sub>=1,2918. 13 iterasi: [0,9969; 1,0062]</p><p class='sm'>[0,5]: u=0,382&times;5=1,910; v=0,618&times;5=3,090.</p></div></section>
+<section class="box g4"><h2>8 &middot; Bisection (turunan)</h2><div class="in"><div class='f'>m = (a+b)/2<small>henti jika |f&prime;(m)| &lt; &epsilon;; f konveks &amp; dapat diturunkan; tanpa nilai f</small></div><p>Contoh slide: min (x&minus;1)&sup2;, [&minus;1,2], &epsilon;=0,001, f&prime;=2(x&minus;1)</p><table class='t'><tr><th>k</th><th>a</th><th>b</th><th>m</th><th>f&prime;(m)</th></tr><tr><td>1</td><td class='c'>&minus;1</td><td class='c'>2</td><td class='c'>0,5</td><td class='c'>&minus;1,0</td></tr><tr><td>2</td><td class='c'>0,5</td><td class='c'>2</td><td class='c'>1,25</td><td class='c'>0,5</td></tr><tr><td>3</td><td class='c'>0,5</td><td class='c'>1,25</td><td class='c'>0,875</td><td class='c'>&minus;0,25</td></tr></table><p class='sm'>12 iterasi &rarr; [0,9995; 1,0010]. Panjang setelah k pembagian = (b&minus;a)/2<sup>k</sup>; &dagger; [&minus;1,2], &le;0,01: 3/2<sup>k</sup>&le;0,01 &rarr; k=9. &dagger; x&#8308;&minus;4x pada [0,3]: [0;1,5], [0,75;1,5], [0,75;1,125].</p></div></section>
+<section class="box g2"><h2>9 &middot; Aturan arah update (min vs maks)</h2><div class="in"><table class='t'><tr><th></th><th>Min</th><th>Maks</th></tr><tr><td>buang kanan &rarr; [a,v]</td><td>f(u) &le; f(v)</td><td>f(u) &ge; f(v)</td></tr><tr><td>buang kiri &rarr; [u,b]</td><td>f(u) &gt; f(v)</td><td>f(u) &lt; f(v)</td></tr><tr><td>bisection &rarr; [a,m]</td><td>f&prime;(m) &gt; 0</td><td>f&prime;(m) &lt; 0</td></tr><tr><td>bisection &rarr; [m,b]</td><td>f&prime;(m) &lt; 0</td><td>f&prime;(m) &gt; 0</td></tr><tr><td>direct search: lanjut d=+1</td><td>f(x+&lambda;) &lt; f(x)</td><td>f(x+&lambda;) &gt; f(x)</td></tr><tr><td>direct search: balik d=&minus;1</td><td>f(x+&lambda;) &gt; f(x)</td><td>f(x+&lambda;) &lt; f(x)</td></tr></table><p class='sm'>f&prime;(m)=0 &rarr; berhenti. Min: f&prime;&gt;0 berarti f naik di m &rarr; minimum di kiri. Maks: f&prime;&gt;0 berarti masih naik &rarr; maksimum di kanan: &minus;(x&minus;1)&sup2; pada [&minus;1,2], m=0,5, f&prime;=1 &rarr; [0,5;2]. Min pada [0,4], m=2, f&prime;=3&gt;0 &rarr; [0;2].</p></div></section>
+</main>
+<p class="foot">Dirangkum dari slide kuliah TI5001. Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 4 | Optim Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F8FAFF;--ink:#111;--mut:#4B4B4B;--acc:#2448D8;--p:#2F5BFF;--s:#FF8A1F;--y:#FFE14D;--tint:#DCE5FF;--stint:#FFE6CC;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(47,91,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(47,91,255,.13) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut);max-width:70ch}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--p);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#fff}.box.g2{--g:var(--s);--gi:var(--ink)}.box.g3{--g:var(--y);--gi:var(--ink)}.box.g4{--g:var(--acc);--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in{overflow-wrap:anywhere}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600;overflow-wrap:normal}
+.t td.c,.t th.c{text-align:center}
+.t td.y{background:var(--y)}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tint)}
+.chip.p{background:var(--stint)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--stint)}
+.mx{display:inline-grid;grid-template-columns:repeat(var(--c,2),auto);gap:0 7px;border-left:1.6px solid #111;border-right:1.6px solid #111;padding:0 4px;vertical-align:middle;text-align:center;font:500 .9em/1.3 var(--mono)}
+.mx i{font-style:normal}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;font-size:.95em}
+.fr i{font-style:normal;padding:0 2px}.fr i:first-child{border-bottom:1.2px solid #111}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+/* cetak / PDF */
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8pt;margin:2px 0 0;max-width:none}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt;margin-top:3px}
+ .fig{margin:3px 0}
+ .mx{border-left-width:1px;border-right-width:1px}
+ .fr i:first-child{border-bottom-width:.8px}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:1.31">
+<svg class='defs' aria-hidden='true'><defs><marker id='ah' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#111'/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="optim.html">Optim</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet Materi 4</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 4</h1><p class="sub">TI5001 / Optimisasi &amp; Intelejensia Komputasional &middot; Pemecahan Analitik Model Optimisasi Tak-Linier Tak-Berpembatas</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan4.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet4.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; Model &amp; kondisi perlu</h2><div class="in"><ul><li>x &isin; R<sup>n</sup> kontinu, bebas (&minus;&infin; &lt; x<sub>j</sub> &lt; &infin;); f kontinu &amp; dapat diturunkan 2&times;</li><li>Gradien &nabla;f(x) = (&part;f/&part;x<sub>1</sub>, &hellip;, &part;f/&part;x<sub>n</sub>)<sup>T</sup></li></ul><div class='f'>&nabla;f(x) = 0<small>kondisi PERLU optimal &rarr; titik stasioner (n persamaan simultan, n variabel). Belum cukup!</small></div><p>Hessian H(x) = [&part;&sup2;f/&part;x<sub>i</sub>&part;x<sub>j</sub>] (n&times;n). Evaluasi di titik stasioner x*: H(x*)</p></div></section>
+<section class="box g2"><h2>2 &middot; Kondisi cukup (multi variabel)</h2><div class="in"><p>Hitung det leading principal minor (LPM) H(x*) orde 1&hellip;n:</p><table class='t'><tr><th>H(x*)</th><th>x* adalah</th></tr><tr><td>definit positif atau semidefinit positif</td><td class='y'>minimum lokal</td></tr><tr><td>definit negatif atau semidefinit negatif</td><td class='y'>maksimum lokal</td></tr><tr><td>tak definit</td><td>titik belok (pelana)</td></tr></table><p class='sm'>Pola tanda LPM: definit + = (+,+,&hellip;); definit &minus; = (&minus;,+,&minus;,&hellip;); selain itu (mis. +,&minus;) = tak definit.</p><p>Parameter k: H=<span class='mx' style='--c:2'><i>2</i><i>k</i><i>k</i><i>2</i></span>, LPM 2 dan 4&minus;k&sup2; &gt; 0 &rArr; <b>&minus;2 &lt; k &lt; 2</b> agar definit positif; |k|&gt;2 tak definit</p></div></section>
+<section class="box g3"><h2>3 &middot; Optimal global</h2><div class="in"><ul><li>Misal x* memenuhi kondisi cukup lokal:</li><li>f <b>cembung</b> (H definit/semidef. + untuk <u>semua</u> x) &rarr; x* <span class='hl'>minimum global</span></li><li>f <b>cekung</b> (H definit/semidef. &minus; untuk semua x) &rarr; x* <span class='hl'>maksimum global</span></li><li>H berubah tanda menurut x &rarr; hanya lokal</li></ul><p>x<sub>1</sub>&#8308;+x<sub>2</sub>&sup2;: H=diag(12x<sub>1</sub>&sup2;, 2), LPM 12x<sub>1</sub>&sup2;&ge;0, 24x<sub>1</sub>&sup2;&ge;0 &rarr; semidef. + untuk semua x &rarr; cembung &rarr; (0,0) <b>minimum global</b></p><p>Konstanta: f+c tak mengubah &nabla;f, H, maupun x*; nilai f di x* naik c (&minus;x<sub>1</sub>&sup2;&minus;x<sub>2</sub>&sup2;&minus;2x<sub>1</sub>&minus;2x<sub>2</sub>: maks 2; +10 &rarr; 12)</p></div></section>
+<section class="box g4"><h2>4 &middot; Langkah pemecahan</h2><div class="in"><ol><li>Hitung &nabla;f(x)</li><li>Pecahkan <span class='hl'>&nabla;f = 0</span> &rarr; semua titik stasioner</li><li>Hitung H(x); evaluasi di tiap x*</li><li>Tanda LPM H(x*) &rarr; min / maks lokal / belok</li><li>Cek H(x) untuk semua x &rarr; cembung/cekung &rarr; global</li></ol><p class='sm'>Kondisi perlu = &nabla;f=0; kondisi cukup = H(x*); global = bentuk f. Contoh sistem: 2x<sub>1</sub>&minus;4+x<sub>2</sub>=0, 2x<sub>2</sub>+2+x<sub>1</sub>=0 &rarr; selesaikan simultan.</p></div></section>
+<section class="box g1"><h2>5 &middot; Contoh multi variabel (slide)</h2><div class="in"><table class='t'><tr><th>f</th><th>x*</th><th>H(x*)</th><th>LPM</th><th>hasil</th></tr><tr><td>x<sub>1</sub>&sup2;+x<sub>2</sub>&sup2;&minus;2x<sub>1</sub>&minus;2x<sub>2</sub></td><td class='c'>(1,1)</td><td class='c'>diag(2,2)</td><td class='c'>2, 4</td><td class='y'>min lokal &amp; global (cembung)</td></tr><tr><td>&minus;x<sub>1</sub>&sup2;&minus;x<sub>2</sub>&sup2;&minus;2x<sub>1</sub>&minus;2x<sub>2</sub></td><td class='c'>(&minus;1,&minus;1)</td><td class='c'>diag(&minus;2,&minus;2)</td><td class='c'>&minus;2, 4</td><td class='y'>maks lokal &amp; global (cekung)</td></tr><tr><td>x<sub>1</sub>&sup2;&minus;x<sub>2</sub>&sup2;&minus;2x<sub>1</sub>&minus;2x<sub>2</sub></td><td class='c'>(1,&minus;1)</td><td class='c'>diag(2,&minus;2)</td><td class='c'>2, &minus;4</td><td>belok (tak definit)</td></tr><tr><td>x<sub>1</sub>&sup3;&minus;x<sub>2</sub>&sup2;&minus;3x<sub>1</sub>&minus;2x<sub>2</sub></td><td class='c'>(1,&minus;1)</td><td class='c'>diag(6,&minus;2)</td><td class='c'>6, &minus;12</td><td>belok</td></tr><tr><td></td><td class='c'>(&minus;1,&minus;1)</td><td class='c'>diag(&minus;6,&minus;2)</td><td class='c'>&minus;6, 12</td><td>maks lokal (H tak konstan &rarr; bukan global)</td></tr></table><p class='sm'>&nabla;f contoh 1 = (2x<sub>1</sub>&minus;2, 2x<sub>2</sub>&minus;2). H contoh 4 = diag(6x<sub>1</sub>, &minus;2) &rarr; &nabla;f=(3x<sub>1</sub>&sup2;&minus;3, &minus;2x<sub>2</sub>&minus;2).</p></div></section>
+<section class="box g2"><h2>6 &middot; Variabel tunggal</h2><div class="in"><svg class='fig' viewBox='0 0 300 80' role='img' aria-label='Minimum, maksimum, belok'>
+<path d='M10 14Q45 90 80 14' fill='none' stroke='#2F5BFF' stroke-width='3'/><circle cx='45' cy='52' r='4.5' fill='#FF8A1F' stroke='#111' stroke-width='2'/>
+<text x='45' y='76' font-size='8.5' text-anchor='middle'>f&#8243;&gt;0 min lokal</text>
+<path d='M110 66Q145 -10 180 66' fill='none' stroke='#2F5BFF' stroke-width='3'/><circle cx='145' cy='28' r='4.5' fill='#FF8A1F' stroke='#111' stroke-width='2'/>
+<text x='145' y='76' font-size='8.5' text-anchor='middle'>f&#8243;&lt;0 maks lokal</text>
+<path d='M210 66C240 66 250 40 255 40S270 14 295 14' fill='none' stroke='#2F5BFF' stroke-width='3'/><circle cx='252' cy='40' r='4.5' fill='#FFE14D' stroke='#111' stroke-width='2'/>
+<text x='252' y='76' font-size='8.5' text-anchor='middle'>f&#8243;=0, f&#8244;&#8800;0 belok</text>
+</svg><div class='f'>f&prime;(x) = 0 &rarr; x* stasioner<small>kondisi cukup di x*:</small></div><table class='t'><tr><th>f&Prime;(x*)</th><th>hasil</th></tr><tr><td>&lt; 0</td><td>maksimum lokal</td></tr><tr><td>&gt; 0</td><td>minimum lokal</td></tr><tr><td>= 0</td><td>periksa turunan lebih tinggi</td></tr></table><p>Global: f&Prime;&gt;0 untuk semua x (cembung) &rarr; min global; f&Prime;&lt;0 semua x (cekung) &rarr; maks global</p></div></section>
+<section class="box g3"><h2>7 &middot; Turunan orde lebih tinggi</h2><div class="in"><p>Jika f&Prime;(x*)=0, cari turunan ke-n <b>pertama yang &ne; 0</b> di x*:</p><table class='t'><tr><th>Turunan ke-n</th><th>tanda</th><th>hasil</th></tr><tr><td>n genap</td><td>&lt; 0</td><td class='y'>maks lokal</td></tr><tr><td>n genap</td><td>&gt; 0</td><td class='y'>min lokal</td></tr><tr><td>n ganjil</td><td>&ne; 0</td><td>titik belok</td></tr><tr><td>= 0</td><td></td><td>lanjut n+1</td></tr></table><p>f=x&#8308;/4 &minus; x&sup3;/3: f&prime;=x&sup3;&minus;x&sup2;=x&sup2;(x&minus;1) &rarr; x=0,1; f&Prime;=3x&sup2;&minus;2x</p><ul><li>x=1: f&Prime;=1&gt;0 &rarr; <b>min lokal</b></li><li>x=0: f&Prime;=0; f&Prime;&prime;=6x&minus;2=&minus;2&ne;0 (ke-3, ganjil) &rarr; <b>belok</b></li></ul><p class='sm'>&minus;x&#8310;: turunan ke-6 = &minus;720 &lt; 0 &rarr; maks lokal. x&#8309;: turunan ke-5 = 120 (ganjil) &rarr; belok.</p></div></section>
+<section class="box g4"><h2>8 &middot; Contoh variabel tunggal (slide)</h2><div class="in"><table class='t'><tr><th>f</th><th>x*</th><th>f&Prime;</th><th>hasil</th></tr><tr><td>&minus;x&sup2;+2x</td><td class='c'>1</td><td class='c'>&minus;2</td><td class='y'>maks lokal &amp; global (f&Prime;&lt;0 semua x)</td></tr><tr><td>x&sup2;+2x</td><td class='c'>&minus;1</td><td class='c'>2</td><td class='y'>min lokal &amp; global (f&Prime;&gt;0 semua x)</td></tr><tr><td>x&sup3;&minus;3x</td><td class='c'>1 ; &minus;1</td><td class='c'>6x</td><td>min lokal ; maks lokal</td></tr></table><p>x&sup3;&minus;3x: f&prime;=3x&sup2;&minus;3=0 &rarr; x=&plusmn;1; f&Prime;(1)=6&gt;0, f&Prime;(&minus;1)=&minus;6&lt;0. f&Prime;=6x ganti tanda &rarr; <b>tak cembung &amp; tak cekung</b> &rarr; x=1 bukan min global (f(&minus;3)=&minus;18 &lt; f(1)=&minus;2)</p></div></section>
+</main>
+<p class="foot">Dirangkum dari slide kuliah TI5001. Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>

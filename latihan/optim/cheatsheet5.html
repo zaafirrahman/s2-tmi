@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 5 | Optim Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F8FAFF;--ink:#111;--mut:#4B4B4B;--acc:#2448D8;--p:#2F5BFF;--s:#FF8A1F;--y:#FFE14D;--tint:#DCE5FF;--stint:#FFE6CC;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(47,91,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(47,91,255,.13) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut);max-width:70ch}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--p);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#fff}.box.g2{--g:var(--s);--gi:var(--ink)}.box.g3{--g:var(--y);--gi:var(--ink)}.box.g4{--g:var(--acc);--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in{overflow-wrap:anywhere}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600;overflow-wrap:normal}
+.t td.c,.t th.c{text-align:center}
+.t td.y{background:var(--y)}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tint)}
+.chip.p{background:var(--stint)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--stint)}
+.mx{display:inline-grid;grid-template-columns:repeat(var(--c,2),auto);gap:0 7px;border-left:1.6px solid #111;border-right:1.6px solid #111;padding:0 4px;vertical-align:middle;text-align:center;font:500 .9em/1.3 var(--mono)}
+.mx i{font-style:normal}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;font-size:.95em}
+.fr i{font-style:normal;padding:0 2px}.fr i:first-child{border-bottom:1.2px solid #111}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+/* cetak / PDF */
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8pt;margin:2px 0 0;max-width:none}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt;margin-top:3px}
+ .fig{margin:3px 0}
+ .mx{border-left-width:1px;border-right-width:1px}
+ .fr i:first-child{border-bottom-width:.8px}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:1.11">
+<svg class='defs' aria-hidden='true'><defs><marker id='ah' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#111'/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="optim.html">Optim</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet Materi 5</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 5</h1><p class="sub">TI5001 / Optimisasi &amp; Intelejensia Komputasional &middot; Pemecahan Analitik Model Optimisasi Tak-Linier Himpunan Berpembatas (Persamaan dan Pertidaksamaan)</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan5.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet5.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; Pembatas persamaan: Lagrange</h2><div class="in"><p>Opt f(x), x &isin; R<sup>n</sup>, dengan m pembatas g<sub>i</sub>(x)=0 (f dapat diturunkan 2&times;, g<sub>i</sub> dapat diturunkan)</p><div class='f'>L(x,&lambda;) = f(x) &minus; &Sigma;<sub>i=1..m</sub> &lambda;<sub>i</sub>g<sub>i</sub>(x)<small>&lambda; = pengali Lagrange (m buah)</small></div><p><b>Kondisi perlu:</b> &part;L/&part;x<sub>j</sub>=0 (j=1..n) dan &part;L/&part;&lambda;<sub>i</sub>=<span class='hl'>&minus;g<sub>i</sub>(x)</span>=0 (i=1..m) &rarr; n+m persamaan untuk n+m variabel (x,&lambda;)</p><svg class='fig' viewBox='0 0 300 104' role='img' aria-label='Kontur dan pembatas'>
+<g fill='none' stroke='#111' stroke-width='1.4'><circle cx='170' cy='36' r='14'/><circle cx='170' cy='36' r='30'/><circle cx='170' cy='36' r='46' stroke='#2F5BFF' stroke-width='2.4'/></g>
+<circle cx='170' cy='36' r='3' fill='#111'/><text x='200' y='98' font-size='8.5'>(1,1): min tanpa batas</text>
+<path d='M110 100L230 -2' stroke='#FF8A1F' stroke-width='3'/>
+<circle cx='148' cy='68' r='5' fill='#FFE14D' stroke='#111' stroke-width='2'/>
+<text x='20' y='78' font-size='8.5'>g: x&#8321;+x&#8322;=1</text><text x='20' y='90' font-size='8.5'>x*=(&#189;,&#189;)</text>
+<text x='20' y='14' font-size='8.5'>kontur f menyinggung g</text>
+</svg><p class='sm'>Jika ditulis L=f+&lambda;g: x* tetap, hanya tanda &lambda; berbalik.</p></div></section>
+<section class="box g2"><h2>2 &middot; Contoh Lagrange</h2><div class="in"><p><b>Slide:</b> min x<sub>1</sub>&sup2;+x<sub>2</sub>&sup2;&minus;2x<sub>1</sub>&minus;2x<sub>2</sub>, x<sub>1</sub>+x<sub>2</sub>=1</p><p>2x<sub>1</sub>&minus;2&minus;&lambda;=0; 2x<sub>2</sub>&minus;2&minus;&lambda;=0; x<sub>1</sub>+x<sub>2</sub>=1 &rarr; x*=(&frac12;,&frac12;), <b>&lambda;=&minus;1</b>, f=&minus;3/2</p><p>maks x<sub>1</sub>x<sub>2</sub>, x<sub>1</sub>+x<sub>2</sub>=10: x<sub>2</sub>&minus;&lambda;=0, x<sub>1</sub>&minus;&lambda;=0 &rarr; x<sub>1</sub>=x<sub>2</sub>=&lambda;=5, f=25</p><p>min x<sub>1</sub>&sup2;+x<sub>2</sub>&sup2;, 2x<sub>1</sub>+x<sub>2</sub>=5: x<sub>1</sub>=&lambda;, x<sub>2</sub>=&lambda;/2 &rarr; &lambda;=2, x*=(2,1), f=5</p><p>maks x<sub>1</sub>+x<sub>2</sub>, x<sub>1</sub>&sup2;+x<sub>2</sub>&sup2;=2: x<sub>1</sub>=x<sub>2</sub>=1/(2&lambda;), &lambda;=&plusmn;&frac12; &rarr; (1,1) dan (&minus;1,&minus;1): <b>dua titik stasioner</b>, bedakan lewat kondisi cukup</p><p class='sm'>4 variabel + 2 pembatas &rarr; 4+2 = 6 persamaan, 6 variabel.</p></div></section>
+<section class="box g3"><h2>3 &middot; Hessian bordered</h2><div class="in"><svg class='fig' viewBox='0 0 300 70' role='img' aria-label='Struktur Hessian bordered'>
+<g stroke='#111' stroke-width='2'><rect x='70' y='6' width='50' height='26' fill='#DCE5FF'/><rect x='120' y='6' width='110' height='26' fill='#FFE6CC'/>
+<rect x='70' y='32' width='50' height='30' fill='#FFE6CC'/><rect x='120' y='32' width='110' height='30' fill='#FFE14D'/></g>
+<g font-size='10' text-anchor='middle'><text x='95' y='23'>0 (m&#215;m)</text><text x='175' y='23'>P (m&#215;n)</text><text x='95' y='50'>P&#7488; (n&#215;m)</text><text x='175' y='50'>Q (n&#215;n)</text></g>
+<text x='62' y='38' font-size='11' text-anchor='end'>H&#7495; =</text>
+<text x='236' y='24' font-size='8.5'>P=&#8706;g&#7522;/&#8706;x&#11388;</text><text x='236' y='52' font-size='8.5'>Q=&#8706;&#178;L/&#8706;x&#8706;x</text>
+</svg><ul><li>Ukuran <b>(m+n)&times;(m+n)</b>; evaluasi di (x*,&lambda;*)</li><li>P: &part;g<sub>i</sub>/&part;x<sub>j</sub> (m&times;n); Q = Hessian L terhadap x (n&times;n)</li><li>n=4, m=2 &rarr; 6&times;6, P 2&times;4, Q 4&times;4</li></ul></div></section>
+<section class="box g4"><h2>4 &middot; Kondisi cukup: Hessian bordered</h2><div class="in"><p>Periksa determinan <b>n&minus;m</b> minor prinsipal (LPM) terakhir H<sup>B</sup>, mulai dari <span class='hl'>orde 2m+1</span> sampai m+n.</p><table class='t'><tr><th></th><th>tanda det</th></tr><tr><td>maksimum</td><td class='y'>berganti-ganti, mulai (&minus;1)<sup>m+1</sup></td></tr><tr><td>minimum</td><td class='y'>semua (&minus;1)<sup>m</sup></td></tr></table><table class='t'><tr><th>n, m</th><th>orde</th><th>maks</th><th>min</th></tr><tr><td>2, 1</td><td class='c'>3</td><td class='c'>+</td><td class='c'>&minus;</td></tr><tr><td>3, 1</td><td class='c'>3, 4</td><td class='c'>+, &minus;</td><td class='c'>&minus;, &minus;</td></tr><tr><td>4, 2</td><td class='c'>5, 6</td><td class='c'>&minus;, +</td><td class='c'>+, +</td></tr></table><p>min slide (n=2,m=1): det <span class='mx' style='--c:3'><i>0</i><i>1</i><i>1</i><i>1</i><i>2</i><i>0</i><i>1</i><i>0</i><i>2</i></span> = &minus;4 &lt;0 &rarr; <b>min</b></p><p>maks x<sub>1</sub>x<sub>2</sub>: det <span class='mx' style='--c:3'><i>0</i><i>1</i><i>1</i><i>1</i><i>0</i><i>1</i><i>1</i><i>1</i><i>0</i></span> = 2 &gt; 0 &rarr; <b>maks</b></p><p>maks slide (n=3): &minus;&sum;x&sup2;+2&sum;x, &sum;x=1 &rarr; x*=(&#8531;,&#8531;,&#8531;), &lambda;=4/3; orde 3 = 4, orde 4 = &minus;12 (+,&minus;) &rarr; <b>maks</b></p><p class='sm'>Maks &minus;&sum;x&sup2; dg x<sub>1</sub>+2x<sub>2</sub>+3x<sub>3</sub>=14: x*=(1,2,3), &lambda;=&minus;2, orde 3=10, orde 4=&minus;56 &rarr; maks.</p></div></section>
+<section class="box g2"><h2>5 &middot; Kondisi cukup: metode &Delta;</h2><div class="in"><div class='f'>&Delta; = [[0, P],[P<sup>T</sup>, Q &minus; &mu;I]], det(&Delta;)=0<small>I identitas n&times;n; hasil: polinomial dalam &mu;</small></div><table class='t'><tr><th>akar &mu;</th><th>x* adalah</th></tr><tr><td>semua negatif</td><td class='y'>maksimum</td></tr><tr><td>semua positif</td><td class='y'>minimum</td></tr></table><p>Contoh 1: det(&Delta;)=2&mu;&minus;4=0 &rarr; &mu;=2 &rarr; <b>min</b></p><p>Contoh 2 (maks): det(&Delta;)=&minus;3&mu;&sup2;&minus;12&mu;&minus;12=0 &rarr; &mu;=&minus;2 (dua kali) &rarr; <b>maks</b></p><p class='sm'>Hasil slide Contoh 3 (min, f=&sum;x&sup2;+2&sum;x): H<sup>B</sup> orde 3,4 = &minus;4, &minus;12; &mu;=2 (ganda) &rarr; min. Periksa lagi nilai x* dan &lambda; di slide itu.</p></div></section>
+<section class="box g3"><h2>6 &middot; Pembatas pertidaksamaan: KKT</h2><div class="in"><p>Model: opt f(x) dengan <span class='hl'>g<sub>i</sub>(x) &le; 0</span>, i=1..m. L = f &minus; &Sigma;&lambda;<sub>i</sub>g<sub>i</sub>.</p><p><b>Bentuk standar:</b> 2x<sub>1</sub>&minus;x<sub>2</sub>&ge;4 &rarr; &minus;2x<sub>1</sub>+x<sub>2</sub>+4 &le; 0 (ruas ke kiri, kalikan &minus;1 &rarr; tanda berbalik)</p><table class='t'><tr><th>Syarat KKT</th><th>bentuk</th></tr><tr><td>tanda &lambda;</td><td class='y'>&lambda;<sub>i</sub>&ge;0 (maks); &lambda;<sub>i</sub>&le;0 (min)</td></tr><tr><td>stasioner</td><td>&part;L/&part;x<sub>j</sub>=0, j=1..n</td></tr><tr><td>complementary slackness</td><td class='y'>&lambda;<sub>i</sub>g<sub>i</sub>(x)=0</td></tr><tr><td>kelayakan</td><td>g<sub>i</sub>(x)&le;0</td></tr></table><p>Aktif: g<sub>i</sub>=0; tak aktif (g<sub>i</sub>&lt;0) &rarr; &lambda;<sub>i</sub>=0. Jumlah syarat = m+n+m+m: n=3,m=4 &rarr; <b>15</b>; slide n=2,m=3 &rarr; 11</p></div></section>
+<section class="box g4"><h2>7 &middot; Prosedur kasus KKT</h2><div class="in"><ol><li>Bagi <b>2<sup>m</sup> kasus</b>: tiap &lambda;<sub>i</sub>=0 atau &ne;0 (m=4 &rarr; 16; m=3 &rarr; 8)</li><li>&lambda;<sub>i</sub>&ne;0 &rarr; g<sub>i</sub>=0 (aktif); &lambda;<sub>i</sub>=0 &rarr; abaikan g<sub>i</sub></li><li>Pecahkan x, &lambda; dari stasioner + pembatas aktif</li><li>Cek <b>layak</b> (semua g&le;0) dan <b>tanda &lambda;</b></li><li>Lolos keduanya = memenuhi kondisi perlu</li></ol><table class='t'><tr><th>Soal</th><th>Kasus</th><th>x</th><th>&lambda;</th><th>hasil</th></tr><tr><td>maks &minus;(x<sub>1</sub>&minus;3)&sup2;&minus;(x<sub>2</sub>&minus;3)&sup2;, x<sub>1</sub>+x<sub>2</sub>&le;5</td><td>&lambda;=0</td><td class='c'>(3,3)</td><td class='c'>0</td><td>tak layak (6&gt;5)</td></tr><tr><td></td><td>&lambda;&ne;0</td><td class='c'>(2&frac12;,2&frac12;)</td><td class='c'>1</td><td class='y'>lolos (&ge;0)</td></tr><tr><td>maks &minus;(x<sub>1</sub>&minus;1)&sup2;&minus;(x<sub>2</sub>&minus;1)&sup2;, sama</td><td>&lambda;&ne;0</td><td class='c'>(2&frac12;,2&frac12;)</td><td class='c'>&minus;1</td><td>tanda salah</td></tr><tr><td></td><td>&lambda;=0</td><td class='c'>(1,1)</td><td class='c'>0</td><td class='y'>lolos</td></tr><tr><td>min x<sub>1</sub>+x<sub>2</sub>, x<sub>1</sub>&ge;1, x<sub>2</sub>&ge;1</td><td>1,1 aktif</td><td class='c'>(1,1)</td><td class='c'>&minus;1,&minus;1</td><td class='y'>lolos (&le;0)</td></tr><tr><td>maks &minus;(x<sub>1</sub>&minus;2)&sup2;&minus;(x<sub>2</sub>&minus;2)&sup2;, x<sub>1</sub>+x<sub>2</sub>&le;2</td><td>&lambda;&ne;0</td><td class='c'>(1,1)</td><td class='c'>2</td><td class='y'>lolos</td></tr><tr><td>min (x<sub>1</sub>&minus;3)&sup2;+(x<sub>2</sub>&minus;1)&sup2;, x<sub>1</sub>+x<sub>2</sub>&le;2</td><td>&lambda;&ne;0</td><td class='c'>(2,0)</td><td class='c'>&minus;2</td><td class='y'>lolos</td></tr></table><p class='sm'>Slide 3 pembatas (8 kasus): maks &minus;(x<sub>1</sub>&minus;1)&sup2;&minus;(x<sub>2</sub>&minus;1)&sup2;, x<sub>1</sub>+x<sub>2</sub>&le;5, x&ge;0: hanya &lambda;=(0,0,0) di (1,1) lolos; mis. (5,0) &lambda;<sub>1</sub>=&minus;8, &lambda;<sub>3</sub>=&minus;10 ditolak (maks butuh &lambda;&ge;0); (0,0) &lambda;=(0,&minus;2,&minus;2) ditolak.</p></div></section>
+<section class="box g1"><h2>8 &middot; Kondisi cukup KKT &amp; ringkasan</h2><div class="in"><svg class='fig' viewBox='0 0 300 114' role='img' aria-label='Dua kasus KKT'>
+<polygon points='10,10 110,10 10,100' fill='#DCE5FF' stroke='none'/><path d='M10 100L110 10' stroke='#111' stroke-width='2.4'/>
+<g fill='none' stroke='#2F5BFF' stroke-width='1.6'><circle cx='100' cy='20' r='14'/><circle cx='100' cy='20' r='28'/></g>
+<circle cx='100' cy='20' r='3' fill='#111'/><circle cx='55' cy='55' r='5' fill='#FF8A1F' stroke='#111' stroke-width='2'/>
+<text x='14' y='96' font-size='8'>x&#8321;+x&#8322;&#8804;5</text><text x='96' y='15' font-size='8' text-anchor='end'>(3,3)</text>
+<text x='62' y='62' font-size='8'>(2&#189;,2&#189;) &#955;=1</text>
+<text x='60' y='108' font-size='8.5' text-anchor='middle'>pusat di luar &#8594; batas aktif</text>
+<polygon points='160,10 260,10 160,100' fill='#DCE5FF' stroke='none'/><path d='M160 100L260 10' stroke='#111' stroke-width='2.4'/>
+<g fill='none' stroke='#2F5BFF' stroke-width='1.6'><circle cx='195' cy='55' r='10'/><circle cx='195' cy='55' r='22'/></g>
+<circle cx='195' cy='55' r='5' fill='#FF8A1F' stroke='#111' stroke-width='2'/><text x='202' y='50' font-size='8'>(1,1) &#955;=0</text>
+<text x='210' y='108' font-size='8.5' text-anchor='middle'>pusat di dalam &#8594; &#955;=0</text>
+</svg><table class='t'><tr><th>Kasus</th><th>f</th><th>himpunan pembatas</th></tr><tr><td>maksimisasi</td><td>cekung</td><td>cembung</td></tr><tr><td>minimisasi</td><td>cembung</td><td>cembung</td></tr></table><p class='sm'>Fungsi linier = cembung <i>dan</i> cekung. Min x<sub>1</sub>+x<sub>2</sub>, x&ge;1: f linier + S cembung &rarr; (1,1) <b>minimum global</b>.</p><table class='t'><tr><th></th><th>Persamaan</th><th>Pertidaksamaan</th></tr><tr><td>pembatas</td><td>g=0</td><td>g&le;0</td></tr><tr><td>&lambda;</td><td>tanda bebas</td><td>&ge;0 maks / &le;0 min</td></tr><tr><td>syarat</td><td>&part;L/&part;&lambda;=0</td><td>&lambda;g=0, g&le;0</td></tr><tr><td>cukup</td><td>H<sup>B</sup> atau &Delta;</td><td>konveksitas f &amp; S</td></tr></table></div></section>
+</main>
+<p class="foot">Dirangkum dari slide kuliah TI5001. Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>

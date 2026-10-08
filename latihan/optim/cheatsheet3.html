@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat Sheet Materi 3 | Optim Exercise</title>
+<link rel="icon" type="image/png" href="../../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F8FAFF;--ink:#111;--mut:#4B4B4B;--acc:#2448D8;--p:#2F5BFF;--s:#FF8A1F;--y:#FFE14D;--tint:#DCE5FF;--stint:#FFE6CC;--disp:'Bricolage Grotesque','Arial Black',sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--body);padding:34px clamp(16px,4vw,48px) 48px;background-image:linear-gradient(rgba(47,91,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(47,91,255,.13) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1240px;margin:0 auto}
+svg.defs{position:absolute;width:0;height:0}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:18px;font:800 17px/1.2 var(--disp)}
+.crumbs a{text-decoration:none;color:var(--acc)}.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs [aria-current]{opacity:.65}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px}
+h1{margin:0;font-family:var(--disp);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sub{margin:8px 0 0;font-size:16px;color:var(--mut);max-width:70ch}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tb{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--p);font:800 15px/1.1 var(--disp);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tb:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--s)}
+.tb.pri{background:var(--s)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.sheet{column-width:292px;column-gap:22px}
+.box{break-inside:avoid;-webkit-column-break-inside:avoid;display:block;background:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--p);margin:0 5px 24px 0}
+.box>h2{margin:0;padding:6px 12px;font:800 18px/1.15 var(--disp);border-bottom:3px solid var(--ink);background:var(--g);color:var(--gi)}
+.box.g1{--g:var(--p);--gi:#fff}.box.g2{--g:var(--s);--gi:var(--ink)}.box.g3{--g:var(--y);--gi:var(--ink)}.box.g4{--g:var(--acc);--gi:#fff}
+.in{padding:8px 12px 10px;font-size:13.2px;line-height:1.42}
+.in{overflow-wrap:anywhere}
+.in p{margin:4px 0}
+.in ul,.in ol{margin:4px 0;padding-left:18px}.in li{margin:2px 0}
+.in b{font-weight:600}
+.hl{background:var(--y);padding:0 3px}
+.f{font:500 12.8px/1.4 var(--mono);background:var(--y);border:2px solid var(--ink);padding:4px 8px;margin:6px 0}
+.f small{font:400 11.5px var(--body);display:block;margin-top:2px}
+.sm{font-size:12px;color:var(--mut)}
+table.t{border-collapse:collapse;width:100%;table-layout:auto;font-size:12px;margin:5px 0}
+.t th,.t td{border:1.5px solid var(--ink);padding:3px 5px;vertical-align:top;text-align:left}
+.t th{background:var(--tint);font-weight:600;overflow-wrap:normal}
+.t td.c,.t th.c{text-align:center}
+.t td.y{background:var(--y)}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.chip{border:2px solid var(--ink);padding:1px 7px;font-size:12px;background:var(--tint)}
+.chip.p{background:var(--stint)}.chip.y{background:var(--y)}
+.fig{width:100%;height:auto;display:block;margin:6px 0}
+.fig text{font-family:var(--body);fill:#111}
+.note{border-left:5px solid var(--s);padding:2px 8px;margin:6px 0;font-size:12.6px;background:var(--stint)}
+.mx{display:inline-grid;grid-template-columns:repeat(var(--c,2),auto);gap:0 7px;border-left:1.6px solid #111;border-right:1.6px solid #111;padding:0 4px;vertical-align:middle;text-align:center;font:500 .9em/1.3 var(--mono)}
+.mx i{font-style:normal}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;font-size:.95em}
+.fr i{font-style:normal;padding:0 2px}.fr i:first-child{border-bottom:1.2px solid #111}
+.foot{margin-top:6px;font-size:12px;color:var(--mut);text-align:right}
+/* cetak / PDF */
+@page{size:A4;margin:7mm}
+@media print{
+ body{background:#fff;padding:0;font-size:8pt}
+ .noprint{display:none!important}
+ .head{margin-bottom:6px;align-items:flex-end}
+ h1{font-size:19pt}.sub{font-size:8pt;margin:2px 0 0;max-width:none}
+ .sheet{column-count:3;column-width:auto;column-gap:7px;zoom:var(--z,1)}
+ .box{box-shadow:none;border-width:1.3px;margin:0 0 7px 0}
+ .box>h2{font-size:9.5pt;padding:2px 6px;border-bottom-width:1.3px}
+ .in{font-size:7.4pt;line-height:1.28;padding:3px 6px 4px}
+ .in ul,.in ol{padding-left:12px;margin:2px 0}.in li{margin:1px 0}
+ .f{font-size:7pt;border-width:1px;padding:2px 4px;margin:3px 0}.f small{font-size:6.5pt}
+ table.t{font-size:6.8pt;margin:3px 0}.t th,.t td{padding:1px 3px;border-width:1px}
+ .chip{font-size:6.8pt;border-width:1px;padding:0 4px}
+ .note{font-size:7pt;padding:1px 5px;margin:3px 0;border-left-width:3px}
+ .sm{font-size:6.8pt}.foot{font-size:6.5pt;margin-top:3px}
+ .fig{margin:3px 0}
+ .mx{border-left-width:1px;border-right-width:1px}
+ .fr i:first-child{border-bottom-width:.8px}
+}
+@media (prefers-reduced-motion:reduce){.tb{transition:none}}
+</style>
+</head>
+<body style="--z:1.1">
+<svg class='defs' aria-hidden='true'><defs><marker id='ah' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='5' markerHeight='5' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#111'/></marker></defs></svg>
+<div class="wrap">
+<nav class="crumbs noprint" aria-label="Navigasi"><a href="../../index.html">Repo S2</a><span aria-hidden="true">/</span><a href="../index.html">Exercise</a><span aria-hidden="true">/</span><a href="optim.html">Optim</a><span aria-hidden="true">/</span><span aria-current="page">Cheat sheet Materi 3</span></nav>
+<header class="head">
+  <div><h1>Cheat Sheet Materi 3</h1><p class="sub">TI5001 / Optimisasi &amp; Intelejensia Komputasional &middot; Konsep Dasar dalam Optimisasi</p></div>
+  <div class="tools noprint">
+    <a class="tb" href="latihan3.html">Latihan soal</a>
+    <a class="tb pri" href="cheatsheet3.pdf" download>Unduh PDF</a>
+    <button class="tb" onclick="window.print()" type="button">Cetak</button>
+  </div>
+</header>
+<main class="sheet">
+<section class="box g1"><h2>1 &middot; Himpunan cembung</h2><div class="in"><ul><li>S &sub; R<sup>n</sup> <b>cembung</b> jika garis antara dua titik di S tetap di S</li></ul><div class='f'>&alpha;x<sub>1</sub> + (1&minus;&alpha;)x<sub>2</sub>, 0 &le; &alpha; &le; 1<small>= kombinasi cembung (bobot &ge; 0, jumlah 1)</small></div><svg class='fig' viewBox='0 0 300 96' role='img' aria-label='Himpunan cembung dan tak cembung'>
+<path d='M30 70Q10 40 40 22Q80 6 110 30Q130 55 100 74Q60 90 30 70Z' fill='#DCE5FF' stroke='#111' stroke-width='2.4'/>
+<path d='M48 62L98 36' stroke='#FF8A1F' stroke-width='2.4'/><circle cx='48' cy='62' r='3.5' fill='#111'/><circle cx='98' cy='36' r='3.5' fill='#111'/>
+<text x='70' y='92' font-size='9' text-anchor='middle'>cembung: ruas tetap di dalam</text>
+<path d='M170 20H250V40H196V74H170Z' fill='#DCE5FF' stroke='#111' stroke-width='2.4'/>
+<path d='M180 64L240 28' stroke='#FF8A1F' stroke-width='2.4'/><circle cx='180' cy='64' r='3.5' fill='#111'/><circle cx='240' cy='28' r='3.5' fill='#111'/>
+<text x='215' y='92' font-size='9' text-anchor='middle'>tak cembung: ruas keluar</text>
+</svg><table class='t'><tr><th>Cembung</th><th>Tak cembung</th></tr><tr><td>half space 5x<sub>1</sub>+3x<sub>2</sub>&le;15; hyperplane 5x<sub>1</sub>+3x<sub>2</sub>=15; polyhedral (irisan half space); cakram x<sub>1</sub>&sup2;+x<sub>2</sub>&sup2;&le;4</td><td>luar lingkaran (x<sub>1</sub>&minus;3)&sup2;+(x<sub>2</sub>&minus;3)&sup2;&ge;4; himpunan titik bulat (integer)</td></tr></table><p>x<sub>1</sub>=(2,0), x<sub>2</sub>=(0,4), &alpha;=0,25: 0,25(2,0)+0,75(0,4) = <b>(0,5; 3)</b>. 0,3x<sub>1</sub>+0,7x<sub>2</sub> kombinasi cembung; bobot harus jumlah 1</p></div></section>
+<section class="box g2"><h2>2 &middot; Ketetanggaan &amp; solusi layak</h2><div class="in"><div class='f'>N(x) = { y : &Vert;y &minus; x&Vert; &lt; &epsilon; }<small>&epsilon;&gt;0 sangat kecil; y tetangga x jika jaraknya &lt; &epsilon; (tepat di batas = bukan)</small></div><p>x=(1,1), &epsilon;=0,5: (1,3; 1,3) jarak 0,424 &rarr; tetangga; (1,4; 1,4) jarak 0,566 &rarr; bukan</p><ul><li><b>Layak</b>: x &isin; S (memenuhi himpunan pembatas); tak layak: x &notin; S. Himpunan solusi = semua solusi layak</li></ul><p>S: 5x<sub>1</sub>+3x<sub>2</sub>&le;15, &minus;x<sub>1</sub>+x<sub>2</sub>&le;1, x<sub>2</sub>&le;3, x&ge;0. (1,5; 2,5): 15&le;15, 1&le;1, 2,5&le;3 &rarr; <b>layak</b>. (2,2): 16&gt;15 &rarr; tak layak</p></div></section>
+<section class="box g3"><h2>3 &middot; Fungsi cembung &amp; cekung</h2><div class="in"><svg class='fig' viewBox='0 0 300 92' role='img' aria-label='Fungsi cembung dan cekung'>
+<path d='M14 14Q75 100 136 14' fill='none' stroke='#2F5BFF' stroke-width='3'/><path d='M26 28L124 28' stroke='#FF8A1F' stroke-width='2.4'/>
+<circle cx='26' cy='28' r='3' fill='#111'/><circle cx='124' cy='28' r='3' fill='#111'/>
+<text x='75' y='88' font-size='9' text-anchor='middle'>cembung: kurva &#8804; ruas</text>
+<path d='M164 76Q225 -10 286 76' fill='none' stroke='#2F5BFF' stroke-width='3'/><path d='M176 62L274 62' stroke='#FF8A1F' stroke-width='2.4'/>
+<circle cx='176' cy='62' r='3' fill='#111'/><circle cx='274' cy='62' r='3' fill='#111'/>
+<text x='225' y='88' font-size='9' text-anchor='middle'>cekung: kurva &#8805; ruas</text>
+</svg><table class='t'><tr><th></th><th>Cembung</th><th>Cekung</th></tr><tr><td>f(&alpha;x<sub>1</sub>+(1&minus;&alpha;)x<sub>2</sub>)</td><td>&le; &alpha;f(x<sub>1</sub>)+(1&minus;&alpha;)f(x<sub>2</sub>)</td><td>&ge; &alpha;f(x<sub>1</sub>)+(1&minus;&alpha;)f(x<sub>2</sub>)</td></tr><tr><td>sempurna</td><td>&lt; (ketat)</td><td>&gt; (ketat)</td></tr></table><ul><li>f cembung &hArr; &minus;f cekung (dan sebaliknya)</li><li><b>Linier</b> (3x+2): cembung <i>dan</i> cekung (tidak sempurna)</li><li>Tak memenuhi keduanya: <b>tak cembung &amp; tak cekung</b> (mis. &minus;x<sub>1</sub>&sup2;+x<sub>2</sub>&sup2;)</li></ul><p>f=x&sup3;, x<sub>1</sub>=&minus;2, x<sub>2</sub>=0, &alpha;=&frac12;: f(&minus;1)=&minus;1 &gt; &frac12;(&minus;8)+&frac12;(0)=&minus;4 &rarr; syarat &le; dilanggar &rarr; <b>bukan cembung</b></p></div></section>
+<section class="box g4"><h2>4 &middot; Uji kecembungan dengan turunan</h2><div class="in"><p><b>1 variabel:</b> f&Prime;(x) &gt; 0 untuk semua x &rarr; cembung; f&Prime;(x) &lt; 0 untuk semua x &rarr; cekung; f&Prime; berubah tanda &rarr; tak cembung &amp; tak cekung</p><table class='t'><tr><th>f</th><th>f&Prime;</th><th>hasil</th></tr><tr><td>x&sup2;+2x+3</td><td class='c'>2</td><td>cembung</td></tr><tr><td>&minus;x&sup2;&minus;2x+3</td><td class='c'>&minus;2</td><td>cekung</td></tr><tr><td>x&sup3;+3x&sup2;</td><td class='c'>6x+6</td><td>tak cembung, tak cekung (ganti tanda di x=&minus;1)</td></tr></table><p><b>Multi variabel:</b> gradien &nabla;f = (&part;f/&part;x<sub>j</sub>); Hessian H(x) = [&part;&sup2;f/&part;x<sub>i</sub>&part;x<sub>j</sub>] (n&times;n)</p><ul><li>H definit/semidefinit <b>positif</b> untuk semua x &isin; S &rarr; f <b>cembung</b></li><li>H definit/semidefinit <b>negatif</b> &rarr; f <b>cekung</b></li><li>H <b>tak definit</b> &rarr; tak cembung &amp; tak cekung</li></ul><p class='sm'>&dagger; Pelengkap dari pembahasan soal: H definit (tanpa nilai 0) &rarr; sempurna; semidefinit (ada 0) &rarr; cembung/cekung tapi tak sempurna, mis. (x<sub>1</sub>&minus;x<sub>2</sub>)&sup2; (LPM 2 dan 0).</p></div></section>
+<section class="box g1"><h2>5 &middot; Kedefinitan via leading principal minor</h2><div class="in"><p>LPM orde k = submatriks kiri-atas k&times;k dari Q simetris (buang n&minus;k baris &amp; kolom terakhir). Hitung det tiap orde, lihat tandanya:</p><table class='t'><tr><th>Q</th><th>tanda det LPM orde 1,2,3,&hellip;</th></tr><tr><td>definit positif</td><td class='y'>semua &gt; 0 (+,+,+)</td></tr><tr><td>semidefinit positif</td><td>semua &ge; 0 (tak negatif)</td></tr><tr><td>definit negatif</td><td class='y'>ganjil &lt; 0, genap &gt; 0 (&minus;,+,&minus;)</td></tr><tr><td>semidefinit negatif</td><td>ganjil &le; 0, genap &ge; 0</td></tr><tr><td>tak definit</td><td>pola lain, mis. (+,&minus;,+) atau (&minus;,&minus;)</td></tr></table><table class='t'><tr><th>Contoh</th><th>LPM</th><th>hasil</th></tr><tr><td>diag(2,2)</td><td class='c'>2, 4</td><td>definit +</td></tr><tr><td>diag(1,0,1)</td><td class='c'>1, 0, 0</td><td>semidef. +</td></tr><tr><td>diag(&minus;1,&minus;1,&minus;1)</td><td class='c'>&minus;1, 1, &minus;1</td><td>definit &minus;</td></tr><tr><td>diag(&minus;1,0,&minus;1)</td><td class='c'>&minus;1, 0, 0</td><td>semidef. &minus;</td></tr><tr><td>diag(1,&minus;1,1)</td><td class='c'>1, &minus;1, 1</td><td>tak definit</td></tr><tr><td>diag(&minus;2,2)</td><td class='c'>&minus;2, &minus;4</td><td>tak definit</td></tr></table><p class='sm'>x<sub>1</sub>&sup3;+2x<sub>2</sub>&sup2;+3x<sub>1</sub>+4x<sub>2</sub>+5: H=diag(6x<sub>1</sub>,4), LPM 6x<sub>1</sub> dan 24x<sub>1</sub> ganti tanda &rarr; tak definit &rarr; tak cembung &amp; tak cekung.</p></div></section>
+<section class="box g2"><h2>6 &middot; Solusi optimal: global &amp; lokal</h2><div class="in"><svg class='fig' viewBox='0 0 300 86' role='img' aria-label='Optimal lokal dan global'>
+<path d='M8 70C30 70 40 20 70 24S110 62 150 56S200 10 230 12S280 56 292 70' fill='none' stroke='#2F5BFF' stroke-width='3'/>
+<circle cx='70' cy='24' r='5' fill='#FFE14D' stroke='#111' stroke-width='2'/><circle cx='230' cy='12' r='5.5' fill='#FF8A1F' stroke='#111' stroke-width='2'/>
+<text x='70' y='16' font-size='9' text-anchor='middle'>x=10 lokal</text><text x='230' y='34' font-size='9' text-anchor='middle'>x=45 global</text>
+<path d='M8 78H292' stroke='#111'/><text x='150' y='85' font-size='8' text-anchor='middle'>0 &#8804; x &#8804; 63 (maks f)</text>
+</svg><ul><li><b>Optimal global x*</b>: f(x*) &ge; f(x) (maks) / &le; (min) untuk <b>semua</b> x &isin; S</li><li><b>Unik</b>: ketidaksamaan ketat (&gt; / &lt;), satu-satunya</li><li><b>Optimal lokal</b>: hanya untuk x &isin; N(x*) (ketetanggaan)</li><li>Global &rArr; lokal (&dagger;); lokal belum tentu global</li></ul><p class='sm'>Slide: maks f(x)=x&#8309;/5&minus;35x&#8308;+(6625/3)x&sup3;&minus;60375x&sup2;+675000x, 0&le;x&le;63: x=10 lokal, x=45 global.</p></div></section>
+<section class="box g3"><h2>7 &middot; Transformasi model</h2><div class="in"><div class='f'>maks Z=f(x), x&isin;S &nbsp;&equiv;&nbsp; min Z&prime;=&minus;f(x), x&isin;S<small>Z = &minus;Z&prime;; x* sama</small></div><p>maks Z=&minus;x&sup2;+4x+7 &rarr; min Z&prime;=x&sup2;&minus;4x&minus;7: x=2, Z&prime;=4&minus;8&minus;7=<b>&minus;11</b> &rarr; Z=<b>11</b></p><p><b>Konstanta</b> pada f(x)+c tidak mengubah x*; hanya menggeser nilai Z (Z=Z&prime;+c)</p><p>min (x&minus;3)&sup2;+100, x&le;2: tanpa batas x=3 (tak layak) &rarr; x*=2, Z=1+100=<b>101</b></p></div></section>
+<section class="box g4"><h2>8 &middot; Model optimisasi cembung</h2><div class="in"><p>Ciri: f cembung/cekung <b>dan</b> himpunan pembatas S cembung.</p><table class='t'><tr><th>Kasus</th><th>f</th><th>S</th><th>hasil x*</th></tr><tr><td>min</td><td>cembung</td><td>cembung</td><td class='y'>minimum global</td></tr><tr><td>maks</td><td>cekung</td><td>cembung</td><td class='y'>maksimum global</td></tr></table><p class='sm'>Pelanggaran (mis. S himpunan bulat, maksimisasi fungsi cembung) &rarr; optimal lokal bisa bukan global.</p></div></section>
+<section class="box g1"><h2>9 &middot; Pemrograman linier (LP)</h2><div class="in"><ul><li>Ciri LP: variabel <b>majemuk</b> &amp; <b>kontinu</b>; <b>berpembatas</b>; f &amp; pembatas <b>linier</b>; tujuan <b>tunggal</b>; parameter <b>deterministik</b> (bukan stokastik)</li><li>LP = kasus khusus model cembung (S polyhedral, f linier). Ada solusi layak &rarr; <b>dijamin ada optimal global</b></li></ul><svg class='fig' viewBox='0 0 300 118' role='img' aria-label='Daerah layak LP'>
+<path d='M30 104H280M30 104V6' stroke='#111' stroke-width='1.5' marker-end='url(#ah)'/>
+<polygon points='30,100 120,100 75,25 30,70' fill='#DCE5FF' stroke='#111' stroke-width='2.4'/>
+<g fill='#111'><circle cx='30' cy='100' r='3'/><circle cx='120' cy='100' r='3'/><circle cx='30' cy='70' r='3'/></g>
+<circle cx='75' cy='25' r='5.5' fill='#FF8A1F' stroke='#111' stroke-width='2'/>
+<path d='M95 12L165 98' stroke='#FF8A1F' stroke-width='2' stroke-dasharray='4 3'/>
+<text x='84' y='22' font-size='8.5'>(1&#189; , 2&#189;) Z=9&#189;</text>
+<text x='124' y='112' font-size='8.5'>(3,0)</text><text x='34' y='66' font-size='8.5'>(0,1)</text>
+<text x='270' y='100' font-size='9'>x&#8321;</text><text x='34' y='12' font-size='9'>x&#8322;</text>
+<text x='168' y='90' font-size='8.5'>garis Z=3x&#8321;+2x&#8322;</text>
+</svg><p>maks Z=3x<sub>1</sub>+2x<sub>2</sub>; 5x<sub>1</sub>+3x<sub>2</sub>&le;15; &minus;x<sub>1</sub>+x<sub>2</sub>&le;1; x<sub>2</sub>&le;3; x&ge;0. Optimum = perpotongan 5x<sub>1</sub>+3x<sub>2</sub>=15 &amp; &minus;x<sub>1</sub>+x<sub>2</sub>=1 &rarr; <b>(1&frac12;, 2&frac12;)</b>, Z=<b>9&frac12;</b>, unik</p><p class='sm'>&dagger; Cek titik sudut: (0,0)&rarr;0, (3,0)&rarr;9, (1,5;2,5)&rarr;9,5, (0,1)&rarr;2. Untuk Z=4x<sub>1</sub>+x<sub>2</sub> optimum di (3,0), Z=12.</p></div></section>
+</main>
+<p class="foot">Dirangkum dari slide kuliah TI5001. Cocokkan lagi dengan slide untuk detail lengkap.</p>
+</div>
+</body>
+</html>
