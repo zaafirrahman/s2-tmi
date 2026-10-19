@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Visualisasi Metode Numerik Optimisasi Variabel Majemuk</title>
+<style>
+:root{--bg:#f6f7fa;--fg:#1c2a44;--mut:#5f6b82;--card:#fff;--bd:#d6dbe6;--ac:#2a5a9e;--cv:#1f497d;--sh:rgba(42,90,158,.17);--hl:#fde6cf;--pt:#d2531e;--pt2:#17835a;--tg:#8a3fc1;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121722;--fg:#e5e9f2;--mut:#95a0b6;--card:#1a2130;--bd:#303a4e;--ac:#6ba3e6;--cv:#8dbcf2;--sh:rgba(107,163,230,.22);--hl:#43331f;--pt:#ff8e5e;--pt2:#4fd19a;--tg:#c79bf0}}
+:root[data-theme="dark"]{--bg:#121722;--fg:#e5e9f2;--mut:#95a0b6;--card:#1a2130;--bd:#303a4e;--ac:#6ba3e6;--cv:#8dbcf2;--sh:rgba(107,163,230,.22);--hl:#43331f;--pt:#ff8e5e;--pt2:#4fd19a;--tg:#c79bf0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:14px;max-width:980px;margin-inline:auto}
+h1{font-size:1.25rem;margin:0 0 2px;color:var(--cv)}
+.sub{color:var(--mut);font-size:.84rem;margin:4px 0 0}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:12px;margin-top:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+button,select,input{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--bd);border-radius:6px;padding:5px 9px}
+button{cursor:pointer}
+.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+.f{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;align-items:end}
+.f label{display:flex;flex-direction:column;font-size:.78rem;color:var(--mut);gap:2px}
+.f input{width:88px}.f #fx{width:290px;max-width:100%}
+.ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ctl input[type=range]{flex:1;min-width:140px;padding:0}
+.ctl label{font-size:.85rem;display:flex;gap:4px;align-items:center}
+canvas{width:100%;max-width:520px;height:auto;display:block;margin:8px auto;border:1px solid var(--bd);border-radius:6px}
+svg{width:100%;height:auto;display:block;margin-top:6px}
+.cv{fill:none;stroke:var(--cv);stroke-width:2.4}
+.ax{stroke:var(--mut);stroke-width:1}
+.tk{fill:var(--mut);font-size:14px}
+.gl{stroke:var(--pt);stroke-dasharray:4 3;stroke-width:1.3}
+.dot{fill:var(--pt)}.dot2{fill:var(--pt2)}
+.lb{font-size:15px;font-weight:600;fill:var(--pt)}
+.lg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;margin-top:8px;color:var(--mut)}.lg span{display:inline-flex;align-items:center;gap:6px}
+details{margin-top:10px}summary{cursor:pointer;color:var(--cv);font-weight:600}#cb p{margin:6px 0}#cb ol{margin:6px 0;padding-left:22px}
+.sy{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;margin:6px 0;font-size:.88rem}.sy dt{font-weight:700;color:var(--cv)}.sy dd{margin:0}
+.note{font-size:.9rem;min-height:2.7em;margin-top:6px}
+.res{font-weight:600;color:var(--pt2);margin-bottom:8px}
+.tw{max-height:360px;overflow:auto;border:1px solid var(--bd);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.82rem;font-variant-numeric:tabular-nums}
+th,td{padding:4px 9px;text-align:right;border-bottom:1px solid var(--bd);white-space:nowrap}
+th{position:sticky;top:0;background:var(--hl);z-index:1}
+tbody tr{cursor:pointer}
+tr.on td{background:var(--sh);font-weight:700}
+tr.fin td{color:var(--pt2)}
+.rh{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:8px}.rh .res{margin:0;flex:1;min-width:200px}
+.dl{background:var(--ac);color:#fff;border-color:var(--ac);font-weight:600;white-space:nowrap}
+#pr{display:none}
+@media print{
+@page{size:A4 landscape;margin:12mm}
+html,body{background:#fff!important;color:#000!important}
+body{padding:0!important;max-width:none!important;margin:0!important}
+body>*:not(#pr){display:none!important}
+#pr{display:block!important;color:#000;font:10pt/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#pr h1{font-size:16pt;color:#000;margin:0 0 6px}
+#pr p{margin:3px 0;font-size:10pt;color:#000}
+#pr .prr{font-weight:700;margin:8px 0}
+#pr .prf{margin-top:10px;font-size:8pt;color:#555}
+#pr table{width:100%;border-collapse:collapse;font-size:9pt}
+#pr th,#pr td{border:1px solid #888;padding:3px 6px;text-align:right;white-space:normal;color:#000;background:none}
+#pr th{position:static;background:#e8e8e8;font-weight:700}
+#pr thead{display:table-header-group}
+#pr tr{break-inside:avoid}
+#pr tr.fin td{font-weight:700;background:#f0f0f0}
+}
+</style></head><body>
+<h1>Metode numerik optimisasi tak linier variabel majemuk</h1>
+<p class="sub">Mengikuti slide Suprayogi (FTI ITB), dengan dua variabel keputusan x₁ dan x₂. Tulis f(x₁, x₂) sendiri, atur titik awal dan ε, lalu telusuri iterasinya.</p>
+
+<div class="card">
+ <div class="tabs" id="tabs"></div>
+ <details id="cc" open><summary id="cn"></summary><div id="cb"></div></details>
+ <div class="f">
+  <label>Contoh<select id="pre"></select></label>
+  <label>f(x₁, x₂)<input id="fx" value="(x1-1)^2+(2*x1-x2)^2" spellcheck="false" autocapitalize="off"></label>
+  <label>Tujuan<select id="mode"><option value="1">Minimisasi</option><option value="-1">Maksimisasi</option></select></label>
+  <label>x₁ awal<input id="a1" value="0"></label>
+  <label>x₂ awal<input id="a2" value="0"></label>
+  <label>ε · kriteria henti<input id="e" value="0.001"></label>
+ </div>
+ <p class="sub">Tulis variabel sebagai x1 dan x2. Operator: + − * / ^ dan fungsi sin, cos, exp, ln, sqrt, abs. Gradien dihitung numerik dari f.</p>
+ <div id="err" class="note" style="color:var(--pt);min-height:0"></div>
+</div>
+
+<div class="card">
+ <div class="ctl">
+  <button id="prev" aria-label="Iterasi sebelumnya">◀</button>
+  <button id="play">▶ Putar</button>
+  <button id="next" aria-label="Iterasi berikutnya">▶|</button>
+  <input type="range" id="sl" min="0" max="0" value="0" aria-label="Pilih langkah">
+  <b id="kl"></b>
+  <label><input type="checkbox" id="zm"> zoom ke langkah ini</label>
+ </div>
+ <canvas id="cvs" width="400" height="400" role="img" aria-label="Kontur f dan jalur iterasi"></canvas>
+ <div class="lg" id="lg"></div>
+ <div class="note" id="nt"></div>
+ <p class="sub" id="c2"><b>Grafik satu variabel f(λ).</b> Di sepanjang garis pencarian, f(x⁽ᵏ⁾ + λd) hanya bergantung pada λ. Nilai λ terbaik adalah minimum kurva ini.</p>
+ <svg id="sv" viewBox="0 0 600 240" role="img" aria-label="Grafik f terhadap lambda"></svg>
+</div>
+
+<div class="card">
+ <div class="rh"><div class="res" id="rs"></div><button id="dl" class="dl" type="button">⬇ Unduh tabel (PDF)</button></div>
+ <div class="tw"><table><thead id="th"></thead><tbody id="tb"></tbody></table></div>
+ <p class="sub">Klik baris tabel untuk melompat ke langkah tersebut. Satu baris = satu pencarian satu variabel (cyclic coordinate) atau satu iterasi (gradient search).</p>
+</div>
+
+<div id="pr" aria-hidden="true"></div>
+
+<script>
+const $=i=>document.getElementById(i),v=i=>+$(i).value.replace(',','.');
+let M='cyc',f,S=1,cur,step=0,timer=0,hk='';
+const n=(x,d=4)=>{if(x==null||x===''||!isFinite(x))return'';let s=(+x).toFixed(d);if(+s===0)s=(0).toFixed(d);return s.replace('.',',')};
+const v2=p=>'('+n(p[0])+'; '+n(p[1])+')',nm2=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+const F=p=>f(p[0],p[1]),G=p=>S*F(p);
+const gr=p=>{const h=1e-5;return[(f(p[0]+h,p[1])-f(p[0]-h,p[1]))/(2*h),(f(p[0],p[1]+h)-f(p[0],p[1]-h))/(2*h)]};
+const MS={cyc:'Cyclic coordinate',grad:'Gradient search'};
+const PR=[['(x1-1)^2+(2*x1-x2)^2',1,0,0,'contoh slide'],['(x1-1)^2+10*(x2-1)^2',1,4,3,'kontur lonjong, gradient zig-zag'],['(x1-2)^2+(x2+1)^2+x1*x2',1,0,0,'variabel saling terkait'],['-(x1-1)^2-(x2-2)^2-x1*x2',-1,0,0,'maksimisasi'],['100*(x2-x1^2)^2+(1-x1)^2',1,-1,1,'Rosenbrock, sangat lambat']];
+const HD={cyc:['k','x<sup>(k)</sup>','‖x<sup>(k)</sup>−x<sup>(k−1)</sup>‖','j','y<sup>(j)</sup>','d<sub>j</sub>','λ<sub>j</sub>','y<sup>(j+1)</sup>'],
+grad:['k','x<sup>(k)</sup>','∇f(x<sup>(k)</sup>)','‖∇f(x<sup>(k)</sup>)‖','d<sup>(k)</sup>','λ<sup>(k)</sup>','x<sup>(k+1)</sup>']};
+const CT={
+cyc:{d:'Metode tanpa turunan untuk banyak variabel. Idenya: masalah n variabel diubah menjadi rangkaian masalah satu variabel. Pada tiap iterasi kita bergerak sepanjang sumbu x₁, lalu sumbu x₂, dan seterusnya secara bergiliran (siklik). Di tiap sumbu, panjang langkah terbaik λ dicari dengan metode satu variabel.',s:['Tetapkan ε, arah pencarian d₁ … dₙ (vektor satuan tiap sumbu), dan titik awal x⁽¹⁾. Mulai dengan y⁽¹⁾ = x⁽¹⁾.','Untuk sumbu j = 1 … n: cari λⱼ yang meminimumkan f(y⁽ʲ⁾ + λⱼdⱼ), lalu y⁽ʲ⁺¹⁾ = y⁽ʲ⁾ + λⱼdⱼ.','Setelah semua sumbu selesai, x⁽ᵏ⁺¹⁾ = y⁽ⁿ⁺¹⁾.','Berhenti kalau ‖x⁽ᵏ⁺¹⁾ − x⁽ᵏ⁾‖ < ε. Kalau tidak, ulangi dari sumbu 1 dengan y⁽¹⁾ = x⁽ᵏ⁺¹⁾.'],k:'Catatan: gerakannya selalu sejajar sumbu. Kalau variabel saling terkait (kontur miring), jalurnya berbentuk tangga dan bisa lambat. Kalau variabel terpisah (tanpa suku x₁x₂), konvergen dalam satu putaran. Di halaman ini λ dicari secara numerik, sedangkan di slide dihitung dengan menyamakan turunan dengan nol.'},
+grad:{d:'Metode berbasis turunan. Dari titik sekarang, bergerak ke arah yang membuat f turun paling cepat, yaitu berlawanan dengan vektor gradien (steepest descent). Untuk maksimisasi arahnya searah gradien (steepest ascent). Panjang langkah λ dicari dengan pencarian satu variabel di sepanjang arah itu.',s:['Tetapkan ε dan titik awal x⁽¹⁾.','Hitung ∇f(x⁽ᵏ⁾). Kalau ‖∇f(x⁽ᵏ⁾)‖ < ε, berhenti.','Tentukan arah satuan d⁽ᵏ⁾ = −∇f(x⁽ᵏ⁾) / ‖∇f(x⁽ᵏ⁾)‖.','Cari λ yang meminimumkan f(x⁽ᵏ⁾ + λd⁽ᵏ⁾), lalu x⁽ᵏ⁺¹⁾ = x⁽ᵏ⁾ + λ⁽ᵏ⁾d⁽ᵏ⁾ dan ulangi.'],k:'Catatan: karena tiap langkah berhenti di titik tempat garis arah menyinggung kontur, arah dua iterasi berurutan saling tegak lurus (zig-zag). Kalau kontur sangat lonjong, konvergensinya lambat.'}};
+const SY={
+cyc:[['x = (x₁, x₂)','vektor variabel keputusan'],['f(x)','fungsi tujuan yang dioptimalkan'],['k','nomor iterasi (satu putaran melewati semua sumbu)'],['j','nomor sumbu yang sedang dicari (j = 1 untuk x₁, j = 2 untuk x₂)'],['dⱼ','vektor arah sumbu j: elemen 1 di baris ke-j dan 0 di baris lain'],['y⁽ʲ⁾','titik awal pencarian pada sumbu j'],['λⱼ','panjang langkah pada sumbu j, hasil pencarian satu variabel'],['y⁽ʲ⁺¹⁾','titik setelah bergerak di sumbu j = y⁽ʲ⁾ + λⱼdⱼ'],['x⁽ᵏ⁾','titik di awal iterasi k (x⁽¹⁾ = titik awal)'],['‖x⁽ᵏ⁺¹⁾−x⁽ᵏ⁾‖','jarak (norma) antara dua titik iterasi berurutan'],['ε','kriteria henti']],
+grad:[['x = (x₁, x₂)','vektor variabel keputusan'],['f(x)','fungsi tujuan yang dioptimalkan'],['k','nomor iterasi'],['x⁽ᵏ⁾','titik pada iterasi k (x⁽¹⁾ = titik awal)'],['∇f(x)','vektor gradien = (∂f/∂x₁, ∂f/∂x₂), arah naik paling curam'],['‖∇f(x)‖','panjang (norma) gradien; makin kecil berarti makin dekat titik stasioner'],['d⁽ᵏ⁾','arah pencarian satuan = −∇f/‖∇f‖ (searah gradien untuk maksimisasi)'],['λ⁽ᵏ⁾','panjang langkah, hasil pencarian satu variabel di sepanjang d⁽ᵏ⁾'],['x⁽ᵏ⁺¹⁾','titik baru = x⁽ᵏ⁾ + λ⁽ᵏ⁾d⁽ᵏ⁾'],['ε','kriteria henti: berhenti kalau ‖∇f‖ < ε']]};
+
+function comp(s){
+ s=s.replace(/\^/g,'**').replace(/(^|\()\s*-/g,'$1(-1)*').replace(/(\d)\s*(?=[a-zA-Z(])/g,'$1*').replace(/\)\s*(?=[a-zA-Z0-9(])/g,')*').replace(/\b(x[12])\s*\(/g,'$1*(');
+ s=s.replace(/\b(sin|cos|tan|asin|acos|atan|exp|log|ln|sqrt|abs)\b/g,m=>'Math.'+(m=='ln'?'log':m)).replace(/\bpi\b/g,'Math.PI').replace(/\be\b/g,'Math.E');
+ const bad=(s.replace(/Math\.[A-Za-z]+/g,'').match(/[A-Za-z_]\w*/g)||[]).find(t=>t!=='x1'&&t!=='x2');
+ if(bad)throw Error('Simbol tidak dikenal: '+bad+'. Pakai x1 dan x2 sebagai variabel');
+ let g;try{g=new Function('x1','x2','return '+s);if(typeof g(1,1)!=='number')throw 0}catch(e){throw Error('Persamaan belum valid. Contoh: (x1-1)^2+(2*x1-x2)^2')}
+ return g}
+
+function lmin(h){
+ const f0=h(0),a1=h(1),a2=h(-1),d=Math.min(a1,a2)<f0?(a1<=a2?1:-1):0;
+ let lo=-1,hi=1;
+ if(d){let p=0,q=d,fq=d>0?a1:a2,st=d;for(let i=0;i<60;i++){st*=2;const r=q+st,fr=h(r);lo=p;hi=r;if(fr>fq)break;p=q;q=r;fq=fr}}
+ let a=Math.min(lo,hi),b=Math.max(lo,hi);const g=.6180339887;
+ let c=b-g*(b-a),e=a+g*(b-a),fc=h(c),fe=h(e);
+ for(let i=0;i<120&&b-a>1e-12;i++){if(fc<=fe){b=e;e=c;fe=fc;c=b-g*(b-a);fc=h(c)}else{a=c;c=e;fc=fe;e=a+g*(b-a);fe=h(e)}}
+ return(a+b)/2}
+
+const D=[[1,0],[0,1]];
+const ALG={
+cyc(P){
+ const R=[];let x=P.p,nm=null,sp=1;
+ for(let k=1;k<=300;k++){
+  let y=x;
+  for(let j=0;j<2;j++){
+   const d=D[j],lam=lmin(t=>G([y[0]+t*d[0],y[1]+t*d[1]])),yn=[y[0]+lam*d[0],y[1]+lam*d[1]],L=nm2(y,yn);
+   if(L>1e-12)sp=L*3;
+   R.push({c:[j?'':k,j?'':v2(x),j||nm==null?'':n(nm),j+1,v2(y),v2(d),n(lam),v2(yn)],seg:[y,yn],base:y,dir:d,lam,pt:yn,foc:[(y[0]+yn[0])/2,(y[1]+yn[1])/2,sp],
+    note:'Iterasi k = '+k+', sumbu x'+(j?'₂':'₁')+': f(y⁽ʲ⁾ + λd) menjadi fungsi satu variabel f(λ) yang minimum di λ = '+n(lam)+'. Jadi y⁽ʲ⁺¹⁾ = '+v2(yn)});
+   y=yn}
+  nm=nm2(x,y);
+  if(nm<P.e){R.push({c:[k+1,v2(y),n(nm),'','','','',''],fin:1,pt:y,foc:[y[0],y[1],sp],note:'Satu putaran selesai: ‖x⁽ᵏ⁺¹⁾ − x⁽ᵏ⁾‖ = '+n(nm,5)+' < ε → berhenti'});break}
+  x=y}
+ return R},
+grad(P){
+ const R=[];let x=P.p,sp=1;
+ for(let k=1;k<=500;k++){
+  const g=gr(x),gn=Math.hypot(g[0],g[1]);
+  if(!(gn>=P.e)){R.push({c:[k,v2(x),v2(g),n(gn,5),'','',''],fin:1,pt:x,foc:[x[0],x[1],sp],note:'‖∇f(x⁽ᵏ⁾)‖ = '+n(gn,5)+' < ε → berhenti'});break}
+  const d=[-S*g[0]/gn,-S*g[1]/gn],lam=lmin(t=>G([x[0]+t*d[0],x[1]+t*d[1]])),xn=[x[0]+lam*d[0],x[1]+lam*d[1]],L=nm2(x,xn);
+  if(L>1e-12)sp=L*3;
+  R.push({c:[k,v2(x),v2(g),n(gn),v2(d),n(lam),v2(xn)],seg:[x,xn],base:x,dir:d,lam,pt:xn,foc:[(x[0]+xn[0])/2,(x[1]+xn[1])/2,sp],
+   note:'Gradien = '+v2(g)+', ‖∇f‖ = '+n(gn)+'. Arah d = '+(S>0?'−':'+')+'∇f/‖∇f‖ = '+v2(d)+'. Minimum sepanjang arah itu di λ = '+n(lam)+', jadi x⁽ᵏ⁺¹⁾ = '+v2(xn)});
+  x=xn}
+ return R}};
+
+const NB=14,hs=(h,s,l)=>{s/=100;l/=100;const a=s*Math.min(l,1-l),q=k=>{k=(k+h/30)%12;return Math.round(255*(l-a*Math.max(-1,Math.min(k-3,9-k,1))))};return[q(0),q(8),q(4)]};
+const LT=[],DK=[];for(let b=0;b<=NB;b++){const h=215-185*b/NB;LT.push(hs(h,70,72));DK.push(hs(h,55,40))}
+const N=400,hc=document.createElement('canvas');hc.width=hc.height=N;
+function heat(vw,zm){
+ const key=vw.join()+'|'+S+'|'+$('fx').value+'|'+zm;if(key===hk)return;hk=key;
+ const[cx,cy,sp]=vw,X0=cx-sp/2,Y0=cy-sp/2,a=new Float64Array(N*N);let lo=1/0,hi=-1/0;
+ for(let j=0;j<N;j++)for(let i=0;i<N;i++){const g=S*f(X0+(i+.5)/N*sp,Y0+(1-(j+.5)/N)*sp);a[j*N+i]=g;if(g<lo)lo=g;if(g>hi)hi=g}
+ if(!isFinite(lo)){lo=0;hi=1}if(!zm&&isFinite(cur.ghi))hi=cur.ghi;if(!(hi>lo+1e-12))hi=lo+1;
+ const x=hc.getContext('2d'),id=x.createImageData(N,N),b=new Uint8Array(N*N);
+ for(let q=0;q<N*N;q++){const t=(a[q]-lo)/(hi-lo);b[q]=isNaN(t)?NB:Math.min(NB,Math.floor(NB*Math.sqrt(Math.max(t,0))))}
+ for(let j=0;j<N;j++)for(let i=0;i<N;i++){const q=j*N+i,e=(i<N-1&&b[q]!==b[q+1])||(j<N-1&&b[q]!==b[q+N]),c=(e?DK:LT)[b[q]];id.data.set([c[0],c[1],c[2],255],q*4)}
+ x.putImageData(id,0,0)}
+
+function draw(r){
+ const zm=$('zm').checked,vw=zm?r.foc:cur.view,[cx,cy,sp]=vw,c=$('cvs').getContext('2d'),cs=getComputedStyle(document.documentElement),col=k=>cs.getPropertyValue(k).trim();
+ heat(vw,zm);c.drawImage(hc,0,0);
+ const X=x=>(x-cx)/sp*N+N/2,Y=y=>N/2-(y-cy)/sp*N,tk=t=>String(+t.toPrecision(4)).replace('.',',');
+ const txt=(s,x,y)=>{c.lineWidth=3;c.strokeStyle=col('--card');c.strokeText(s,x,y);c.fillStyle=col('--fg');c.fillText(s,x,y)};
+ c.font='600 13px system-ui,sans-serif';c.lineCap='round';c.lineJoin='round';
+ for(let i=1;i<=4;i++){const t=cx-sp/2+sp*i/5,u=cy-sp/2+sp*i/5;c.textAlign='center';txt(tk(t),X(t),N-5);c.textAlign='left';txt(tk(u),5,Y(u)+4)}
+ c.textAlign='right';txt('x₁ →',N-6,N-20);c.textAlign='left';txt('x₂ ↑',5,16);
+ if(r.base){const[bx,by]=r.base,[dx,dy]=r.dir,L=sp*3;c.setLineDash([7,5]);c.strokeStyle=col('--tg');c.lineWidth=2.4;c.beginPath();c.moveTo(X(bx-dx*L),Y(by-dy*L));c.lineTo(X(bx+dx*L),Y(by+dy*L));c.stroke();c.setLineDash([])}
+ const dot=(p,rad,fill)=>{c.beginPath();c.arc(X(p[0]),Y(p[1]),rad,0,7);c.fillStyle=fill;c.fill();c.lineWidth=1.5;c.strokeStyle=col('--card');c.stroke()};
+ cur.R.slice(0,step+1).forEach((q,i)=>{if(!q.seg)return;c.beginPath();c.moveTo(X(q.seg[0][0]),Y(q.seg[0][1]));c.lineTo(X(q.seg[1][0]),Y(q.seg[1][1]));c.strokeStyle=i===step?col('--pt'):col('--fg');c.lineWidth=i===step?4.5:2.4;c.stroke()});
+ cur.R.slice(0,step+1).forEach(q=>{if(q.seg)dot(q.seg[0],3,col('--fg'))});
+ const st=cur.P.p;dot(st,6,col('--pt2'));c.textAlign='left';txt('x⁽¹⁾',X(st[0])+9,Y(st[1])-9);
+ dot(r.pt,6,col('--pt'));
+ if(r.fin){c.beginPath();c.arc(X(r.pt[0]),Y(r.pt[1]),12,0,7);c.strokeStyle=col('--pt2');c.lineWidth=3;c.stroke();txt('x*',X(r.pt[0])+15,Y(r.pt[1])+16)}}
+
+function draw1(r){
+ [$('sv'),$('c2')].forEach(x=>x.style.display=r.base?'':'none');if(!r.base)return;
+ const W=600,H=240,L=52,Rr=14,T=14,B=30,pw=W-L-Rr,ph=H-T-B,lam=r.lam,w=Math.abs(lam)||1,x0=Math.min(0,lam)-.5*w,x1=Math.max(0,lam)+.5*w;
+ const h=t=>F([r.base[0]+t*r.dir[0],r.base[1]+t*r.dir[1]]),xs=[],ys=[];let lo=1/0,hi=-1/0;
+ for(let i=0;i<=200;i++){const t=x0+(x1-x0)*i/200,y=h(t);xs.push(t);ys.push(y);if(isFinite(y)){lo=Math.min(lo,y);hi=Math.max(hi,y)}}
+ if(!isFinite(lo)){lo=0;hi=1}if(hi-lo<1e-12){lo-=1;hi+=1}const pd=(hi-lo)*.1;lo-=pd;hi+=pd;
+ const X=t=>L+(t-x0)/(x1-x0)*pw,Y=y=>T+ph-(y-lo)/(hi-lo)*ph,t2=t=>String(+(+t).toPrecision(4)).replace('.',',');
+ let s='';
+ for(let i=0;i<=4;i++){const t=x0+(x1-x0)*i/4,y=lo+(hi-lo)*i/4;s+='<text class="tk" x="'+X(t)+'" y="'+(H-10)+'" text-anchor="middle">'+t2(t)+'</text><text class="tk" x="'+(L-6)+'" y="'+(Y(y)+4)+'" text-anchor="end">'+t2(y)+'</text>'}
+ s+='<line class="ax" x1="'+L+'" y1="'+(T+ph)+'" x2="'+(W-Rr)+'" y2="'+(T+ph)+'"/><line class="ax" x1="'+L+'" y1="'+T+'" x2="'+L+'" y2="'+(T+ph)+'"/>';
+ let d='';ys.forEach((y,i)=>{if(isFinite(y))d+=(i&&isFinite(ys[i-1])?'L':'M')+X(xs[i]).toFixed(1)+','+Y(y).toFixed(1)});
+ s+='<path class="cv" d="'+d+'"/>';
+ const s0=lam>=0?-1:1;
+ [[0,'dot','λ = 0 (titik awal)',s0],[lam,'dot2','λ = '+n(lam)+' (minimum)',-s0]].forEach(([t,c,l,sd])=>{const cx=X(t),cy=Math.min(T+ph,Math.max(T,Y(h(t))));
+  s+='<line class="gl" x1="'+cx+'" y1="'+(T+ph)+'" x2="'+cx+'" y2="'+cy+'"/><circle class="'+c+'" cx="'+cx+'" cy="'+cy+'" r="5"/><text class="lb" x="'+(cx+sd*7)+'" y="'+(cy-9)+'" text-anchor="'+(sd<0?'end':'start')+'">'+l+'</text>'});
+ $('sv').innerHTML=s}
+
+function run(){
+ stop();let R;
+ try{
+  f=comp($('fx').value);S=+$('mode').value;
+  const P={p:[v('a1'),v('a2')],e:v('e')};
+  if(!P.p.every(isFinite))throw Error('Titik awal belum valid');
+  if(!(P.e>0))throw Error('ε harus lebih besar dari 0');
+  cur={P};R=ALG[M](P);
+ }catch(x){$('err').textContent=x.message;return}
+ $('err').textContent='';cur.R=R;
+ const L=R[R.length-1];if(!L.fin){L.fin=1;L.note=(L.note||'')+' (batas iterasi tercapai, belum konvergen)'}
+ const q=R.map(r=>r.pt).concat(R.map(r=>r.base).filter(Boolean),[cur.P.p]),xs=q.map(p=>p[0]),ys=q.map(p=>p[1]);
+ const mx=Math.min(...xs),Mx=Math.max(...xs),my=Math.min(...ys),My=Math.max(...ys);
+ let sp=Math.max(Mx-mx,My-my)*1.4;if(!(sp>1e-9))sp=1;
+ cur.view=[(mx+Mx)/2,(my+My)/2,sp];cur.ghi=Math.max(...q.map(G));hk='';
+ const K=R.filter(r=>r.seg).length/(M==='cyc'?2:1);
+ $('rs').textContent='x* ≈ '+v2(L.pt)+'  ·  f(x*) ≈ '+n(F(L.pt),6)+'  ·  '+K+' iterasi';
+ $('th').innerHTML='<tr><th>'+HD[M].join('</th><th>')+'</th></tr>';
+ $('tb').innerHTML=R.map((r,i)=>'<tr'+(r.fin?' class="fin"':'')+' data-i="'+i+'"><td>'+r.c.join('</td><td>')+'</td></tr>').join('');
+ $('sl').max=R.length-1;show(0)}
+
+function show(i){
+ step=i;const r=cur.R[i];$('sl').value=i;
+ $('kl').textContent='langkah '+(i+1)+' / '+cur.R.length+(r.fin?' (akhir)':'');
+ $('tb').querySelectorAll('.on').forEach(e=>e.classList.remove('on'));
+ const el=$('tb').children[i];el.classList.add('on');const w=el.closest('.tw');w.scrollTop=el.offsetTop-w.clientHeight/2;
+ $('nt').innerHTML=r.note||'';
+ draw(r);draw1(r)}
+
+function legend(){
+ const it=[['b','rgb('+LT[0]+')','nilai f rendah (dekat optimum)'],['b','rgb('+LT[NB]+')','nilai f tinggi'],['l','var(--fg)','jalur iterasi sebelumnya'],['l','var(--pt)','langkah saat ini'],['d','var(--tg)',M==='cyc'?'garis sumbu yang sedang dicari':'garis arah pencarian (−∇f)'],['c','var(--pt2)','titik awal x⁽¹⁾'],['c','var(--pt)','titik saat ini'],['r','var(--pt2)','x* (hasil akhir)']];
+ const sw=(t,c)=>t==='b'?'width:16px;height:10px;border-radius:2px;border:1px solid var(--bd);background:'+c:t==='c'?'width:10px;height:10px;border-radius:50%;background:'+c:t==='r'?'width:10px;height:10px;border-radius:50%;border:2px solid '+c:'width:18px;border-top:'+(t==='d'?'2px dashed ':'3px solid ')+c;
+ $('lg').innerHTML=it.map(([t,c,l])=>'<span><i style="display:inline-block;'+sw(t,c)+'"></i>'+l+'</span>').join('')}
+function concept(k){const c=CT[k];$('cn').textContent='Konsep dan keterangan simbol: '+MS[k];$('cb').innerHTML='<p>'+c.d+'</p><ol>'+c.s.map(x=>'<li>'+x+'</li>').join('')+'</ol><p class="sub">'+c.k+'</p><b>Keterangan simbol</b><dl class="sy">'+SY[k].concat([['x*','perkiraan titik optimum hasil akhir']]).map(x=>'<dt>'+x[0]+'</dt><dd>'+x[1]+'</dd>').join('')+'</dl>'}
+function stop(){clearInterval(timer);timer=0;$('play').textContent='▶ Putar'}
+function setM(k){M=k;$('tabs').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));concept(k);legend();run()}
+
+$('tabs').innerHTML=Object.keys(MS).map(k=>'<button data-k="'+k+'">'+MS[k]+'</button>').join('');
+$('tabs').onclick=e=>{const b=e.target.closest('button');if(b)setM(b.dataset.k)};
+$('pre').innerHTML=PR.map((p,i)=>'<option value="'+i+'">'+p[0]+'  ('+p[4]+')</option>').join('');
+$('pre').onchange=()=>{const p=PR[$('pre').value];$('fx').value=p[0];$('mode').value=p[1];$('a1').value=p[2];$('a2').value=p[3];run()};
+['fx','mode','a1','a2','e'].forEach(i=>$(i).oninput=run);
+$('sl').oninput=()=>{stop();show(+$('sl').value)};
+$('zm').onchange=()=>show(step);
+$('prev').onclick=()=>{stop();show(Math.max(0,step-1))};
+$('next').onclick=()=>{stop();show(Math.min(cur.R.length-1,step+1))};
+$('tb').onclick=e=>{const t=e.target.closest('tr');if(t){stop();show(+t.dataset.i)}};
+$('play').onclick=()=>{
+ if(timer){stop();return}
+ if(step>=cur.R.length-1)show(0);
+ $('play').textContent='❚❚ Jeda';
+ timer=setInterval(()=>step>=cur.R.length-1?stop():show(step+1),Math.max(60,Math.min(700,9000/cur.R.length)))};
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function pdf(){
+ if($('err').textContent){alert('Perbaiki input dulu: '+$('err').textContent);return}
+ stop();
+ const nm=MS[M],fl='f(x₁, x₂)',ps=['a1','a2','e'].map(i=>$(i).closest('label').childNodes[0].textContent.trim()+' = '+$(i).value);
+ $('pr').innerHTML='<h1>Tabel iterasi: '+esc(nm)+'</h1><p><b>'+esc(fl)+'</b> = '+esc($('fx').value)+' &nbsp;·&nbsp; <b>Tujuan</b>: '+esc($('mode').selectedOptions[0].text)+'</p><p><b>Parameter</b>: '+esc(ps.join(' · '))+'</p><p class="prr">'+esc($('rs').textContent.replace(/\s+/g,' '))+'</p><table><thead>'+$('th').innerHTML+'</thead><tbody>'+cur.R.map(r=>'<tr'+(r.fin?' class="fin"':'')+'><td>'+r.c.join('</td><td>')+'</td></tr>').join('')+'</tbody></table><p class="prf">Dibuat dari Visualisasi Metode Numerik Optimisasi, TI5001 Optimisasi &amp; Intelejensia Komputasional.</p>';
+ const t=document.title;document.title='Tabel iterasi - '+nm;
+ window.addEventListener('afterprint',()=>{document.title=t},{once:true});
+ window.print()}
+$('dl').onclick=pdf;
+setM('cyc');
+</script></body></html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Visualisasi Metode Numerik Optimisasi Variabel Tunggal</title>
+<style>
+:root{--bg:#f6f7fa;--fg:#1c2a44;--mut:#5f6b82;--card:#fff;--bd:#d6dbe6;--ac:#2a5a9e;--cv:#1f497d;--sh:rgba(42,90,158,.17);--hl:#fde6cf;--pt:#d2531e;--pt2:#17835a;--out:rgba(95,107,130,.2);--gone:rgba(200,45,75,.16);--will:rgba(235,170,15,.34);--tg:#8a3fc1;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121722;--fg:#e5e9f2;--mut:#95a0b6;--card:#1a2130;--bd:#303a4e;--ac:#6ba3e6;--cv:#8dbcf2;--sh:rgba(107,163,230,.22);--hl:#43331f;--pt:#ff8e5e;--pt2:#4fd19a;--out:rgba(160,172,196,.2);--gone:rgba(255,110,130,.2);--will:rgba(245,190,60,.32);--tg:#c79bf0}}
+:root[data-theme="dark"]{--bg:#121722;--fg:#e5e9f2;--mut:#95a0b6;--card:#1a2130;--bd:#303a4e;--ac:#6ba3e6;--cv:#8dbcf2;--sh:rgba(107,163,230,.22);--hl:#43331f;--pt:#ff8e5e;--pt2:#4fd19a;--out:rgba(160,172,196,.2);--gone:rgba(255,110,130,.2);--will:rgba(245,190,60,.32);--tg:#c79bf0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:14px;max-width:980px;margin-inline:auto}
+h1{font-size:1.25rem;margin:0 0 2px;color:var(--cv)}
+.sub{color:var(--mut);font-size:.84rem;margin:4px 0 0}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:12px;margin-top:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+button,select,input{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--bd);border-radius:6px;padding:5px 9px}
+button{cursor:pointer}
+.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+.f{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;align-items:end}
+.f label{display:flex;flex-direction:column;font-size:.78rem;color:var(--mut);gap:2px}
+.f input{width:88px}.f #fx{width:220px}
+.ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ctl input[type=range]{flex:1;min-width:140px;padding:0}
+.ctl label{font-size:.85rem;display:flex;gap:4px;align-items:center}
+svg{width:100%;height:auto;display:block;margin-top:6px}
+.cv{fill:none;stroke:var(--cv);stroke-width:2.4}
+.ax{stroke:var(--mut);stroke-width:1}
+.tk{fill:var(--mut);font-size:14px}
+.iv{fill:var(--sh)}
+.gl{stroke:var(--pt);stroke-dasharray:4 3;stroke-width:1.3}
+.dot{fill:var(--pt)}.dot2{fill:var(--pt2)}
+.q{fill:none;stroke:var(--pt2);stroke-dasharray:6 4;stroke-width:1.8}
+.st{fill:none;stroke:var(--pt2);stroke-width:2.5}
+.lb{font-size:15px;font-weight:600;fill:var(--pt)}
+.out{fill:var(--out)}.gone{fill:var(--gone)}.will{fill:var(--will)}
+.bnd{stroke:var(--fg);stroke-width:2.2}.bl{font-size:14px;font-weight:700;fill:var(--fg)}.rl{font-size:12px;fill:var(--mut)}
+.tg{fill:none;stroke:var(--tg);stroke-width:2.2}.dv{fill:none;stroke:var(--fg);stroke-width:2.2}
+.sy{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;margin:6px 0;font-size:.88rem}.sy dt{font-weight:700;color:var(--cv)}.sy dd{margin:0}
+.lg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;margin-top:8px;color:var(--mut)}.lg span{display:inline-flex;align-items:center;gap:6px}
+details{margin-top:10px}summary{cursor:pointer;color:var(--cv);font-weight:600}#cb p{margin:6px 0}#cb ol{margin:6px 0;padding-left:22px}
+.note{font-size:.9rem;min-height:2.7em;margin-top:6px}
+.res{font-weight:600;color:var(--pt2);margin-bottom:8px}
+.tw{max-height:360px;overflow:auto;border:1px solid var(--bd);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.82rem;font-variant-numeric:tabular-nums}
+th,td{padding:4px 9px;text-align:right;border-bottom:1px solid var(--bd);white-space:nowrap}
+th{position:sticky;top:0;background:var(--hl);z-index:1}
+tbody tr{cursor:pointer}
+tr.on td{background:var(--sh);font-weight:700}
+tr.fin td{color:var(--pt2)}
+.rh{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:8px}.rh .res{margin:0;flex:1;min-width:200px}
+.dl{background:var(--ac);color:#fff;border-color:var(--ac);font-weight:600;white-space:nowrap}
+#pr{display:none}
+@media print{
+@page{size:A4 landscape;margin:12mm}
+html,body{background:#fff!important;color:#000!important}
+body{padding:0!important;max-width:none!important;margin:0!important}
+body>*:not(#pr){display:none!important}
+#pr{display:block!important;color:#000;font:10pt/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#pr h1{font-size:16pt;color:#000;margin:0 0 6px}
+#pr p{margin:3px 0;font-size:10pt;color:#000}
+#pr .prr{font-weight:700;margin:8px 0}
+#pr .prf{margin-top:10px;font-size:8pt;color:#555}
+#pr table{width:100%;border-collapse:collapse;font-size:9pt}
+#pr th,#pr td{border:1px solid #888;padding:3px 6px;text-align:right;white-space:normal;color:#000;background:none}
+#pr th{position:static;background:#e8e8e8;font-weight:700}
+#pr thead{display:table-header-group}
+#pr tr{break-inside:avoid}
+#pr tr.fin td{font-weight:700;background:#f0f0f0}
+}
+</style></head><body>
+<h1>Metode numerik optimisasi tak linier variabel tunggal</h1>
+<p class="sub">Mengikuti slide Suprayogi (FTI ITB). Tulis f(x) sendiri, atur parameter, lalu telusuri iterasinya satu per satu.</p>
+
+<div class="card">
+ <div class="tabs" id="tabs"></div>
+ <details id="cc" open><summary id="cn"></summary><div id="cb"></div></details>
+ <div class="f">
+  <label>Contoh<select id="pre"></select></label>
+  <label>f(x)<input id="fx" value="(x-1)^2" spellcheck="false" autocapitalize="off"></label>
+  <label>Tujuan<select id="mode"><option value="1">Minimisasi</option><option value="-1">Maksimisasi</option></select></label>
+  <label data-m="dich fib gold bis">a · batas kiri<input id="a" value="-1"></label>
+  <label data-m="dich fib gold bis">b · batas kanan<input id="b" value="2"></label>
+  <label data-m="direct newton">x⁽¹⁾ awal<input id="x0" value="3"></label>
+  <label data-m="direct dich fib gold">l · panjang interval akhir<input id="l" value="0.01"></label>
+  <label data-m="dich fib newton bis">ε · pembeda / kriteria henti<input id="e" value="0.0001"></label>
+  <label data-m="gold">γ · golden ratio<input id="g" value="0.618"></label>
+ </div>
+ <p class="sub">Operator: + − * / ^ dan fungsi sin, cos, tan, exp, ln, sqrt, abs, konstanta pi dan e. Turunan dihitung numerik dari f(x).</p>
+ <div id="err" class="note" style="color:var(--pt);min-height:0"></div>
+</div>
+
+<div class="card">
+ <div class="ctl">
+  <button id="prev" aria-label="Iterasi sebelumnya">◀</button>
+  <button id="play">▶ Putar</button>
+  <button id="next" aria-label="Iterasi berikutnya">▶|</button>
+  <input type="range" id="sl" min="0" max="0" value="0" aria-label="Pilih iterasi">
+  <b id="kl"></b>
+  <label><input type="checkbox" id="zm"> zoom ke interval</label>
+ </div>
+ <svg id="sv" viewBox="0 0 600 340" role="img" aria-label="Grafik f(x) dan interval ketidakpastian"></svg>
+ <p class="sub" id="c2"><b>Grafik turunan f′(x).</b> Garis singgung di (x⁽ᵏ⁾, f′(x⁽ᵏ⁾)) berkemiringan f″ dan memotong sumbu f′ = 0 di x⁽ᵏ⁺¹⁾, yaitu titik berikutnya.</p>
+ <svg id="sv2" viewBox="0 0 600 260" role="img" aria-label="Grafik turunan f′(x) dan garis singgungnya"></svg>
+ <div class="lg" id="lg"></div>
+ <div class="note" id="nt"></div>
+</div>
+
+<div class="card">
+ <div class="rh"><div class="res" id="rs"></div><button id="dl" class="dl" type="button">⬇ Unduh tabel (PDF)</button></div>
+ <div class="tw"><table><thead id="th"></thead><tbody id="tb"></tbody></table></div>
+ <p class="sub">Klik baris tabel untuk melompat ke iterasi tersebut.</p>
+</div>
+
+<div id="pr" aria-hidden="true"></div>
+
+<script>
+const $=i=>document.getElementById(i),v=i=>+$(i).value.replace(',','.');
+let M='direct',f,S=1,LE,GT,cur,step=0,timer=0;
+const n=(x,d=4)=>{if(x==null||x===''||!isFinite(x))return'';let s=(+x).toFixed(d);if(+s===0)s=(0).toFixed(d);return s.replace('.',',')};
+const MS={
+direct:{n:'Direct search',d:'Dari titik awal, melangkah sejauh λ = l/2 ke arah yang memperbaiki f. Berhenti saat langkah berikutnya tidak lagi membaik; interval akhir diapit dua titik terakhir.'},
+newton:{n:'Newton',d:'Memakai pendekatan kuadratik f di x⁽ᵏ⁾ (garis hijau putus-putus). Lembah/puncaknya menjadi titik berikutnya: x − f′/f″.',e:'0.01'},
+dich:{n:'Dichotomous',d:'Dua titik uji u dan v diletakkan di kiri dan kanan titik tengah (selisih ε). Bagian yang pasti tidak memuat optimum dibuang, interval menyusut sekitar separuh tiap iterasi.',e:'0.0001'},
+fib:{n:'Fibonacci',d:'Jumlah iterasi n dipilih agar Fₙ > (b−a)/l. Titik u dan v memakai rasio bilangan Fibonacci sehingga satu titik lama dipakai ulang; iterasi terakhir memakai ε.',e:'0.0001'},
+gold:{n:'Golden section',d:'Seperti Fibonacci, tetapi rasionya tetap γ ≈ 0,618: u = a + (1−γ)(b−a), v = a + γ(b−a). Berhenti saat |b−a| < l.'},
+bis:{n:'Bisection',d:'Berbasis turunan: hitung titik tengah m, lalu tanda f′(m) menentukan separuh interval yang dibuang. Berhenti saat |f′(m)| < ε.',e:'0.001'}};
+const HD={direct:['k','d','x<sup>(k)</sup>','x<sup>(k)</sup>+dλ','f(x<sup>(k)</sup>)','f(x<sup>(k)</sup>+dλ)'],
+newton:['k','x<sup>(k)</sup>','|x<sup>(k)</sup>−x<sup>(k−1)</sup>|','f′(x<sup>(k)</sup>)','f″(x<sup>(k)</sup>)'],
+dich:['k','a','b','|b−a|','u','v','f(u)','f(v)'],bis:['k','a','b','m','f′(m)']};
+HD.fib=HD.gold=HD.dich;
+const PR=[['(x-1)^2',1,-1,2,3],['-(x-2)^2+3',-1,0,5,0],['x^2-4x+sin(x)',1,0,4,0],['x*exp(-x)',-1,0,5,0],['x^3-3x',1,0,3,3]];
+
+function comp(s){
+ s=s.replace(/\^/g,'**').replace(/(^|\()\s*-/g,'$1(-1)*').replace(/(\d)\s*(?=[a-zA-Z(])/g,'$1*').replace(/\)\s*(?=[a-zA-Z0-9(])/g,')*').replace(/\bx\s*\(/g,'x*(');
+ s=s.replace(/\b(sin|cos|tan|asin|acos|atan|exp|log|ln|sqrt|abs)\b/g,m=>'Math.'+(m=='ln'?'log':m)).replace(/\bpi\b/g,'Math.PI').replace(/\be\b/g,'Math.E');
+ const bad=(s.replace(/Math\.[A-Za-z]+/g,'').match(/[A-Za-z_]\w*/g)||[]).find(t=>t!=='x');
+ if(bad)throw Error('Simbol tidak dikenal: '+bad);
+ let g;try{g=new Function('x','return '+s);if(typeof g(1)!=='number')throw 0}catch(e){throw Error('Persamaan belum valid. Contoh: (x-1)^2, sin(x), x*exp(-x)')}
+ return g}
+
+const G=x=>S*f(x),d1=x=>(f(x+1e-5)-f(x-1e-5))/2e-5,d2=x=>(f(x+1e-3)-2*f(x)+f(x-1e-3))/1e-6;
+const FN=(k,a,b,u,fin,note)=>({c:[k,n(a),n(b),n(b-a),'','','',''],lo:a,hi:b,pts:[],fin:1,note:'|b − a| < l → berhenti, interval akhir = [a, b]'});
+
+function two(P,uv){
+ const R=[];let a=P.a,b=P.b;
+ for(let k=1;k<=300;k++){
+  const w=b-a;
+  if(w<P.l){R.push(FN(k,a,b));break}
+  const[u,vv]=uv(a,b),fu=f(u),fv=f(vv),le=G(u)<=G(vv);
+  R.push({c:[k,n(a),n(b),n(w),n(u),n(vv),n(fu,6),n(fv,6)],lo:a,hi:b,del:le?[vv,b]:[a,u],pts:[{x:u,l:'u'},{x:vv,l:'v',alt:1}],
+   note:le?'f(u) '+LE+' f(v) → optimum ada di kiri v, jadi b ← v':'f(u) '+GT+' f(v) → optimum ada di kanan u, jadi a ← u'});
+  if(le)b=vv;else a=u;
+ }
+ return R}
+
+const ALG={
+direct(P){
+ const lam=P.l/2,R=[];let x=P.x0,d=1;
+ for(let k=1;k<5000;k++){
+  const y=x+lam*d,up=G(y)<G(x),r={c:[k,d,n(x),n(y),n(f(x),6),n(f(y),6)],pts:[{x,l:'x'},{x:y,l:'x+dλ',alt:1}],lo:Math.min(x,y),hi:Math.max(x,y)};
+  R.push(r);
+  if(up){r.note='f(x+dλ) membaik → pindah ke x+dλ';x=y;continue}
+  if(k===1){
+   if(G(y)===G(x)){r.fin=1;r.note='f(x+dλ) = f(x) → berhenti';break}
+   d=-1;r.note='f(x+λ) lebih buruk → arah dibalik (d = −1)';
+   if(G(x-lam)>=G(x)){r.fin=1;r.lo=x-lam;r.hi=x+lam;r.note='Kedua arah tidak membaik → optimum ada di sekitar titik awal';break}
+   x+=lam*d;continue}
+  const p=x-lam*d;r.fin=1;r.lo=Math.min(y,p);r.hi=Math.max(y,p);
+  r.note='f(x+dλ) tidak membaik → berhenti. Interval akhir = antara x+dλ dan x⁽ᵏ⁻¹⁾';break}
+ return R},
+newton(P){
+ const R=[];let x=P.x0,px=null;
+ for(let k=1;k<=60;k++){
+  const fp=d1(x),fpp=d2(x),dl=px==null?null:Math.abs(x-px),ok=isFinite(fp)&&isFinite(fpp)&&Math.abs(fpp)>1e-9,xn=ok?x-fp/fpp:x;
+  const r={c:[k,n(x),n(dl),n(fp),n(fpp)],pts:[{x,l:'x'}],lo:Math.min(x,xn),hi:Math.max(x,xn),q:{x,y:f(x),p:fp,s:fpp}};
+  if(ok&&xn!==x)r.pts.push({x:xn,l:'x⁺',alt:1});
+  R.push(r);
+  if(!ok){r.fin=1;r.note='f″ mendekati 0 atau tidak terdefinisi → Newton tidak bisa lanjut';break}
+  if(dl!=null&&dl<P.e){r.fin=1;r.note='|x⁽ᵏ⁾ − x⁽ᵏ⁻¹⁾| < ε → berhenti';break}
+  r.note='Gradien f′(x⁽ᵏ⁾) = '+n(fp)+', kelengkungan f″(x⁽ᵏ⁾) = '+n(fpp)+'. Di grafik turunan, garis singgung berkemiringan f″ memotong sumbu f′ = 0 di x⁽ᵏ⁺¹⁾ = x − f′/f″ = '+n(x)+' − ('+n(fp)+') / ('+n(fpp)+') = '+n(xn);
+  px=x;x=xn}
+ return R},
+dich:P=>two(P,(a,b)=>[a+(b-a)/2-P.e/2,a+(b-a)/2+P.e/2]),
+gold:P=>two(P,(a,b)=>[a+(1-P.g)*(b-a),a+P.g*(b-a)]),
+fib(P){
+ const F=[1,1];for(let i=2;i<60;i++)F[i]=F[i-1]+F[i-2];
+ let nn=2;while(F[nn]<=(P.b-P.a)/P.l&&nn<50)nn++;
+ const R=[],row=(k,a,b,u,vv,note,fin)=>({c:[k,n(a),n(b),n(b-a),n(u),n(vv),n(f(u),6),n(f(vv),6)],lo:a,hi:b,pts:[{x:u,l:'u'},{x:vv,l:'v',alt:1}],note,fin});
+ let a=P.a,b=P.b,u=a+F[nn-2]/F[nn]*(b-a),vv=a+F[nn-1]/F[nn]*(b-a);
+ R.push(row(1,a,b,u,vv));
+ for(let k=1;k<=nn-2;k++){
+  const le=G(u)<=G(vv);
+  R[k-1].del=le?[vv,b]:[a,u];R[k-1].note=le?'f(u) '+LE+' f(v) → b ← v; titik v lama = u baru':'f(u) '+GT+' f(v) → a ← u; titik u lama = v baru';
+  if(le){b=vv;vv=u;u=a+F[nn-k-2]/F[nn-k]*(b-a)}else{a=u;u=vv;vv=a+F[nn-k-1]/F[nn-k]*(b-a)}
+  R.push(row(k+1,a,b,u,vv))}
+ const le=G(u)<=G(u+P.e);vv=u+P.e;
+ if(le)b=vv;else a=u;
+ R.push(row(nn,a,b,u,vv,'k = n: v ← u + ε, lalu dibandingkan. Interval akhir = ['+n(a)+'; '+n(b)+']',1));
+ R.info='n = '+nn+' (F'+nn+' = '+F[nn]+' > '+n((P.b-P.a)/P.l,1)+')';
+ return R},
+bis(P){
+ const R=[];let a=P.a,b=P.b;
+ for(let k=1;k<=200;k++){
+  const m=(a+b)/2,dm=d1(m),fin=Math.abs(dm)<P.e,gp=S*dm>0;
+  R.push({c:[k,n(a),n(b),n(m),n(dm)],lo:a,hi:b,del:fin?null:(gp?[m,b]:[a,m]),pts:[{x:m,l:'m'}],fin,note:fin?'|f′(m)| < ε → berhenti':'f′(m) '+(dm>0?'> 0':'< 0')+' → '+(gp?'b ← m':'a ← m')});
+  if(fin)break;if(gp)b=m;else a=m}
+ return R}};
+
+function run(){
+ stop();let P,R;
+ try{
+  f=comp($('fx').value);S=+$('mode').value;LE=S>0?'≤':'≥';GT=S>0?'>':'<';
+  P={a:v('a'),b:v('b'),x0:v('x0'),l:v('l'),e:v('e'),g:v('g')};
+  if(['dich','fib','gold','bis'].includes(M)&&!(P.a<P.b))throw Error('Syarat: a harus lebih kecil dari b');
+  if(['direct','newton'].includes(M)&&!isFinite(P.x0))throw Error('Titik awal belum valid');
+  if(['direct','dich','fib','gold'].includes(M)&&!(P.l>0))throw Error('l harus lebih besar dari 0');
+  if(['dich','fib','newton','bis'].includes(M)&&!(P.e>0))throw Error('ε harus lebih besar dari 0');
+  if(['dich','fib'].includes(M)&&!(P.e<P.l))throw Error('ε harus lebih kecil dari l');
+  if(M==='gold'&&!(P.g>.5&&P.g<1))throw Error('γ harus di antara 0,5 dan 1');
+  R=ALG[M](P);
+ }catch(x){$('err').textContent=x.message;return}
+ $('err').textContent='';
+ const L=R[R.length-1];
+ if(!L.fin){L.fin=1;L.note=(L.note||'')+' (batas iterasi tercapai)'}
+ let v0,v1;
+ if(M==='direct'||M==='newton'){const q=R.flatMap(r=>r.pts.map(p=>p.x)).concat(P.x0);v0=Math.min(...q);v1=Math.max(...q)}else{v0=P.a;v1=P.b}
+ const w=(v1-v0)||2;v0-=w*.08;v1+=w*.08;
+ cur={R,v0,v1,bd:['dich','fib','gold','bis'].includes(M),A:P.a,B:P.b};
+ const xm=L.q?L.q.x:(L.lo+L.hi)/2;
+ $('rs').textContent=(L.q?'':'Interval ketidakpastian akhir = ['+n(L.lo)+'; '+n(L.hi)+']  ·  ')+'x* ≈ '+n(xm)+'  ·  f(x*) ≈ '+n(f(xm),6)+'  ·  '+R.length+' iterasi'+(R.info?'  ·  '+R.info:'');
+ $('th').innerHTML='<tr><th>'+HD[M].join('</th><th>')+'</th></tr>';
+ $('tb').innerHTML=R.map((r,i)=>'<tr'+(r.fin?' class="fin"':'')+' data-i="'+i+'"><td>'+r.c.join('</td><td>')+'</td></tr>').join('');
+ $('sl').max=R.length-1;show(0)}
+
+function show(i){
+ step=i;const r=cur.R[i];$('sl').value=i;
+ $('kl').textContent='k = '+r.c[0]+(r.fin?' (akhir)':'');
+ $('tb').querySelectorAll('.on').forEach(e=>e.classList.remove('on'));
+ const el=$('tb').children[i];el.classList.add('on');const w=el.closest('.tw');w.scrollTop=el.offsetTop-w.clientHeight/2;
+ $('nt').innerHTML='<b>k = '+r.c[0]+':</b> '+(r.note||'');
+ draw(r)}
+
+function draw(r){
+ const W=600,Ht=340,L=52,Rr=14,T=14,B=32,pw=W-L-Rr,ph=Ht-T-B;
+ let x0=cur.v0,x1=cur.v1;
+ if($('zm').checked){let w=r.hi-r.lo;if(!(w>1e-12))w=.2;x0=r.lo-w*.6;x1=r.hi+w*.6}
+ const xs=[],ys=[];let lo=1/0,hi=-1/0;
+ for(let i=0;i<=240;i++){const t=x0+(x1-x0)*i/240,y=f(t);xs.push(t);ys.push(y);if(isFinite(y)){lo=Math.min(lo,y);hi=Math.max(hi,y)}}
+ if(!isFinite(lo)){lo=0;hi=1}if(hi-lo<1e-12){lo-=1;hi+=1}
+ const pd=(hi-lo)*.1;lo-=pd;hi+=pd;
+ const X=t=>L+(t-x0)/(x1-x0)*pw,Y=y=>T+ph-(y-lo)/(hi-lo)*ph,t2=t=>String(+(+t).toPrecision(5)).replace('.',',');
+ let s='<defs><clipPath id="cp"><rect x="'+L+'" y="'+T+'" width="'+pw+'" height="'+ph+'"/></clipPath></defs>';
+ s+='<line class="ax" x1="'+L+'" y1="'+(T+ph)+'" x2="'+(W-Rr)+'" y2="'+(T+ph)+'"/><line class="ax" x1="'+L+'" y1="'+T+'" x2="'+L+'" y2="'+(T+ph)+'"/>';
+ for(let i=0;i<=4;i++){const t=x0+(x1-x0)*i/4,y=lo+(hi-lo)*i/4;
+  s+='<text class="tk" x="'+X(t)+'" y="'+(Ht-10)+'" text-anchor="middle">'+t2(t)+'</text><text class="tk" x="'+(L-6)+'" y="'+(Y(y)+4)+'" text-anchor="end">'+t2(y)+'</text>'}
+ const rc=(c,p,q,lb,mw)=>{const a=Math.max(X(p),L),b=Math.min(X(q),L+pw),w=b-a;if(X(q)<L||X(p)>L+pw||(w<=0&&!mw))return'';
+  return '<rect class="'+c+'" x="'+a+'" y="'+T+'" width="'+Math.max(w,mw||0)+'" height="'+ph+'"/>'+(lb&&w>80?'<text class="rl" x="'+(a+w/2)+'" y="'+(T+ph-8)+'" text-anchor="middle">'+lb+'</text>':'')};
+ if(cur.bd){
+  s+=rc('out',x0,cur.A,'di luar pembatas')+rc('out',cur.B,x1,'di luar pembatas')+rc('gone',cur.A,r.lo,'sudah dibuang')+rc('gone',r.hi,cur.B,'sudah dibuang');
+  if(r.del)s+=rc('will',r.del[0],r.del[1],'akan dibuang');
+  [[cur.A,'a'],[cur.B,'b']].forEach(([t,l])=>{if(t>=x0&&t<=x1)s+='<line class="bnd" x1="'+X(t)+'" y1="'+T+'" x2="'+X(t)+'" y2="'+(T+ph)+'"/><text class="bl" x="'+(X(t)+(l=='a'?5:-5))+'" y="'+(T+15)+'" text-anchor="'+(l=='a'?'start':'end')+'">'+l+' (batas '+(l=='a'?'kiri':'kanan')+') = '+t2(t)+'</text>'})}
+ let k0=r.lo,k1=r.hi;
+ if(r.del){const t=r.del[0]===r.lo?[r.del[1],r.hi]:[r.lo,r.del[0]];k0=t[0];k1=t[1]}
+ s+=rc('iv',k0,k1,cur.bd?'dipertahankan':'',2);
+ let d='';ys.forEach((y,i)=>{if(isFinite(y))d+=(i&&isFinite(ys[i-1])?'L':'M')+X(xs[i]).toFixed(1)+','+Y(y).toFixed(1)});
+ s+='<path class="cv" clip-path="url(#cp)" d="'+d+'"/>';
+ if(r.q){const q=r.q;let e='';xs.forEach((t,i)=>{e+=(i?'L':'M')+X(t).toFixed(1)+','+Y(q.y+q.p*(t-q.x)+.5*q.s*(t-q.x)**2).toFixed(1)});s+='<path class="q" clip-path="url(#cp)" d="'+e+'"/>'}
+ r.pts.forEach(p=>{
+  if(p.x<x0||p.x>x1)return;const cx=X(p.x),yy=f(p.x);if(!isFinite(yy))return;
+  const cy=Math.min(T+ph,Math.max(T,Y(yy))),two=r.pts.length>1,an=two?(p.alt?'start':'end'):'middle',dx=two?(p.alt?7:-7):0;
+  s+='<line class="gl" x1="'+cx+'" y1="'+(T+ph)+'" x2="'+cx+'" y2="'+cy+'"/><circle class="'+(p.alt?'dot2':'dot')+'" cx="'+cx+'" cy="'+cy+'" r="5"/><text class="lb" x="'+(cx+dx)+'" y="'+(cy-9)+'" text-anchor="'+an+'">'+p.l+'</text>'});
+ if(r.fin){const xm=r.q?r.q.x:(r.lo+r.hi)/2,yy=f(xm);
+  if(xm>=x0&&xm<=x1&&isFinite(yy))s+='<circle class="st" cx="'+X(xm)+'" cy="'+Y(yy)+'" r="8"/><text class="lb" x="'+X(xm)+'" y="'+(Y(yy)+26)+'" text-anchor="middle">x*</text>'}
+ $('sv').innerHTML=s;if(r.q)draw2(r,x0,x1)}
+
+const CT={
+direct:{d:'Metode paling sederhana: tidak butuh turunan dan tidak butuh batas a–b, cukup satu titik awal. Ibarat berjalan menuruni lembah dengan langkah tetap λ = l/2 sambil mengecek apakah langkah berikutnya masih lebih baik.',s:['Tentukan titik awal x⁽¹⁾, l, dan arah d = +1 (ke kanan).','Coba titik x + dλ. Kalau di langkah pertama f lebih buruk, balik arah (d = −1).','Selama f(x + dλ) masih membaik, pindah ke titik itu lalu ulangi.','Begitu tidak membaik, berhenti. Optimum terjepit di antara dua titik terakhir, jadi panjang interval akhir sekitar l.'],k:'Catatan: f diasumsikan unimodal. Iterasinya bisa sangat banyak kalau titik awal jauh dari optimum (contoh di slide butuh 401 iterasi).'},
+newton:{d:'Metode berbasis turunan. Di titik x⁽ᵏ⁾, f dihampiri parabola yang gradien (kemiringan garis singgung, f′) dan kelengkungannya (f″) sama dengan f di titik itu. Puncak atau lembah parabola menjadi titik berikutnya. Artinya sama dengan mencari titik tempat f′(x) = 0. Grafik kedua menunjukkan kurva turunan f′(x): garis singgungnya (kemiringan f″) memotong sumbu nol tepat di titik berikutnya.',s:['Tentukan titik awal x⁽¹⁾ dan ε.','Hitung f′(x⁽ᵏ⁾) sebagai gradien dan f″(x⁽ᵏ⁾) sebagai kelengkungan.','Titik berikutnya: x⁽ᵏ⁺¹⁾ = x⁽ᵏ⁾ − f′/f″.','Berhenti kalau |x⁽ᵏ⁺¹⁾ − x⁽ᵏ⁾| < ε.'],k:'Catatan: sangat cepat kalau titik awal dekat optimum (fungsi kuadrat selesai dalam satu langkah). Syaratnya f dua kali terdiferensial dan f″ ≠ 0. Kalau f″ berlawanan tanda dengan tujuan (misal f″ < 0 saat minimisasi), hasilnya malah titik puncak.'},
+dich:{d:'Pencarian pada interval [a, b] tanpa turunan. Di sekitar titik tengah dipasang dua titik uji u dan v yang hanya terpaut ε (konstanta pembeda). Dari perbandingan f(u) dan f(v), kita tahu separuh interval mana yang pasti tidak memuat optimum, lalu dibuang.',s:['Tentukan a, b, l, dan ε (ε harus lebih kecil dari l).','Hitung u = titik tengah − ε/2 dan v = titik tengah + ε/2.','Minimisasi: kalau f(u) ≤ f(v), buang bagian kanan v (b ← v). Kalau tidak, buang bagian kiri u (a ← u). Untuk maksimisasi, tandanya dibalik.','Ulangi sampai |b − a| < l.'],k:'Catatan: tiap iterasi butuh 2 evaluasi f, dan interval menyusut sedikit di atas separuh.'},
+fib:{d:'Mirip dichotomous, tetapi letak u dan v diatur lewat rasio bilangan Fibonacci. Akibatnya satu titik lama bisa dipakai lagi di iterasi berikutnya, jadi setelah iterasi pertama hanya perlu 1 evaluasi f baru. Jumlah iterasi n harus ditentukan di awal.',s:['Pilih n terkecil sehingga Fₙ > (b − a)/l.','Hitung u = a + F(n−k−1)/F(n−k+1) · (b − a) dan v = a + F(n−k)/F(n−k+1) · (b − a).','Bandingkan f(u) dan f(v), buang bagian yang tidak memuat optimum. Titik yang tersisa menjadi u atau v yang baru.','Di iterasi terakhir u dan v berimpit, jadi dipakai ε: v = u + ε.'],k:'Catatan: paling hemat evaluasi untuk jumlah iterasi tertentu, asalkan n sudah diketahui dari awal.'},
+gold:{d:'Versi Fibonacci yang tidak perlu menentukan n di awal: rasio pembagiannya tetap, yaitu golden ratio γ ≈ 0,618. Interval menyusut dengan faktor sekitar 0,618 setiap iterasi.',s:['Tentukan a, b, dan l.','Hitung u = a + (1 − γ)(b − a) dan v = a + γ(b − a).','Buang bagian yang tidak memuat optimum (aturan perbandingannya sama seperti dichotomous).','Ulangi sampai |b − a| < l.'],k:'Catatan: sedikit kurang hemat dibanding Fibonacci, tetapi lebih mudah dipakai. Di tabel slide, u dan v dihitung ulang tiap iterasi.'},
+bis:{d:'Metode berbasis turunan pada interval [a, b]. Karena f konveks, tanda f′ di titik tengah m menunjukkan arah optimum. Contoh minimisasi: kalau f′(m) > 0, f sedang naik di m, jadi optimum ada di sebelah kiri m.',s:['Tentukan a, b, dan ε.','Hitung titik tengah m = (a + b)/2 dan f′(m).','Minimisasi: f′(m) > 0 → b ← m, f′(m) < 0 → a ← m. Untuk maksimisasi, tandanya dibalik.','Berhenti kalau |f′(m)| < ε.'],k:'Catatan: interval tepat separuh tiap iterasi dan hanya butuh satu evaluasi turunan per iterasi, tetapi f harus terdiferensial dan konveks (untuk minimisasi).'}};
+function concept(k){const c=CT[k];$('cn').textContent='Konsep dan keterangan simbol: '+MS[k].n;$('cb').innerHTML='<p>'+c.d+'</p><ol>'+c.s.map(x=>'<li>'+x+'</li>').join('')+'</ol><p class="sub">'+c.k+'</p><b>Keterangan simbol</b><dl class="sy">'+SY[k].concat([['x*','perkiraan titik optimum hasil akhir']]).map(x=>'<dt>'+x[0]+'</dt><dd>'+x[1]+'</dd>').join('')+'</dl>'}
+function legend(){
+ const it=[['l','var(--cv)','kurva f(x)']];
+ if(M==='direct')it.push(['c','var(--pt)','titik x'],['c','var(--pt2)','titik uji x+dλ'],['b','var(--sh)','interval antara dua titik']);
+ else if(M==='newton')it.push(['c','var(--pt)','titik x⁽ᵏ⁾'],['c','var(--pt2)','titik berikutnya x⁺'],['d','var(--pt2)','pendekatan kuadratik di x⁽ᵏ⁾'],['l','var(--fg)','kurva turunan f′(x) (grafik bawah)'],['l','var(--tg)','garis singgung f′(x) di x⁽ᵏ⁾, kemiringan = f″']);
+ else it.push(['l','var(--fg)','batas a dan b'],['b','var(--out)','di luar pembatas'],['b','var(--gone)','sudah dibuang'],['b','var(--will)','akan dibuang iterasi ini'],['b','var(--sh)','interval yang dipertahankan'],['c','var(--pt)',M==='bis'?'titik tengah m':'titik uji kiri u']),M!=='bis'&&it.push(['c','var(--pt2)','titik uji kanan v']);
+ if(M!=='direct'&&M!=='newton')it.push(['r','var(--pt2)','x* (hasil akhir)']);
+ const sw=(t,c)=>t==='b'?'width:16px;height:10px;border-radius:2px;border:1px solid var(--bd);background:'+c:t==='c'?'width:10px;height:10px;border-radius:50%;background:'+c:t==='r'?'width:10px;height:10px;border-radius:50%;border:2px solid '+c:'width:18px;border-top:'+(t==='d'?'2px dashed ':'2.5px solid ')+c;
+ $('lg').innerHTML=it.map(([t,c,l])=>'<span><i style="display:inline-block;'+sw(t,c)+'"></i>'+l+'</span>').join('')}
+const SY={
+direct:[['f(x)','fungsi tujuan yang dioptimalkan'],['k','nomor iterasi'],['x⁽ᵏ⁾','titik pada iterasi ke-k (x⁽¹⁾ = titik awal)'],['d','arah pencarian: +1 ke kanan, −1 ke kiri'],['λ','panjang langkah = l/2'],['l','panjang interval ketidakpastian akhir yang diinginkan'],['x⁽ᵏ⁾+dλ','titik uji, satu langkah dari x⁽ᵏ⁾ ke arah d']],
+newton:[['f(x)','fungsi tujuan yang dioptimalkan'],['k','nomor iterasi'],['x⁽ᵏ⁾','titik pada iterasi ke-k (x⁽¹⁾ = titik awal)'],['f′(x)','turunan pertama = gradien (kemiringan garis singgung f)'],['f″(x)','turunan kedua = kelengkungan, sekaligus kemiringan garis singgung f′'],['x⁽ᵏ⁺¹⁾','titik berikutnya = x⁽ᵏ⁾ − f′/f″ (di grafik ditulis x⁺)'],['ε','kriteria henti: berhenti kalau |x⁽ᵏ⁾ − x⁽ᵏ⁻¹⁾| < ε']],
+dich:[['f(x)','fungsi tujuan yang dioptimalkan'],['k','nomor iterasi'],['a','batas kiri (bawah) interval ketidakpastian'],['b','batas kanan (atas) interval ketidakpastian'],['|b−a|','panjang interval ketidakpastian'],['u','titik uji kiri'],['v','titik uji kanan'],['f(u), f(v)','nilai fungsi di u dan v; perbandingannya menentukan bagian yang dibuang'],['ε','konstanta pembeda: jarak antara u dan v (harus lebih kecil dari l)'],['l','panjang interval ketidakpastian akhir yang diinginkan (berhenti kalau |b−a| < l)']],
+bis:[['f(x)','fungsi tujuan yang dioptimalkan'],['k','nomor iterasi'],['a','batas kiri (bawah) interval ketidakpastian'],['b','batas kanan (atas) interval ketidakpastian'],['m','titik tengah = (a + b)/2'],['f′(m)','turunan pertama di m; tandanya menentukan bagian yang dibuang'],['ε','kriteria henti: berhenti kalau |f′(m)| < ε']]};
+SY.fib=SY.dich.map(x=>x[0]=='ε'?['ε','konstanta pembeda di iterasi terakhir: v = u + ε (harus lebih kecil dari l)']:x).concat([['n','jumlah iterasi, dipilih agar Fₙ > (b−a)/l'],['Fₙ','bilangan Fibonacci ke-n: 1, 1, 2, 3, 5, 8, …']]);
+SY.gold=SY.dich.filter(x=>x[0]!='ε').concat([['γ','golden ratio ≈ 0,618, dipakai di u = a + (1−γ)(b−a) dan v = a + γ(b−a)']]);
+function draw2(r,x0,x1){
+ const W=600,Ht=260,L=52,Rr=14,T=14,B=32,pw=W-L-Rr,ph=Ht-T-B,q=r.q,xs=[],ys=[];let lo=0,hi=0;
+ for(let i=0;i<=240;i++){const t=x0+(x1-x0)*i/240,y=d1(t);xs.push(t);ys.push(y);if(isFinite(y)){lo=Math.min(lo,y);hi=Math.max(hi,y)}}
+ if(hi-lo<1e-12){lo-=1;hi+=1}
+ const pd=(hi-lo)*.1;lo-=pd;hi+=pd;
+ const X=t=>L+(t-x0)/(x1-x0)*pw,Y=y=>T+ph-(y-lo)/(hi-lo)*ph,t2=t=>String(+(+t).toPrecision(5)).replace('.',',');
+ let s='<defs><clipPath id="cp2"><rect x="'+L+'" y="'+T+'" width="'+pw+'" height="'+ph+'"/></clipPath></defs>';
+ for(let i=0;i<=4;i++){const t=x0+(x1-x0)*i/4,y=lo+(hi-lo)*i/4;
+  s+='<text class="tk" x="'+X(t)+'" y="'+(Ht-10)+'" text-anchor="middle">'+t2(t)+'</text><text class="tk" x="'+(L-6)+'" y="'+(Y(y)+4)+'" text-anchor="end">'+t2(y)+'</text>'}
+ s+='<line class="ax" x1="'+L+'" y1="'+T+'" x2="'+L+'" y2="'+(T+ph)+'"/><line class="bnd" x1="'+L+'" y1="'+Y(0)+'" x2="'+(W-Rr)+'" y2="'+Y(0)+'"/><text class="rl" x="'+(W-Rr-4)+'" y="'+(Y(0)-6)+'" text-anchor="end">sumbu f′(x) = 0</text>';
+ let d='';ys.forEach((y,i)=>{if(isFinite(y))d+=(i&&isFinite(ys[i-1])?'L':'M')+X(xs[i]).toFixed(1)+','+Y(y).toFixed(1)});
+ s+='<path class="dv" clip-path="url(#cp2)" d="'+d+'"/><line class="tg" clip-path="url(#cp2)" x1="'+X(x0)+'" y1="'+Y(q.p+q.s*(x0-q.x))+'" x2="'+X(x1)+'" y2="'+Y(q.p+q.s*(x1-q.x))+'"/>';
+ const px=X(q.x),py=Math.min(T+ph,Math.max(T,Y(q.p)));
+ s+='<line class="gl" x1="'+px+'" y1="'+Y(0)+'" x2="'+px+'" y2="'+py+'"/><circle class="dot" cx="'+px+'" cy="'+py+'" r="5"/><text class="lb" x="'+px+'" y="'+(py-9)+'" text-anchor="middle">f′(x⁽ᵏ⁾)</text>';
+ if(r.pts[1]){const nx=X(r.pts[1].x);s+='<circle class="dot2" cx="'+nx+'" cy="'+Y(0)+'" r="5"/><text class="lb" x="'+nx+'" y="'+(Y(0)+22)+'" text-anchor="middle">x⁽ᵏ⁺¹⁾</text>'}
+ $('sv2').innerHTML=s}
+function stop(){clearInterval(timer);timer=0;$('play').textContent='▶ Putar'}
+function setM(k){
+ M=k;
+ $('tabs').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));
+ document.querySelectorAll('[data-m]').forEach(el=>el.style.display=el.dataset.m.split(' ').includes(k)?'':'none');
+ if(MS[k].e)$('e').value=MS[k].e;
+ concept(k);legend();$('sv2').style.display=$('c2').style.display=k==='newton'?'':'none';run()}
+
+$('tabs').innerHTML=Object.keys(MS).map(k=>'<button data-k="'+k+'">'+MS[k].n+'</button>').join('');
+$('tabs').onclick=e=>{const b=e.target.closest('button');if(b)setM(b.dataset.k)};
+$('pre').innerHTML=PR.map((p,i)=>'<option value="'+i+'">'+p[0]+(p[1]<0?'  (maks)':'  (min)')+'</option>').join('');
+$('pre').onchange=()=>{const p=PR[$('pre').value];$('fx').value=p[0];$('mode').value=p[1];$('a').value=p[2];$('b').value=p[3];$('x0').value=p[4];run()};
+['fx','mode','a','b','x0','l','e','g'].forEach(i=>$(i).oninput=run);
+$('sl').oninput=()=>{stop();show(+$('sl').value)};
+$('zm').onchange=()=>show(step);
+$('prev').onclick=()=>{stop();show(Math.max(0,step-1))};
+$('next').onclick=()=>{stop();show(Math.min(cur.R.length-1,step+1))};
+$('tb').onclick=e=>{const t=e.target.closest('tr');if(t){stop();show(+t.dataset.i)}};
+$('play').onclick=()=>{
+ if(timer){stop();return}
+ if(step>=cur.R.length-1)show(0);
+ $('play').textContent='❚❚ Jeda';
+ timer=setInterval(()=>step>=cur.R.length-1?stop():show(step+1),Math.max(30,Math.min(700,9000/cur.R.length)))};
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function pdf(){
+ if($('err').textContent){alert('Perbaiki input dulu: '+$('err').textContent);return}
+ stop();
+ const nm=MS[M].n,fl='f(x)',ps=[...document.querySelectorAll('.f label[data-m]')].filter(l=>l.dataset.m.split(' ').includes(M)).map(l=>l.childNodes[0].textContent.trim()+' = '+l.querySelector('input').value);
+ $('pr').innerHTML='<h1>Tabel iterasi: '+esc(nm)+'</h1><p><b>'+esc(fl)+'</b> = '+esc($('fx').value)+' &nbsp;·&nbsp; <b>Tujuan</b>: '+esc($('mode').selectedOptions[0].text)+'</p><p><b>Parameter</b>: '+esc(ps.join(' · '))+'</p><p class="prr">'+esc($('rs').textContent.replace(/\s+/g,' '))+'</p><table><thead>'+$('th').innerHTML+'</thead><tbody>'+cur.R.map(r=>'<tr'+(r.fin?' class="fin"':'')+'><td>'+r.c.join('</td><td>')+'</td></tr>').join('')+'</tbody></table><p class="prf">Dibuat dari Visualisasi Metode Numerik Optimisasi, TI5001 Optimisasi &amp; Intelejensia Komputasional.</p>';
+ const t=document.title;document.title='Tabel iterasi - '+nm;
+ window.addEventListener('afterprint',()=>{document.title=t},{once:true});
+ window.print()}
+$('dl').onclick=pdf;
+setM('direct');
+</script></body></html>
