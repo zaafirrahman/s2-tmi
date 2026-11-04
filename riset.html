@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stack Riset | Repo S2 TMI</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0C0C0A">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0C0C0A;--ink:#FFFFFF;--mut:#A9A9A0;--line:rgba(255,255,255,.6);--line2:rgba(255,255,255,.26);
+--grid:rgba(255,255,255,.05);--gridM:rgba(255,255,255,.12);--nb:#161614;--ni:#0C0C0A;--amber:#FFC400;
+--disp:"Barlow Condensed","Arial Narrow",sans-serif;--body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background-color:var(--bg);color:var(--ink);font:400 16px/1.55 var(--body);padding:36px clamp(24px,5vw,64px) 56px;
+background-image:linear-gradient(var(--gridM) 1px,transparent 1px),linear-gradient(90deg,var(--gridM) 1px,transparent 1px),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+background-size:100px 100px,100px 100px,20px 20px,20px 20px}
+body::before{content:"";position:fixed;inset:10px;border:1.5px solid var(--line);pointer-events:none}
+.wrap{max-width:1000px;margin:0 auto}
+.back{display:inline-block;font:600 20px/1 var(--disp);color:var(--amber);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent}
+.back:hover{border-bottom-color:var(--amber)}
+.back:focus-visible,.tool:focus-visible{outline:3px solid #fff;outline-offset:4px}
+h1{margin:22px 0 0;font:700 clamp(68px,13vw,148px)/.88 var(--disp);letter-spacing:-.01em}
+.tag{margin:14px 0 0;max-width:34em;font-size:18px;font-weight:500;color:var(--mut)}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px}
+.tool{display:flex;flex-direction:column;gap:20px;padding:24px 24px 24px 30px;background:var(--nb);color:var(--ink);text-decoration:none;
+border:1.5px solid var(--line);border-radius:3px;box-shadow:inset 6px 0 0 var(--amber);transition:transform .15s,box-shadow .15s,background-color .15s}
+.tool:hover{transform:translate(-3px,-3px);box-shadow:inset 6px 0 0 var(--amber),6px 6px 0 var(--amber)}
+.tool:hover .go{background:var(--amber);color:var(--ni)}
+.ic{height:96px}
+.ic img{height:100%;width:auto;max-width:100%;object-fit:contain;object-position:left center;display:block}
+.tool h2{margin:0;font:600 38px/1 var(--disp)}
+.tool p{margin:8px 0 0;font-size:15px;line-height:1.5;color:var(--mut)}
+.go{align-self:flex-start;margin-top:auto;padding:8px 16px;border:1.5px solid var(--amber);border-radius:3px;color:var(--amber);font:600 20px/1 var(--disp);transition:background-color .15s,color .15s}
+.note{margin:40px 0 0;font-size:13.5px;color:var(--mut)}
+@media (max-width:720px){.tools{grid-template-columns:1fr;margin-top:36px}.ic{height:80px}}
+@media (prefers-reduced-motion:reduce){.tool,.go{transition:none}.tool:hover{transform:none}}
+</style>
+<script data-goatcounter="https://feinstehaar.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">Kembali ke Repo S2</a>
+  <h1>Stack Riset</h1>
+  <p class="tag">Dari pertanyaan riset sampai tinjauan pustaka yang bisa dipertanggungjawabkan, semua alatnya ada di satu tumpukan.</p>
+
+  <main class="tools">
+    <a class="tool" href="https://thesis-tmi.pages.dev" target="_blank" rel="noopener">
+      <div class="ic"><img src="katalog.png" alt="Logo Katalog Tesis"></div>
+      <div>
+        <h2>Katalog Tesis</h2>
+        <p>Cek kaitan judul tesis dengan KK, dari data perpustakaan ITB.</p>
+      </div>
+      <span class="go">Buka katalog</span>
+    </a>
+    <a class="tool" href="https://slr-protocol.pages.dev" target="_blank" rel="noopener">
+      <div class="ic"><img src="slr.png" alt="Logo SLR Protocol"></div>
+      <div>
+        <h2>SLR Protocol</h2>
+        <p>Susun protokol systematic literature review secara terstruktur.</p>
+      </div>
+      <span class="go">Buka protokol</span>
+    </a>
+  </main>
+
+  <p class="note">Keduanya terbuka di tab baru.</p>
+</div>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('sw.js').catch(function(e){console.warn('SW gagal:',e)});
+  });
+}
+</script>
+</body>
+</html>
