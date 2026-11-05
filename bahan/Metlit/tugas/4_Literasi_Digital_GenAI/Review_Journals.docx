@@ -1,0 +1,78 @@
+Journal Review Report
+
+---
+
+**Journal 1 – Enhancing Intermittent Spare Part Demand Forecasting: A Novel Ensemble Approach with Focal Loss and SMOTE**
+
+**Problem Identification**
+- Spare‑part inventories in industrial settings exhibit highly intermittent demand: long zero‑demand periods punctuated by rare spikes.  This imbalance leads to costly over‑stocking or stock‑outs, especially in sectors such as petrochemical, aerospace, and defense.
+
+**Method / Analysis Technique & Industrial Management**
+- **Concept**: Combine data‑level balancing (SMOTE) with model‑level loss weighting (Focal Loss) inside an ensemble of deep‑learning models (CNN, LSTM, Random Forest).
+- **Method**: Synthetic Minority Oversampling Technique generates synthetic minority‑class samples; Focal Loss reduces the contribution of abundant zero‑demand instances, forcing the network to focus on rare events.
+- **Tools**: Python scikit‑learn, TensorFlow/Keras, imbalanced‑learn library for SMOTE, custom loss implementation for focal loss.
+
+**Research Methodology (Systemic Integrated Thinking)**
+- Two‑layer integration: (1) *Data‑level* – rebalancing the training set; (2) *Model‑level* – modifying the objective function.  The study follows a systematic pipeline: data collection → preprocessing → SMOTE → model training with focal loss → ensemble voting → validation.
+
+**Weaknesses**
+- Evaluation limited to a single industry dataset; no cross‑domain validation.
+- SMOTE may introduce noise when the minority class is extremely sparse.
+- Model assumes static demand patterns; real‑time updates are not addressed.
+
+**Improvement Suggestions**
+- Test on multiple sectors (e.g., automotive, aerospace) to assess generality.
+- Explore alternative oversampling methods (ADASYN, Borderline‑SMOTE) or cost‑sensitive learning.
+- Incorporate online learning or incremental retraining to handle streaming demand data.
+
+---
+
+**Journal 2 – Simultaneous Allocation and Scheduling of Quay Cranes, Yard Cranes, and Trucks in Dynamical Integrated Container Terminal Operations**
+
+**Problem Identification**
+- Traditional terminal planning treats berth allocation, crane allocation, and truck scheduling as separate, static problems, ignoring real‑time interactions among quay cranes (QC), yard cranes (YC) and internal trucks (IT).
+
+**Method / Analysis Technique & Industrial Management**
+- **Concept**: Model the whole terminal as a Discrete‑Event System (DES) coupled with a Finite‑State Machine (FSM) to capture job states (loading vs. unloading).
+- **Method**: Derive a state‑space representation for QC, YC, and IT; apply a Model Predictive Algorithm (MPA) that solves a rolling‑horizon optimization at each event.
+- **Tools**: DES modeling in Python/SimPy, MILP solver (CPLEX/Gurobi) inside the MPC loop, Monte‑Carlo simulation for performance evaluation.
+
+**Research Methodology (Systemic Integrated Thinking)**
+- The study integrates three subsystems (seaside, storage, transfer) into a single dynamical model, allowing simultaneous decision‑making for allocation and scheduling rather than sequential heuristics.
+
+**Weaknesses**
+- Assumes constant operation times for QC, YC, and IT; neglects stochastic service times and equipment breakdowns.
+- Focuses on inbound container handling; outbound and external truck logistics are omitted.
+
+**Improvement Suggestions**
+- Introduce stochastic processing times and reliability models for equipment.
+- Extend the DES‑FSM framework to cover outbound operations and external truck appointments.
+- Test the MPA on larger, multi‑terminal networks to assess scalability.
+
+---
+
+**Journal 3 – Discrete‑Event Systems Modeling and the Model Predictive Allocation Algorithm for Integrated Berth and Quay Crane Allocation**
+
+**Problem Identification**
+- Existing berth‑and‑crane allocation methods are static or treat berth allocation (BAP) and crane allocation (CAP) separately, leading to sub‑optimal terminal throughput under dynamic ship arrivals.
+
+**Method / Analysis Technique & Industrial Management**
+- **Concept**: Use a Discrete‑Event System (DES) to model the aperiodic arrival of ships and the asynchronous completion of crane tasks.
+- **Method**: Formulate a Model Predictive Allocation (MPA) algorithm that solves a rolling‑horizon mixed‑integer program, simultaneously deciding berth positions and QC assignments.
+- **Tools**: DES formulation in MATLAB/Simulink, MILP solver (Gurobi) for the MPC step, extensive Monte‑Carlo simulation and a real‑world field experiment at Tanjung Priok terminal.
+
+**Research Methodology (Systemic Integrated Thinking)**
+- Integrates strategic (berth) and tactical (crane) decisions within a single DES‑based state model; the MPC loop continuously updates decisions as new ship arrival information becomes available.
+
+**Weaknesses**
+- Relies on deterministic service times; does not capture stochastic disturbances (e.g., weather, equipment failure).
+- Model complexity grows quickly with the number of berths/cranes, limiting real‑time applicability for very large ports.
+
+**Improvement Suggestions**
+- Incorporate stochastic dynamic programming or robust MPC to handle uncertainties in arrival and service times.
+- Use decomposition techniques (e.g., Benders decomposition) to scale the MILP for larger terminals.
+- Enrich the DES model with additional resources (e.g., external trucks, yard storage policies) for a more comprehensive terminal representation.
+
+---
+
+*All three reviews are limited to one printed page each (≈ 250‑300 words) and together do not exceed three pages when formatted in Word (A4, 4 cm × 3 mm margins, Times New Roman 11).*

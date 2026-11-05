@@ -1,0 +1,25 @@
+BT
+/F1 12 Tf
+70 720 Td
+14 TL
+(\(Jurnal 1 – Enhancing Intermittent Spare Part Demand Forecasting: A Novel Ensemble Approach with Focal Loss and SMOTE\)) Tj
+T* (Identifikasi masalah penelitian: Permintaan suku cadang yang bersifat intermittent menghasilkan data sangat tidak seimbang, menyebabkan over‑stocking atau stock‑out yang mahal pada industri petrokimia, aerospace, dan pertahanan.) Tj
+T* (Metode / Analisis teknik dan manajemen industri: Menggabungkan SMOTE untuk oversampling data minor dengan Focal Loss pada ensemble model deep‑learning \(CNN, LSTM, Random Forest\). Tools: Python, scikit‑learn, TensorFlow/Keras, imbalanced‑learn.) Tj
+T* (Metodologi penelitian \(sistemik terintegrasi\): Dua lapisan integrasi – \(1\) tingkat data \(SMOTE\) dan \(2\) tingkat model \(focal loss\). Alur: kumpulkan data → preprocessing → SMOTE → pelatihan model dengan focal loss → ensemble voting → validasi.) Tj
+T* (Kelemahan: Evaluasi hanya pada satu dataset industri; SMOTE dapat menambahkan noise bila kelas minor sangat sedikit; model mengasumsikan pola demand statis, tidak ada pembaruan real‑time.) Tj
+T* (Improvement: Uji pada beberapa sektor \(otomotif, aerospace\) untuk menilai generalisasi; coba teknik oversampling alternatif \(ADASYN, Borderline‑SMOTE\) atau cost‑sensitive learning; integrasikan pembelajaran online atau retraining inkremental untuk data streaming.) Tj
+T* () Tj
+T* (\(Jurnal 2 – Simultaneous Allocation and Scheduling of Quay Cranes, Yard Cranes, and Trucks in Dynamical Integrated Container Terminal Operations\)) Tj
+T* (Identifikasi masalah penelitian: Perencanaan tradisional memisahkan alokasi dermaga, crane, dan penjadwalan truk secara statis, sehingga tidak memperhitungkan interaksi real‑time antara quay crane \(QC\), yard crane \(YC\), dan internal truck \(IT\).) Tj
+T* (Metode / Analisis teknik dan manajemen industri: Memodelkan seluruh terminal sebagai Discrete‑Event System \(DES\) dipadukan Finite‑State Machine \(FSM\) untuk status pekerjaan \(loading vs unloading\). Menggunakan Model Predictive Algorithm \(MPA\) yang menyelesaikan optimasi horizon bergulir pada tiap event. Tools: Python/SimPy, solver MILP \(CPLEX/Gurobi\), simulasi Monte‑Carlo.) Tj
+T* (Metodologi penelitian \(sistemik terintegrasi\): Mengintegrasikan tiga subsistem \(seaside, storage, transfer\) dalam satu model dinamis, memungkinkan keputusan simultan alokasi dan penjadwalan dibandingkan heuristik berurutan.) Tj
+T* (Kelemahan: Mengasumsikan waktu operasi QC, YC, IT konstan; tidak memperhitungkan variasi layanan stochastic atau kerusakan peralatan; fokus hanya pada penanganan inbound, tidak mencakup outbound dan truk eksternal.) Tj
+T* (Improvement: Tambahkan model waktu layanan stochastic dan keandalan peralatan; perluas DES‑FSM ke operasi outbound dan penjadwalan truk eksternal; uji MPA pada jaringan terminal multi‑port untuk menilai skalabilitas.) Tj
+T* () Tj
+T* (\(Jurnal 3 – Discrete‑Event Systems Modeling and the Model Predictive Allocation Algorithm for Integrated Berth and Quay Crane Allocation\)) Tj
+T* (Identifikasi masalah penelitian: Metode alokasi berth‑crane \(I‑BCAP\) yang ada biasanya statis atau memisahkan berth allocation \(BAP\) dan crane allocation \(CAP\), sehingga tidak optimal ketika kedatangan kapal bersifat dinamis.) Tj
+T* (Metode / Analisis teknik dan manajemen industri: Menggunakan Discrete‑Event System \(DES\) untuk memodelkan kedatangan kapal aperiodik dan penyelesaian tugas crane yang asinkron. Algoritma Model Predictive Allocation \(MPA\) menyelesaikan mixed‑integer program dengan horizon bergulir, menentukan berth dan penugasan QC secara simultan. Tools: MATLAB/Simulink, solver MILP \(Gurobi\), simulasi Monte‑Carlo, percobaan lapangan di Pelabuhan Tanjung Priok.) Tj
+T* (Metodologi penelitian \(sistemik terintegrasi\): Menggabungkan keputusan strategis \(berth\) dan taktis \(crane\) dalam satu model DES‑based; loop MPC terus‑menerus memperbarui keputusan berdasarkan data kedatangan terbaru.) Tj
+T* (Kelemahan: Menggunakan waktu layanan deterministik; tidak mencerminkan gangguan \(cuaca, kerusakan\); kompleksitas model meningkat drastis dengan banyak berth/crane, sehingga sulit dijalankan real‑time pada pelabuhan besar.) Tj
+T* (Improvement: Tambahkan unsur stochastic \(arrival, service time\) dan gunakan robust MPC; terapkan teknik dekomposisi \(Benders\) untuk mempercepat penyelesaian MILP pada skala besar; perluas model dengan sumber daya tambahan \(truk eksternal, kebijakan penyimpanan yard\).) Tj
+ET
