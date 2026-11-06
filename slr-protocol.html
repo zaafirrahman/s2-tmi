@@ -235,8 +235,10 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 46px;font-size:13px;
     </div>
     <div class="callout"><b>Penting:</b> tanpa centang "Add python.exe to PATH" saat install Python, aplikasi tidak akan bisa jalan.</div>
 
+    <div class="callout"><b>Pertama kali:</b> <b>run.bat</b> butuh beberapa menit untuk menyiapkan komponen, jadi biarkan jendela hitamnya terbuka. Setelah browser terbuka, kamu diminta mendaftar <b>sekali saja</b> dengan nama pengguna atau email. Setelah itu tidak perlu mendaftar lagi.</div>
+
     <div class="run">
-      <div><h3>Menjalankan setiap hari</h3><p>Buka folder project, klik 2x <b style="color:#fff">run.bat</b>. Jendela hitam akan menyiapkan dan memperbarui aplikasi otomatis. Lalu buka browser ke alamat di samping.</p></div>
+      <div><h3>Menjalankan setiap hari</h3><p>Buka folder project, klik 2x <b style="color:#fff">run.bat</b>. Jendela hitam akan menyiapkan dan memperbarui aplikasi otomatis, lalu browser terbuka sendiri ke alamat di samping. Jangan tutup jendela hitamnya selama aplikasi dipakai.</p></div>
       <div class="code"><code id="c3">http://127.0.0.1:5000</code><button class="btn btn-sm" type="button" data-copy="c3">Salin</button></div>
     </div>
   </div></section>
@@ -289,7 +291,8 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0 46px;font-size:13px;
   <section class="sec" id="faq"><div class="wrap">
     <div class="sec-head"><p class="eyebrow">FAQ</p><h2>Pertanyaan yang sering muncul</h2></div>
     <div class="faq">
-      <details><summary>Apakah perlu API berbayar?</summary><p>Ya, aplikasi memakai DeepSeek API yang ditagih per token. Dengan DeepSeek Flash, menganalisis 20 jurnal sampai taksonomi desain riset kira-kira Rp2.000–3.000 jika dipakai di jam off-peak, tergantung kompleksitas jurnalnya. Menyusun taksonomi dan diagramnya dari hasil ekstraksi tidak memakai token tambahan.</p></details>
+      <details><summary>Apakah perlu API key atau bayar sendiri?</summary><p>Tidak perlu punya API key. Setelah mendaftar sekali di aplikasi, panggilan AI berjalan lewat layanan yang disediakan admin dan pemakaian token dicatat per akun. Sebagai gambaran, menganalisis 20 jurnal sampai taksonomi desain riset memakai biaya sekitar Rp2.000–3.000 di jam off-peak, tergantung kompleksitas jurnalnya. Pemakaian yang tidak wajar dapat diblokir.</p></details>
+      <details><summary>Apa saja yang dicatat saat aku memakainya?</summary><p>Saat mendaftar, tercatat nama pengguna atau email yang kamu isi. Setiap panggilan AI mencatat jumlah token, nama model, dan waktu. Layanan perantara tidak menyimpan isi PDF maupun hasil analisismu. Teks artikel diteruskan ke DeepSeek untuk dianalisis, sehingga tunduk pada kebijakan DeepSeek. Proyekmu sendiri tetap tersimpan di browser.</p></details>
       <details><summary>Bisakah memproses PDF hasil scan?</summary><p>Belum. Aplikasi membaca PDF berbasis teks. Untuk PDF scan, jalankan OCR terlebih dahulu.</p></details>
       <details><summary>Di mana datanya disimpan?</summary><p>Di localStorage browser pada alamat yang kamu pakai. Gunakan Ekspor proyek secara berkala sebagai cadangan, karena membersihkan data browser akan menghapus proyek.</p></details>
       <details><summary>Apakah Arah Riset berlaku untuk semua jurusan?</summary><p>Arah Riset diturunkan dari tesis Teknik dan Manajemen Industri ITB, jadi khusus TMI. Fitur lainnya bisa dipakai umum.</p></details>
