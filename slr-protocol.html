@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SLR Protocol: workspace systematic literature review dengan bantuan AI. Panduan instalasi, fitur, dan alur kerja.">
+  <meta name="theme-color" content="#000000">
+  <title>SLR Protocol — Instalasi &amp; Panduan</title>
+  <link rel="icon" type="image/png" href="slr.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap">
+  <style>
+/* SLR Protocol — landing page.
+   Tema: hitam (primer) · pink (sekunder) · putih (tersier). Poppins untuk judul, Inter untuk isi.
+   Landing memuat CSS ini SAJA, bukan style.css; variabel :root disalin dari sana. */
+:root{
+  --bg:#000;--panel:#0d0d0d;--raised:#171717;--line:#2e2e2e;--line-soft:#1e1e1e;
+  --dim:#9b9b9b;--text:#e8e8e8;--bright:#fff;
+  --pink:#ff4fa3;--pink-soft:#ffb3d6;--pink-deep:#d4146d;--pink-wash:rgba(255,79,163,.14);
+  --ok:#5ee2a0;--bad:#ff8a5b;--warn:#ffd166;--info:#ffb3d6;
+  --font:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --display:'Poppins','Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--text);font:400 15px/1.7 var(--font);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}img{max-width:100%}
+h1,h2,h3{font-family:var(--display);font-weight:700;color:var(--bright);letter-spacing:-.02em;line-height:1.2;margin:0}
+::selection{background:var(--pink);color:#000}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1160px,100% - 48px);margin:0 auto}
+.grad{color:var(--pink)}
+.glow{display:none}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:rgba(0,0,0,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none;font:700 17px var(--display);color:var(--bright);letter-spacing:-.01em}
+.logo img{width:34px;height:34px;object-fit:contain}
+.nav-links{display:flex;gap:6px}
+.nav-links a{text-decoration:none;font-size:14px;font-weight:500;color:var(--dim);padding:8px 14px;border-radius:999px;transition:color .15s,background .15s}
+.nav-links a:hover{color:var(--bright);background:var(--raised)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 26px;border:1.5px solid var(--bright);border-radius:999px;background:transparent;color:var(--bright);font:600 14px var(--display);text-decoration:none;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s,border-color .15s}
+.btn:hover{background:var(--bright);color:#000}
+.btn-primary{background:var(--pink);border-color:var(--pink);color:#000}
+.btn-primary:hover{background:var(--bright);border-color:var(--bright);color:#000}
+.btn-sm{padding:9px 20px;font-size:13px}
+
+/* hero */
+.hero{position:relative;padding:44px 0 56px;border-bottom:1px solid var(--line-soft)}
+.hero-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:9px;padding:7px 16px;border:1px solid var(--line);border-radius:999px;color:var(--text);font-size:13px;font-weight:500;margin-bottom:20px}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--pink)}
+.hero h1{font-size:clamp(34px,4.6vw,56px);font-weight:800;line-height:1.04;letter-spacing:-.035em}
+.hero h1 .grad{display:block}
+.hero p.lead{font-size:17px;color:var(--text);max-width:520px;margin:20px 0 26px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.chips{display:flex;gap:10px 22px;flex-wrap:wrap;margin-top:22px;font-size:13px;color:var(--dim)}
+.chips span:before{content:"✓";color:var(--pink);margin-right:8px;font-weight:700}
+.window{background:var(--panel);border:1.5px solid var(--bright);border-radius:20px;box-shadow:10px 10px 0 var(--pink);overflow:hidden}
+.win-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.win-bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.win-bar i:first-child{background:var(--pink)}
+.win-bar span{margin-left:10px;font-size:12px;color:var(--dim)}
+.win-body{padding:18px;background:var(--bg)}.mock-svg{display:block;width:100%;height:auto}
+.mock-svg.sun{max-width:420px;margin:0 auto}
+
+/* sections */
+section{position:relative}
+.sec{padding:104px 0}.sec-alt{background:var(--panel);border-block:1px solid var(--line-soft)}
+.eyebrow{display:flex;align-items:center;font-size:18px;font-weight:600;color:var(--pink);margin:0 0 18px}
+.sec-head{max-width:700px;margin-bottom:56px}
+.sec-head h2,.show h2{font-size:clamp(27px,3.6vw,42px);letter-spacing:-.03em}
+.sec-head p:not(.eyebrow){color:var(--dim);margin:18px 0 0;font-size:16px}
+
+
+/* features */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--panel);border:1px solid var(--line-soft);border-radius:20px;padding:30px;transition:border-color .15s}
+.card:hover{border-color:var(--pink)}
+.ico{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:28px;padding:0 11px;border-radius:999px;background:var(--pink-wash);color:var(--pink);font:600 12px var(--display);margin-bottom:20px}
+.card h3{font-size:18px;margin-bottom:12px}.card p{margin:0;font-size:14px;color:var(--dim)}
+.card.hl{border-color:var(--pink)}.card.hl .ico{background:var(--pink);color:#000}
+.tag{display:inline-block;margin-top:18px;font-size:12px;font-weight:600;color:var(--bright);border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+.card.hl .tag{border-color:var(--pink);color:var(--pink)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
+.step{padding:28px;border:1px solid var(--line-soft);border-radius:20px;background:var(--bg)}
+.step:before{counter-increment:s;content:"0" counter(s);font:700 34px/1 var(--display);color:var(--pink);display:block;margin-bottom:18px;letter-spacing:-.03em}
+.step h3{font-size:16px;margin-bottom:10px}.step p{margin:0;font-size:13.5px;color:var(--dim)}
+
+/* showcase diagram */
+.show{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.show h2{margin-bottom:22px}
+.show ul{list-style:none;padding:0;margin:28px 0 32px;display:grid;gap:18px}
+.show li{display:flex;gap:14px;font-size:15px;color:var(--dim)}
+.show li:before{content:"";flex:none;width:9px;height:9px;margin-top:9px;border-radius:50%;background:var(--pink)}
+.show li b{color:var(--bright);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:24px;font-size:13px;color:var(--dim)}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:8px}
+
+/* faq */
+.faq{max-width:800px;display:grid;gap:12px}
+.faq details{border:1px solid var(--line-soft);border-radius:16px;background:var(--panel);padding:0 24px}
+.faq summary{cursor:pointer;list-style:none;padding:20px 0;font:600 16px var(--display);color:var(--bright);display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";flex:none;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:var(--pink-wash);color:var(--pink);font-size:20px;line-height:1}
+.faq details[open] summary:after{content:"−";background:var(--pink);color:#000}
+.faq details[open]{border-color:var(--pink)}
+.faq details p{margin:0 0 22px;color:var(--dim);font-size:14.5px}
+
+/* cta + footer */
+.cta{padding:96px 0}
+.cta-box{text-align:center;padding:76px 32px;border-radius:32px;background:var(--pink);color:#000}
+.cta-box h2{font-size:clamp(28px,4.2vw,50px);font-weight:800;color:#000;max-width:780px;margin:0 auto 20px;letter-spacing:-.035em;line-height:1.14}
+.cta-box .grad{color:var(--pink);background:#000;padding:0 .22em;border-radius:.2em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.cta-box p{color:#000;font-size:17px;max-width:540px;margin:0 auto 34px}
+.cta-box .btn-primary{background:#000;border-color:#000;color:var(--bright)}
+.cta-box .btn-primary:hover{background:var(--bright);border-color:var(--bright);color:#000}
+footer{border-top:1px solid var(--line-soft);padding:34px 0 46px;font-size:13px;color:var(--dim)}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.credits{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.credits a{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:var(--text);transition:color .15s}.credits a:hover{color:var(--pink)}
+.credits img{width:26px;height:26px;object-fit:cover;border-radius:7px;border:1px solid var(--line)}
+
+@media (max-width:980px){
+  .hero-grid,.show{grid-template-columns:1fr;gap:48px}.grid3{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}
+  .stats-in{grid-template-columns:1fr 1fr}.stat:first-child{padding-left:26px}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line-soft)}
+  .nav-links{display:none}.hero{padding:36px 0 48px}.sec{padding:72px 0}.window{box-shadow:7px 7px 0 var(--pink)}
+}
+@media (max-width:620px){.grid3,.steps{grid-template-columns:1fr}.wrap{width:calc(100% - 32px)}.btn{padding:12px 20px}.cta-box{padding:52px 22px;border-radius:24px}.stat b{font-size:38px}.window{box-shadow:5px 5px 0 var(--pink)}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;animation:none!important}}
+
+
+/* halaman instalasi */
+.back{display:inline-flex;align-items:center;gap:6px;font:600 13px var(--display);color:var(--dim);text-decoration:none;padding:9px 14px;border-radius:999px;transition:color .15s,background .15s}
+.back:hover{color:var(--bright);background:var(--raised)}
+.nav-r{display:flex;align-items:center;gap:8px}
+.warn{display:flex;gap:16px;align-items:flex-start;margin:0 0 32px;padding:20px 26px;border:1.5px solid var(--warn);border-left-width:6px;border-radius:16px;background:rgba(255,209,102,.1);font-size:14.5px;color:var(--text)}
+.warn b.k{flex:none;padding:4px 12px;border-radius:999px;background:var(--warn);color:#000;font:700 12px var(--display);letter-spacing:.06em;text-transform:uppercase;margin-top:1px}
+.warn strong{color:var(--warn)}
+@media (max-width:620px){.warn{flex-direction:column;gap:10px;padding:18px}}
+.dl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.dl{display:flex;flex-direction:column;gap:16px;background:var(--bg);border:1px solid var(--line-soft);border-radius:20px;padding:34px 32px 32px;text-decoration:none;transition:border-color .15s,transform .15s}
+.dl:hover{border-color:var(--pink);transform:translateY(-3px)}
+.dl h3{font-size:19px}.dl p{margin:0;font-size:14px;color:var(--dim)}
+.dl{position:relative}
+.dl-ic{position:absolute;top:24px;right:24px;width:44px;height:44px;object-fit:contain}
+.dl h3{padding-right:60px}
+.dl .btn{margin-top:auto;align-self:flex-start}
+.dl small{display:block;font-size:12px;color:var(--dim)}
+.clone{margin:44px 10px 12px 0;background:var(--bg);border:1.5px solid var(--bright);border-radius:20px;box-shadow:8px 8px 0 var(--pink);padding:34px 36px}
+.clone h3{font-size:18px;margin-bottom:6px}.clone>p{margin:0 0 24px;line-height:1.7;font-size:14px;color:var(--dim)}
+.code{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 10px 10px 20px}
+.code code{flex:1;min-width:0;overflow-x:auto;white-space:nowrap;font:500 14px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--pink-soft);scrollbar-width:none}
+.code code::-webkit-scrollbar{display:none}
+.code .btn{flex:none}
+.sub{font:600 13px var(--display);color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin:64px 0 24px}
+.s3{grid-template-columns:repeat(3,1fr);gap:24px}
+.step ol,.step ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--dim);display:grid;gap:6px}
+.step b,.callout b{color:var(--bright)}
+.callout{margin-top:28px;padding:20px 26px;border:1px solid var(--pink);border-radius:16px;background:var(--pink-wash);font-size:14px;color:var(--text)}
+.run{margin-top:28px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;padding:32px 36px;border:1px solid var(--line-soft);border-radius:20px;background:var(--bg)}
+.run h3{font-size:18px;margin-bottom:8px}.run p{margin:0;font-size:14px;color:var(--dim)}
+.run .code{margin:0;min-width:260px}
+@media (max-width:980px){.dl-grid,.s3{grid-template-columns:1fr}.run{grid-template-columns:1fr}.clone{box-shadow:5px 5px 0 var(--pink);margin-right:5px;padding:26px 22px}.dl-grid,.s3{gap:16px}}
+
+  </style>
+</head>
+<body>
+
+  <header class="nav"><div class="wrap nav-in">
+    <a class="logo" href="./slr-protocol.html" aria-label="SLR Protocol"><img src="slr.png" alt="" width="34" height="34"><span>SLR Protocol</span></a>
+    <nav class="nav-links" aria-label="Navigasi utama"><a href="#setup">Instalasi</a><a href="#fitur">Fitur</a><a href="#alur">Alur kerja</a><a href="#taksonomi">Taksonomi</a><a href="#faq">FAQ</a></nav>
+    <div class="nav-r"><a class="back" href="riset.html">← Stack Riset</a><a class="btn btn-primary btn-sm" href="#setup">Instal</a></div>
+  </div></header>
+
+  <main>
+  <section class="hero"><div class="glow g1"></div><div class="glow g2"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="pill"><i></i>Systematic Literature Review dengan bantuan AI</span>
+        <h1>Dari kumpulan jurnal, <span class="grad">menjadi peta pengetahuan.</span></h1>
+        <p class="lead">Unggah artikel PDF, biarkan AI mengekstrak datanya, putuskan sendiri INCLUDE atau EXCLUDE, lalu susun PRISMA, taksonomi desain riset, dan diagramnya dalam satu ruang kerja.</p>
+        <div class="cta-row"><a class="btn btn-primary" href="#setup">Mulai instalasi</a></div>
+        <div class="chips"><span>Data tersimpan di browser</span><span>Manusia yang memutuskan</span></div>
+      </div>
+      <div class="window" aria-hidden="false">
+        <div class="win-bar"><i></i><i></i><i></i><span>Diagram taksonomi desain riset</span></div>
+        <div class="win-body"><svg class="mock-svg" viewBox="0 0 727 366" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Contoh diagram taksonomi desain riset (pohon)"><g transform="translate(28,28)"><path d="M122 162.8 C153.0 162.8 153.0 46.5 184 46.5" fill="none" stroke="#9fd09f" stroke-opacity="0.5" stroke-width="1.4"/><path d="M338 46.5 C395.5 46.5 395.5 15.5 453 15.5" fill="none" stroke="#9fd09f" stroke-opacity="0.5" stroke-width="1.4"/><path d="M338 46.5 C395.5 46.5 395.5 46.5 453 46.5" fill="none" stroke="#9fd09f" stroke-opacity="0.5" stroke-width="1.4"/><path d="M338 46.5 C395.5 46.5 395.5 77.5 453 77.5" fill="none" stroke="#9fd09f" stroke-opacity="0.5" stroke-width="1.4"/><path d="M122 162.8 C153.0 162.8 153.0 139.5 184 139.5" fill="none" stroke="#86b4d8" stroke-opacity="0.5" stroke-width="1.4"/><path d="M323 139.5 C388.0 139.5 388.0 108.5 453 108.5" fill="none" stroke="#86b4d8" stroke-opacity="0.5" stroke-width="1.4"/><path d="M323 139.5 C388.0 139.5 388.0 139.5 453 139.5" fill="none" stroke="#86b4d8" stroke-opacity="0.5" stroke-width="1.4"/><path d="M323 139.5 C388.0 139.5 388.0 170.5 453 170.5" fill="none" stroke="#86b4d8" stroke-opacity="0.5" stroke-width="1.4"/><path d="M122 162.8 C153.0 162.8 153.0 217.0 184 217.0" fill="none" stroke="#e8906e" stroke-opacity="0.5" stroke-width="1.4"/><path d="M391 217.0 C422.0 217.0 422.0 201.5 453 201.5" fill="none" stroke="#e8906e" stroke-opacity="0.5" stroke-width="1.4"/><path d="M391 217.0 C422.0 217.0 422.0 232.5 453 232.5" fill="none" stroke="#e8906e" stroke-opacity="0.5" stroke-width="1.4"/><path d="M122 162.8 C153.0 162.8 153.0 279.0 184 279.0" fill="none" stroke="#dcb85c" stroke-opacity="0.5" stroke-width="1.4"/><path d="M315 279.0 C384.0 279.0 384.0 263.5 453 263.5" fill="none" stroke="#dcb85c" stroke-opacity="0.5" stroke-width="1.4"/><path d="M315 279.0 C384.0 279.0 384.0 294.5 453 294.5" fill="none" stroke="#dcb85c" stroke-opacity="0.5" stroke-width="1.4"/><g transform="translate(0,162.8)"><rect x="0" y="-12" width="122" height="24" rx="6" fill="#ffffff" stroke="#ffffff" stroke-width="1"/><text x="12" y="4.2" font-family="'Inter', Arial, sans-serif" font-size="13" font-weight="800" fill="#000000">Topik riset</text></g><g transform="translate(184,46.5)"><rect x="0" y="-12" width="136" height="24" rx="6" fill="#101010" stroke="#9fd09f" stroke-width="1.8"/><text x="12" y="4.2" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="700" fill="#9fd09f">Metodologi</text><rect x="108" y="-8.5" width="23" height="17" rx="6" fill="#9fd09f" fill-opacity="0.18"/><text x="119.5" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#9fd09f">24</text><rect x="137.5" y="-7.5" width="15" height="15" fill="#000000" stroke="#9fd09f" stroke-width="1.4"/><text x="145" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="700" fill="#9fd09f">−</text></g><g transform="translate(453,15.5)"><rect x="0" y="-12" width="140" height="24" rx="6" fill="#101010" stroke="#3a3a3a" stroke-width="1"/><rect x="7" y="-3" width="6" height="6" fill="#9fd09f"/><text x="19" y="4.2" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="500" fill="#e8e8e8">Kuantitatif</text><rect x="112" y="-8.5" width="23" height="17" rx="6" fill="#9fd09f" fill-opacity="0.18"/><text x="123.5" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#9fd09f">17</text></g><g transform="translate(453,46.5)"><rect x="0" y="-12" width="133" height="24" rx="6" fill="#101010" stroke="#3a3a3a" stroke-width="1"/><rect x="7" y="-3" width="6" height="6" fill="#9fd09f"/><text x="19" y="4.2" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="500" fill="#e8e8e8">Kualitatif</text><rect x="105" y="-8.5" width="23" height="17" rx="6" fill="#9fd09f" fill-opacity="0.18"/><text x="116.5" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#9fd09f">4</text></g><g transform="translate(453,77.5)"><rect x="0" y="-12" width="118" height="24" rx="6" fill="#101010" stroke="#3a3a3a" stroke-width="1"/><rect x="7" y="-3" width="6" height="6" fill="#9fd09f"/><text x="19" y="4.2" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="500" fill="#e8e8e8">Campuran</text><rect x="90" y="-8.5" width="23" height="17" rx="6" fill="#9fd09f" fill-opacity="0.18"/><text x="101.5" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#9fd09f">3</text></g><g transform="translate(184,139.5)"><rect x="0" y="-12" width="121" height="24" rx="6" fill="#101010" stroke="#86b4d8" stroke-width="1.8"/><text x="12" y="4.2" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="700" fill="#86b4d8">Strategi</text><rect x="93" y="-8.5" width="23" height="17" rx="6" fill="#86b4d8" fill-opacity="0.18"/><text x="104.5" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#86b4d8">24</text><rect x="122.5" y="-7.5" width="15" height="15" fill="#000000" stroke="#86b4d8" stroke-width="1.4"/><text x="130" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="700" fill="#86b4d8">−</text></g><g transform="translate(453,108.5)"><rect x="0" y="-12" width="133" height="24" rx="6" fill="#101010" stroke="#3a3a3a" stroke-width="1"/><rect x="7" y="-3" width="6" height="6" fill="#86b4d8"/><text x="19" y="4.2" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="500" fill="#e8e8e8">Experiment</text><rect x="105" y="-8.5" width="23" height="17" rx="6" fill="#86b4d8" fill-opacity="0.18"/><text x="116.5" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#86b4d8">9</text></g><g transform="translate(453,139.5)"><rect x="0" y="-12" width="184" height="24" rx="6" fill="#101010" stroke="#3a3a3a" stroke-width="1"/><rect x="7" y="-3" width="6" height="6" fill="#86b4d8"/><text x="19" y="4.2" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="500" fill="#e8e8e8">Archival research</text><rect x="156" y="-8.5" width="23" height="17" rx="6" fill="#86b4d8" fill-opacity="0.18"/><text x="167.5" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#86b4d8">8</text></g><g transform="translate(453,170.5)"><rect x="0" y="-12" width="133" height="24" rx="6" fill="#101010" stroke="#3a3a3a" stroke-width="1"/><rect x="7" y="-3" width="6" height="6" fill="#86b4d8"/><text x="19" y="4.2" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="500" fill="#e8e8e8">Case study</text><rect x="105" y="-8.5" width="23" height="17" rx="6" fill="#86b4d8" fill-opacity="0.18"/><text x="116.5" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#86b4d8">7</text></g><g transform="translate(184,217.0)"><rect x="0" y="-12" width="189" height="24" rx="6" fill="#101010" stroke="#e8906e" stroke-width="1.8"/><text x="12" y="4.2" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="700" fill="#e8906e">Teknik &amp; prosedur</text><rect x="161" y="-8.5" width="23" height="17" rx="6" fill="#e8906e" fill-opacity="0.18"/><text x="172.5" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#e8906e">24</text><rect x="190.5" y="-7.5" width="15" height="15" fill="#000000" stroke="#e8906e" stroke-width="1.4"/><text x="198" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="700" fill="#e8906e">−</text></g><g transform="translate(453,201.5)"><rect x="0" y="-12" width="155" height="24" rx="6" fill="#101010" stroke="#3a3a3a" stroke-width="1"/><rect x="7" y="-3" width="6" height="6" fill="#e8906e"/><text x="19" y="4.2" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="500" fill="#e8e8e8">Data sekunder</text><rect x="127" y="-8.5" width="23" height="17" rx="6" fill="#e8906e" fill-opacity="0.18"/><text x="138.5" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#e8906e">15</text></g><g transform="translate(453,232.5)"><rect x="0" y="-12" width="206" height="24" rx="6" fill="#101010" stroke="#3a3a3a" stroke-width="1"/><rect x="7" y="-3" width="6" height="6" fill="#e8906e"/><text x="19" y="4.2" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="500" fill="#e8e8e8">Analisis kuantitatif</text><rect x="178" y="-8.5" width="23" height="17" rx="6" fill="#e8906e" fill-opacity="0.18"/><text x="189.5" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#e8906e">21</text></g><g transform="translate(184,279.0)"><rect x="0" y="-12" width="113" height="24" rx="6" fill="#101010" stroke="#dcb85c" stroke-width="1.8"/><text x="12" y="4.2" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="700" fill="#dcb85c">Fondasi</text><rect x="85" y="-8.5" width="23" height="17" rx="6" fill="#dcb85c" fill-opacity="0.18"/><text x="96.5" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#dcb85c">24</text><rect x="114.5" y="-7.5" width="15" height="15" fill="#000000" stroke="#dcb85c" stroke-width="1.4"/><text x="122" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="700" fill="#dcb85c">−</text></g><g transform="translate(453,263.5)"><rect x="0" y="-12" width="118" height="24" rx="6" fill="#101010" stroke="#3a3a3a" stroke-width="1"/><rect x="7" y="-3" width="6" height="6" fill="#dcb85c"/><text x="19" y="4.2" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="500" fill="#e8e8e8">Deduktif</text><rect x="90" y="-8.5" width="23" height="17" rx="6" fill="#dcb85c" fill-opacity="0.18"/><text x="101.5" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#dcb85c">20</text></g><g transform="translate(453,294.5)"><rect x="0" y="-12" width="148" height="24" rx="6" fill="#101010" stroke="#3a3a3a" stroke-width="1"/><rect x="7" y="-3" width="6" height="6" fill="#dcb85c"/><text x="19" y="4.2" font-family="'Inter', Arial, sans-serif" font-size="12" font-weight="500" fill="#e8e8e8">Longitudinal</text><rect x="120" y="-8.5" width="23" height="17" rx="6" fill="#dcb85c" fill-opacity="0.18"/><text x="131.5" y="4" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#dcb85c">6</text></g></g></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-alt" id="setup"><div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Mulai di sini</p><h2>Siapkan di laptopmu, <span class="grad">cukup sekali.</span></h2><p>Tiga langkah di awal: pasang Python, pasang Git, lalu clone project. Setelah itu tinggal klik <b style="color:#fff">run.bat</b>.</p></div>
+
+    <div class="warn" role="note"><b class="k">Windows saja</b><p style="margin:0"><strong>Aplikasi ini hanya bisa dipakai di Windows.</strong> Panduan, installer Git, dan <code>run.bat</code> di halaman ini semuanya untuk Windows. macOS dan Linux belum didukung.</p></div>
+
+    <div class="dl-grid">
+      <a class="dl soon" href="https://www.youtube.com/hashtag/tutorialslrprotocol" target="_blank" rel="noopener">
+        <img class="dl-ic" src="youtube.png" alt="YouTube">
+        <h3>Video tutorial instalasi</h3>
+        <p>Ikuti langkah pemasangan dari awal sampai aplikasi jalan. Video segera hadir di YouTube.</p>
+        <span class="btn btn-primary btn-sm">#TutorialSLRProtocol ↗</span>
+      </a>
+      <!-- GANTI href di bawah dengan link Google Drive installer Python 3.12 -->
+      <a class="dl" id="py" href="https://drive.google.com/" target="_blank" rel="noopener">
+        <img class="dl-ic" src="python.svg" alt="Python">
+        <h3>Python 3.12</h3>
+        <p>Dibutuhkan agar aplikasi bisa berjalan. Jangan lupa centang <b style="color:#fff">Add python.exe to PATH</b>.</p>
+        <span class="btn btn-sm">Download dari Drive ↗</span>
+      </a>
+      <a class="dl" id="git" href="https://git-scm.com/download/win" target="_blank" rel="noopener">
+        <img class="dl-ic" src="git.svg" alt="Git">
+        <h3>Git for Windows</h3>
+        <p>Agar aplikasi bisa diperbarui otomatis. Link mengambil versi terbaru langsung dari rilis resmi.</p>
+        <small id="gitver">Memeriksa versi terbaru…</small>
+        <span class="btn btn-sm">Download Git terbaru ↓</span>
+      </a>
+    </div>
+
+    <div class="clone">
+      <h3>Clone project</h3>
+      <p>Buka Terminal / Git Bash di folder tujuan (misalnya Documents), lalu jalankan perintah ini. Tidak perlu <code>cd</code>: cukup buka folder hasil clone dan klik 2x <b style="color:#fff">run.bat</b>.</p>
+      <div class="code"><code id="c1">git clone https://github.com/latte0nim/slr-protocol.git</code><button class="btn btn-sm" type="button" data-copy="c1">Salin</button></div>
+    </div>
+
+    <p class="sub">Ringkasan cara pasang</p>
+    <div class="steps s3">
+      <div class="step"><h3>Install Python</h3><ol><li>Download Python 3.12 dari Drive.</li><li>Buka installer, centang <b>Add python.exe to PATH</b>.</li><li>Klik Install Now, lalu Close.</li></ol></div>
+      <div class="step"><h3>Install Git</h3><ol><li>Download installer Git di atas.</li><li>Klik Next terus tanpa ubah pengaturan.</li><li>Klik Finish.</li></ol></div>
+      <div class="step"><h3>Clone project</h3><ol><li>Klik kanan di folder kosong, pilih Open in Terminal atau Git Bash Here.</li><li>Paste perintah clone, tekan Enter.</li><li>Folder <b>slr-protocol</b> terbentuk, di dalamnya ada run.bat.</li></ol></div>
+    </div>
+    <div class="callout"><b>Penting:</b> tanpa centang "Add python.exe to PATH" saat install Python, aplikasi tidak akan bisa jalan.</div>
+
+    <div class="run">
+      <div><h3>Menjalankan setiap hari</h3><p>Buka folder project, klik 2x <b style="color:#fff">run.bat</b>. Jendela hitam akan menyiapkan dan memperbarui aplikasi otomatis. Lalu buka browser ke alamat di samping.</p></div>
+      <div class="code"><code id="c3">http://127.0.0.1:5000</code><button class="btn btn-sm" type="button" data-copy="c3">Salin</button></div>
+    </div>
+  </div></section>
+
+  <section class="sec" id="fitur"><div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Fitur</p><h2>Semua tahap SLR, <span class="grad">satu ruang kerja.</span></h2><p>Dari mencari arah topik sampai menggambar peta konsep. AI membantu membaca, kamu yang memutuskan.</p></div>
+    <div class="grid3">
+      <article class="card"><div class="ico">00</div><h3>Arah Riset</h3><p>Belum punya topik? Pilih arah dari tesis TMI ITB terdahulu, lalu dapatkan topik, research question, query Scopus/ScienceDirect, dan kriteria seleksi. Tanpa AI, tanpa biaya token.</p><span class="tag">Khusus TMI ITB</span></article>
+      <article class="card"><div class="ico">01</div><h3>Ekstraksi PDF terstruktur</h3><p>Judul, metode, variabel, temuan, keterbatasan, dan kutipan bukti diekstrak per artikel. Kutipan diverifikasi ke teks PDF, dan PDF duplikat dilewati otomatis.</p></article>
+      <article class="card"><div class="ico">02</div><h3>Screening dua tahap</h3><p>Rekomendasi AI tidak pernah menjadi keputusan. Kamu menetapkan screening dan full-text eligibility, dan hanya artikel INCLUDE di kedua tahap yang masuk sintesis.</p></article>
+      <article class="card"><div class="ico">03</div><h3>Taksonomi desain riset</h3><p>Metodologi, strategi, teknik, dan fondasi disusun menurut research onion (Saunders dkk.), lengkap dengan matriks metodologi × strategi untuk mencari kandidat research gap.</p></article>
+      <article class="card"><div class="ico">04</div><h3>PRISMA &amp; sintesis</h3><p>Diagram alir PRISMA dari keputusan yang tersimpan, serta sintesis tema, kontradiksi, dan research gap dengan progres dan biaya token yang transparan.</p></article>
+      <article class="card"><div class="ico">05</div><h3>Peta topik &amp; system map</h3><p>Lima bentuk taxonomy, jaringan co-occurrence istilah, dan system map hubungan antarkonsep. Semuanya bisa diunduh sebagai SVG.</p></article>
+    </div>
+  </div></section>
+
+  <section class="sec sec-alt" id="alur"><div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Alur kerja</p><h2>Empat langkah dari PDF ke <span class="grad">diagram.</span></h2></div>
+    <div class="steps">
+      <div class="step"><h3>Tentukan review</h3><p>Isi research question, sumber, query, dan kriteria inklusi/eksklusi, atau mulai dari Arah Riset.</p></div>
+      <div class="step"><h3>Unggah jurnal</h3><p>Seret batch PDF berbasis teks. AI mengekstrak data terstruktur dan label desain riset tiap artikel.</p></div>
+      <div class="step"><h3>Verifikasi manual</h3><p>Periksa hasil ekstraksi dan tetapkan keputusan screening serta full-text. Kamu yang memegang kendali.</p></div>
+      <div class="step"><h3>Lihat taksonomi</h3><p>Taksonomi dihitung dari label artikel, lalu divisualkan sebagai diagram pohon atau sunburst.</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec" id="taksonomi"><div class="wrap show">
+    <div>
+      <p class="eyebrow">Diagram taksonomi</p>
+      <h2>Hasil taksonomi, <span class="grad">terlihat sekali pandang.</span></h2>
+      <ul>
+        <li><span><b>Dua bentuk diagram.</b> Pohon horizontal yang bisa dibuka dan ditutup per cabang, atau sunburst konsentris.</span></li>
+        <li><span><b>Klik simpul, lihat artikelnya.</b> Definisi, jumlah artikel, dan daftar rujukan tampil di panel detail.</span></li>
+        <li><span><b>Siap masuk naskah.</b> Unduh sebagai SVG atau PNG, dengan opsi latar terang untuk dicetak.</span></li>
+      </ul>
+      <div class="legend"><span><i style="background:#9fd09f"></i>Metodologi</span><span><i style="background:#86b4d8"></i>Strategi</span><span><i style="background:#e8906e"></i>Teknik &amp; prosedur</span><span><i style="background:#dcb85c"></i>Fondasi</span></div>
+    </div>
+    <div class="window"><div class="win-bar"><i></i><i></i><i></i><span>Tampilan sunburst</span></div><div class="win-body"><svg class="mock-svg sun" viewBox="-276 -276 552 552" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Contoh diagram sunburst taksonomi"><path d="M0.0 -131.0A131 131 0 0 1 124.6 40.5L39.0 12.7A41 41 0 0 0 0.0 -41.0Z" fill="#9fd09f" fill-opacity="0.95" stroke="#000000" stroke-width="1.5"/><text transform="translate(69.6,-50.5) rotate(-36.00)" text-anchor="middle" y="4" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#000000">Metodologi</text><path d="M0.0 -251.0A251 251 0 0 1 147.5 -203.1L78.2 -107.6A133 133 0 0 0 0.0 -133.0Z" fill="#9fd09f" fill-opacity="0.3" stroke="#000000" stroke-width="1.5"/><text transform="translate(59.3,-182.6) rotate(-72.00)" text-anchor="middle" y="4" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="500" fill="#e8e8e8">Kuantitatif</text><path d="M147.5 -203.1A251 251 0 0 1 238.7 -77.6L126.5 -41.1A133 133 0 0 0 78.2 -107.6Z" fill="#9fd09f" fill-opacity="0.3" stroke="#000000" stroke-width="1.5"/><text transform="translate(155.3,-112.9) rotate(-36.00)" text-anchor="middle" y="4" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="500" fill="#e8e8e8">Kualitatif</text><path d="M238.7 -77.6A251 251 0 0 1 238.7 77.6L126.5 41.1A133 133 0 0 0 126.5 -41.1Z" fill="#9fd09f" fill-opacity="0.3" stroke="#000000" stroke-width="1.5"/><text transform="translate(192.0,0.0) rotate(0.00)" text-anchor="middle" y="4" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="500" fill="#e8e8e8">Campuran</text><path d="M124.6 40.5A131 131 0 0 1 -77.0 106.0L-24.1 33.2A41 41 0 0 0 39.0 12.7Z" fill="#86b4d8" fill-opacity="0.95" stroke="#000000" stroke-width="1.5"/><text transform="translate(26.6,81.8) rotate(72.00)" text-anchor="middle" y="4" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#000000">Strategi</text><path d="M238.7 77.6A251 251 0 0 1 147.5 203.1L78.2 107.6A133 133 0 0 0 126.5 41.1Z" fill="#86b4d8" fill-opacity="0.3" stroke="#000000" stroke-width="1.5"/><text transform="translate(155.3,112.9) rotate(36.00)" text-anchor="middle" y="4" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="500" fill="#e8e8e8">Experiment</text><path d="M147.5 203.1A251 251 0 0 1 0.0 251.0L0.0 133.0A133 133 0 0 0 78.2 107.6Z" fill="#86b4d8" fill-opacity="0.3" stroke="#000000" stroke-width="1.5"/><text transform="translate(59.3,182.6) rotate(72.00)" text-anchor="middle" y="4" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="500" fill="#e8e8e8">Arsip</text><path d="M0.0 251.0A251 251 0 0 1 -147.5 203.1L-78.2 107.6A133 133 0 0 0 0.0 133.0Z" fill="#86b4d8" fill-opacity="0.3" stroke="#000000" stroke-width="1.5"/><text transform="translate(-59.3,182.6) rotate(288.00)" text-anchor="middle" y="4" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="500" fill="#e8e8e8">Case study</text><path d="M-77.0 106.0A131 131 0 0 1 -124.6 -40.5L-39.0 -12.7A41 41 0 0 0 -24.1 33.2Z" fill="#e8906e" fill-opacity="0.95" stroke="#000000" stroke-width="1.5"/><text transform="translate(-81.8,26.6) rotate(342.00)" text-anchor="middle" y="4" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#000000">Teknik</text><path d="M-147.5 203.1A251 251 0 0 1 -238.7 77.6L-126.5 41.1A133 133 0 0 0 -78.2 107.6Z" fill="#e8906e" fill-opacity="0.3" stroke="#000000" stroke-width="1.5"/><text transform="translate(-155.3,112.9) rotate(324.00)" text-anchor="middle" y="4" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="500" fill="#e8e8e8">Data sekunder</text><path d="M-238.7 77.6A251 251 0 0 1 -238.7 -77.6L-126.5 -41.1A133 133 0 0 0 -126.5 41.1Z" fill="#e8906e" fill-opacity="0.3" stroke="#000000" stroke-width="1.5"/><text transform="translate(-192.0,0.0) rotate(360.00)" text-anchor="middle" y="4" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="500" fill="#e8e8e8">Statistik</text><path d="M-124.6 -40.5A131 131 0 0 1 -0.0 -131.0L-0.0 -41.0A41 41 0 0 0 -39.0 -12.7Z" fill="#dcb85c" fill-opacity="0.95" stroke="#000000" stroke-width="1.5"/><text transform="translate(-50.5,-69.6) rotate(414.00)" text-anchor="middle" y="4" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="700" fill="#000000">Fondasi</text><path d="M-238.7 -77.6A251 251 0 0 1 -147.5 -203.1L-78.2 -107.6A133 133 0 0 0 -126.5 -41.1Z" fill="#dcb85c" fill-opacity="0.3" stroke="#000000" stroke-width="1.5"/><text transform="translate(-155.3,-112.9) rotate(396.00)" text-anchor="middle" y="4" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="500" fill="#e8e8e8">Deduktif</text><path d="M-147.5 -203.1A251 251 0 0 1 -0.0 -251.0L-0.0 -133.0A133 133 0 0 0 -78.2 -107.6Z" fill="#dcb85c" fill-opacity="0.3" stroke="#000000" stroke-width="1.5"/><text transform="translate(-59.3,-182.6) rotate(432.00)" text-anchor="middle" y="4" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="500" fill="#e8e8e8">Longitudinal</text><circle r="38" fill="#ffffff" stroke="#000000" stroke-width="2"/><text text-anchor="middle" y="4" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="800" fill="#000000">Topik</text></svg></div></div>
+  </div></section>
+
+  <section class="sec sec-alt"><div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Prinsip</p><h2>Transparan, <span class="grad">bisa diaudit.</span></h2></div>
+    <div class="grid3">
+      <article class="card"><h3>AI membantu, manusia memutuskan</h3><p>Keputusan awal selalu pending. Label yang hanya disimpulkan AI ditandai terpisah dari label yang didukung kutipan.</p></article>
+      <article class="card"><h3>Data milikmu</h3><p>Proyek disimpan di browser dan dicadangkan lewat ekspor JSON. Bukan disimpan di database.</p></article>
+      <article class="card"><h3>Biaya terlihat</h3><p>Pantau token, durasi, dan estimasi biaya per panggilan AI secara langsung.</p></article>
+    </div>
+  </div></section>
+
+  <section class="sec" id="faq"><div class="wrap">
+    <div class="sec-head"><p class="eyebrow">FAQ</p><h2>Pertanyaan yang sering muncul</h2></div>
+    <div class="faq">
+      <details><summary>Apakah perlu API berbayar?</summary><p>Ya, aplikasi memakai DeepSeek API yang ditagih per token. Dengan DeepSeek Flash, menganalisis 20 jurnal sampai taksonomi desain riset kira-kira Rp2.000–3.000 jika dipakai di jam off-peak, tergantung kompleksitas jurnalnya. Menyusun taksonomi dan diagramnya dari hasil ekstraksi tidak memakai token tambahan.</p></details>
+      <details><summary>Bisakah memproses PDF hasil scan?</summary><p>Belum. Aplikasi membaca PDF berbasis teks. Untuk PDF scan, jalankan OCR terlebih dahulu.</p></details>
+      <details><summary>Di mana datanya disimpan?</summary><p>Di localStorage browser pada alamat yang kamu pakai. Gunakan Ekspor proyek secara berkala sebagai cadangan, karena membersihkan data browser akan menghapus proyek.</p></details>
+      <details><summary>Apakah Arah Riset berlaku untuk semua jurusan?</summary><p>Arah Riset diturunkan dari tesis Teknik dan Manajemen Industri ITB, jadi khusus TMI. Fitur lainnya bisa dipakai umum.</p></details>
+    </div>
+  </div></section>
+
+  <section class="cta"><div class="wrap"><div class="cta-box">
+    <h2>Siap mengubah jurnalmu menjadi <span class="grad">peta pengetahuan?</span></h2>
+    <p>Jalankan run.bat, buka workspace, unggah PDF pertamamu, dan lihat taksonomi desain risetnya terbentuk.</p>
+    <a class="btn btn-primary" href="http://127.0.0.1:5000">Buka Workspace</a>
+  </div></div></section>
+  </main>
+  <footer><div class="wrap foot">
+    <span>SLR Protocol · Prototype untuk riset pribadi. Verifikasi semua hasil ekstraksi.</span>
+    <div class="credits"><span>Forged and curated by</span>
+      <a href="https://github.com/latte0nim" target="_blank" rel="noopener noreferrer"><img src="latte0nim.jpg" alt="" width="26" height="26">latte0nim</a>
+      <a href="https://github.com/zaafirrahman" target="_blank" rel="noopener noreferrer"><img src="feinstehaar.jpg" alt="" width="26" height="26">feinstehaar</a>
+    </div>
+  </div></footer>
+
+<script>
+(function(){
+  function copy(t){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t);
+    return new Promise(function(ok,no){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy')?ok():no()}catch(e){no(e)}document.body.removeChild(a)});
+  }
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=document.getElementById(b.dataset.copy).textContent.trim(),o=b.textContent;
+      copy(t).then(function(){b.textContent='Tersalin ✓'},function(){b.textContent='Gagal'}).then(function(){setTimeout(function(){b.textContent=o},1800)});
+    });
+  });
+  // Git: ambil installer 64-bit terbaru dari rilis resmi Git for Windows
+  var g=document.getElementById('git'),v=document.getElementById('gitver');
+  fetch('https://api.github.com/repos/git-for-windows/git/releases/latest').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
+    var a=(j.assets||[]).filter(function(x){return /^Git-.+-64-bit\.exe$/.test(x.name)})[0];
+    if(!a)throw 0;
+    g.href=a.browser_download_url;g.removeAttribute('target');v.textContent='Versi terbaru: '+a.name.replace(/^Git-|-64-bit\.exe$/g,'')+' (64-bit)';
+  }).catch(function(){v.textContent='Membuka halaman unduhan resmi Git.'});
+})();
+</script>
+
+</body>
+</html>
