@@ -1,0 +1,4 @@
+Uji,Statistik,p,Kesimpulan
+Normalitas residual (Shapiro-Wilk),W = 0.9902,0.3394674782687398,terpenuhi
+"Homogenitas varians (Levene, median)",F = 0.4894,0.9429656468605464,terpenuhi
+Independensi residual (Durbin-Watson),DW = 2.007,,terpenuhi (≈ 2)
