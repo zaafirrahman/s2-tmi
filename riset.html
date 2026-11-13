@@ -26,7 +26,7 @@ body::before{content:"";position:fixed;inset:10px;border:1.5px solid var(--line)
 .back:focus-visible,.tool:focus-visible{outline:3px solid #fff;outline-offset:4px}
 h1{margin:22px 0 0;font:700 clamp(68px,13vw,148px)/.88 var(--disp);letter-spacing:-.01em}
 .tag{margin:14px 0 0;max-width:34em;font-size:18px;font-weight:500;color:var(--mut)}
-.tools{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px}
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
 .tool{display:flex;flex-direction:column;gap:20px;padding:24px 24px 24px 30px;background:var(--nb);color:var(--ink);text-decoration:none;
 border:1.5px solid var(--line);border-radius:3px;box-shadow:inset 6px 0 0 var(--amber);transition:transform .15s,box-shadow .15s,background-color .15s}
 .tool:hover{transform:translate(-3px,-3px);box-shadow:inset 6px 0 0 var(--amber),6px 6px 0 var(--amber)}
@@ -37,7 +37,7 @@ border:1.5px solid var(--line);border-radius:3px;box-shadow:inset 6px 0 0 var(--
 .tool p{margin:8px 0 0;font-size:15px;line-height:1.5;color:var(--mut)}
 .go{align-self:flex-start;margin-top:auto;padding:8px 16px;border:1.5px solid var(--amber);border-radius:3px;color:var(--amber);font:600 20px/1 var(--disp);transition:background-color .15s,color .15s}
 .note{margin:40px 0 0;font-size:13.5px;color:var(--mut)}
-@media (max-width:720px){.tools{grid-template-columns:1fr;margin-top:36px}.ic{height:80px}}
+@media (max-width:860px){.tools{grid-template-columns:1fr;margin-top:36px}.ic{height:80px}}
 @media (prefers-reduced-motion:reduce){.tool,.go{transition:none}.tool:hover{transform:none}}
 </style>
 <script data-goatcounter="https://feinstehaar.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -64,6 +64,14 @@ border:1.5px solid var(--line);border-radius:3px;box-shadow:inset 6px 0 0 var(--
         <p>Susun protokol systematic literature review secara terstruktur.</p>
       </div>
       <span class="go">Buka protokol</span>
+    </a>
+    <a class="tool" href="#">
+      <div class="ic"><img src="bengkel.png" alt="Logo Bengkel Tesis"></div>
+      <div>
+        <h2>Bengkel Tesis</h2>
+        <p>Alat teknis penulisan tesis: pilih model, format LaTeX, dan konversi dokumen.</p>
+      </div>
+      <span class="go">Buka bengkel</span>
     </a>
   </main>
 
