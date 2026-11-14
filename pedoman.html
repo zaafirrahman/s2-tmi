@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pedoman Tesis TMI</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@1,400&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+:root{--bg:#cdd1d2;--panel:#e9ebeb;--ink:#1c2226;--mute:#59636a;--line:#8b959b;--acc:#f2b705;--accink:#1c2226;--paper:#fff;--bad:#b3261e;--ok:#1d6b3a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#202427;--panel:#2c3135;--ink:#e7e9ea;--mute:#9aa4aa;--line:#4a5258;--bad:#ff8a80;--ok:#7bd69a}}
+:root[data-theme="dark"]{--bg:#202427;--panel:#2c3135;--ink:#e7e9ea;--mute:#9aa4aa;--line:#4a5258;--bad:#ff8a80;--ok:#7bd69a}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Barlow,"Helvetica Neue",Arial,sans-serif;background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:22px 22px;background-position:-11px -11px}
+.stripe{height:14px;background:repeating-linear-gradient(-45deg,var(--acc) 0 14px,#1c2226 14px 28px)}
+header{padding:20px 24px 8px;max-width:1200px;margin:0 auto}
+h1{font:700 clamp(2.4rem,6vw,4rem)/.95 "Barlow Condensed",Impact,sans-serif;letter-spacing:.02em;margin:0;text-transform:uppercase}
+header p{margin:6px 0 0;color:var(--mute);max-width:60ch}
+.plate{display:inline-block;margin-top:10px;background:var(--acc);color:var(--accink);font:500 12px "IBM Plex Mono",monospace;padding:3px 8px;border:2px solid var(--accink)}
+main{max-width:1200px;margin:0 auto;padding:12px 24px 48px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:24px;align-items:start}
+@media(max-width:860px){main{grid-template-columns:1fr}}
+nav.steps{grid-column:1/-1;display:flex;gap:0;flex-wrap:wrap}
+nav.steps button{flex:1 1 140px;font:600 1.1rem "Barlow Condensed",Impact,sans-serif;text-transform:uppercase;letter-spacing:.04em;padding:10px 12px;background:var(--panel);color:var(--ink);border:2px solid var(--ink);margin-right:-2px;cursor:pointer;text-align:left}
+nav.steps button[aria-current="step"]{background:var(--ink);color:var(--bg)}
+nav.steps small{display:block;font:400 11px "IBM Plex Mono",monospace;text-transform:none;letter-spacing:0;opacity:.8}
+.bench{background:var(--panel);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:20px}
+.bench h2{font:700 1.7rem "Barlow Condensed",Impact,sans-serif;text-transform:uppercase;margin:0 0 12px}
+label{display:block;font-weight:600;font-size:14px;margin:14px 0 4px}
+.hint{font-weight:400;color:var(--mute);font-size:13px}
+input[type=text],input[type=number],select,textarea{width:100%;font:inherit;padding:8px 10px;background:var(--paper);color:#1c2226;border:2px solid var(--ink);border-radius:0}
+textarea{font:13px/1.45 "IBM Plex Mono",monospace;min-height:190px}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.row>*{min-width:0}
+.chk{display:flex;gap:8px;align-items:center;font-weight:500;margin:10px 0}.chk input{width:18px;height:18px;accent-color:var(--ink)}
+.btn{font:700 1.1rem "Barlow Condensed",Impact,sans-serif;text-transform:uppercase;letter-spacing:.05em;padding:10px 18px;border:2px solid var(--ink);background:var(--acc);color:var(--accink);cursor:pointer;box-shadow:3px 3px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn.sec{background:var(--panel);color:var(--ink)}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.bab{display:flex;gap:6px;margin:6px 0;align-items:center}.bab b{font:500 13px "IBM Plex Mono",monospace;width:54px;flex:none}
+.bab button{border:2px solid var(--ink);background:var(--panel);color:var(--ink);cursor:pointer;padding:6px 10px;font-weight:700}
+.msg{font:13px/1.4 "IBM Plex Mono",monospace;padding:6px 10px;border-left:6px solid;margin:6px 0;background:var(--paper);color:#1c2226}
+.msg.bad{border-color:var(--bad)}.msg.ok{border-color:var(--ok)}.msg.warn{border-color:var(--acc)}
+aside{position:sticky;top:12px}
+.tag{font:500 12px "IBM Plex Mono",monospace;color:var(--mute);margin-bottom:6px;display:flex;justify-content:space-between}
+.page{aspect-ratio:210/297;background:#fff;color:#000;border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink);font-family:"Times New Roman",Tinos,Times,serif;display:flex;flex-direction:column;text-align:center;padding:9% 7% 9% 9%;font-size:clamp(6px,1.25vw,11px);line-height:1.15;overflow:hidden}
+.page .t{font-weight:700;font-size:1.17em;text-transform:uppercase;overflow-wrap:anywhere}
+.page .b{font-weight:700}.sp{flex:1}
+.logo{align-self:center;width:18%;aspect-ratio:2.35/3.5;border:1px dashed #666;display:grid;place-items:center;color:#666;font-size:.8em}
+code{font-family:"IBM Plex Mono",monospace;font-size:.9em}
+:root{--bg:#ecebe8;--panel:#fbfaf8;--ink:#141414;--mute:#5d5d5d;--line:#b9b6af;--acc:#8c1d18;--accink:#fff}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16181a;--panel:#1f2225;--ink:#ececec;--mute:#a0a4a8;--line:#3b4045;--acc:#e0645c;--accink:#16181a}}
+:root[data-theme="dark"]{--bg:#16181a;--panel:#1f2225;--ink:#ececec;--mute:#a0a4a8;--line:#3b4045;--acc:#e0645c;--accink:#16181a}
+body{font-family:"Source Sans 3","Helvetica Neue",Arial,sans-serif;background-image:none}
+.stripe{height:5px;background:none;border-top:3px solid var(--ink);border-bottom:1px solid var(--ink)}
+header{max-width:none;padding:18px 28px 6px;text-align:center}
+h1{font:900 clamp(2.2rem,5vw,3.6rem)/1 "Playfair Display",Georgia,serif;text-transform:none;letter-spacing:0}
+header p{margin:8px auto 0;font:italic 400 1rem "Source Serif 4",Georgia,serif}
+.plate{display:block;margin-top:12px;background:none;color:var(--mute);border:0;border-top:1px solid var(--ink);border-bottom:3px double var(--ink);padding:4px 0;font:600 12px "Source Sans 3",sans-serif}
+main{max-width:none;padding:14px 28px 48px}
+.bench{box-shadow:none;border:1px solid var(--ink);padding:24px 28px}
+.bench h2{font:700 1.7rem "Playfair Display",Georgia,serif;text-transform:none;border-bottom:1px solid var(--ink);padding-bottom:6px}
+input[type=text],input[type=number],select,textarea,.bab button{border:1px solid var(--ink)}
+.btn{font:600 15px "Source Sans 3",sans-serif;text-transform:none;letter-spacing:0;background:var(--acc);color:var(--accink);border:1px solid var(--acc);box-shadow:none}
+.btn:active{transform:none;opacity:.85}
+.btn.sec{background:transparent;color:var(--ink);border-color:var(--ink)}
+nav.steps button{font:600 15px "Source Sans 3",sans-serif;text-transform:none;letter-spacing:0;background:transparent;border:0;border-left:3px solid transparent;margin:0;padding:10px 14px}
+nav.steps button[aria-current="step"]{background:var(--panel);color:var(--ink);border-left-color:var(--acc);font-weight:700}
+nav.steps small{font:400 12px "Source Sans 3",sans-serif;color:var(--mute);opacity:1}
+.page{box-shadow:none;border:1px solid var(--ink);position:relative;font-size:min(2vw,8.4px);max-width:440px}
+.pn{position:absolute;bottom:4.5%;left:0;right:0}
+.page .t{margin-bottom:.8em}.page .j{text-align:justify;line-height:1.5;margin:0 0 1em}.page .l{text-align:left}
+.page .r{display:flex;text-align:left}.page .r i{flex:1;border-bottom:1px dotted #000;margin:0 2px 3px}
+.pt{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.pt button{font:600 12px "Source Sans 3",sans-serif;padding:4px 8px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.pt button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+@media(min-width:1100px){main{grid-template-columns:230px minmax(0,1fr) 440px}nav.steps{grid-column:auto;flex-direction:column;position:sticky;top:12px;border-right:1px solid var(--ink)}nav.steps button{flex:none}}
+@media(max-width:1099px){main{grid-template-columns:1fr}nav.steps{grid-column:1/-1}aside{position:static}}
+header{display:flex;align-items:center;justify-content:space-between;gap:20px;text-align:left}
+header p{margin:8px 0 0}
+.hr{display:flex;align-items:center;gap:14px;flex:none}
+.hlogo{max-height:72px;max-width:180px;width:auto}
+@media(max-width:600px){header{flex-wrap:wrap}}
+header{flex-wrap:wrap;gap:12px 20px}
+.plate{flex:1 0 100%;display:flex;justify-content:space-between;margin-top:0}
+.btn.ic{display:inline-flex;align-items:center;gap:6px;text-decoration:none;min-height:40px}
+header>div:first-child{flex:1 1 0;min-width:0}
+@media(max-width:600px){header>div:first-child{flex:1 1 100%}}
+</style>
+</head>
+<body>
+<div class="stripe"></div>
+<header>
+<div>
+<h1>Pedoman Tesis TMI</h1>
+<p>Rakit kerangka tesis LaTeX sesuai juknis Sekolah Pascasarjana ITB.<br>Isi data, unduh bundel, unggah ke Overleaf.</p>
+</div>
+<div class="hr"><a class="btn sec ic" id="bk" href="bengkel.html">← Bengkel</a><button class="btn sec ic" id="tm" type="button"></button></div>
+<div class="plate"><span>Magister Teknik dan Manajemen Industri · FTI · juknis Mei 2019</span><span>EST. MMXXVI</span></div>
+</header>
+<main>
+<nav class="steps" id="steps"></nav>
+<section class="bench" id="form"></section>
+<aside><div class="tag"><span>Pratinjau halaman</span><span>perkiraan, bukan PDF asli</span></div><div class="pt" id="pt"></div><div class="page" id="prev"></div></aside>
+</main>
+<script>
+const BLN=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+const LOGO="data:image/png;base64,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";
+const PRODI={id:"Program Studi Magister Teknik dan Manajemen Industri",en:"Master’s Program in Industrial Engineering and Management",fak:"Fakultas Teknologi Industri"};
+const D={judul:"",judulEn:"",nama:"",nim:"",pemb:["","",""],nPemb:2,bulan:new Date().getMonth(),tahun:new Date().getFullYear(),duplex:true,bab:["Pendahuluan","Tinjauan Pustaka","Metodologi Penelitian","Hasil dan Pembahasan","Kesimpulan"],peruntukan:false,dedikasi:"",singkatan:true,lampiran:1,bib:""};
+let S=D,step=-1;
+try{const r=JSON.parse(localStorage.getItem("bengkel-tesis")||"null");if(r)S={...D,...r}}catch(e){}
+const save=()=>{try{localStorage.setItem("bengkel-tesis",JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s||"").replace(/[\\&%$#_{}~^]/g,c=>({"\\":"\\textbackslash{}","~":"\\textasciitilde{}","^":"\\textasciicircum{}"}[c]||"\\"+c));
+const h=s=>String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const STEPS=[["Identitas","data sampul"],["Struktur","bab dan halaman"],["Referensi","BibTeX dan DOI"],["Unduh","cek lalu bundel"]];
+
+/* ---------- bib validator ---------- */
+function bibCheck(t){const out=[],keys={};const re=/@(\w+)\s*\{\s*([^,\s]*)\s*,([\s\S]*?)(?=\n@|\s*$)/g;let m,n=0;
+ while((m=re.exec(t))){n++;const [,type,key,body]=m;if(type.toLowerCase()=="comment")continue;
+  if(keys[key])out.push(["bad",`Cite key ganda: ${key}`]);keys[key]=1;
+  const miss=["title","year","date"].filter(f=>!new RegExp("\\b"+f+"\\s*=","i").test(body));
+  if(miss.length==2&&!miss.includes("title")||miss.length==3)out.push(["warn",`${key}: field kosong (${miss.filter(x=>x!="date").join(", ")})`]);
+  if(!/\b(author|editor)\s*=/i.test(body))out.push(["warn",`${key}: tidak ada author/editor`]);}
+ return{n,out}}
+function checks(){const w=[];if(!S.judul)w.push(["bad","Judul Indonesia belum diisi"]);if(!S.judulEn)w.push(["warn","Judul Inggris kosong (dipakai di halaman Abstract dan Pedoman)"]);
+ if(!S.nama)w.push(["bad","Nama belum diisi"]);if(!/^\d{8}$/.test(S.nim))w.push(["warn","NIM biasanya 8 digit"]);
+ for(let i=0;i<S.nPemb;i++)if(!S.pemb[i])w.push(["warn",`Nama pembimbing ${i+1} kosong`]);
+ const b=bibCheck(S.bib);if(!b.n)w.push(["warn","Belum ada entri referensi"]);return w.concat(b.out)}
+
+/* ---------- latex generators ---------- */
+const initials=n=>{const p=n.trim().split(/\s+/);return p.length<2?n:p[p.length-1]+", "+p.slice(0,-1).map(x=>x[0].toUpperCase()+".").join(" ")};
+const babFile=i=>`bab/bab${i+1}.tex`;
+const CLS=String.raw`\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{itb-tmi}[2026/11/13 Tesis Magister ITB (juknis SPs Mei 2019)]
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
+\ProcessOptions\relax
+\LoadClass[12pt,a4paper]{report}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{tgtermes} % setara Times New Roman
+\RequirePackage[english,indonesian]{babel}
+\RequirePackage{geometry}
+\if@twoside
+ \geometry{a4paper,inner=4cm,outer=3cm,top=3cm,bottom=3cm,nohead,footskip=1.5cm}
+\else
+ \geometry{a4paper,left=4cm,right=3cm,top=3cm,bottom=3cm,nohead,footskip=1.5cm}
+\fi
+\RequirePackage{setspace,graphicx,titlesec,tocloft,caption,array,xcolor}
+\onehalfspacing
+\setlength{\parindent}{0pt}\setlength{\parskip}{12pt}
+\renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand{\thesection}{\thechapter.\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thefigure}{\thechapter.\arabic{figure}}
+\renewcommand{\thetable}{\thechapter.\arabic{table}}
+\renewcommand{\theequation}{\thechapter.\arabic{equation}}
+\titleformat{\chapter}[block]{\centering\bfseries\fontsize{14}{17}\selectfont}{Bab \thechapter}{1em}{}
+\titlespacing*{\chapter}{0pt}{-33pt}{12pt} % kompensasi \parskip dan \topskip agar judul bab sejajar dengan judul halaman awal
+\titleformat{\section}[hang]{\bfseries\normalsize}{\thesection}{1em}{}
+\titleformat{\subsection}[hang]{\bfseries\normalsize}{\thesubsection}{1em}{}
+\titlespacing*{\section}{0pt}{6pt}{0pt}\titlespacing*{\subsection}{0pt}{6pt}{0pt}
+\captionsetup{labelsep=space,format=hang,justification=justified,skip=6pt}
+\renewcommand{\cftchappresnum}{Bab }\setlength{\cftchapnumwidth}{3.6em}
+\renewcommand{\cftchapfont}{\normalfont}\renewcommand{\cftchappagefont}{\normalfont}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforechapskip}{12pt}\setlength{\cftsecindent}{3.6em}\setlength{\cftsecnumwidth}{3em}
+\setlength{\cftsubsecindent}{6.6em}\setlength{\cftsubsecnumwidth}{3.6em}
+\renewcommand{\cftfigpresnum}{Gambar }\setlength{\cftfignumwidth}{5.5em}\setlength{\cftfigindent}{0pt}
+\renewcommand{\cfttabpresnum}{Tabel }\setlength{\cfttabnumwidth}{5.5em}\setlength{\cfttabindent}{0pt}
+\renewcommand{\cfttoctitlefont}{\hfill\bfseries\fontsize{14}{17}\selectfont}\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftloftitlefont}{\hfill\bfseries\fontsize{14}{17}\selectfont}\renewcommand{\cftafterloftitle}{\hfill}
+\renewcommand{\cftlottitlefont}{\hfill\bfseries\fontsize{14}{17}\selectfont}\renewcommand{\cftafterlottitle}{\hfill}
+\AtBeginDocument{\renewcommand{\contentsname}{DAFTAR ISI}\renewcommand{\listfigurename}{DAFTAR GAMBAR DAN ILUSTRASI}\renewcommand{\listtablename}{DAFTAR TABEL}}
+% judul halaman awal (14 pt tebal, tengah) + masuk daftar isi
+\newcommand{\judulawal}[1]{\clearpage\addcontentsline{toc}{chapter}{#1}\begin{center}\bfseries\fontsize{14}{17}\selectfont #1\end{center}\vspace{-6pt}}
+% daftar-daftar tanpa judul bawaan, supaya sama dengan halaman awal lain
+\newlistof{lampiran}{lam}{DAFTAR LAMPIRAN}
+\setlength{\cftlampiranindent}{0pt}\setlength{\cftlampirannumwidth}{5.5em}
+\newcommand{\daftarisi}{\judulawal{DAFTAR ISI}\@starttoc{toc}}
+\newcommand{\daftarlampiran}{\judulawal{DAFTAR LAMPIRAN}\@starttoc{lam}}
+\newcommand{\daftargambar}{\judulawal{DAFTAR GAMBAR DAN ILUSTRASI}\@starttoc{lof}}
+\newcommand{\daftartabel}{\judulawal{DAFTAR TABEL}\@starttoc{lot}}
+% lampiran: halaman pemisah, lalu "Lampiran A  Judul" rata kiri
+\newcommand{\mulailampiran}{\clearpage\thispagestyle{plain}\vspace*{\fill}\begin{center}\bfseries\fontsize{14}{17}\selectfont LAMPIRAN\end{center}\vspace*{\fill}\addcontentsline{toc}{chapter}{LAMPIRAN}\appendix}
+\newcommand{\lampiranbaru}[1]{\clearpage\refstepcounter{chapter}\noindent{\bfseries Lampiran \thechapter\hspace{1em}#1}\par\addcontentsline{lam}{lampiran}{\protect\numberline{Lampiran \thechapter}#1}}
+\endinput
+`;
+function mainTex(){const J=esc(S.judul.toUpperCase()),JE=esc(S.judulEn.toUpperCase()),N=esc(S.nama),NIM=esc(S.nim),P=esc(PRODI.id),PE=esc(PRODI.en);
+ const bulan=BLN[S.bulan]+" "+S.tahun,ini=initials(S.nama);
+ const sign=(r,n)=>String.raw`\begin{tabular}[t]{@{}c@{}}${r}\\[3\baselineskip]\rule{5cm}{0.4pt}\\(${esc(n)||"Nama Pembimbing"})\end{tabular}`;
+ const pem=[sign("Ketua",S.pemb[0])];for(let i=1;i<S.nPemb;i++)pem.push(sign("Anggota",S.pemb[i]));
+ const bibHang=(en)=>String.raw`\hangindent=1.27cm\noindent ${esc(ini)} (${S.tahun}): \textit{${esc(en?S.judulEn:S.judul)}}, ${en?"Master’s Thesis":"Tesis Program Magister"}, Institut Teknologi Bandung.`;
+ return String.raw`% Dibuat oleh Bengkel Tesis. Kompilasi: pdfLaTeX + Biber (Overleaf: Menu > Compiler = pdfLaTeX).
+\documentclass[${S.duplex?"twoside":"oneside"}]{itb-tmi}
+\usepackage[backend=biber,style=authoryear,maxcitenames=2,minnames=1,uniquelist=false,dashed=false]{biblatex}
+\DefineBibliographyStrings{indonesian}{and={dan},andothers={dkk\adddot}}
+\setlength{\bibhang}{1.27cm}
+\addbibresource{referensi.bib}
+
+\begin{document}
+\pagestyle{plain}
+%% ---- SAMPUL ----
+\begin{titlepage}\thispagestyle{empty}\centering\singlespacing
+{\bfseries\fontsize{14}{17}\selectfont ${J}\par}
+\vspace{\stretch{2}}
+{\bfseries\fontsize{12}{14}\selectfont TESIS\\Karya tulis sebagai salah satu syarat\\untuk memperoleh gelar Magister dari\\Institut Teknologi Bandung\par}
+\vspace{\stretch{1}}
+{\bfseries Oleh\\${N.toUpperCase()}\\NIM: ${NIM}\\(${P})\par}
+\vspace{\stretch{1}}
+\IfFileExists{gambar/logo-itb.png}{\includegraphics[height=3.5cm]{gambar/logo-itb.png}}{\fbox{\parbox[c][3.5cm][c]{2.35cm}{\centering\small taruh logo\\gambar/logo-itb.png}}}
+\par\vspace{\stretch{1.5}}
+{\bfseries\fontsize{14}{17}\selectfont INSTITUT TEKNOLOGI BANDUNG\\${bulan}\par}
+\end{titlepage}
+\pagenumbering{roman}\setcounter{page}{1}
+%% ---- ABSTRAK ----
+\judulawal{ABSTRAK}\addtocounter{page}{0}
+\begin{center}\singlespacing{\bfseries\fontsize{14}{17}\selectfont ${J}\par}\vspace{\baselineskip}Oleh\\{\bfseries ${N}\\NIM: ${NIM}\\(${P})}\end{center}
+\vspace{3\baselineskip}
+\begin{singlespace}\setlength{\parskip}{\baselineskip}\noindent\textit{(Tulis abstrak bahasa Indonesia di sini: 500 sampai 800 kata, tanpa cetak tebal. Kata kunci maksimal tujuh dan tidak boleh diambil dari tubuh tesis.)}
+
+\noindent Kata kunci: kata kunci 1, kata kunci 2
+\end{singlespace}
+%% ---- ABSTRACT ----
+\judulawal{\textit{ABSTRACT}}
+\begin{center}\singlespacing{\bfseries\itshape\fontsize{14}{17}\selectfont ${JE||"ENGLISH THESIS TITLE"}\par}\vspace{\baselineskip}\textit{By}\\{\bfseries ${N}\\NIM: ${NIM}\\\textit{(${PE})}}\end{center}
+\vspace{3\baselineskip}
+\begin{singlespace}\itshape\setlength{\parskip}{\baselineskip}\noindent (English abstract here, translated from the Indonesian one.)
+
+\noindent Keywords: keyword 1, keyword 2
+\end{singlespace}
+%% ---- PENGESAHAN ----
+\clearpage\addcontentsline{toc}{chapter}{HALAMAN PENGESAHAN}
+\begin{center}\singlespacing{\bfseries\fontsize{14}{17}\selectfont ${J}\par}
+\vspace{2\baselineskip}Oleh\\{\bfseries ${N}\\NIM: ${NIM}\\\small(${P})}\\[1.5\baselineskip]
+Institut Teknologi Bandung\\[3\baselineskip]
+Menyetujui\\Tim Pembimbing\\[1\baselineskip]Tanggal ..............................\\[2\baselineskip]
+${pem.join(String.raw`\hfill `)}
+\end{center}
+%% ---- PEDOMAN PENGGUNAAN ----
+\judulawal{PEDOMAN PENGGUNAAN TESIS}
+Tesis Magister yang tidak dipublikasikan terdaftar dan tersedia di Perpustakaan Institut Teknologi Bandung, dan terbuka untuk umum dengan ketentuan bahwa hak cipta ada pada penulis dengan mengikuti aturan HaKI yang berlaku di Institut Teknologi Bandung. Referensi kepustakaan diperkenankan dicatat, tetapi pengutipan atau peringkasan hanya dapat dilakukan seizin penulis dan harus disertai dengan kaidah ilmiah untuk menyebutkan sumbernya.
+
+Sitasi hasil penelitian Tesis ini dapat ditulis dalam bahasa Indonesia sebagai berikut:
+
+{\singlespacing ${bibHang(false)}}
+
+dan dalam bahasa Inggris sebagai berikut:
+
+{\singlespacing ${bibHang(true)}}
+
+Memperbanyak atau menerbitkan sebagian atau seluruh tesis haruslah seizin Dekan Sekolah Pascasarjana, Institut Teknologi Bandung.
+${S.peruntukan?String.raw`%% ---- PERUNTUKAN ----
+\clearpage\addcontentsline{toc}{chapter}{HALAMAN PERUNTUKAN}
+\vspace*{\fill}\begin{center}\itshape ${esc(S.dedikasi)||"Dipersembahkan kepada ..."}\end{center}\vspace*{\fill}`:""}
+%% ---- KATA PENGANTAR ----
+\judulawal{KATA PENGANTAR}
+(Tulis kata pengantar di sini. Ucapan terima kasih dibatasi pada yang \textquotedblleft\textit{scientifically related}\textquotedblright{}.)
+%% ---- DAFTAR-DAFTAR ----
+\daftarisi
+\daftarlampiran
+\daftargambar
+\daftartabel
+${S.singkatan?String.raw`\judulawal{DAFTAR SINGKATAN DAN LAMBANG}
+\begin{singlespace}\noindent\begin{tabular}{@{}p{3.5cm}p{7.5cm}c@{}}SINGKATAN & Nama & Halaman\\[4pt]
+\textit{(isi)} & \textit{(isi)} & \\ \end{tabular}\end{singlespace}`:""}
+%% ---- ISI ----
+\clearpage\pagenumbering{arabic}
+${S.bab.map((_,i)=>`\\input{${babFile(i).replace(".tex","")}}`).join("\n")}
+%% ---- DAFTAR PUSTAKA ----
+\clearpage\addcontentsline{toc}{chapter}{DAFTAR PUSTAKA}
+\begin{center}\bfseries\fontsize{14}{17}\selectfont DAFTAR PUSTAKA\end{center}
+{\singlespacing\printbibliography[heading=none]}
+%% ---- LAMPIRAN ----
+${S.lampiran>0?String.raw`\mulailampiran
+${Array.from({length:S.lampiran},(_,i)=>`\\lampiranbaru{Judul Lampiran ${String.fromCharCode(65+i)}}\n`).join("")}`:""}
+\end{document}
+`}
+function babTex(i){const t=S.bab[i];const K=(S.bib.match(/@\w+\s*\{\s*([^,\s]+)\s*,/)||[])[1]||"contoh2024";const body=i==0?String.raw`\section{Latar Belakang}
+Tulis latar belakang di sini. Contoh sitasi: \textcite{${K}} atau \parencite{${K}}.
+
+\section{Masalah Penelitian}
+`:`% Tulis isi bab di sini.\n`;return `\\chapter{${esc(t)}}\n${body}`}
+function readme(){return `BENGKEL TESIS — bundel tesis ITB (Magister TMI, juknis SPs Mei 2019)
+
+Cara pakai di Overleaf:
+1. Overleaf > New Project > Upload Project > pilih zip ini.
+2. Menu > Compiler = pdfLaTeX. Biber dipakai otomatis untuk daftar pustaka.
+3. Buka main.tex lalu Recompile. Isi bab ada di folder bab/.
+4. Logo ITB sudah ada di gambar/logo-itb.png. Daftar pustaka hanya memuat entri yang disitasi di teks (\\cite).
+
+Catatan:
+- Aturan layout ada di itb-tmi.cls (margin, spasi, penomoran, daftar isi).
+- Gaya sitasi sementara memakai biblatex author-year. Juknis meminta CSL ITB; belum diuji.
+- Bandingkan PDF hasil kompilasi dengan template-tesis_Mei2019.docx sebelum dipakai.
+`}
+async function makeZip(){const z=new JSZip();z.file("main.tex",mainTex());z.file("itb-tmi.cls",CLS);
+ S.bab.forEach((_,i)=>z.file(babFile(i),babTex(i)));
+ z.file("referensi.bib",S.bib.trim()||`@book{contoh2024,\n  author = {Belakang, Nama},\n  title = {Judul Buku Contoh},\n  year = {2024},\n  publisher = {Penerbit}\n}\n`);
+ z.folder("gambar").file("logo-itb.png",LOGO.split(",")[1],{base64:true});z.file("README.txt",readme());
+ const blob=await z.generateAsync({type:"blob"});const dl=typeof claude!=="undefined"?await claude.use("downloads"):null;if(dl){await dl.save({filename:"tesis-itb-tmi.zip",data:blob});return}const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+ a.download="tesis-itb-tmi.zip";document.body.appendChild(a);a.click();a.remove()}
+
+/* ---------- preview ---------- */
+function coverPage(){return `<div class="t">${h(S.judul)||"Judul tesis tampil di sini"}</div><div class="sp" style="flex:2"></div>
+<div class="b">TESIS</div><div class="b">Karya tulis sebagai salah satu syarat<br>untuk memperoleh gelar Magister dari<br>Institut Teknologi Bandung</div><div class="sp"></div>
+<div class="b">Oleh<br>${h(S.nama).toUpperCase()||"NAMA MAHASISWA"}<br>NIM: ${h(S.nim)||"00000000"}<br>(${PRODI.id.replace("Program Studi ","Program Studi ")})</div><div class="sp"></div>
+<img src="${LOGO}" alt="Logo ITB" style="align-self:center;height:8.3em"><div class="sp" style="flex:1.5"></div>
+<div class="b" style="font-size:1.17em">INSTITUT TEKNOLOGI BANDUNG<br>${BLN[S.bulan]} ${S.tahun}</div>`}
+
+let pv=0;
+const PG=["Sampul","Abstrak","Abstract","Pengesahan","Pedoman","Daftar isi","Bab I"],RN=["","i","ii","iii","iv","vii","1"],ROM=["I","II","III","IV","V","VI","VII","VIII","IX","X"];
+const ID=en=>`${en?"<i>By</i>":"Oleh"}<br><b>${h(S.nama)||"Nama Mahasiswa"}<br>NIM: ${h(S.nim)||"00000000"}<br>${en?"<i>("+PRODI.en+")</i>":"("+PRODI.id+")"}</b>`;
+function pageHTML(i){
+ const J=h(S.judul).toUpperCase()||"JUDUL TESIS",JE=h(S.judulEn).toUpperCase()||"ENGLISH THESIS TITLE",H=t=>`<div class="t">${t}</div>`,gap='<div style="height:2em"></div>';
+ if(i==0)return coverPage();
+ if(i==1)return H("ABSTRAK")+H(J)+`<div>${ID()}</div>${gap}<p class="j">(Abstrak bahasa Indonesia, 500 sampai 800 kata, ditulis di main.tex.)</p><p class="j l">Kata kunci: kata kunci 1, kata kunci 2</p>`;
+ if(i==2)return `<div class="t"><i>ABSTRACT</i></div><div class="t"><i>${JE}</i></div><div>${ID(1)}</div>${gap}<p class="j"><i>(English abstract goes here.)</i></p><p class="j l"><i>Keywords: keyword 1, keyword 2</i></p>`;
+ if(i==3){const g=(r,n)=>`<div style="flex:1">${r}<br><br><br>__________<br>(${h(n)||"Nama Pembimbing"})</div>`;
+  return H(J)+`<div>${ID()}</div><br>Institut Teknologi Bandung<br><br>Menyetujui<br>Tim Pembimbing<br>Tanggal ..............<br><br>`+g("Ketua",S.pemb[0])+`<div style="display:flex;margin-top:1.5em">${Array.from({length:S.nPemb-1},(_,k)=>g("Anggota",S.pemb[k+1])).join("")}</div>`}
+ if(i==4){const c=h(initials(S.nama||"Nama Belakang")),hg='style="padding-left:1.5em;text-indent:-1.5em"';return H("PEDOMAN PENGGUNAAN TESIS")+`<p class="j">(Teks standar pedoman penggunaan dari juknis, ditambahkan otomatis.)</p><p class="j">Sitasi dalam bahasa Indonesia:</p><p class="j l" ${hg}>${c} (${S.tahun}): <i>${h(S.judul)||"Judul tesis"}</i>, Tesis Program Magister, Institut Teknologi Bandung.</p><p class="j">dan dalam bahasa Inggris:</p><p class="j l" ${hg}>${c} (${S.tahun}): <i>${h(S.judulEn)||"Thesis title"}</i>, Master’s Thesis, Institut Teknologi Bandung.</p>`}
+ if(i==5){const r=(a,b)=>`<div class="r"><span>${a}</span><i></i><span>${b}</span></div>`;return H("DAFTAR ISI")+[["ABSTRAK","i"],["ABSTRACT","ii"],["HALAMAN PENGESAHAN","iii"],["PEDOMAN PENGGUNAAN TESIS","iv"],["KATA PENGANTAR","vi"]].map(x=>r(...x)).join("")+S.bab.map((b,k)=>r(`Bab ${ROM[k]||k+1}&nbsp; ${h(b)}`,"…")).join("")+r("DAFTAR PUSTAKA","…")}
+ return H(`Bab I&nbsp; ${h(S.bab[0]||"Pendahuluan")}`)+`<p class="j l"><b>I.1&nbsp; Latar Belakang</b></p><p class="j">(Isi bab ditulis di bab/bab1.tex. Paragraf tanpa indentasi, spasi 1,5, rata kiri-kanan.)</p>`}
+function preview(){$("#pt").innerHTML=PG.map((p,i)=>`<button aria-pressed="${i==pv}" data-i="${i}">${p}</button>`).join("");
+ $("#pt").querySelectorAll("button").forEach(b=>b.onclick=()=>{pv=+b.dataset.i;preview()});
+ $("#prev").innerHTML=pageHTML(pv)+(pv?`<div class="pn">${RN[pv]}</div>`:"")}
+/* ---------- form ---------- */
+function bind(sel,key,num){const el=$(sel);el.oninput=()=>{S[key]=el.type=="checkbox"?el.checked:num?+el.value:el.value;save();preview()}}
+function render(){
+ $("#steps").innerHTML=[["Panduan","baca dulu"],...STEPS].map((s,i)=>`<button ${i-1==step?'aria-current="step"':""} data-i="${i-1}">${i}. ${s[0]}<small>${s[1]}</small></button>`).join("");
+ $("#steps").querySelectorAll("button").forEach(b=>b.onclick=()=>{step=+b.dataset.i;render()});
+ const f=$("#form");
+ if(step==-1){f.innerHTML=`<h2>Panduan</h2>
+ <p>Alat ini merakit kerangka tesis LaTeX sesuai Petunjuk Teknis Penulisan Tesis Magister Sekolah Pascasarjana ITB (Mei 2019) untuk Program Studi Magister Teknik dan Manajemen Industri.</p>
+ <h3 style="font:700 1.15rem 'Playfair Display',Georgia,serif;margin:18px 0 4px">Cara memakai</h3>
+ <ol style="padding-left:1.3em;margin:0"><li><b>Identitas.</b> Isi judul, nama, NIM, dan nama pembimbing.</li><li><b>Struktur.</b> Atur daftar bab dan halaman opsional seperti peruntukan, daftar singkatan, dan lampiran.</li><li><b>Referensi.</b> Tempel entri BibTeX atau ambil metadata dari DOI.</li><li><b>Unduh.</b> Periksa peringatan, lalu unduh bundel .zip.</li></ol>
+ <p>Setelah itu, unggah zip ke Overleaf lewat <i>New Project, Upload Project</i>, pilih compiler pdfLaTeX, dan tulis isi bab di folder <code>bab/</code>.</p>
+ <h3 style="font:700 1.15rem 'Playfair Display',Georgia,serif;margin:18px 0 4px">Perlu diketahui</h3>
+ <ul style="padding-left:1.3em;margin:0"><li>Pratinjau di kanan hanya perkiraan tampilan, bukan PDF asli.</li><li>Isi abstrak dan kata pengantar ditulis langsung di <code>main.tex</code>.</li><li>Daftar pustaka hanya memuat entri yang disitasi di teks, jadi tulis sitasi <code>\parencite{kunci}</code> di bab.</li><li>Template belum diuji kompilasi. Cocokkan hasil PDF dengan template resmi sebelum dipakai.</li><li>Isianmu tersimpan di browser ini saja.</li></ul>`}
+ if(step==0){f.innerHTML=`<h2>Identitas</h2>
+ <label for="j">Judul tesis (Indonesia)</label><input type="text" id="j" value="${h(S.judul)}">
+ <label for="je">Judul tesis (Inggris) <span class="hint">untuk halaman Abstract</span></label><input type="text" id="je" value="${h(S.judulEn)}">
+ <div class="row"><div><label for="n">Nama</label><input type="text" id="n" value="${h(S.nama)}"></div><div><label for="nim">NIM</label><input type="text" id="nim" inputmode="numeric" value="${h(S.nim)}"></div></div>
+ <label>Program studi <span class="hint">tetap untuk versi ini</span></label><div class="msg ok">${PRODI.id}, ${PRODI.fak}</div>
+ <div class="row"><div><label for="bl">Bulan sampul</label><select id="bl">${BLN.map((b,i)=>`<option value="${i}" ${i==S.bulan?"selected":""}>${b}</option>`).join("")}</select></div><div><label for="th">Tahun</label><input type="number" id="th" value="${S.tahun}"></div></div>
+ <label for="np">Jumlah pembimbing</label><select id="np"><option value="2" ${S.nPemb==2?"selected":""}>2 pembimbing</option><option value="3" ${S.nPemb==3?"selected":""}>3 pembimbing</option></select>
+ <div id="pb"></div>
+ <label class="chk"><input type="checkbox" id="dx" ${S.duplex?"checked":""}> Cetak bolak-balik <span class="hint">(margin ganjil/genap dibalik)</span></label>`;
+  bind("#j","judul");bind("#je","judulEn");bind("#n","nama");bind("#nim","nim");bind("#bl","bulan",1);bind("#th","tahun",1);bind("#dx","duplex");
+  const pb=()=>{$("#pb").innerHTML=Array.from({length:S.nPemb},(_,i)=>`<label for="p${i}">${i?"Anggota "+i:"Ketua pembimbing"}</label><input type="text" id="p${i}" value="${h(S.pemb[i])}">`).join("");
+   for(let i=0;i<S.nPemb;i++){const el=$("#p"+i);el.oninput=()=>{S.pemb[i]=el.value;save()}}};pb();
+  $("#np").onchange=e=>{S.nPemb=+e.target.value;save();pb()};
+ }
+ if(step==1){f.innerHTML=`<h2>Struktur</h2><p class="hint">Bab bisa diganti nama, ditambah, atau dihapus. Juknis membolehkan Tinjauan Pustaka dilebur ke bab lain.</p><div id="bl2"></div>
+ <button class="btn sec" id="add">Tambah bab</button>
+ <label class="chk"><input type="checkbox" id="pr" ${S.peruntukan?"checked":""}> Halaman peruntukan</label><div id="dd"></div>
+ <label class="chk"><input type="checkbox" id="sg" ${S.singkatan?"checked":""}> Daftar singkatan dan lambang</label>
+ <label for="lp">Jumlah lampiran</label><input type="number" id="lp" min="0" max="26" value="${S.lampiran}">`;
+  const bl=()=>{$("#bl2").innerHTML=S.bab.map((b,i)=>`<div class="bab"><b>Bab ${["I","II","III","IV","V","VI","VII","VIII","IX","X"][i]||i+1}</b><input type="text" aria-label="Judul bab ${i+1}" value="${h(b)}" data-i="${i}"><button data-d="${i}" aria-label="Hapus bab ${i+1}">×</button></div>`).join("");
+   $("#bl2").querySelectorAll("input").forEach(el=>el.oninput=()=>{S.bab[+el.dataset.i]=el.value;save()});
+   $("#bl2").querySelectorAll("button").forEach(b=>b.onclick=()=>{S.bab.splice(+b.dataset.d,1);save();bl()})};bl();
+  $("#add").onclick=()=>{S.bab.push("Bab Baru");save();bl()};
+  const dd=()=>{$("#dd").innerHTML=S.peruntukan?`<label for="ded">Kalimat peruntukan</label><input type="text" id="ded" value="${h(S.dedikasi)}">`:"";if(S.peruntukan)bind("#ded","dedikasi")};dd();
+  $("#pr").onchange=e=>{S.peruntukan=e.target.checked;save();dd()};bind("#sg","singkatan");bind("#lp","lampiran",1);
+ }
+ if(step==2){f.innerHTML=`<h2>Referensi</h2>
+ <label for="doi">Ambil dari DOI <span class="hint">memakai Crossref</span></label><div class="row" style="grid-template-columns:1fr auto"><input type="text" id="doi" placeholder="10.1000/xyz123"><button class="btn" id="go">Ambil</button></div><div id="doim"></div>
+ <label for="bib">Isi referensi (BibTeX)</label><textarea id="bib" spellcheck="false">${h(S.bib)}</textarea><div id="val"></div>`;
+  const val=()=>{const b=bibCheck(S.bib);$("#val").innerHTML=`<div class="msg ${b.out.length?"warn":"ok"}">${b.n} entri terbaca</div>`+b.out.map(o=>`<div class="msg ${o[0]}">${h(o[1])}</div>`).join("")};val();
+  $("#bib").oninput=e=>{S.bib=e.target.value;save();val()};
+  $("#go").onclick=async()=>{const d=$("#doi").value.trim().replace(/^https?:\/\/(dx\.)?doi\.org\//,"");if(!d)return;
+   $("#doim").innerHTML='<div class="msg warn">Mengambil metadata…</div>';
+   try{const r=await fetch("https://api.crossref.org/works/"+encodeURIComponent(d)+"/transform/application/x-bibtex");if(!r.ok)throw 0;
+    S.bib=(S.bib.trim()?S.bib.trim()+"\n\n":"")+(await r.text()).trim()+"\n";save();$("#bib").value=S.bib;$("#doim").innerHTML='<div class="msg ok">Entri ditambahkan</div>';val()}
+   catch(e){$("#doim").innerHTML='<div class="msg bad">DOI tidak ditemukan atau Crossref tidak terjangkau. Periksa DOI lalu coba lagi, atau tempel BibTeX manual.</div>'}}}
+ if(step==3){const w=checks();f.innerHTML=`<h2>Tinjau dan unduh</h2>${w.length?w.map(o=>`<div class="msg ${o[0]}">${h(o[1])}</div>`).join(""):'<div class="msg ok">Semua isian lengkap</div>'}
+ <p>Bundel berisi <code>main.tex</code>, <code>itb-tmi.cls</code>, ${S.bab.length} file di <code>bab/</code>, <code>referensi.bib</code>, folder <code>gambar/</code>, dan <code>README.txt</code>.</p>
+ <button class="btn" id="dl">Unduh .zip</button><div id="dm"></div>`;
+  $("#dl").onclick=async()=>{try{await makeZip();$("#dm").innerHTML='<div class="msg ok">Unduhan dimulai. Unggah zip ke Overleaf.</div>'}catch(e){$("#dm").innerHTML=`<div class="msg bad">${e&&e.code=="declined"?"Unduhan dibatalkan.":"Gagal menyimpan zip. Coba lagi, atau buka halaman ini langsung di claude.ai."}</div>`}}}
+ f.insertAdjacentHTML("beforeend",`<div class="nav">${step<0?"<span></span>":'<button class="btn sec" id="pv">Sebelumnya</button>'}${step<3?'<button class="btn" id="nx">Lanjut</button>':"<span></span>"}</div>`);
+ if($("#pv"))$("#pv").onclick=()=>{step--;render()};if($("#nx"))$("#nx").onclick=()=>{step++;render()};
+ preview()}
+render();
+(function(){const root=document.documentElement,btn=$("#tm");const IC='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">',SUN=IC+'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',MOON=IC+'<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';let t="light";try{t=localStorage.getItem("pt-theme")||"light"}catch(e){}
+const ap=()=>{root.dataset.theme=t;btn.innerHTML=t=="dark"?SUN:MOON;btn.setAttribute("aria-label",t=="dark"?"Ganti ke mode terang":"Ganti ke mode gelap");btn.title=btn.getAttribute("aria-label")};
+btn.onclick=()=>{t=t=="dark"?"light":"dark";try{localStorage.setItem("pt-theme",t)}catch(e){}ap()};ap()})();
+</script>
+</body>
+</html>
