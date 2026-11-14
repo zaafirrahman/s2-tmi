@@ -26,8 +26,9 @@ header{padding:calc(28px + env(safe-area-inset-top,0px)) 0 8px}
 header h1{font-size:clamp(36px,6vw,64px);letter-spacing:-.01em;overflow-wrap:anywhere}
 header p{margin:12px 0 0;font-size:17px;max-width:64ch;color:var(--mut)}
 .wrap{display:grid;grid-template-columns:340px minmax(0,1fr);gap:28px;max-width:1180px;margin:0 auto;padding:24px clamp(16px,4vw,48px) 56px;align-items:start}
-@media(max-width:860px){.wrap{grid-template-columns:1fr}}
+@media(max-width:860px){.wrap{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:480px){header h1{font-size:32px}.seg button{width:36px;height:34px}}
+.wrap>*{min-width:0}
 .side,.main{background:var(--card);border:3px solid var(--line)}
 .side{box-shadow:6px 6px 0 var(--shc);padding:18px;position:sticky;top:16px}
 @media(max-width:860px){.side{position:static}}
@@ -71,21 +72,33 @@ textarea{min-height:96px;resize:vertical;margin:4px 0 12px}
 .box{background:var(--oc,var(--y));color:#111;border:3px solid var(--line);padding:14px 16px;max-width:72ch;box-shadow:4px 4px 0 var(--sh)}
 .nov{background:var(--card);color:var(--ink);border-style:dashed;box-shadow:none}
 .tw{overflow-x:auto;border:3px solid var(--line);background:var(--card);margin-top:12px}
-table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.5}
-th,td{text-align:left;vertical-align:top;padding:12px 14px;border:1px solid var(--soft)}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:14.5px;line-height:1.5}
+th,td{text-align:left;vertical-align:top;padding:12px 14px;border-right:1px solid var(--soft);border-bottom:1px solid var(--soft)}
+tr:last-child>*{border-bottom:0}th:last-child,td:last-child{border-right:0}
 th{font-weight:700;background:var(--code);min-width:130px}
 table.rh th{border-right:3px solid var(--line)}
+table.hr{min-width:640px}
 table.hr tr:first-child>*{border-bottom:3px solid var(--line)}
-table.hr th:first-child{border-right:3px solid var(--line)}
+table.hr th:first-child{border-right:3px solid var(--line);position:sticky;left:0;z-index:1;min-width:124px;width:124px}
 td{min-width:170px;overflow-wrap:anywhere}
+table.hr td{min-width:200px}
+.tw{max-width:100%}
 tr:nth-child(even) td{background:color-mix(in srgb,var(--code) 45%,transparent)}
 p,li,.box,.cat{overflow-wrap:anywhere}
 .main p{max-width:72ch;margin:12px 0}
 h3{font-size:19px;margin:26px 0 10px}
 ul{padding-left:22px;margin:10px 0}li{margin:6px 0}
-pre{background:#111;color:#F4F4EF;padding:16px;border:3px solid var(--line);overflow:auto;font:13px/1.6 var(--mono);margin:10px 0 16px}
+pre{max-width:100%;background:#111;color:#F4F4EF;padding:16px;border:3px solid var(--line);overflow:auto;font:13px/1.6 var(--mono);margin:10px 0 16px}
 a{color:var(--ink);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;font-weight:600}
 a:hover{background:var(--y);color:#111}
+.pl{display:grid;gap:14px;margin-top:14px}
+.pc{--mc:var(--soft);position:relative;background:var(--card);border:2px solid var(--line);box-shadow:4px 4px 0 var(--sh);padding:12px 14px 12px 28px}
+.pc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:10px;background:var(--mc);border-right:2px solid var(--line)}
+.pc.m3{--mc:#3ddc97}.pc.m2{--mc:#ffd400}
+.pt{display:block;font-weight:700;font-size:15px;line-height:1.4}
+.pb{display:block;font-size:13.5px;color:var(--mut);margin-top:6px}
+.pm{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.pm .mt{background:var(--mc);color:#111}
 .yr{font-family:var(--mono);font-size:13px;color:var(--mut)}
 td.yr{white-space:nowrap}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--y);color:#111;border:3px solid var(--line);box-shadow:5px 5px 0 var(--sh);font-weight:700;padding:8px 16px;z-index:9}
@@ -124,7 +137,7 @@ if(!th.length)return '<div class="box nov">Belum ada preseden langsung di katalo
 const rows=th.slice().sort((a,b)=>(b[5]-a[5])||(b[1]-a[1])).slice(0,60);
 return `<p><b>${th.length}</b> tesis memuat kata kunci metode ini, <b>${th.filter(t=>t[5]>1).length}</b> di antaranya cocok di judul atau kata kunci resmi (paling relevan, tampil di atas). Cek manual sebelum dikutip.</p>
 <div class="lbl">Pembimbing yang paling sering muncul</div><div class="chips">${adv.map(a=>`<span class="n">${esc(a[0])} · ${a[1]}</span>`).join('')}</div>
-<div class="tw"><table class="hr"><tr><th>Tahun</th><th>Judul</th><th>Pembimbing</th><th>Cocok di</th></tr>${rows.map(t=>`<tr><td class="yr">${esc(t[1]||'-')}</td><td><a href="${esc(t[3])}" target="_blank" rel="noopener">${esc(t[2])}</a></td><td>${esc(t[4].join(', '))}</td><td>${['','Abstrak','Kata kunci','Judul'][t[5]]}</td></tr>`).join('')}</table></div>${th.length>60?'<p class="yr">Menampilkan 60 teratas dari '+th.length+'.</p>':''}`}
+<div class="pl">${rows.map(t=>`<article class="pc m${t[5]}"><a class="pt" href="${esc(t[3])}" target="_blank" rel="noopener">${esc(t[2])}</a><span class="pb">Pembimbing: ${esc(t[4].join(', ')||'tidak tercatat')}</span><div class="pm"><span class="n">${esc(t[1]||'Tahun -')}</span>${t[5]?`<span class="n mt">Cocok di ${['','abstrak','kata kunci','judul'][t[5]]}</span>`:''}</div></article>`).join('')}</div>${th.length>60?'<p class="yr">Menampilkan 60 teratas dari '+th.length+'.</p>':''}`}
 function method(){const m=M.find(x=>x.id===st.sel)||filtered()[0]||M[0];st.sel=m.id;window._c=[m.latex,m.py,'']; 
 const prompt=`Kamu adalah asisten metodologi penelitian untuk mahasiswa Magister Teknik dan Manajemen Industri (TMI) ITB. Terjemahkan kerangka umum metode pemodelan menjadi rancangan konseptual yang spesifik sesuai topik penelitian pengguna. Gunakan bahasa Indonesia akademis yang ringkas, terstruktur, dan langsung pada poin teknis.\n\nMetode: ${m.name}\nAnatomi dasar: ${Object.entries(m.anat).map(e=>e[0]+': '+e[1]).join('; ')}\nTopik/masalah saya: ${st.topic||'[tulis topik penelitianmu di sini]'}\n\nBuatkan: (1) penjabaran komponen model spesifik untuk topik ini, (2) daftar data riil yang perlu dikumpulkan, dan (3) 2 poin argumen utama mengapa metode ini tepat untuk masalah tersebut.`;window._c[2]=prompt;
 const T_={ringkas:`<div class="box"><b>Kapan dipakai.</b> ${esc(m.when)}</div><div class="lbl">Tools umum</div><div class="chips">${m.tools.map(t=>`<span class="n">${esc(t)}</span>`).join('')}</div><div class="lbl">Kelompok keahlian terkait</div><div class="chips">${m.kk.map(k=>`<span class="n">${esc(KK[k])}</span>`).join('')}</div>`,
