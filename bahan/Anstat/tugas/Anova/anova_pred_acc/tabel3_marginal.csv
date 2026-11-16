@@ -1,0 +1,9 @@
+Faktor,Level,n run,Rata-rata (%),SD (%)
+A: Sumber pre-training,ImageNet,80,90.0625,5.848796563199422
+A: Sumber pre-training,HF,80,90.6875,5.604735728640947
+B: Patch size,16,80,90.35416666666667,5.367596625142309
+B: Patch size,32,80,90.39583333333333,6.083362233328266
+C: Jumlah data latih (sampel/kelas),8,40,84.16666666666666,4.698911797402892
+C: Jumlah data latih (sampel/kelas),10,40,88.54166666666666,3.6041188055712556
+C: Jumlah data latih (sampel/kelas),14,40,93.54166666666666,3.3586114177246884
+C: Jumlah data latih (sampel/kelas),16,40,95.25,3.0557497995756853
