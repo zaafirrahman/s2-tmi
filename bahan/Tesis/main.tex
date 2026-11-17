@@ -1,0 +1,91 @@
+%% Dibuat oleh Bengkel Tesis. Kompilasi: pdfLaTeX + Biber (Overleaf: Menu > Compiler = pdfLaTeX).
+\documentclass[twoside]{itb-tmi}
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\emergencystretch=3em
+\usepackage{microtype}
+\usepackage[style=english]{csquotes}
+\usepackage[backend=biber,style=authoryear,maxcitenames=2,minnames=1,uniquelist=false,dashed=false]{biblatex}
+\setlength{\bibhang}{1.27cm}
+\addbibresource{referensi.bib}
+
+\begin{document}
+\pagestyle{plain}
+%% ---- SAMPUL ----
+\begin{titlepage}\thispagestyle{empty}\centering\singlespacing
+{\bfseries\fontsize{14}{17}\selectfont DECISION-FOCUSED PROBABILISTIC FORECASTING OF VESSEL SERVICE TIME FOR MODEL PREDICTIVE BERTH AND QUAY CRANE ALLOCATION\par}
+\vspace{\stretch{2}}
+{\bfseries\fontsize{12}{14}\selectfont TESIS\\Karya tulis sebagai salah satu syarat\\untuk memperoleh gelar Magister dari\\Institut Teknologi Bandung\par}
+\vspace{\stretch{1}}
+{\bfseries Oleh\\AULYA AZ ZAAFIRRAHMAN\\NIM: 23426014\\(Program Studi Magister Teknik dan Manajemen Industri)\par}
+\vspace{\stretch{1}}
+\IfFileExists{gambar/logo-itb.png}{\includegraphics[height=3.5cm]{gambar/logo-itb.png}}{\fbox{\parbox[c][3.5cm][c]{2.35cm}{\centering\small taruh logo\\gambar/logo-itb.png}}}
+\par\vspace{\stretch{1.5}}
+{\bfseries\fontsize{14}{17}\selectfont INSTITUT TEKNOLOGI BANDUNG\\November 2026\par}
+\end{titlepage}
+\pagenumbering{roman}\setcounter{page}{1}
+%% ---- ABSTRAK ----
+\judulawal{ABSTRAK}\addtocounter{page}{0}
+\begin{center}\singlespacing{\bfseries\fontsize{14}{17}\selectfont DECISION-FOCUSED PROBABILISTIC FORECASTING OF VESSEL SERVICE TIME FOR MODEL PREDICTIVE BERTH AND QUAY CRANE ALLOCATION\par}\vspace{\baselineskip}Oleh\\{\bfseries Aulya Az Zaafirrahman\\NIM: 23426014\\(Program Studi Magister Teknik dan Manajemen Industri)}\end{center}
+\vspace{3\baselineskip}
+\begin{singlespace}\setlength{\parskip}{\baselineskip}\noindent\textit{(Tulis abstrak bahasa Indonesia di sini: 500 sampai 800 kata, tanpa cetak tebal. Kata kunci maksimal tujuh dan tidak boleh diambil dari tubuh tesis.)}
+
+\noindent Kata kunci: kata kunci 1, kata kunci 2
+\end{singlespace}
+%% ---- ABSTRACT ----
+\judulawal{\textit{ABSTRACT}}
+\begin{center}\singlespacing{\bfseries\itshape\fontsize{14}{17}\selectfont DECISION-FOCUSED PROBABILISTIC FORECASTING OF VESSEL SERVICE TIME FOR MODEL PREDICTIVE BERTH AND QUAY CRANE ALLOCATION\par}\vspace{\baselineskip}\textit{By}\\{\bfseries Aulya Az Zaafirrahman\\NIM: 23426014\\\textit{(Master’s Program in Industrial Engineering and Management)}}\end{center}
+\vspace{3\baselineskip}
+\begin{singlespace}\itshape\setlength{\parskip}{\baselineskip}\noindent (English abstract here, translated from the Indonesian one.)
+
+\noindent Keywords: keyword 1, keyword 2
+\end{singlespace}
+%% ---- PENGESAHAN ----
+\clearpage\addcontentsline{toc}{chapter}{HALAMAN PENGESAHAN}
+\begin{center}\singlespacing{\bfseries\fontsize{14}{17}\selectfont DECISION-FOCUSED PROBABILISTIC FORECASTING OF VESSEL SERVICE TIME FOR MODEL PREDICTIVE BERTH AND QUAY CRANE ALLOCATION\par}
+\vspace{2\baselineskip}Oleh\\{\bfseries Aulya Az Zaafirrahman\\NIM: 23426014\\\small(Program Studi Magister Teknik dan Manajemen Industri)}\\[1.5\baselineskip]
+Institut Teknologi Bandung\\[3\baselineskip]
+Menyetujui\\Tim Pembimbing\\[1\baselineskip]Tanggal ..............................\\[2\baselineskip]
+\begin{tabular}[t]{@{}c@{}}Ketua\\[3\baselineskip]\rule{5cm}{0.4pt}\\(Rully Tri Cahyono)\end{tabular}\hfill \begin{tabular}[t]{@{}c@{}}Anggota\\[3\baselineskip]\rule{5cm}{0.4pt}\\(Titah Yudistira)\end{tabular}
+\end{center}
+%% ---- PEDOMAN PENGGUNAAN ----
+\judulawal{PEDOMAN PENGGUNAAN TESIS}
+Tesis Magister yang tidak dipublikasikan terdaftar dan tersedia di Perpustakaan Institut Teknologi Bandung, dan terbuka untuk umum dengan ketentuan bahwa hak cipta ada pada penulis dengan mengikuti aturan HaKI yang berlaku di Institut Teknologi Bandung. Referensi kepustakaan diperkenankan dicatat, tetapi pengutipan atau peringkasan hanya dapat dilakukan seizin penulis dan harus disertai dengan kaidah ilmiah untuk menyebutkan sumbernya.
+
+Sitasi hasil penelitian Tesis ini dapat ditulis dalam bahasa Indonesia sebagai berikut:
+
+{\singlespacing \hangindent=1.27cm\noindent Zaafirrahman, A. A. (2026): \textit{Decision-Focused Probabilistic Forecasting of Vessel Service Time for Model Predictive Berth and Quay Crane Allocation}, Tesis Program Magister, Institut Teknologi Bandung.}
+
+dan dalam bahasa Inggris sebagai berikut:
+
+{\singlespacing \hangindent=1.27cm\noindent Zaafirrahman, A. A. (2026): \textit{Decision-Focused Probabilistic Forecasting of Vessel Service Time for Model Predictive Berth and Quay Crane Allocation}, Master’s Thesis, Institut Teknologi Bandung.}
+
+Memperbanyak atau menerbitkan sebagian atau seluruh tesis haruslah seizin Dekan Sekolah Pascasarjana, Institut Teknologi Bandung.
+
+%% ---- KATA PENGANTAR ----
+\judulawal{KATA PENGANTAR}
+(Tulis kata pengantar di sini. Ucapan terima kasih dibatasi pada yang \textquotedblleft\textit{scientifically related}\textquotedblright{}.)
+%% ---- DAFTAR-DAFTAR ----
+\daftarisi
+\daftarlampiran
+\daftargambar
+\daftartabel
+\judulawal{DAFTAR SINGKATAN DAN LAMBANG}
+\begin{singlespace}\noindent\begin{tabular}{@{}p{3.5cm}p{7.5cm}c@{}}SINGKATAN & Nama & Halaman\\[4pt]
+\textit{(isi)} & \textit{(isi)} & \\ \end{tabular}\end{singlespace}
+%% ---- ISI ----
+\clearpage\pagenumbering{arabic}
+\input{bab/bab1}
+\input{bab/bab2}
+\input{bab/bab3}
+\input{bab/bab4}
+\input{bab/bab5}
+%% ---- DAFTAR PUSTAKA ----
+\clearpage\addcontentsline{toc}{chapter}{DAFTAR PUSTAKA}
+\begin{center}\bfseries\fontsize{14}{17}\selectfont DAFTAR PUSTAKA\end{center}
+{\singlespacing\printbibliography[heading=none]}
+%% ---- LAMPIRAN ----
+\mulailampiran
+\lampiranbaru{Judul Lampiran A}
+
+\end{document}

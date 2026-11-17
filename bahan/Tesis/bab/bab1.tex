@@ -1,0 +1,20 @@
+\chapter{Pendahuluan}
+\section{Latar Belakang}
+Tulis latar belakang di sini. Contoh sitasi: \textcite{Sheng_2026} atau \parencite{Sheng_2026}.
+
+\section{Masalah Penelitian}
+Studi ini mengusulkan kerangka Decision-Focused Learning (DFL) end-to-end untuk sistem HVAC fixed-frequency. 
+Masalah kontrol dirumuskan sebagai Mixed-Integer Program dengan tiga arsitektur prediktif: 
+jaringan RC berbasis fisika, Input-Convex Neural Networks (ICNN), dan ANN non-linear. 
+Untuk mengatasi non-diferensiabilitas variabel keputusan diskret, digunakan continuous relaxation 
+dengan Implicit Differentiation untuk formulasi konveks dan Stochastic Smoothing untuk lanskap non-konveks, 
+ditambah strategi fine-tuning untuk mengurangi parameter terlatih. Validasi dalam lingkungan BOPTEST 
+menunjukkan varian DFL meningkatkan kinerja closed-loop, dengan tambahan penghematan energi hingga 8,6\% 
+dan perbaikan kenyamanan termal hingga 23,5\% dibanding MPC konvensional. 
+
+Kerangka DFL end-to-end menggabungkan lapisan prediksi dan optimasi MPC. Tiga model prediktif 
+(3R2C RC, ANN MLP dua hidden layer, ICNN) dilatih dengan loss prediksi (baseline) atau loss tugas kontrol 
+(DFL). Implicit Differentiation via CVXPYlayers dipakai untuk RC-MPC yang direlaksasi kontinu; Stochastic 
+Smoothing dengan score-function estimator dan Monte Carlo dipakai untuk ANN/ICNN, dengan fine-tuning layer 
+output. Evaluasi closed-loop dalam simulator BOPTEST bestest\_hydronic\_heat\_pump, dua skenario cuaca, 
+metrik MAE/RMSE/MAPE/CVRMSE dan KPI biaya, discomfort, switching, waktu komputasi.

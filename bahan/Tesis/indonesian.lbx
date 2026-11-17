@@ -1,0 +1,40 @@
+\ProvidesFile{indonesian.lbx}[2026/11/17 biblatex localization module for Indonesian]
+
+% Format tanggal (\mkbibdatelong dst.) diwarisi dari bahasa Inggris
+\InheritBibliographyExtras{english}
+
+% Istilah yang tidak didefinisikan di sini otomatis memakai bahasa Inggris,
+% jadi tidak akan muncul "untranslated".
+\DeclareBibliographyStrings{%
+  inherit      = {english},
+  and          = {{dan}{dan}},
+  andothers    = {{dkk\adddot}{dkk\adddot}},
+  in           = {{dalam}{dalam}},
+  page         = {{halaman}{hlm\adddot}},
+  pages        = {{halaman}{hlm\adddot}},
+  volume       = {{volume}{vol\adddot}},
+  number       = {{nomor}{no\adddot}},
+  edition      = {{edisi}{ed\adddot}},
+  editor       = {{editor}{ed\adddot}},
+  editors      = {{editor}{ed\adddot}},
+  urlseen      = {{diakses}{diakses}},
+  nodate       = {{tanpa tahun}{t.t\adddot}},
+  inpress      = {{dalam proses terbit}{dalam proses terbit}},
+  forthcoming  = {{akan terbit}{akan terbit}},
+  mathesis     = {{tesis magister}{tesis magister}},
+  phdthesis    = {{disertasi doktoral}{disertasi doktoral}},
+  january      = {{Januari}{Jan\adddot}},
+  february     = {{Februari}{Feb\adddot}},
+  march        = {{Maret}{Mar\adddot}},
+  april        = {{April}{Apr\adddot}},
+  may          = {{Mei}{Mei}},
+  june         = {{Juni}{Jun\adddot}},
+  july         = {{Juli}{Jul\adddot}},
+  august       = {{Agustus}{Agu\adddot}},
+  september    = {{September}{Sep\adddot}},
+  october      = {{Oktober}{Okt\adddot}},
+  november     = {{November}{Nov\adddot}},
+  december     = {{Desember}{Des\adddot}},
+}
+
+\endinput

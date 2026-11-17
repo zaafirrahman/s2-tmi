@@ -1,0 +1,22 @@
+# ===== Hasil build LaTeX =====
+*.aux
+*.log
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.toc
+*.lof
+*.lot
+*.lam
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.xdv
+*.bbl-SAVE-ERROR
+
+# ===== File sistem =====
+.DS_Store
+Thumbs.db
