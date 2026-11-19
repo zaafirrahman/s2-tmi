@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Replipix – Replicube 2D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--card:#101010;--tx:#d4d4d4;--mu:#7a7a7a;--bd:#3c3c3c;--ac:#ececec;--ok:#9be37c;--er:#ff6b6b;--cell:#303030;--ax:#ff6b7f;--ay:#5fd97a;color-scheme:dark;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+::selection{background:#5a5a5a;color:#fff}
+body{margin:0;background:var(--bg);color:var(--tx);font:19px/1.3 VT323,ui-monospace,Menlo,Consolas,monospace;padding:16px}
+h1{font-size:32px;font-weight:400;margin:0 0 2px;color:var(--ac);letter-spacing:.04em}
+h1::before{content:"> ";color:var(--mu)}
+h1::after{content:"_";animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.sub{color:var(--mu);margin:0 0 14px}
+.wrap{max-width:900px;margin:auto;display:grid;gap:14px;grid-template-columns:minmax(0,330px) minmax(0,1fr)}
+@media(max-width:720px){.wrap{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--bd);padding:12px}
+.lbl{color:var(--mu);text-transform:uppercase;letter-spacing:.1em;margin:0 0 6px}
+.lbl::before{content:"# "}
+canvas{width:100%;max-width:290px;aspect-ratio:290/286;display:block;margin-bottom:12px;touch-action:none;background:#1e1e1e}
+.ed{position:relative;height:250px}
+.ed pre,.ed textarea{position:absolute;inset:0;margin:0;width:100%;height:100%;font:18px/1.25 VT323,ui-monospace,Menlo,Consolas,monospace;padding:10px;border:1px solid var(--bd);border-radius:0;tab-size:2;white-space:pre;letter-spacing:normal}
+.ed pre{background:#080808;color:var(--tx);pointer-events:none;overflow:hidden}
+.ed textarea{background:transparent;color:transparent;caret-color:var(--ac);resize:none;overflow:auto;z-index:1;outline:none}
+.ed textarea:focus{border-color:var(--mu)}
+.k{color:#ff7ab6}.c{color:#ffa94d}.f{color:#9be37c}.v{color:#ff6b6b}.n,.s{color:#e6db74}.m{color:#6b6b6b;font-style:italic}.o{color:#8a8a8a}
+button,select{font:inherit;border:1px solid var(--bd);background:transparent;color:var(--tx);padding:2px 12px;cursor:pointer;border-radius:0}
+button:hover,select:hover{border-color:var(--tx)}
+select option{background:#101010;color:var(--tx)}
+button.p{background:var(--ac);color:#0a0a0a;border-color:var(--ac)}
+button.p::before{content:"> "}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.stats{display:flex;gap:20px;flex-wrap:wrap;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.stats b{font-size:28px;font-weight:400;color:var(--ac)}
+#msg{min-height:26px;font-size:21px;margin:6px 0}
+.ok{color:var(--ok)}.er{color:var(--er)}
+.pal{display:grid;grid-template-columns:repeat(8,1fr);gap:3px;margin-top:6px}
+.pal div{font-size:17px;text-align:center;padding:3px 0}
+details{color:var(--mu);margin-top:10px}
+summary{cursor:pointer;color:var(--tx)}
+details p{margin:8px 0}
+code{background:#1c1c1c;color:var(--ac);padding:0 4px}
+[hidden]{display:none!important}
+input{font:inherit;background:#080808;color:var(--tx);border:1px solid var(--bd);padding:4px 8px;border-radius:0;width:100%;outline:none}
+input:focus{border-color:var(--mu)}
+#lres{display:flex;flex-direction:column;gap:4px;margin-top:8px;align-items:flex-start}
+.scr{max-width:900px;margin:auto}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:2px 8px}th{color:var(--mu);font-weight:400}
+tr.me{background:#1c1c1c;color:var(--ac)}
+.lv{display:flex;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid #1e1e1e}.lv span:first-child{flex:1}.lv i{color:var(--mu);font-style:normal}
+.hist{position:relative;display:flex;align-items:flex-end;gap:2px;height:90px;border-bottom:1px solid var(--bd)}.hist div{flex:1;background:#8a8a8a}
+.hist i{position:absolute;top:0;bottom:0;width:2px;background:var(--er)}
+.hax{display:flex;justify-content:space-between;color:var(--mu)}
+</style>
+</head>
+<body>
+<div id="auth" class="scr"><div class="wrap" style="margin-bottom:14px"><div style="grid-column:1/-1"><h1>Replipix</h1><p class="sub">Tulis kode Lua untuk menggambar ulang targetnya.</p></div></div>
+<div class="wrap"><div class="card"><p class="lbl">Pemain baru</p><input id="sn" maxlength="20" placeholder="nama pemain"><div class="row"><button class="p" id="su">Daftar</button></div></div>
+<div class="card"><p class="lbl">Sudah punya akun</p><input id="ls" placeholder="cari nama..." autocomplete="off"><div id="lres"></div></div></div><p id="am" class="er"></p></div>
+<div id="menu" class="scr" hidden></div><div id="lbp" class="scr" hidden></div>
+<div id="game" hidden>
+<div class="wrap" style="margin-bottom:0"><div style="grid-column:1/-1"><h1>Replipix</h1><p class="sub">Tulis kode Lua yang dijalankan untuk setiap sel (x, y dari −5 sampai 5) dan return warnanya, sampai hasilnya identik dengan target.</p></div></div>
+<div class="wrap">
+<div class="card">
+<p class="lbl">Target</p><canvas id="t" width="290" height="286"></canvas>
+<p class="lbl">Hasil kodemu</p><canvas id="o" width="290" height="286"></canvas>
+</div>
+<div class="card">
+<div class="row"><button id="bk">← Menu</button><button id="lb">Leaderboard</button><span id="who" style="color:var(--mu)"></span></div>
+<div class="row"><select id="lv"></select><span id="goal" style="color:var(--mu);font-size:13px"></span></div>
+<div class="ed"><pre id="hl" aria-hidden="true"></pre><textarea id="code" spellcheck="false" wrap="off"></textarea></div>
+<div class="row"><button class="p" id="run">▶ Jalankan</button><button id="rst">Reset kode</button><button id="snd">🔊 Suara</button></div>
+<div id="msg"></div>
+<div class="stats"><div>Code size<br><b id="cs">0</b></div><div>Cycles<br><b id="cy">0</b></div><div>Skor<br><b id="sc">–</b></div><div>Terbaik<br><b id="bs">–</b></div></div>
+<details open><summary>Cara kerja &amp; fungsi</summary>
+<p>Kodemu dijalankan sekali per sel dengan <code>x</code> dan <code>y</code> (y positif ke atas). <code>return</code> angka (0 atau negatif = kosong, di atas 16 berputar lagi: 17=WHITE, 18=GRAY, dst) atau konstanta warna: WHITE=1, GRAY, BLACK, PEACH, PINK, PURPLE=6, RED=7, ORANGE, YELLOW, LIME, GREEN, NAVY, BLUE, SKY, BROWN, MAROON=16. Tanpa return atau <code>false</code> = kosong, <code>true</code> = putih (1). Tersedia: <code>if/elseif/else</code>, variabel, <code>for</code>, operator aritmetika dan bitwise, serta min, max, abs, floor, round, ceil, step, sign, clamp, inrange, mix, sqrt, sin, cos, tan, asin, acos, atan, btoi, sort, insert (tanpa prefix <code>math.</code>). Code size = jumlah token (komentar tidak dihitung). Cycles = rata-rata instruksi VM per sel. Skor = size + cycles, makin kecil makin bagus.</p>
+<div class="pal" id="pal"></div></details>
+</div></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/fengari-web@0.1.4/dist/fengari-web.js"></script>
+<script>
+// Isi dua nilai ini untuk memakai Supabase. Kosong = mode lokal (data di browser).
+const SB_URL="https://whghcdlsfldjiwjnxerq.supabase.co",SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndoZ2hjZGxzZmxkaml3am54ZXJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM5ODk0ODAsImV4cCI6MjEwOTU2NTQ4MH0.cmuwn1ZnBeQZZV5wG_Ck-ttptxrAmMAK7zpfwoABzos";
+const COL=["#dfe8f7","#6a7494","#0f1a1d","#f9a6a6","#d9679c","#7b2d99","#e8365c","#f58a5c","#ffcb62","#86c440","#3d9b5a","#2e2d63","#3a4aa0","#6e96e0","#9a4a4f","#4a2030"];
+const NAMES=["WHITE","GRAY","BLACK","PEACH","PINK","PURPLE","RED","ORANGE","YELLOW","LIME","GREEN","NAVY","BLUE","SKY","BROWN","MAROON"];
+let N=11,H=5,CELL=24;const LIMIT=20000;
+function art(rows){return (x,y)=>".123456789abcdefg".indexOf(rows[H-y][x+H])}
+const abs=Math.abs,mx=Math.max;
+const LEVELS=[
+{n:"1. Titik merah",g:"Satu sel merah (RED) di tengah",t:(x,y)=>x==0&&y==0?7:0,s:"-- dijalankan untuk setiap sel\nif x == 0 and y == 0 then\n  \nend\n"},
+{n:"2. Garis biru",g:"Garis horizontal biru (BLUE)",t:(x,y)=>y==0?13:0,s:""},
+{n:"3. Tanda plus",g:"Plus hijau (GREEN): x == 0 atau y == 0",t:(x,y)=>x==0||y==0?11:0,s:""},
+{n:"4. Bingkai",g:"Bingkai oranye (ORANGE)",t:(x,y)=>mx(abs(x),abs(y))==H?8:0,s:""},
+{n:"5. Papan catur",g:"Sel (0,0) RED, tetangganya WHITE, selang-seling seperti papan catur",t:(x,y)=>(x+y)%2==0?7:1,s:"-- tips: (x + y) % 2 hasilnya 0 atau 1\n-- sel (0, 0) harus RED\n"},
+{n:"6. Diagonal pelangi",g:"Diagonal x == y, warna = x + 6",t:(x,y)=>x==y?x+6:0,s:""},
+{n:"7. Persegi bersarang",g:"Warna = 6 + jarak maksimum ke pusat (6 sampai 11)",t:(x,y)=>6+mx(abs(x),abs(y)),s:""},
+{n:"8. Segitiga",g:"Segitiga LIME (10): semua sel dengan y ≤ x",t:(x,y)=>y<=x?10:0,s:""},
+{n:"9. Lingkaran",g:"Lingkaran PURPLE penuh, jarak ke pusat ≤ 4",t:(x,y)=>Math.sqrt(x*x+y*y)<=4?6:0,s:"-- tips: sqrt(x*x + y*y)\n"}
+,
+{n:"10. Rumah",g:"Rumah: atap RED, dinding PEACH, jendela SKY, pintu BROWN",t:art([".....7.....", "....777....", "...77777...", "..7777777..", ".777777777.", "77777777777", ".444444444.", ".4ee444ee4.", ".4eefffee4.", ".444fff444.", ".444fff444."]),s:"-- tips: atap segitiga, pakai abs(x) untuk simetri\n"},
+{n:"11. Pohon apel",g:"Pohon apel: daun GREEN, dua apel RED, batang BROWN",t:art(["...bbbbb...", "..bbbbbbb..", ".bb7bbbbbb.", ".bbbbbbbbb.", ".bbbbbb7bb.", "..bbbbbbb..", "...bbbbb...", "....fff....", "....fff....", "....fff....", "....fff...."]),s:"-- tips: kerjakan daun dulu, lalu batang\n"},
+{n:"12. Cangkir kopi",g:"Cangkir kopi: badan WHITE, kopi BROWN, uap dan tatakan GRAY",t:art(["...2..2....", "....2..2...", "...2..2....", ".fffffff...", ".111111111.", ".1111111.1.", ".1111111.1.", ".111111111.", ".1111111...", "..11111....", ".222222222."]),s:"-- tips: uap berselang-seling di dua kolom\n"},
+{n:"13. Roket",g:"Roket: moncong dan sirip RED, badan WHITE, jendela SKY, api ORANGE dan YELLOW",t:art([".....7.....", "....777....", "...11111...", "...11e11...", "...11111...", "...11111...", ".771111177.", ".7.11111.7.", "...22222...", "....898....", ".....9....."]),s:"-- tips: abs(x) membuat sirip kiri dan kanan sekaligus\n"},
+{n:"14. Jamur",g:"Jamur: tudung RED dengan bintik WHITE, batang PEACH",t:art(["...77777...", "..7777777..", ".771777177.", ".777777777.", "77777177777", "77777777777", "...44444...", "....444....", "....444....", "....444....", "...44444..."]),s:"-- tips: tudung makin lebar ke bawah\n"},
+{n:"15. Kaktus",g:"Kaktus: batang GREEN, bunga PINK, pot ORANGE",t:art([".....5.....", "....bbb....", ".b..bbb..b.", ".b..bbb..b.", ".bbbbbbbbb.", "....bbb....", "....bbb....", "..8888888..", "...88888...", "...88888...", "....888...."]),s:"-- tips: lengan kaktus ada di y = 4 sampai 1\n"}
+,
+{n:"16. Papan sasaran",g:"Cincin RED dan WHITE selang-seling dari pusat (RED di tengah), jarak dibulatkan ke bawah, sampai jarak 9",t:(x,y)=>{const d=Math.floor(Math.sqrt(x*x+y*y));return d>9?0:d%2==0?7:1},s:"-- tips: floor(sqrt(x*x + y*y)) % 2\n"}
+];
+const META=[["dot",3],["line",3],["plus",4],["frame",4],["checker",5],["diag",5],["nested",5],["tri",5],["circle",5],["house",5],["tree",5],["cup",5],["rocket",5],["mushroom",5],["cactus",5],["target",9]];
+LEVELS.forEach((l,i)=>{l.id=META[i][0];l.h=META[i][1]});
+const $=id=>document.getElementById(id);
+let cur=0,mine={},me=null;
+function blank(){return Array.from({length:N},()=>Array(N).fill(0))}
+function target(l){const g=blank();for(let y=-H;y<=H;y++)for(let x=-H;x<=H;x++)g[H-y][x+H]=LEVELS[l].t(x,y);return g}
+const OX=26,OB=22,FONT="16px VT323,ui-monospace,monospace";
+let W=0,HT=0,gT=blank(),gO=blank(),hov=null,tmr,anim=null,tk=0;const DUR=380;
+function draw(cv,g){
+const c=cv.getContext("2d"),st=getComputedStyle(document.body),cs=n=>st.getPropertyValue(n).trim();
+c.clearRect(0,0,W,HT);
+const an=cv.id==="o"&&anim?anim:null,sk=new Set(an?an.cells.map(k=>k.r*N+k.q):[]);
+for(let r=0;r<N;r++)for(let q=0;q<N;q++){c.fillStyle=g[r][q]&&!sk.has(r*N+q)?COL[g[r][q]-1]:cs("--cell");c.fillRect(OX+q*CELL,r*CELL,CELL-1,CELL-1)}
+if(an){const e=Math.min(1,(performance.now()-an.t0)/DUR);an.cells.forEach(k=>{let col,u;
+if(k.o&&e<0.35){col=k.o;u=1-e/0.35}else if(k.n){col=k.n;const s0=k.o?0.35:0,v=Math.max(0,(e-s0)/(1-s0));u=v<0.7?v/0.7*1.18:1.18-0.18*(v-0.7)/0.3}else return;
+const z=(CELL-1)*u,cx=OX+k.q*CELL+(CELL-1)/2,cy=k.r*CELL+(CELL-1)/2;c.fillStyle=COL[col-1];c.fillRect(cx-z/2,cy-z/2,z,z)})}
+const hc=hov?hov.c:-1,hr=hov?hov.r:-1,ls=CELL>=20?1:2;
+c.textBaseline="middle";c.textAlign="center";c.fillStyle=cs("--ax");
+for(let q=0;q<N;q++){if((q-H)%ls&&q!=hc)continue;c.font=(q==hc?"700 ":"")+FONT;c.fillText(q-H,OX+q*CELL+CELL/2,N*CELL+OB/2)}
+c.textAlign="right";c.fillStyle=cs("--ay");
+for(let r=0;r<N;r++){if((H-r)%ls&&r!=hr)continue;c.font=(r==hr?"700 ":"")+FONT;c.fillText(H-r,OX-6,r*CELL+CELL/2)}
+if(hov){c.strokeStyle=cs("--tx");c.lineWidth=1.5;c.strokeRect(OX+hc*CELL+.5,hr*CELL+.5,CELL-2,CELL-2);
+if(hov.cv===cv){const v=g[hr][hc],P=[["(",cs("--tx")],[hc-H,cs("--ax")],[", ",cs("--tx")],[H-hr,cs("--ay")],[")",cs("--tx")]].concat(v?[[" = ",cs("--tx")],[v,COL[v-1],1]]:[]);
+c.font="19px VT323,ui-monospace,monospace";c.textAlign="left";
+const ws=P.map(p=>c.measureText(p[0]).width),tw=ws.reduce((a,b)=>a+b,0),bw=tw+12,bh=20;
+let bx=hov.px+12,by=hov.py-bh-8;if(bx+bw>W)bx=hov.px-12-bw;if(by<0)by=hov.py+14;
+c.fillStyle=cs("--card");c.fillRect(bx,by,bw,bh);c.strokeStyle=cs("--bd");c.lineWidth=1;c.strokeRect(bx+.5,by+.5,bw-1,bh-1);
+let tx=bx+6;P.forEach((p,i)=>{c.fillStyle=p[1];c.fillText(p[0],tx,by+bh/2+1);tx+=ws[i]})}}}
+function redraw(){draw($("t"),gT);draw($("o"),gO)}
+function tick(){redraw();if(anim&&performance.now()-anim.t0<DUR)requestAnimationFrame(tick);else{anim=null;tk=0;redraw()}}
+let AC=null,snd=true;
+try{snd=localStorage.getItem("replipix_snd")!=="0"}catch(e){}
+function initA(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==="suspended")AC.resume()}
+["pointerdown","keydown"].forEach(ev=>addEventListener(ev,initA));
+const PENT=[0,2,4,7,9];
+function drop(f,t,up,vol){const o=AC.createOscillator(),g=AC.createGain();o.type="sine";
+const d=up?0.11:0.13;
+o.frequency.setValueAtTime(up?f*0.55:f*1.25,t);o.frequency.exponentialRampToValueAtTime(up?f*1.3:f*0.5,t+d);
+g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime(vol,t+0.008);g.gain.exponentialRampToValueAtTime(0.0001,t+d+0.08);
+o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d+0.1)}
+function playSnd(cells){if(!snd||!AC||AC.state!=="running")return;
+const t0=AC.currentTime+0.02,pick=a=>{const st=Math.max(1,Math.ceil(a.length/12));return a.filter((k,i)=>i%st===0)},
+fq=(k,c)=>{const d=(k.q*2+k.r+c)%10;return 300*Math.pow(2,(PENT[d%5]+12*Math.floor(d/5))/12)*(1+(Math.random()-0.5)*0.05)};
+const sh=pick(cells.filter(k=>k.o)),gr=pick(cells.filter(k=>k.n));
+sh.forEach((k,i)=>drop(fq(k,k.o),t0+i*0.012,false,0.09/Math.sqrt(sh.length)));
+gr.forEach((k,i)=>drop(fq(k,k.n),t0+(k.o?0.35:0)*DUR/1000+i*0.012,true,0.16/Math.sqrt(gr.length)))}
+$("snd").onclick=()=>{snd=!snd;$("snd").textContent=snd?"🔊 Suara":"🔇 Suara";try{localStorage.setItem("replipix_snd",snd?"1":"0")}catch(e){}};
+$("snd").textContent=snd?"🔊 Suara":"🔇 Suara";
+function startAnim(a,b){const cells=[];for(let r=0;r<N;r++)for(let q=0;q<N;q++)if(a[r][q]!==b[r][q])cells.push({r,q,o:a[r][q],n:b[r][q]});
+anim=cells.length?{cells,t0:performance.now()}:null;if(anim){playSnd(cells);if(!tk){tk=1;requestAnimationFrame(tick)}}else redraw()}
+function tokens(s){s=s.replace(/--\[\[[\s\S]*?\]\]/g,"").replace(/--.*$/gm,"");
+return (s.match(/[A-Za-z_]\w*|\d+\.?\d*|"[^"]*"|'[^']*'|==|~=|<=|>=|<<|>>|\.\.\.?|\/\/|[^\s]/g)||[]).length}
+const PRE=NAMES.map((n,i)=>n+"="+(i+1)).join(" ")+`
+min=math.min max=math.max abs=math.abs floor=math.floor ceil=math.ceil sqrt=math.sqrt
+sin=math.sin cos=math.cos tan=math.tan asin=math.asin acos=math.acos
+atan=function(a,b) return math.atan(a,b) end
+round=function(a) return floor(a+0.5) end
+step=function(a,v) return a>v and 1 or 0 end
+sign=function(a) return a>0 and 1 or a<0 and -1 or 0 end
+clamp=function(v,a,b) return v<a and a or v>b and b or v end
+inrange=function(v,a,b) return v>=a and v<=b end
+mix=function(a,b,t) return a+(b-a)*t end
+btoi=function(a) return a and 1 or 0 end
+sort=table.sort insert=table.insert remove=table.remove
+math=nil table=nil string=nil load=nil loadfile=nil dofile=nil rawset=nil rawget=nil setmetatable=nil getmetatable=nil collectgarbage=nil print=nil require=nil`;
+function run(src){
+const {lua,lauxlib,lualib,to_luastring,to_jsstring}=fengari;
+const g=blank();let total=0,cell=0,err=null;
+const L=lauxlib.luaL_newstate();
+[["_G",lualib.luaopen_base],["math",lualib.luaopen_math],["table",lualib.luaopen_table]].forEach(([n,f])=>{lauxlib.luaL_requiref(L,to_luastring(n),f,1);lua.lua_pop(L,1)});
+lauxlib.luaL_dostring(L,to_luastring(PRE));
+if(lauxlib.luaL_loadstring(L,to_luastring(src))!==0)return {g,cyc:0,err:to_jsstring(lua.lua_tostring(L,-1))};
+lua.lua_sethook(L,()=>{total++;if(++cell>LIMIT)lauxlib.luaL_error(L,to_luastring("batas cycle terlampaui (loop tak berujung?)"))},lua.LUA_MASKCOUNT,1);
+outer:for(let y=H;y>=-H;y--)for(let x=-H;x<=H;x++){
+lua.lua_pushvalue(L,-1);
+lua.lua_pushinteger(L,x);lua.lua_setglobal(L,to_luastring("x"));
+lua.lua_pushinteger(L,y);lua.lua_setglobal(L,to_luastring("y"));
+cell=0;let st;
+try{st=lua.lua_pcall(L,0,1,0)}catch(e){err=String(e);break outer}
+if(st!==0){err=to_jsstring(lua.lua_tostring(L,-1))+" (di sel x="+x+", y="+y+")";break outer}
+const t=lua.lua_type(L,-1);let c=0;
+if(t===lua.LUA_TBOOLEAN)c=lua.lua_toboolean(L,-1)?1:0;
+else if(t===lua.LUA_TNUMBER)c=Math.floor(lua.lua_tonumber(L,-1));
+else if(t!==lua.LUA_TNIL&&t!==lua.LUA_TNONE){err="return harus angka, boolean, atau kosong (sel x="+x+", y="+y+")";break outer}
+c=(c>=1&&isFinite(c))?((c-1)%16)+1:0;
+g[H-y][x+H]=c;lua.lua_pop(L,1)}
+return {g,cyc:Math.round(total/(N*N)*10)/10,err}}
+const KW=new Set("and break do else elseif end false for function goto if in local nil not or repeat return then true until while".split(" "));
+const FN=new Set("min max abs floor round ceil step sign clamp inrange mix sqrt sin cos tan asin acos atan btoi sort insert remove pairs ipairs".split(" "));
+function hl(){const s=$("code").value,re=/(--\[\[[\s\S]*?\]\]|--[^\n]*)|("[^"\n]*"|'[^'\n]*')|(\d+\.?\d*)|([A-Za-z_]\w*)|(==|~=|<=|>=|<<|>>|\/\/|\.\.|[^\s\w])/g;
+const esc=t=>t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+let out="",last=0,m;
+while((m=re.exec(s))){out+=esc(s.slice(last,m.index));
+const w=m[4];const cl=m[1]?"m":m[2]?"s":m[3]?"n":w?(KW.has(w)?"k":NAMES.includes(w)?"c":FN.has(w)?"f":(w=="x"||w=="y")?"v":""):"o";
+out+=cl?'<span class="'+cl+'">'+esc(m[0])+'</span>':esc(m[0]);last=re.lastIndex}
+$("hl").innerHTML=out+esc(s.slice(last))+"\n"}
+function same(a,b){return a.every((r,i)=>r.every((v,j)=>v===b[i][j]))}
+function load(l){cur=l;setSize(LEVELS[l].h);$("lv").value=l;$("goal").textContent=LEVELS[l].g;$("code").value=LEVELS[l].s;
+gT=target(l);gO=blank();redraw();$("msg").textContent="";$("cy").textContent=0;$("cs").textContent=tokens($("code").value);$("sc").textContent="–";showBest();hl();exec()}
+function showBest(){const b=mine[LEVELS[cur].id];$("bs").textContent=b?b.score:"–"}
+function setSize(h){H=h;N=2*h+1;CELL=Math.floor(264/N);W=OX+N*CELL;HT=N*CELL+OB;["t","o"].forEach(i=>{const c=$(i);c.width=W;c.height=HT;c.style.maxWidth=W+"px";c.style.aspectRatio=W+"/"+HT});gT=blank();gO=blank();hov=null;anim=null}
+function exec(){
+const src=$("code").value,r=run(src),cs=tokens(src),m=$("msg");
+$("cs").textContent=cs;
+if(r.err){m.className="er";m.textContent="Error: "+r.err.replace(/\[string "[^"]*"\]:/,"baris ");return}
+const old=gO;gO=r.g;startAnim(old,r.g);$("cy").textContent=r.cyc;
+if(same(r.g,gT)){const sc=Math.round((cs+r.cyc)*10)/10;$("sc").textContent=sc;
+const id=LEVELS[cur].id;if(me&&(!mine[id]||sc<mine[id].score)){mine[id]={size:cs,cyc:r.cyc,score:sc};rpc("rp_submit",{p_name:me,p_level:id,p_size:cs,p_cycles:r.cyc,p_code:src}).catch(()=>{})}
+showBest();m.className="ok";m.textContent="✓ Identik! Coba kurangi code size atau cycles."}
+else{$("sc").textContent="–";m.className="er";const d=r.g.flat().filter((v,i)=>v!==gT.flat()[i]).length;m.textContent="Belum identik: "+d+" sel berbeda."}}
+$("run").onclick=exec;
+["t","o"].forEach(id=>{const cv=$(id);
+const mv=e=>{const rc=cv.getBoundingClientRect(),k=cv.width/rc.width,px=(e.clientX-rc.left)*k,py=(e.clientY-rc.top)*k,c=Math.floor((px-OX)/CELL),r=Math.floor(py/CELL);
+hov=(c>=0&&c<N&&r>=0&&r<N)?{c,r,px,py,cv}:null;redraw()};
+cv.onpointermove=mv;cv.onpointerdown=mv;cv.onpointerleave=()=>{hov=null;redraw()}});
+$("rst").onclick=()=>load(cur);
+$("code").oninput=()=>{$("cs").textContent=tokens($("code").value);hl();clearTimeout(tmr);tmr=setTimeout(exec,120)};$("code").onscroll=()=>{$("hl").scrollTop=$("code").scrollTop;$("hl").scrollLeft=$("code").scrollLeft};
+$("code").onkeydown=e=>{if(e.key==="Tab"){e.preventDefault();const t=e.target,s=t.selectionStart;t.value=t.value.slice(0,s)+"  "+t.value.slice(t.selectionEnd);t.selectionStart=t.selectionEnd=s+2;t.dispatchEvent(new Event("input"))}};
+LEVELS.forEach((l,i)=>{const o=document.createElement("option");o.value=i;o.textContent=l.n;$("lv").appendChild(o)});
+$("lv").onchange=e=>load(+e.target.value);
+COL.forEach((c,i)=>{const d=document.createElement("div");d.style.background=c;d.style.color=[0,3,4,7,8,9,13].includes(i)?"#111":"#fff";d.textContent=i+1;d.title=NAMES[i];$("pal").appendChild(d)});
+document.fonts&&document.fonts.load("16px VT323").then(()=>{redraw()});
+
+const E=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const LOCAL=!SB_URL;
+const LS={get(){try{return JSON.parse(localStorage.getItem("rp_local")||"{}")}catch(e){return{}}},put(d){try{localStorage.setItem("rp_local",JSON.stringify(d))}catch(e){}}};
+const LF={
+rp_search:a=>Object.values(LS.get()).filter(p=>p.name.toLowerCase().includes((a.q||"").toLowerCase())).sort((x,y)=>x.name.localeCompare(y.name)).slice(0,8).map(p=>({name:p.name})),
+rp_signup:a=>{const d=LS.get(),k=a.p_name.toLowerCase();if(d[k])throw new Error("NAMA_SUDAH_ADA");d[k]={name:a.p_name,sc:{}};LS.put(d);return a.p_name},
+rp_login:a=>{const p=LS.get()[a.p_name.toLowerCase()];return p?p.name:null},
+rp_submit:a=>{const d=LS.get(),p=d[a.p_name.toLowerCase()];if(!p)return null;const s=a.p_size+a.p_cycles,o=p.sc[a.p_level];if(!o||s<o.score){p.sc[a.p_level]={code_size:a.p_size,cycles:a.p_cycles,score:Math.round(s*10)/10};LS.put(d)}return null},
+rp_my_scores:a=>{const p=LS.get()[a.p_name.toLowerCase()];return p?Object.entries(p.sc).map(([k,v])=>({level_id:k,...v})):[]},
+rp_leaderboard:a=>Object.values(LS.get()).filter(p=>p.sc[a.p_level]).map(p=>({name:p.name,...p.sc[a.p_level]})).sort((x,y)=>x.score-y.score),
+rp_ranking:()=>Object.values(LS.get()).filter(p=>Object.keys(p.sc).length).map(p=>{const v=Object.values(p.sc),n=v.length,av=k=>v.reduce((s,o)=>s+o[k],0)/n;return{name:p.name,solved:n,avg_score:av("score"),avg_size:av("code_size"),avg_cycles:av("cycles")}}).sort((x,y)=>y.solved-x.solved||x.avg_score-y.avg_score)};
+async function rpc(f,a){if(LOCAL)return LF[f](a||{});
+const r=await fetch(SB_URL+"/rest/v1/rpc/"+f,{method:"POST",headers:{apikey:SB_KEY,Authorization:"Bearer "+SB_KEY,"Content-Type":"application/json"},body:JSON.stringify(a||{})});
+const j=await r.json().catch(()=>null);if(!r.ok)throw new Error((j&&j.message)||"error");return j}
+const SC=["auth","menu","lbp","game"];
+function show(id){SC.forEach(s=>$(s).hidden=s!==id);scrollTo(0,0)}
+const T=m=>{$("am").textContent=m};
+$("su").onclick=async()=>{const n=$("sn").value.trim();if(n.length<2||n.length>20)return T("Nama harus 2 sampai 20 karakter.");
+try{await rpc("rp_signup",{p_name:n});await login(n)}catch(e){T(/NAMA_SUDAH_ADA|duplicate/.test(e.message)?"Nama sudah dipakai. Coba nama lain, atau cari namamu di kotak Sudah punya akun.":"Gagal: "+e.message)}};
+let st2;$("ls").oninput=()=>{clearTimeout(st2);st2=setTimeout(find,150)};$("ls").onfocus=find;
+async function find(){try{const r=await rpc("rp_search",{q:$("ls").value.trim()});$("lres").innerHTML=r.length?r.map(p=>'<button data-n="'+E(p.name)+'">'+E(p.name)+'</button>').join(""):'<span style="color:var(--mu)">Tidak ada akun yang cocok.</span>'}catch(e){T("Gagal memuat: "+e.message)}}
+$("lres").onclick=e=>{const n=e.target.dataset&&e.target.dataset.n;if(n)login(n)};
+async function login(n){const r=await rpc("rp_login",{p_name:n});if(!r)return T("Akun tidak ditemukan.");me=r;try{localStorage.setItem("rp_me",me)}catch(e){}
+mine={};(await rpc("rp_my_scores",{p_name:me})).forEach(o=>mine[o.level_id]={size:o.code_size,cyc:+o.cycles,score:+o.score});await menu()}
+const GUIDE=`<p>Kodemu dijalankan sekali untuk setiap sel dengan <code>x</code> dan <code>y</code> (y positif ke atas), lalu <code>return</code> angka warna 0 sampai 16 atau konstanta seperti RED. Tanpa return atau false = kosong, true = putih. Angka di atas 16 berputar lagi (17 = WHITE).</p>
+<p><b>Kondisi</b>: <code>if kondisi then ... elseif ... else ... end</code>. Gabungkan dengan <code>and</code>, <code>or</code>, <code>not</code>, dan boleh bersarang.</p>
+<p><b>Variabel</b>: <code>a = 10 - x</code>. <b>Pembanding</b>: <code>==</code> sama, <code>~=</code> tidak sama, <code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code>.</p>
+<p><b>Operator</b>: <code>+ - * /</code>, <code>//</code> pembagian bulat, <code>%</code> sisa bagi, <code>^</code> pangkat. Bitwise: <code>&amp; | ~ &lt;&lt; &gt;&gt;</code>.</p>
+<p><b>Fungsi</b> (tanpa prefix math.): min, max, abs, floor, round, ceil, step(a,v), sign, clamp(v,a,b), inrange(v,a,b), mix(a,b,t), sqrt, sin, cos, tan, asin, acos, atan, btoi, sort, insert, remove.</p>
+<p><b>Trik hemat kode</b>: <code>return x == 0 and 5 or 15</code> menggantikan if-else. Pustaka string, io, debug, dan random tidak tersedia.</p>
+<p><b>Skor</b> = code size (jumlah token) + cycles (rata-rata instruksi per sel). Makin kecil makin bagus.</p>`;
+function rankT(rk){return '<table><tr><th>#</th><th>Pemain</th><th>Level</th><th>Rata-rata skor</th></tr>'+(rk.slice(0,10).map((p,i)=>'<tr class="'+(p.name===me?"me":"")+'"><td>'+(i+1)+'</td><td>'+E(p.name)+'</td><td>'+p.solved+'</td><td>'+(+p.avg_score).toFixed(1)+'</td></tr>').join("")||'<tr><td colspan=4>Belum ada pemain yang menyelesaikan level.</td></tr>')+'</table>'}
+async function menu(){show("menu");const M=$("menu");M.innerHTML='<p class="sub">Memuat...</p>';
+let rk=[];try{rk=await rpc("rp_ranking")}catch(e){}
+const ks=Object.values(mine),n=ks.length,av=k=>n?(ks.reduce((s,o)=>s+o[k],0)/n).toFixed(1):"–",pos=rk.findIndex(p=>p.name===me)+1;
+M.innerHTML=`<h1>Halo, ${E(me)}</h1><p class="sub">${LOCAL?"Mode lokal: data hanya tersimpan di browser ini.":"Terhubung ke database."} <button id="out">Keluar</button></p>
+<div class="card" style="margin-bottom:14px"><div class="stats"><div>Level selesai<br><b>${n}/${LEVELS.length}</b></div><div>Rata-rata size<br><b>${av("size")}</b></div><div>Rata-rata cycles<br><b>${av("cyc")}</b></div><div>Rata-rata skor<br><b>${av("score")}</b></div><div>Peringkat<br><b>${pos?"#"+pos+" / "+rk.length:"–"}</b></div></div></div>
+<div class="card" style="margin-bottom:14px"><p class="lbl">Peringkat pemain</p>${rankT(rk)}<p class="sub">Urutan: level selesai terbanyak, lalu rata-rata skor terkecil.</p></div>
+<details class="card" style="margin-bottom:14px"><summary>Panduan permainan</summary>${GUIDE}</details>
+<div class="card"><p class="lbl">Pilih level</p>${LEVELS.map((l,i)=>{const m=mine[l.id],z=2*l.h+1;return `<div class="lv"><span>${E(l.n)} <i>${z}×${z}</i></span><span class="${m?"ok":""}">${m?"skor "+m.score:"belum"}</span><button data-p="${i}">Main</button><button data-l="${i}">Leaderboard</button></div>`}).join("")}</div>`}
+$("menu").onclick=e=>{const d=e.target.dataset;if(d.p!==undefined)play(+d.p);else if(d.l!==undefined)lb(+d.l,"menu");else if(e.target.id==="out"){me=null;mine={};try{localStorage.removeItem("rp_me")}catch(x){}show("auth")}};
+function play(i){show("game");$("who").textContent=me;load(i)}
+$("bk").onclick=menu;$("lb").onclick=()=>lb(cur,"game");
+let lbFrom="menu";
+async function lb(i,from){lbFrom=from;show("lbp");const L=LEVELS[i],P=$("lbp");P.innerHTML='<p class="sub">Memuat...</p>';
+let rows=[];try{rows=(await rpc("rp_leaderboard",{p_level:L.id})).map(r=>({...r,score:+r.score}))}catch(e){P.innerHTML='<p class="er">Gagal memuat: '+E(e.message)+'</p><button id="lbk">← Kembali</button>';$("lbk").onclick=()=>show(lbFrom);return}
+const m=mine[L.id],mn=rows.length?rows[0].score:0,mxv=rows.length?rows[rows.length-1].score:1,B=8,bins=Array(B).fill(0);
+rows.forEach(r=>bins[mxv===mn?0:Math.min(B-1,Math.floor((r.score-mn)/(mxv-mn)*B))]++);
+const bm=Math.max(1,...bins),pos=m?(mxv>mn?(m.score-mn)/(mxv-mn)*100:50/B):null;
+P.innerHTML=`<h1>${E(L.n)}</h1><p class="sub">Leaderboard · ${rows.length} pemain</p><button id="lbk">← Kembali</button>
+${m?"":'<p class="er" style="margin:10px 0">Kamu belum menyelesaikan level ini. Selesaikan dulu supaya namamu muncul di leaderboard.</p>'}
+<div class="card" style="margin:12px 0"><p class="lbl">Sebaran skor${m?" · garis merah = skormu ("+m.score+")":""}</p><div class="hist">${bins.map(b=>'<div style="height:'+(b/bm*100)+'%"></div>').join("")}${pos==null?"":'<i style="left:'+Math.max(0,Math.min(100,pos))+'%"></i>'}</div><div class="hax"><span>${mn}</span><span>${mxv}</span></div></div>
+<div class="card"><table><tr><th>#</th><th>Nama</th><th>Size</th><th>Cycles</th><th>Skor</th></tr>${rows.map((r,k)=>`<tr class="${r.name===me?"me":""}"><td>${k+1}</td><td>${E(r.name)}</td><td>${r.code_size}</td><td>${r.cycles}</td><td>${r.score}</td></tr>`).join("")||'<tr><td colspan=5>Belum ada yang menyelesaikan.</td></tr>'}</table></div>`;
+$("lbk").onclick=()=>show(lbFrom)}
+show("auth");
+try{const n=localStorage.getItem("rp_me");if(n)login(n).catch(()=>show("auth"))}catch(e){}
+</script>
+</body>
+</html>
