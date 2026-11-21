@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Replipix – Replicube 2D</title>
+<title>Pixelcode</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 22 22'%3E%3Crect x='5.5' width='9' height='9' fill='%23e8365c'/%3E%3Crect y='11' width='9' height='9' fill='%233a4aa0'/%3E%3Crect x='11' y='11' width='9' height='9' fill='%23ffcb62'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 <style>
@@ -13,7 +14,7 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 ::selection{background:#5a5a5a;color:#fff}
 body{margin:0;background:var(--bg);color:var(--tx);font:19px/1.3 VT323,ui-monospace,Menlo,Consolas,monospace;padding:16px}
 h1{font-size:32px;font-weight:400;margin:0 0 2px;color:var(--ac);letter-spacing:.04em}
-h1::before{content:"> ";color:var(--mu)}
+.lg{display:inline-block;width:.62em;height:.62em;margin-right:.32em}
 h1::after{content:"_";animation:bl 1s steps(1) infinite}
 @keyframes bl{50%{opacity:0}}
 .sub{color:var(--mu);margin:0 0 14px}
@@ -73,25 +74,44 @@ button.on{background:var(--ac);color:#0a0a0a;border-color:var(--ac)}
 .xb{display:inline-block;line-height:.8;border-top:2px solid currentColor;padding:0 1px}
 .lv{gap:8px}.lv span:first-child{min-width:0}.lv span:nth-child(2){white-space:nowrap}
 .lv button{padding:4px 9px;display:inline-flex;align-items:center}.lv svg{pointer-events:none;display:block}
+.hero{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;border:1px solid var(--bd);background:var(--card);padding:22px;margin-bottom:14px}
+.hero h1{font-size:72px;line-height:.95;margin:0 0 14px}
+.wl{font-size:30px;line-height:1;color:var(--mu);letter-spacing:.05em;margin:0 0 4px}
+.hero p{margin:6px 0}
+.ha{display:flex;flex-direction:column;gap:8px;align-items:center}
+#hcode{margin:0;width:252px;box-sizing:border-box;height:84px;overflow:hidden;font:inherit;font-size:18px;line-height:1.25;background:#080808;border:1px solid var(--bd);padding:6px 8px;white-space:pre;color:var(--tx)}
+.ha canvas{width:252px;height:252px;aspect-ratio:auto;max-width:none;margin:0}
+@media(max-width:720px){.hero{grid-template-columns:1fr}.hero h1{font-size:54px}.wl{font-size:24px}.dbr{display:none}}
+.who{display:inline-flex;align-items:center;gap:6px;background:var(--ok);color:#0a0a0a;padding:0 10px;font-size:20px}
+.or{display:flex;align-items:center;gap:10px;color:var(--mu);margin:16px 0}.or::before,.or::after{content:"";flex:1;border-top:1px solid var(--bd)}
+#out svg{pointer-events:none;display:block}#out{padding:4px 9px}
+@media(max-width:720px){#lv{margin-left:0!important}}
+.hprog{border-top:1px dashed var(--bd);margin-top:16px;padding-top:12px}
+.hst{display:flex;align-items:center;gap:8px;margin-top:14px;color:var(--mu)}
+.dot{width:8px;height:8px;background:var(--ok);animation:bl 1s steps(1) infinite}
+.pcard{display:none}
+@media(max-width:720px){.hprog{display:none}.pcard{display:block}}
+.foot{text-align:center;color:var(--mu);margin:22px 0 6px;font-size:17px}
 </style>
 </head>
 <body>
-<div id="auth" class="scr"><div class="wrap" style="margin-bottom:14px"><div style="grid-column:1/-1"><h1>Replipix</h1><p class="sub">Tulis kode Lua untuk menggambar ulang targetnya.</p></div></div>
-<div class="wrap"><div class="card"><p class="lbl">Pemain baru</p><input id="sn" maxlength="20" placeholder="nama pemain"><div class="row"><button class="p" id="su">Daftar</button></div></div>
-<div class="card"><p class="lbl">Sudah punya akun</p><input id="ls" placeholder="cari nama..." autocomplete="off"><div id="lres"></div></div></div><p id="am" class="er"></p></div>
+<div id="auth" class="scr" style="max-width:380px;text-align:center;padding-top:5vh"><h1 style="font-size:46px;line-height:1"><svg class="lg" viewBox="0 0 20 20" aria-hidden="true"><rect x="5.5" y="0" width="9" height="9" fill="#e8365c"/><rect x="0" y="11" width="9" height="9" fill="#3a4aa0"/><rect x="11" y="11" width="9" height="9" fill="#ffcb62"/></svg>Pixelcode</h1>
+<p class="sub">Gambar ulang pixel art dengan kode Lua seefisien mungkin, lalu adu skor di leaderboard.</p>
+<div class="card" style="text-align:left;margin-top:18px"><p class="lbl">Pemain baru</p><input id="sn" maxlength="20" placeholder="nama pemain"><div class="row"><button class="p" id="su">Daftar</button></div>
+<div class="or">atau</div>
+<p class="lbl">Sudah punya akun</p><input id="ls" placeholder="cari nama..." autocomplete="off"><div id="lres"></div></div><p id="am" class="er"></p></div>
 <div id="menu" class="scr" hidden></div><div id="lbp" class="scr" hidden></div>
 <div id="game" hidden>
-<div class="wrap" style="margin-bottom:0"><div style="grid-column:1/-1"><h1>Replipix</h1></div></div>
+<div class="wrap" style="margin-bottom:0"><div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;gap:10px"><h1><svg class="lg" viewBox="0 0 20 20" aria-hidden="true"><rect x="5.5" y="0" width="9" height="9" fill="#e8365c"/><rect x="0" y="11" width="9" height="9" fill="#3a4aa0"/><rect x="11" y="11" width="9" height="9" fill="#ffcb62"/></svg>Pixelcode</h1><span id="who" class="who"></span></div></div>
 <div class="wrap">
 <div class="card">
 <p class="lbl">Target</p><canvas id="t" width="290" height="286"></canvas>
-<p class="lbl">Hasil kodemu<span id="cmpl"></span></p><canvas id="o" width="290" height="286"></canvas>
+<p class="lbl">Hasil<span id="cmpl"></span></p><canvas id="o" width="290" height="286"></canvas>
 </div>
 <div class="card">
-<div class="row"><button id="bk">← Menu</button><button id="lb">Leaderboard</button><span id="who" style="color:var(--mu)"></span></div>
-<div class="row"><div class="dd" id="lv"><button id="ddb"></button><div id="ddl" hidden></div></div></div>
+<div class="row"><button id="bk">← Menu</button><button id="lb">Leaderboard</button><div class="dd" id="lv" style="margin-left:auto"><button id="ddb"></button><div id="ddl" hidden></div></div></div>
 <div class="ed"><pre id="ml" aria-hidden="true"></pre><pre id="hl" aria-hidden="true"></pre><textarea id="code" spellcheck="false" wrap="off"></textarea></div>
-<div class="row"><button id="cmp">Compare</button><button id="rst">Reset kode</button><button id="snd" title="Suara" aria-label="Suara">🔊</button></div>
+<div class="row"><button id="cmp">Compare</button><button id="rst">Reset</button><button id="snd" title="Suara" aria-label="Suara">🔊</button></div>
 <div id="msg"></div>
 <div class="stats"><div>Code size<br><b id="cs">0</b></div><div>Cycles<br><b id="cy">0</b></div><div>Skor<br><b id="sc">–</b></div><div>Terbaik<br><b id="bs">–</b></div></div>
 <p class="lbl" style="margin-top:12px">Palet warna<span id="pn"></span></p><div class="pal" id="pal"></div>
@@ -128,8 +148,8 @@ const LEVELS=[
 {n:"16. Papan sasaran",g:"Cincin RED dan WHITE selang-seling dari pusat (RED di tengah), jarak dibulatkan ke bawah, sampai jarak 9",t:(x,y)=>{const d=Math.floor(Math.sqrt(x*x+y*y));return d>9?0:d%2==0?7:1},s:"-- tips: floor(sqrt(x*x + y*y)) % 2\n"}
 ];
 const META=[["dot",3],["line",3],["plus",4],["frame",4],["checker",5],["diag",5],["nested",5],["tri",5],["circle",5],["house",5],["tree",5],["cup",5],["rocket",5],["mushroom",5],["cactus",5],["target",9]];
-const wrapC=t=>{const o=[];let c="";t.split(" ").forEach(w=>{if((c+" "+w).trim().length>56){o.push(c);c=w}else c=(c+" "+w).trim()});if(c)o.push(c);return o.map(x=>"-- "+x).join("\n")+"\n"};
-LEVELS.forEach((l,i)=>{l.id=META[i][0];l.h=META[i][1];l.s=wrapC("Target: "+l.g)+l.s});
+const TIPS=["kondisikan x dan y, lalu return warnanya","cukup cek satu sumbu","gabungkan dua kondisi dengan or","max(abs(x), abs(y)) = jarak kotak dari pusat","(x + y) % 2 hasilnya 0 atau 1","warna bisa dihitung dari x","warna naik seiring jarak dari pusat","bandingkan y dengan x","sqrt(x*x + y*y) = jarak ke pusat","atap segitiga, pakai abs(x) untuk simetri","kerjakan daun dulu, lalu batang","uap berselang-seling di dua kolom","abs(x) membuat sirip kiri dan kanan sekaligus","tudung makin lebar ke bawah","lengan kaktus ada di y = 4 sampai 1","floor(sqrt(x*x + y*y)) % 2"];
+LEVELS.forEach((l,i)=>{l.id=META[i][0];l.h=META[i][1];l.s="-- tips: "+TIPS[i]+"\n"+(i==0?"if x == 0 and y == 0 then\n  \nend\n":"")});
 const $=id=>document.getElementById(id);
 let cur=0,mine={},me=null;
 function blank(){return Array.from({length:N},()=>Array(N).fill(0))}
@@ -218,13 +238,14 @@ g[H-y][x+H]=c;lua.lua_pop(L,1)}
 return {g,cyc:Math.round(total/(N*N)*10)/10,err}}
 const KW=new Set("and break do else elseif end false for function goto if in local nil not or repeat return then true until while".split(" "));
 const FN=new Set("min max abs floor round ceil step sign clamp inrange mix sqrt sin cos tan asin acos atan btoi sort insert remove pairs ipairs".split(" "));
-function hl(){const s=$("code").value,re=/(--\[\[[\s\S]*?\]\]|--[^\n]*)|("[^"\n]*"|'[^'\n]*')|(\d+\.?\d*)|([A-Za-z_]\w*)|(==|~=|<=|>=|<<|>>|\/\/|\.\.|[^\s\w])/g;
+function hlText(s){const re=/(--\[\[[\s\S]*?\]\]|--[^\n]*)|("[^"\n]*"|'[^'\n]*')|(\d+\.?\d*)|([A-Za-z_]\w*)|(==|~=|<=|>=|<<|>>|\/\/|\.\.|[^\s\w])/g;
 const esc=t=>t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 let out="",last=0,m;
 while((m=re.exec(s))){out+=esc(s.slice(last,m.index));
 const w=m[4];const cl=m[1]?"m":m[2]?"s":m[3]?"n":w?(KW.has(w)?"k":NAMES.includes(w)?"c":FN.has(w)?"f":(w=="x"||w=="y")?"v":""):"o";
 out+=cl?'<span class="'+cl+'">'+esc(m[0])+'</span>':esc(m[0]);last=re.lastIndex}
-$("hl").innerHTML=out+esc(s.slice(last))+"\n"}
+return out+esc(s.slice(last))}
+function hl(){$("hl").innerHTML=hlText($("code").value)+"\n"}
 function same(a,b){return a.every((r,i)=>r.every((v,j)=>v===b[i][j]))}
 function load(l){flush();cur=l;cmp=false;solved=false;cel=true;sp=[];$("gd").open=false;lblState();setSize(LEVELS[l].h);opts();$("code").value=draft(l);
 gT=target(l);gO=blank();redraw();$("msg").textContent="";$("cy").textContent=0;$("cs").textContent=tokens($("code").value);$("sc").textContent="–";showBest();hl();exec();pull(l)}
@@ -357,19 +378,39 @@ const GUIDE=`<p>Kodemu dijalankan sekali untuk setiap sel dengan <code>x</code> 
 <p><b>Skor</b> = code size (jumlah token) + cycles (rata-rata instruksi per sel). Makin kecil makin bagus.</p>`;
 $("gh").innerHTML=GUIDE;
 const XB='<span class="xb">x</span>';
+const IU='<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="4.5" r="3"/><path d="M1 13c0-3.3 2.7-5 6-5s6 1.7 6 5z"/></svg>';
+const IO='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2H2v12h4M10 4l4 4-4 4M14 8H6"/></svg>';
 const IP='<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M3 1v12l10-6z"/></svg>';
 const IS='<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="1" y="8" width="3" height="5"/><rect x="5.5" y="4" width="3" height="9"/><rect x="10" y="1" width="3" height="12"/></svg>';
+const HP=[{c:"-- berlian\nd = abs(x) + abs(y)\nreturn d <= 3 and RED",f:(x,y)=>abs(x)+abs(y)<=3?7:0},
+{c:"-- plus\nif x == 0 or y == 0 then\n  return LIME end",f:(x,y)=>x==0||y==0?10:0},
+{c:"-- papan catur\nreturn (x+y)%2==0\n  and PINK or WHITE",f:(x,y)=>(x+y)%2==0?5:1},
+{c:"-- bingkai\nd = max(abs(x), abs(y))\nreturn d == 3 and ORANGE",f:(x,y)=>mx(abs(x),abs(y))==3?8:0}];
+let hp=0,ht0=0;
+const HO=(()=>{const a=[];for(let y=-3;y<=3;y++)for(let x=-3;x<=3;x++)a.push([x,y]);a.sort((p,q)=>Math.hypot(p[0],p[1])-Math.hypot(q[0],q[1])||p[1]-q[1]);return a})();
+function heroLoop(now){const cv=$("hc");
+if(!cv||$("menu").hidden||document.hidden){setTimeout(()=>requestAnimationFrame(heroLoop),300);return}
+if(!ht0)ht0=now;const P=HP[hp],T1=P.c.length*32,T2=T1+350,T3=T2+49*14+260+1500,T4=T3+450,t=now-ht0;
+$("hcode").innerHTML=hlText(P.c.slice(0,Math.min(P.c.length,Math.floor(t/32))))+(Math.floor(t/380)%2?"":"▌");
+const c=cv.getContext("2d");c.clearRect(0,0,252,252);
+HO.forEach(([x,y],r)=>{const px=(x+3)*36,py=(3-y)*36;c.fillStyle="#303030";c.fillRect(px,py,35,35);const col=P.f(x,y);if(!col)return;
+let u=(t-T2-r*14)/260;if(u<=0)return;u=Math.min(1,u);let k=u<.7?u/.7*1.2:1.2-.2*(u-.7)/.3;if(t>T3)k*=Math.max(0,1-(t-T3)/450);
+const z=35*k;c.fillStyle=COL[col-1];c.fillRect(px+17.5-z/2,py+17.5-z/2,z,z)});
+if(t>T4){hp=(hp+1)%HP.length;ht0=now}
+requestAnimationFrame(heroLoop)}
+requestAnimationFrame(heroLoop);
 function rankT(rk){return '<table><tr><th>#</th><th>Pemain</th><th>Level</th><th>'+XB+' skor</th></tr>'+(rk.slice(0,10).map((p,i)=>'<tr class="'+(p.name===me?"me":"")+'"><td>'+(i+1)+'</td><td>'+E(p.name)+'</td><td>'+p.solved+'</td><td>'+(+p.avg_score).toFixed(1)+'</td></tr>').join("")||'<tr><td colspan=4>Belum ada pemain yang menyelesaikan level.</td></tr>')+'</table>'}
 async function menu(){flush();show("menu");const M=$("menu");M.innerHTML='<p class="sub">Memuat...</p>';
 let rk=[];try{rk=await rpc("rp_ranking")}catch(e){}
 const ks=Object.values(mine),n=ks.length,av=k=>n?(ks.reduce((s,o)=>s+o[k],0)/n).toFixed(1):"–",pos=rk.findIndex(p=>p.name===me)+1;
-M.innerHTML=`<h1>Halo, ${E(me)}</h1><p class="sub">${LOCAL?"Mode lokal: data hanya tersimpan di browser ini.":"Terhubung ke database."} <button id="out">Keluar</button></p>
-<div class="card" style="margin-bottom:14px"><div class="stats"><div>Level<br><b>${n}/${LEVELS.length}</b></div><div>${XB} size<br><b>${av("size")}</b></div><div>${XB} cycles<br><b>${av("cyc")}</b></div><div>${XB} skor<br><b>${av("score")}</b></div><div>Peringkat<br><b>${pos?"#"+pos+" / "+rk.length:"–"}</b></div></div></div>
+const PG=`<p class="lbl" style="text-transform:none"><span class="ok">${E(me)}</span>’s progress</p><div class="stats"><div>Level<br><b>${n}/${LEVELS.length}</b></div><div>${XB} size<br><b>${av("size")}</b></div><div>${XB} cycles<br><b>${av("cyc")}</b></div><div>${XB} skor<br><b>${av("score")}</b></div><div>Peringkat<br><b>${pos?"#"+pos+" / "+rk.length:"–"}</b></div></div>`;
+M.innerHTML=`<div class="hero"><div><div class="wl">Welcome to</div><h1><svg class="lg" viewBox="0 0 20 20" aria-hidden="true"><rect x="5.5" y="0" width="9" height="9" fill="#e8365c"/><rect x="0" y="11" width="9" height="9" fill="#3a4aa0"/><rect x="11" y="11" width="9" height="9" fill="#ffcb62"/></svg>Pixelcode</h1><p class="sub">Gambar ulang pixel art dengan kode Lua seefisien mungkin. <br class="dbr">Pilih level, tulis kodenya, dan hasilnya langsung terlihat.</p><div class="hprog">${PG}</div><div class="hst"><span class="dot"></span><span>${LOCAL?"Mode lokal: data hanya di browser ini":"Terhubung ke database"}</span><button id="out" title="Keluar" aria-label="Keluar">${IO}</button></div></div><div class="ha"><pre id="hcode"></pre><canvas id="hc" width="252" height="252"></canvas></div></div>
+<div class="card pcard" style="margin-bottom:14px">${PG}</div>
 <div class="card" style="margin-bottom:14px"><p class="lbl">Peringkat pemain</p>${rankT(rk)}<p class="sub">Urutan: level terbanyak, lalu ${XB} skor terkecil.</p></div>
 <details class="card" style="margin-bottom:14px"><summary>Panduan permainan</summary>${GUIDE}</details>
-<div class="card"><p class="lbl">Pilih level</p>${LEVELS.map((l,i)=>{const m=mine[l.id];return `<div class="lv"><span>${E(l.n)}</span><span class="${m?"ok":""}">${m?"skor "+m.score:"belum"}</span><button data-p="${i}" title="Main" aria-label="Main">${IP}</button><button data-l="${i}" title="Leaderboard" aria-label="Leaderboard">${IS}</button></div>`}).join("")}</div>`}
+<div class="card"><p class="lbl">Pilih level</p>${LEVELS.map((l,i)=>{const m=mine[l.id];return `<div class="lv"><span>${E(l.n)}</span><span class="${m?"ok":""}">${m?"skor "+m.score:"belum"}</span><button data-p="${i}" title="Main" aria-label="Main">${IP}</button><button data-l="${i}" title="Leaderboard" aria-label="Leaderboard">${IS}</button></div>`}).join("")}</div><p class="foot">Inspired by: Replicube by Walaber</p>`}
 $("menu").onclick=e=>{const d=e.target.dataset;if(d.p!==undefined)play(+d.p);else if(d.l!==undefined)lb(+d.l,"menu");else if(e.target.id==="out"){me=null;mine={};try{localStorage.removeItem("rp_me")}catch(x){}show("auth")}};
-function play(i){show("game");$("who").textContent=me;load(i)}
+function play(i){show("game");$("who").innerHTML=IU+E(me);load(i)}
 $("bk").onclick=menu;$("lb").onclick=()=>lb(cur,"game");
 let lbFrom="menu";
 async function lb(i,from){lbFrom=from;show("lbp");const L=LEVELS[i],P=$("lbp");P.innerHTML='<p class="sub">Memuat...</p>';
