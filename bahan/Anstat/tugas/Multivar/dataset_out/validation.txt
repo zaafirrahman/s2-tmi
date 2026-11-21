@@ -1,0 +1,6 @@
+Baris master: 116912
+Baris yang berhasil digabung dengan komponen: 113185 (96.8%)
+Spearman Radar_Score vs SCORE_yf: 0.9789
+Kesamaan tanda: 98.07%
+Median |Price - Close_yf|/Price: 0.439%
+Baris dengan Up5 tersedia: 109931

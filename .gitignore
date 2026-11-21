@@ -20,3 +20,5 @@
 # ===== File sistem =====
 .DS_Store
 Thumbs.db
+
+cache/
