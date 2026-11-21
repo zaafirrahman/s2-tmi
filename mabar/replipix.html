@@ -44,7 +44,8 @@ button.p::before{content:"> "}
 details{color:var(--mu);margin-top:10px}
 summary{cursor:pointer;color:var(--tx)}
 details p{margin:8px 0}
-code{background:#1c1c1c;color:var(--ac);padding:0 4px}
+code{font:inherit;background:#1c1c1c;color:var(--ac);padding:0 4px;border:1px solid #2e2e2e}
+body{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 [hidden]{display:none!important}
 input{font:inherit;background:#080808;color:var(--tx);border:1px solid var(--bd);padding:4px 8px;border-radius:0;width:100%;outline:none}
 input:focus{border-color:var(--mu)}
@@ -56,6 +57,22 @@ tr.me{background:#1c1c1c;color:var(--ac)}
 .hist{position:relative;display:flex;align-items:flex-end;gap:2px;height:90px;border-bottom:1px solid var(--bd)}.hist div{flex:1;background:#8a8a8a}
 .hist i{position:absolute;top:0;bottom:0;width:2px;background:var(--er)}
 .hax{display:flex;justify-content:space-between;color:var(--mu)}
+#hl{background:transparent!important}
+#ml{color:transparent}#ml mark{background:#585858;color:transparent}
+#ml mark.c{background:none;position:relative}#ml mark.c::after{content:"";position:absolute;left:0;top:0;width:2px;height:1.25em;background:#e0e0e0}
+canvas.solved{outline:2px solid var(--ok);outline-offset:2px}
+.pal div small{display:block;font-size:13px;opacity:.85}
+#msg button{margin-left:6px}
+button.on{background:var(--ac);color:#0a0a0a;border-color:var(--ac)}
+.dd{position:relative;display:inline-block;min-width:250px}
+.dd button{width:100%;display:flex;gap:8px;text-align:left}.dd button span{flex:1}.dd em{font-style:normal;color:var(--mu)}
+#ddl{position:absolute;z-index:5;left:0;right:0;top:100%;background:#101010;border:1px solid var(--bd);max-height:280px;overflow:auto}
+#ddl div{display:flex;justify-content:space-between;gap:8px;padding:2px 10px;cursor:pointer}#ddl div:hover{background:#1c1c1c}
+.dd b{color:var(--ok);font-weight:400}
+#pn{color:var(--ac)}
+.xb{display:inline-block;line-height:.8;border-top:2px solid currentColor;padding:0 1px}
+.lv{gap:8px}.lv span:first-child{min-width:0}.lv span:nth-child(2){white-space:nowrap}
+.lv button{padding:4px 9px;display:inline-flex;align-items:center}.lv svg{pointer-events:none;display:block}
 </style>
 </head>
 <body>
@@ -64,22 +81,21 @@ tr.me{background:#1c1c1c;color:var(--ac)}
 <div class="card"><p class="lbl">Sudah punya akun</p><input id="ls" placeholder="cari nama..." autocomplete="off"><div id="lres"></div></div></div><p id="am" class="er"></p></div>
 <div id="menu" class="scr" hidden></div><div id="lbp" class="scr" hidden></div>
 <div id="game" hidden>
-<div class="wrap" style="margin-bottom:0"><div style="grid-column:1/-1"><h1>Replipix</h1><p class="sub">Tulis kode Lua yang dijalankan untuk setiap sel (x, y dari −5 sampai 5) dan return warnanya, sampai hasilnya identik dengan target.</p></div></div>
+<div class="wrap" style="margin-bottom:0"><div style="grid-column:1/-1"><h1>Replipix</h1></div></div>
 <div class="wrap">
 <div class="card">
 <p class="lbl">Target</p><canvas id="t" width="290" height="286"></canvas>
-<p class="lbl">Hasil kodemu</p><canvas id="o" width="290" height="286"></canvas>
+<p class="lbl">Hasil kodemu<span id="cmpl"></span></p><canvas id="o" width="290" height="286"></canvas>
 </div>
 <div class="card">
 <div class="row"><button id="bk">← Menu</button><button id="lb">Leaderboard</button><span id="who" style="color:var(--mu)"></span></div>
-<div class="row"><select id="lv"></select><span id="goal" style="color:var(--mu);font-size:13px"></span></div>
-<div class="ed"><pre id="hl" aria-hidden="true"></pre><textarea id="code" spellcheck="false" wrap="off"></textarea></div>
-<div class="row"><button class="p" id="run">▶ Jalankan</button><button id="rst">Reset kode</button><button id="snd">🔊 Suara</button></div>
+<div class="row"><div class="dd" id="lv"><button id="ddb"></button><div id="ddl" hidden></div></div></div>
+<div class="ed"><pre id="ml" aria-hidden="true"></pre><pre id="hl" aria-hidden="true"></pre><textarea id="code" spellcheck="false" wrap="off"></textarea></div>
+<div class="row"><button id="cmp">Compare</button><button id="rst">Reset kode</button><button id="snd" title="Suara" aria-label="Suara">🔊</button></div>
 <div id="msg"></div>
 <div class="stats"><div>Code size<br><b id="cs">0</b></div><div>Cycles<br><b id="cy">0</b></div><div>Skor<br><b id="sc">–</b></div><div>Terbaik<br><b id="bs">–</b></div></div>
-<details open><summary>Cara kerja &amp; fungsi</summary>
-<p>Kodemu dijalankan sekali per sel dengan <code>x</code> dan <code>y</code> (y positif ke atas). <code>return</code> angka (0 atau negatif = kosong, di atas 16 berputar lagi: 17=WHITE, 18=GRAY, dst) atau konstanta warna: WHITE=1, GRAY, BLACK, PEACH, PINK, PURPLE=6, RED=7, ORANGE, YELLOW, LIME, GREEN, NAVY, BLUE, SKY, BROWN, MAROON=16. Tanpa return atau <code>false</code> = kosong, <code>true</code> = putih (1). Tersedia: <code>if/elseif/else</code>, variabel, <code>for</code>, operator aritmetika dan bitwise, serta min, max, abs, floor, round, ceil, step, sign, clamp, inrange, mix, sqrt, sin, cos, tan, asin, acos, atan, btoi, sort, insert (tanpa prefix <code>math.</code>). Code size = jumlah token (komentar tidak dihitung). Cycles = rata-rata instruksi VM per sel. Skor = size + cycles, makin kecil makin bagus.</p>
-<div class="pal" id="pal"></div></details>
+<p class="lbl" style="margin-top:12px">Palet warna<span id="pn"></span></p><div class="pal" id="pal"></div>
+<details id="gd"><summary>Cara kerja &amp; fungsi</summary><div id="gh"></div></details>
 </div></div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/fengari-web@0.1.4/dist/fengari-web.js"></script>
@@ -112,7 +128,8 @@ const LEVELS=[
 {n:"16. Papan sasaran",g:"Cincin RED dan WHITE selang-seling dari pusat (RED di tengah), jarak dibulatkan ke bawah, sampai jarak 9",t:(x,y)=>{const d=Math.floor(Math.sqrt(x*x+y*y));return d>9?0:d%2==0?7:1},s:"-- tips: floor(sqrt(x*x + y*y)) % 2\n"}
 ];
 const META=[["dot",3],["line",3],["plus",4],["frame",4],["checker",5],["diag",5],["nested",5],["tri",5],["circle",5],["house",5],["tree",5],["cup",5],["rocket",5],["mushroom",5],["cactus",5],["target",9]];
-LEVELS.forEach((l,i)=>{l.id=META[i][0];l.h=META[i][1]});
+const wrapC=t=>{const o=[];let c="";t.split(" ").forEach(w=>{if((c+" "+w).trim().length>56){o.push(c);c=w}else c=(c+" "+w).trim()});if(c)o.push(c);return o.map(x=>"-- "+x).join("\n")+"\n"};
+LEVELS.forEach((l,i)=>{l.id=META[i][0];l.h=META[i][1];l.s=wrapC("Target: "+l.g)+l.s});
 const $=id=>document.getElementById(id);
 let cur=0,mine={},me=null;
 function blank(){return Array.from({length:N},()=>Array(N).fill(0))}
@@ -122,8 +139,8 @@ let W=0,HT=0,gT=blank(),gO=blank(),hov=null,tmr,anim=null,tk=0;const DUR=380;
 function draw(cv,g){
 const c=cv.getContext("2d"),st=getComputedStyle(document.body),cs=n=>st.getPropertyValue(n).trim();
 c.clearRect(0,0,W,HT);
-const an=cv.id==="o"&&anim?anim:null,sk=new Set(an?an.cells.map(k=>k.r*N+k.q):[]);
-for(let r=0;r<N;r++)for(let q=0;q<N;q++){c.fillStyle=g[r][q]&&!sk.has(r*N+q)?COL[g[r][q]-1]:cs("--cell");c.fillRect(OX+q*CELL,r*CELL,CELL-1,CELL-1)}
+const cp=cv.id==="o"&&cmp,an=cv.id==="o"&&anim&&!cp?anim:null,sk=new Set(an?an.cells.map(k=>k.r*N+k.q):[]);
+for(let r=0;r<N;r++)for(let q=0;q<N;q++){c.fillStyle=cp?cmpC(gT[r][q],g[r][q],cs("--cell")):(g[r][q]&&!sk.has(r*N+q)?COL[g[r][q]-1]:cs("--cell"));c.fillRect(OX+q*CELL,r*CELL,CELL-1,CELL-1)}
 if(an){const e=Math.min(1,(performance.now()-an.t0)/DUR);an.cells.forEach(k=>{let col,u;
 if(k.o&&e<0.35){col=k.o;u=1-e/0.35}else if(k.n){col=k.n;const s0=k.o?0.35:0,v=Math.max(0,(e-s0)/(1-s0));u=v<0.7?v/0.7*1.18:1.18-0.18*(v-0.7)/0.3}else return;
 const z=(CELL-1)*u,cx=OX+k.q*CELL+(CELL-1)/2,cy=k.r*CELL+(CELL-1)/2;c.fillStyle=COL[col-1];c.fillRect(cx-z/2,cy-z/2,z,z)})}
@@ -132,6 +149,7 @@ c.textBaseline="middle";c.textAlign="center";c.fillStyle=cs("--ax");
 for(let q=0;q<N;q++){if((q-H)%ls&&q!=hc)continue;c.font=(q==hc?"700 ":"")+FONT;c.fillText(q-H,OX+q*CELL+CELL/2,N*CELL+OB/2)}
 c.textAlign="right";c.fillStyle=cs("--ay");
 for(let r=0;r<N;r++){if((H-r)%ls&&r!=hr)continue;c.font=(r==hr?"700 ":"")+FONT;c.fillText(H-r,OX-6,r*CELL+CELL/2)}
+if(cv.id==="o"&&sp.length){sp.forEach(p=>{const a=1-p.life/p.max,r=p.sz*(0.5+0.5*Math.sin(p.life*0.5));c.globalAlpha=a;c.fillStyle=p.col;c.fillRect(p.x-r,p.y-1,r*2,2);c.fillRect(p.x-1,p.y-r,2,r*2);c.fillRect(p.x-1,p.y-1,2,2)});c.globalAlpha=1}
 if(hov){c.strokeStyle=cs("--tx");c.lineWidth=1.5;c.strokeRect(OX+hc*CELL+.5,hr*CELL+.5,CELL-2,CELL-2);
 if(hov.cv===cv){const v=g[hr][hc],P=[["(",cs("--tx")],[hc-H,cs("--ax")],[", ",cs("--tx")],[H-hr,cs("--ay")],[")",cs("--tx")]].concat(v?[[" = ",cs("--tx")],[v,COL[v-1],1]]:[]);
 c.font="19px VT323,ui-monospace,monospace";c.textAlign="left";
@@ -157,8 +175,8 @@ fq=(k,c)=>{const d=(k.q*2+k.r+c)%10;return 300*Math.pow(2,(PENT[d%5]+12*Math.flo
 const sh=pick(cells.filter(k=>k.o)),gr=pick(cells.filter(k=>k.n));
 sh.forEach((k,i)=>drop(fq(k,k.o),t0+i*0.012,false,0.09/Math.sqrt(sh.length)));
 gr.forEach((k,i)=>drop(fq(k,k.n),t0+(k.o?0.35:0)*DUR/1000+i*0.012,true,0.16/Math.sqrt(gr.length)))}
-$("snd").onclick=()=>{snd=!snd;$("snd").textContent=snd?"🔊 Suara":"🔇 Suara";try{localStorage.setItem("replipix_snd",snd?"1":"0")}catch(e){}};
-$("snd").textContent=snd?"🔊 Suara":"🔇 Suara";
+$("snd").onclick=()=>{snd=!snd;$("snd").textContent=snd?"🔊":"🔇";try{localStorage.setItem("replipix_snd",snd?"1":"0")}catch(e){}};
+$("snd").textContent=snd?"🔊":"🔇";
 function startAnim(a,b){const cells=[];for(let r=0;r<N;r++)for(let q=0;q<N;q++)if(a[r][q]!==b[r][q])cells.push({r,q,o:a[r][q],n:b[r][q]});
 anim=cells.length?{cells,t0:performance.now()}:null;if(anim){playSnd(cells);if(!tk){tk=1;requestAnimationFrame(tick)}}else redraw()}
 function tokens(s){s=s.replace(/--\[\[[\s\S]*?\]\]/g,"").replace(/--.*$/gm,"");
@@ -208,8 +226,35 @@ const w=m[4];const cl=m[1]?"m":m[2]?"s":m[3]?"n":w?(KW.has(w)?"k":NAMES.includes
 out+=cl?'<span class="'+cl+'">'+esc(m[0])+'</span>':esc(m[0]);last=re.lastIndex}
 $("hl").innerHTML=out+esc(s.slice(last))+"\n"}
 function same(a,b){return a.every((r,i)=>r.every((v,j)=>v===b[i][j]))}
-function load(l){cur=l;setSize(LEVELS[l].h);$("lv").value=l;$("goal").textContent=LEVELS[l].g;$("code").value=LEVELS[l].s;
-gT=target(l);gO=blank();redraw();$("msg").textContent="";$("cy").textContent=0;$("cs").textContent=tokens($("code").value);$("sc").textContent="–";showBest();hl();exec()}
+function load(l){flush();cur=l;cmp=false;solved=false;cel=true;sp=[];$("gd").open=false;lblState();setSize(LEVELS[l].h);opts();$("code").value=draft(l);
+gT=target(l);gO=blank();redraw();$("msg").textContent="";$("cy").textContent=0;$("cs").textContent=tokens($("code").value);$("sc").textContent="–";showBest();hl();exec();pull(l)}
+function draft(l){try{const d=localStorage.getItem("rp_d_"+me+"_"+LEVELS[l].id);if(d!==null)return d}catch(e){}return LEVELS[l].s}
+let dbt,pend=null;
+function saveDraft(){const id=LEVELS[cur].id,c=$("code").value;try{localStorage.setItem("rp_d_"+me+"_"+id,c);localStorage.setItem("rp_dt_"+me+"_"+id,String(Date.now()))}catch(e){}
+if(LOCAL)return;pend={id,code:c};clearTimeout(dbt);dbt=setTimeout(flush,1500)}
+function flush(){if(!pend||!me)return;const p=pend;pend=null;clearTimeout(dbt);rpc("rp_save_draft",{p_name:me,p_level:p.id,p_code:p.code}).catch(()=>{})}
+addEventListener("visibilitychange",()=>{if(document.hidden)flush()});addEventListener("pagehide",flush);
+async function pull(l){if(LOCAL||!me)return;const id=LEVELS[l].id;
+try{const r=await rpc("rp_get_draft",{p_name:me,p_level:id});if(!r||!r.length||cur!==l)return;
+const t=+localStorage.getItem("rp_dt_"+me+"_"+id)||0,d=Date.parse(r[0].updated_at);
+if(d>t&&r[0].code!==$("code").value){$("code").value=r[0].code;try{localStorage.setItem("rp_d_"+me+"_"+id,r[0].code);localStorage.setItem("rp_dt_"+me+"_"+id,String(d))}catch(e){}$("cs").textContent=tokens(r[0].code);hl();cel=true;exec()}}catch(e){}}
+let cmp=false,solved=false,cel=false,sp=[],spk=0,multi=[];
+function cmpC(t,o,e){return t===o?(t?"#46c46a":e):t&&o?"#f5c542":"#e5484d"}
+function lblState(){$("cmpl").innerHTML=(solved?' · <span class="ok">✓ identik</span>':"")+(cmp?" · compare":"");$("o").classList.toggle("solved",solved);$("cmp").classList.toggle("on",cmp)}
+function opts(){const ck=i=>mine[LEVELS[i].id]?"<b>✓</b>":"";
+$("ddl").innerHTML=LEVELS.map((l,i)=>'<div data-i="'+i+'"><span>'+E(l.n)+'</span>'+ck(i)+'</div>').join("");
+$("ddb").innerHTML="<span>"+E(LEVELS[cur].n)+"</span>"+ck(cur)+"<em>▾</em>"}
+$("ddb").onclick=()=>{$("ddl").hidden=!$("ddl").hidden};
+$("ddl").onclick=e=>{const d=e.target.closest("[data-i]");if(d){$("ddl").hidden=true;load(+d.dataset.i)}};
+document.addEventListener("click",e=>{if(!e.target.closest("#lv"))$("ddl").hidden=true});
+function note(f,t,d,type,v){const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime(v,t+0.01);g.gain.exponentialRampToValueAtTime(0.0001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d+0.02)}
+function fanfare(){if(!snd||!AC||AC.state!=="running")return;const t0=AC.currentTime+0.03;
+[523.25,659.25,783.99,1046.5,1318.5].forEach((f,i)=>{const t=t0+i*0.1,d=i==4?0.7:0.18;note(f,t,d,"triangle",0.16);note(f*2,t,d,"sine",0.05)});
+for(let i=0;i<8;i++)note(2000+Math.random()*2500,t0+0.35+i*0.07,0.12,"sine",0.04)}
+function celebrate(){fanfare();const cl=["#ffe27a","#ffffff","#ff9ed2","#9be37c","#ffa94d"];
+for(let i=0;i<34;i++)sp.push({x:OX+Math.random()*N*CELL,y:Math.random()*N*CELL,vx:(Math.random()-.5)*.6,vy:-(.2+Math.random()*.7),life:-Math.floor(Math.random()*15),max:45+Math.random()*35,sz:3+Math.random()*5,col:cl[i%5]});
+if(!spk){spk=1;requestAnimationFrame(sparkTick)}}
+function sparkTick(){sp.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.life++});sp=sp.filter(p=>p.life<p.max);redraw();if(sp.length)requestAnimationFrame(sparkTick);else spk=0}
 function showBest(){const b=mine[LEVELS[cur].id];$("bs").textContent=b?b.score:"–"}
 function setSize(h){H=h;N=2*h+1;CELL=Math.floor(264/N);W=OX+N*CELL;HT=N*CELL+OB;["t","o"].forEach(i=>{const c=$(i);c.width=W;c.height=HT;c.style.maxWidth=W+"px";c.style.aspectRatio=W+"/"+HT});gT=blank();gO=blank();hov=null;anim=null}
 function exec(){
@@ -218,20 +263,64 @@ $("cs").textContent=cs;
 if(r.err){m.className="er";m.textContent="Error: "+r.err.replace(/\[string "[^"]*"\]:/,"baris ");return}
 const old=gO;gO=r.g;startAnim(old,r.g);$("cy").textContent=r.cyc;
 if(same(r.g,gT)){const sc=Math.round((cs+r.cyc)*10)/10;$("sc").textContent=sc;
-const id=LEVELS[cur].id;if(me&&(!mine[id]||sc<mine[id].score)){mine[id]={size:cs,cyc:r.cyc,score:sc};rpc("rp_submit",{p_name:me,p_level:id,p_size:cs,p_cycles:r.cyc,p_code:src}).catch(()=>{})}
-showBest();m.className="ok";m.textContent="✓ Identik! Coba kurangi code size atau cycles."}
-else{$("sc").textContent="–";m.className="er";const d=r.g.flat().filter((v,i)=>v!==gT.flat()[i]).length;m.textContent="Belum identik: "+d+" sel berbeda."}}
-$("run").onclick=exec;
+const id=LEVELS[cur].id;if(me&&(!mine[id]||sc<mine[id].score)){mine[id]={size:cs,cyc:r.cyc,score:sc};rpc("rp_submit",{p_name:me,p_level:id,p_size:cs,p_cycles:r.cyc,p_code:src}).catch(()=>{});opts()}
+showBest();solved=true;m.className="ok";
+m.innerHTML="✓ Level selesai! "+(cur<LEVELS.length-1?'<button class="p" id="nx">Level berikutnya</button>':"");
+if(!cel){cel=true;celebrate()}}
+else{$("sc").textContent="–";solved=false;cel=false;m.className="";m.textContent=""}
+lblState()}
+$("msg").onclick=e=>{if(e.target.id==="nx")load(cur+1)};
+$("cmp").onclick=()=>{cmp=!cmp;lblState();redraw()};
+
 ["t","o"].forEach(id=>{const cv=$(id);
 const mv=e=>{const rc=cv.getBoundingClientRect(),k=cv.width/rc.width,px=(e.clientX-rc.left)*k,py=(e.clientY-rc.top)*k,c=Math.floor((px-OX)/CELL),r=Math.floor(py/CELL);
 hov=(c>=0&&c<N&&r>=0&&r<N)?{c,r,px,py,cv}:null;redraw()};
 cv.onpointermove=mv;cv.onpointerdown=mv;cv.onpointerleave=()=>{hov=null;redraw()}});
-$("rst").onclick=()=>load(cur);
-$("code").oninput=()=>{$("cs").textContent=tokens($("code").value);hl();clearTimeout(tmr);tmr=setTimeout(exec,120)};$("code").onscroll=()=>{$("hl").scrollTop=$("code").scrollTop;$("hl").scrollLeft=$("code").scrollLeft};
-$("code").onkeydown=e=>{if(e.key==="Tab"){e.preventDefault();const t=e.target,s=t.selectionStart;t.value=t.value.slice(0,s)+"  "+t.value.slice(t.selectionEnd);t.selectionStart=t.selectionEnd=s+2;t.dispatchEvent(new Event("input"))}};
-LEVELS.forEach((l,i)=>{const o=document.createElement("option");o.value=i;o.textContent=l.n;$("lv").appendChild(o)});
-$("lv").onchange=e=>load(+e.target.value);
-COL.forEach((c,i)=>{const d=document.createElement("div");d.style.background=c;d.style.color=[0,3,4,7,8,9,13].includes(i)?"#111":"#fff";d.textContent=i+1;d.title=NAMES[i];$("pal").appendChild(d)});
+$("rst").onclick=async()=>{const id=LEVELS[cur].id;pend=null;clearTimeout(dbt);try{localStorage.removeItem("rp_d_"+me+"_"+id);localStorage.removeItem("rp_dt_"+me+"_"+id)}catch(e){}if(!LOCAL)await rpc("rp_save_draft",{p_name:me,p_level:id,p_code:null}).catch(()=>{});load(cur)};
+$("code").oninput=()=>{$("cs").textContent=tokens($("code").value);hl();saveDraft();clearTimeout(tmr);tmr=setTimeout(exec,120)};$("code").onscroll=()=>{["hl","ml"].forEach(i=>{$(i).scrollTop=$("code").scrollTop;$(i).scrollLeft=$("code").scrollLeft})};
+const fire=()=>$("code").dispatchEvent(new Event("input"));
+function renderMulti(){const v=$("code").value,X=t=>t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");let o="",l=0;
+multi.slice().sort((a,b)=>a.s-b.s).forEach(r=>{o+=X(v.slice(l,r.s))+(r.s===r.e?'<mark class="c"></mark>':"<mark>"+X(v.slice(r.s,r.e))+"</mark>");l=r.e});
+$("ml").innerHTML=multi.length?o+X(v.slice(l))+"\n":""}
+function ctrlD(){const ta=$("code"),v=ta.value;
+if(!multi.length){let s=ta.selectionStart,e=ta.selectionEnd;if(s===e){const w=/\w/;while(s>0&&w.test(v[s-1]))s--;while(e<v.length&&w.test(v[e]))e++;if(s===e)return}
+multi=[{s,e}];ta.setSelectionRange(s,e);renderMulti();return}
+const t=v.slice(multi[0].s,multi[0].e),from=Math.max(...multi.map(r=>r.e));let i=v.indexOf(t,from);if(i<0)i=v.indexOf(t);
+if(i<0||multi.some(r=>r.s===i))return;multi.push({s:i,e:i+t.length});ta.setSelectionRange(i,i+t.length);renderMulti()}
+function applyMulti(ins,back,fwd){const ta=$("code"),v=ta.value;let out="",last=0;const np=[];
+multi.slice().sort((a,b)=>a.s-b.s).forEach(r=>{let s=r.s,e=r.e;if(s===e){if(back)s=Math.max(last,s-1);if(fwd)e=Math.min(v.length,e+1)}
+out+=v.slice(last,s)+ins;np.push(out.length);last=e});
+ta.value=out+v.slice(last);multi=np.map(x=>({s:x,e:x}));ta.setSelectionRange(np[np.length-1],np[np.length-1]);fire();renderMulti()}
+function toggleComment(ta){const v=ta.value,s=ta.selectionStart,e=ta.selectionEnd,ls=v.lastIndexOf("\n",s-1)+1;let le=v.indexOf("\n",e>s&&v[e-1]==="\n"?e-1:e);if(le<0)le=v.length;
+const L=v.slice(ls,le).split("\n"),ne=L.filter(l=>l.trim()),all=ne.length>0&&ne.every(l=>/^\s*--/.test(l));let d0=0,dt=0;
+const out=L.map((l,i)=>{if(!l.trim())return l;const n=all?l.replace(/^(\s*)-- ?/,"$1"):l.replace(/^(\s*)/,"$1-- "),d=n.length-l.length;if(i===0)d0=d;dt+=d;return n});
+ta.value=v.slice(0,ls)+out.join("\n")+v.slice(le);ta.setSelectionRange(Math.max(ls,s+d0),Math.max(ls,e+dt))}
+function lineInfo(v){const L=v.split("\n"),st=[];let p=0;L.forEach(l=>{st.push(p);p+=l.length+1});return{L,st,at:pos=>{let i=0;while(i+1<st.length&&st[i+1]<=pos)i++;return i}}}
+function moveLines(ta,dir,copy){const v=ta.value,s=ta.selectionStart,e=ta.selectionEnd,{L,st,at}=lineInfo(v);
+const a=at(s),b=at(e>s&&e===st[at(e)]?e-1:e),sc=s-st[a],ec=e-st[b],blk=L.slice(a,b+1);let na;
+if(copy){L.splice(b+1,0,...blk);na=dir>0?b+1:a}
+else{if((dir<0&&a===0)||(dir>0&&b===L.length-1))return;L.splice(a,blk.length);na=a+dir;L.splice(na,0,...blk)}
+const nv=L.join("\n"),n2=lineInfo(nv).st;ta.value=nv;
+ta.setSelectionRange(n2[na]+Math.min(sc,L[na].length),n2[na+b-a]+Math.min(ec,L[na+b-a].length))}
+const MODK=["Shift","Control","Alt","Meta"];
+$("code").onkeydown=e=>{const ta=e.target,k=e.key,mod=e.ctrlKey||e.metaKey;
+if(mod&&!e.altKey&&k.toLowerCase()==="d"){e.preventDefault();ctrlD();return}
+if(mod&&k==="/"){e.preventDefault();multi=[];renderMulti();toggleComment(ta);fire();return}
+if(e.altKey&&(k==="ArrowUp"||k==="ArrowDown")){e.preventDefault();multi=[];renderMulti();moveLines(ta,k==="ArrowUp"?-1:1,e.shiftKey);fire();return}
+if(multi.length>1){
+if(k.length===1&&!mod&&!e.altKey){e.preventDefault();applyMulti(k)}
+else if(k==="Enter"){e.preventDefault();applyMulti("\n")}
+else if(k==="Tab"){e.preventDefault();applyMulti("  ")}
+else if(k==="Backspace"){e.preventDefault();applyMulti("",1)}
+else if(k==="Delete"){e.preventDefault();applyMulti("",0,1)}
+else if(!MODK.includes(k)&&!(mod&&k.toLowerCase()==="c")){multi=[];renderMulti()}
+return}
+if(multi.length&&!MODK.includes(k)){multi=[];renderMulti()}
+if(k==="Tab"){e.preventDefault();const s=ta.selectionStart;ta.value=ta.value.slice(0,s)+"  "+ta.value.slice(ta.selectionEnd);ta.selectionStart=ta.selectionEnd=s+2;fire()}};
+$("code").onmousedown=()=>{if(multi.length){multi=[];renderMulti()}};
+
+
+COL.forEach((c,i)=>{const d=document.createElement("div");d.style.background=c;d.style.color=[0,3,4,7,8,9,13].includes(i)?"#111":"#fff";d.textContent=i+1;d.style.cursor="pointer";const sh=()=>{$("pn").textContent=" · "+(i+1)+" "+NAMES[i]};d.onpointerenter=sh;d.onclick=sh;d.onpointerleave=e=>{if(e.pointerType==="mouse")$("pn").textContent=""};d.title=NAMES[i];$("pal").appendChild(d)});
 document.fonts&&document.fonts.load("16px VT323").then(()=>{redraw()});
 
 const E=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -245,8 +334,9 @@ rp_submit:a=>{const d=LS.get(),p=d[a.p_name.toLowerCase()];if(!p)return null;con
 rp_my_scores:a=>{const p=LS.get()[a.p_name.toLowerCase()];return p?Object.entries(p.sc).map(([k,v])=>({level_id:k,...v})):[]},
 rp_leaderboard:a=>Object.values(LS.get()).filter(p=>p.sc[a.p_level]).map(p=>({name:p.name,...p.sc[a.p_level]})).sort((x,y)=>x.score-y.score),
 rp_ranking:()=>Object.values(LS.get()).filter(p=>Object.keys(p.sc).length).map(p=>{const v=Object.values(p.sc),n=v.length,av=k=>v.reduce((s,o)=>s+o[k],0)/n;return{name:p.name,solved:n,avg_score:av("score"),avg_size:av("code_size"),avg_cycles:av("cycles")}}).sort((x,y)=>y.solved-x.solved||x.avg_score-y.avg_score)};
+LF.rp_save_draft=()=>null;LF.rp_get_draft=()=>[];
 async function rpc(f,a){if(LOCAL)return LF[f](a||{});
-const r=await fetch(SB_URL+"/rest/v1/rpc/"+f,{method:"POST",headers:{apikey:SB_KEY,Authorization:"Bearer "+SB_KEY,"Content-Type":"application/json"},body:JSON.stringify(a||{})});
+const r=await fetch(SB_URL+"/rest/v1/rpc/"+f,{method:"POST",keepalive:true,headers:{apikey:SB_KEY,Authorization:"Bearer "+SB_KEY,"Content-Type":"application/json"},body:JSON.stringify(a||{})});
 const j=await r.json().catch(()=>null);if(!r.ok)throw new Error((j&&j.message)||"error");return j}
 const SC=["auth","menu","lbp","game"];
 function show(id){SC.forEach(s=>$(s).hidden=s!==id);scrollTo(0,0)}
@@ -257,7 +347,7 @@ let st2;$("ls").oninput=()=>{clearTimeout(st2);st2=setTimeout(find,150)};$("ls")
 async function find(){try{const r=await rpc("rp_search",{q:$("ls").value.trim()});$("lres").innerHTML=r.length?r.map(p=>'<button data-n="'+E(p.name)+'">'+E(p.name)+'</button>').join(""):'<span style="color:var(--mu)">Tidak ada akun yang cocok.</span>'}catch(e){T("Gagal memuat: "+e.message)}}
 $("lres").onclick=e=>{const n=e.target.dataset&&e.target.dataset.n;if(n)login(n)};
 async function login(n){const r=await rpc("rp_login",{p_name:n});if(!r)return T("Akun tidak ditemukan.");me=r;try{localStorage.setItem("rp_me",me)}catch(e){}
-mine={};(await rpc("rp_my_scores",{p_name:me})).forEach(o=>mine[o.level_id]={size:o.code_size,cyc:+o.cycles,score:+o.score});await menu()}
+mine={};(await rpc("rp_my_scores",{p_name:me})).forEach(o=>mine[o.level_id]={size:o.code_size,cyc:+o.cycles,score:+o.score});opts();await menu()}
 const GUIDE=`<p>Kodemu dijalankan sekali untuk setiap sel dengan <code>x</code> dan <code>y</code> (y positif ke atas), lalu <code>return</code> angka warna 0 sampai 16 atau konstanta seperti RED. Tanpa return atau false = kosong, true = putih. Angka di atas 16 berputar lagi (17 = WHITE).</p>
 <p><b>Kondisi</b>: <code>if kondisi then ... elseif ... else ... end</code>. Gabungkan dengan <code>and</code>, <code>or</code>, <code>not</code>, dan boleh bersarang.</p>
 <p><b>Variabel</b>: <code>a = 10 - x</code>. <b>Pembanding</b>: <code>==</code> sama, <code>~=</code> tidak sama, <code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code>.</p>
@@ -265,15 +355,19 @@ const GUIDE=`<p>Kodemu dijalankan sekali untuk setiap sel dengan <code>x</code> 
 <p><b>Fungsi</b> (tanpa prefix math.): min, max, abs, floor, round, ceil, step(a,v), sign, clamp(v,a,b), inrange(v,a,b), mix(a,b,t), sqrt, sin, cos, tan, asin, acos, atan, btoi, sort, insert, remove.</p>
 <p><b>Trik hemat kode</b>: <code>return x == 0 and 5 or 15</code> menggantikan if-else. Pustaka string, io, debug, dan random tidak tersedia.</p>
 <p><b>Skor</b> = code size (jumlah token) + cycles (rata-rata instruksi per sel). Makin kecil makin bagus.</p>`;
-function rankT(rk){return '<table><tr><th>#</th><th>Pemain</th><th>Level</th><th>Rata-rata skor</th></tr>'+(rk.slice(0,10).map((p,i)=>'<tr class="'+(p.name===me?"me":"")+'"><td>'+(i+1)+'</td><td>'+E(p.name)+'</td><td>'+p.solved+'</td><td>'+(+p.avg_score).toFixed(1)+'</td></tr>').join("")||'<tr><td colspan=4>Belum ada pemain yang menyelesaikan level.</td></tr>')+'</table>'}
-async function menu(){show("menu");const M=$("menu");M.innerHTML='<p class="sub">Memuat...</p>';
+$("gh").innerHTML=GUIDE;
+const XB='<span class="xb">x</span>';
+const IP='<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M3 1v12l10-6z"/></svg>';
+const IS='<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="1" y="8" width="3" height="5"/><rect x="5.5" y="4" width="3" height="9"/><rect x="10" y="1" width="3" height="12"/></svg>';
+function rankT(rk){return '<table><tr><th>#</th><th>Pemain</th><th>Level</th><th>'+XB+' skor</th></tr>'+(rk.slice(0,10).map((p,i)=>'<tr class="'+(p.name===me?"me":"")+'"><td>'+(i+1)+'</td><td>'+E(p.name)+'</td><td>'+p.solved+'</td><td>'+(+p.avg_score).toFixed(1)+'</td></tr>').join("")||'<tr><td colspan=4>Belum ada pemain yang menyelesaikan level.</td></tr>')+'</table>'}
+async function menu(){flush();show("menu");const M=$("menu");M.innerHTML='<p class="sub">Memuat...</p>';
 let rk=[];try{rk=await rpc("rp_ranking")}catch(e){}
 const ks=Object.values(mine),n=ks.length,av=k=>n?(ks.reduce((s,o)=>s+o[k],0)/n).toFixed(1):"–",pos=rk.findIndex(p=>p.name===me)+1;
 M.innerHTML=`<h1>Halo, ${E(me)}</h1><p class="sub">${LOCAL?"Mode lokal: data hanya tersimpan di browser ini.":"Terhubung ke database."} <button id="out">Keluar</button></p>
-<div class="card" style="margin-bottom:14px"><div class="stats"><div>Level selesai<br><b>${n}/${LEVELS.length}</b></div><div>Rata-rata size<br><b>${av("size")}</b></div><div>Rata-rata cycles<br><b>${av("cyc")}</b></div><div>Rata-rata skor<br><b>${av("score")}</b></div><div>Peringkat<br><b>${pos?"#"+pos+" / "+rk.length:"–"}</b></div></div></div>
-<div class="card" style="margin-bottom:14px"><p class="lbl">Peringkat pemain</p>${rankT(rk)}<p class="sub">Urutan: level selesai terbanyak, lalu rata-rata skor terkecil.</p></div>
+<div class="card" style="margin-bottom:14px"><div class="stats"><div>Level<br><b>${n}/${LEVELS.length}</b></div><div>${XB} size<br><b>${av("size")}</b></div><div>${XB} cycles<br><b>${av("cyc")}</b></div><div>${XB} skor<br><b>${av("score")}</b></div><div>Peringkat<br><b>${pos?"#"+pos+" / "+rk.length:"–"}</b></div></div></div>
+<div class="card" style="margin-bottom:14px"><p class="lbl">Peringkat pemain</p>${rankT(rk)}<p class="sub">Urutan: level terbanyak, lalu ${XB} skor terkecil.</p></div>
 <details class="card" style="margin-bottom:14px"><summary>Panduan permainan</summary>${GUIDE}</details>
-<div class="card"><p class="lbl">Pilih level</p>${LEVELS.map((l,i)=>{const m=mine[l.id],z=2*l.h+1;return `<div class="lv"><span>${E(l.n)} <i>${z}×${z}</i></span><span class="${m?"ok":""}">${m?"skor "+m.score:"belum"}</span><button data-p="${i}">Main</button><button data-l="${i}">Leaderboard</button></div>`}).join("")}</div>`}
+<div class="card"><p class="lbl">Pilih level</p>${LEVELS.map((l,i)=>{const m=mine[l.id];return `<div class="lv"><span>${E(l.n)}</span><span class="${m?"ok":""}">${m?"skor "+m.score:"belum"}</span><button data-p="${i}" title="Main" aria-label="Main">${IP}</button><button data-l="${i}" title="Leaderboard" aria-label="Leaderboard">${IS}</button></div>`}).join("")}</div>`}
 $("menu").onclick=e=>{const d=e.target.dataset;if(d.p!==undefined)play(+d.p);else if(d.l!==undefined)lb(+d.l,"menu");else if(e.target.id==="out"){me=null;mine={};try{localStorage.removeItem("rp_me")}catch(x){}show("auth")}};
 function play(i){show("game");$("who").textContent=me;load(i)}
 $("bk").onclick=menu;$("lb").onclick=()=>lb(cur,"game");
