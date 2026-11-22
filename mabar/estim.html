@@ -109,6 +109,12 @@ a.backbtn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding
 a.backbtn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
 a.backbtn svg{width:20px;height:20px}
 footer{margin-top:30px;font-size:12px;color:var(--mut);text-align:center}
+.lb{grid-template-columns:30px 1fr auto 30px;padding:8px 6px}
+.rk{display:grid;place-items:center;width:30px;height:30px;border:2px solid #0c0c0c;border-radius:6px;font-style:normal;font-weight:700;color:#1d1d1b;box-shadow:0 2px 0 #0c0c0c}
+.lbc{max-height:274px}
+.lb{grid-template-columns:28px 1fr auto 24px;column-gap:6px}
+.rk{width:24px;height:24px;font-size:13px;border-radius:5px;box-shadow:0 2px 0 #0c0c0c}
+.lbc{max-height:244px}
 </style></head>
 <body><div id="app"></div>
 <script>
@@ -219,7 +225,7 @@ const again=()=>{i=0;res=[];go()};
 async function board(box,n){box.innerHTML='<p class="mut">Memuat…</p>';
  try{const r=await sb('es_scores?select=score,player_id,es_players(name)&order=score.desc&limit=1000'),seen={},top=[];
   r.forEach(x=>{if(!seen[x.player_id]){seen[x.player_id]=1;top.push(x)}});
-  box.innerHTML=top.slice(0,n).map((x,k)=>`<div class="lb${me&&x.player_id==me.id?' me':''}"><b>${k+1}</b><span>${esc(x.es_players.name)}</span><em>${(x.score/10).toFixed(1)} · ${rank(Math.round(x.score/10))}</em></div>`).join('')||'<p class="mut">Belum ada skor. Jadilah yang pertama!</p>'}
+  box.innerHTML=top.slice(0,n).map((x,k)=>`<div class="lb${me&&x.player_id==me.id?' me':''}"><b>${k+1}</b><span>${esc(x.es_players.name)}</span><em>${(x.score/10).toFixed(1)}</em><i class="rk r${rank(Math.round(x.score/10))}">${rank(Math.round(x.score/10))}</i></div>`).join('')||'<p class="mut">Belum ada skor. Jadilah yang pertama!</p>'}
  catch(_){box.innerHTML='<p class="mut">Leaderboard gagal dimuat.</p>'}}
 function login(){
  app.innerHTML='';app.className='home';
