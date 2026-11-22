@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="id"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Estim</title>
+<title>estim.</title>
 <style>
 :root{--bg:#f6f4ef;--fg:#1d1d1b;--mut:#6b6a65;--ac:#d9480f;--card:#fff;--bd:#dedbd2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171716;--fg:#f0eee8;--mut:#a09e96;--card:#242422;--bd:#3a3935;color-scheme:dark}}
@@ -78,6 +78,15 @@ input:not([type]){font:inherit;font-weight:700;width:100%;box-sizing:border-box;
 button:disabled{opacity:.5}
 .lb{display:grid;grid-template-columns:32px 1fr auto;gap:8px;align-items:center;padding:8px 0;border-bottom:2px dashed var(--bd)}.lb:last-child{border:0}.lb b{color:var(--ac)}.lb em{font-style:normal;font-weight:700}
 .lb.me{background:color-mix(in srgb,var(--ac) 16%,transparent);border-radius:8px;padding:8px 6px}
+h1{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--fg)}
+h1.logo{display:inline-block;background:var(--ac);color:#1d1d1b;border:3px solid var(--line);box-shadow:6px 6px 0 var(--fg);padding:2px 20px 12px;font-size:68px;line-height:.95;letter-spacing:-.05em;margin:6px 6px 22px 0;transform:rotate(-1.5deg)}
+h1.logo{display:inline-flex;align-items:center;gap:12px;background:none;border:0;box-shadow:none;transform:none;padding:0;color:var(--fg);font-size:64px;line-height:1;letter-spacing:-.05em;margin:6px 0 20px}
+.logo .dot{color:var(--ac)}.logo svg{flex:none;width:.85em;height:.85em;transform:rotate(-8deg)}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;width:100%;margin:18px 0 10px;text-align:left}
+.tiles div{display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:1/1.1;min-width:0;padding:5px;border:2px solid var(--fg);background:var(--ac);color:#1d1d1b}
+.tiles div:nth-child(even){background:#0c0c0c;color:#f0eee8}
+.tiles small{font-size:9.5px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;opacity:.85}
+.tiles b{font-size:clamp(11px,3.4vw,14px);line-height:1.05;letter-spacing:-.03em;overflow-wrap:anywhere}
 </style></head>
 <body><div id="app"></div>
 <script>
@@ -100,12 +109,12 @@ X=h((.4124*R+.3576*G+.1805*B)/.95047),Y=h(.2126*R+.7152*G+.0722*B),Z=h((.0193*R+
 function cr(a,b,c,d,t){return a.map((_,k)=>.5*(2*b[k]+(-a[k]+c[k])*t+(2*a[k]-5*b[k]+4*c[k]-d[k])*t*t+(-a[k]+3*b[k]-3*c[k]+d[k])*t*t*t))}
 
 const T=[
-{n:'Hitung titik',d:'Titik-titik muncul 1,5 detik lalu hilang. Tebak jumlahnya.',run:(b,f)=>{
+{n:'Count Dots',d:'Titik-titik muncul 1,5 detik lalu hilang. Tebak jumlahnya.',run:(b,f)=>{
  const n=ri(15,120),[c,x]=canvas();b.append(c);
  for(let k=0;k<n;k++)dot(x,rnd(12,288),rnd(12,288),'#ff7a45',4);
  setTimeout(()=>{x.clearRect(0,0,S,S);const inp=el('input');inp.type='number';inp.inputMode='numeric';inp.placeholder='Berapa jumlah titiknya?';
   const g=btn('Kunci',()=>{const v=+inp.value;if(!v)return;inp.remove();g.remove();f(ex(Math.abs(v-n)/n,.15),`tebakanmu ${v}, aslinya ${n}`)});b.append(inp,g)},1500)}},
-{n:'Lacak bola',d:'Bola melambung lalu hilang di tengah jalan. Tap di mana bola akan mendarat di garis tanah.',run:(b,f)=>{
+{n:'Track Ball',d:'Bola melambung lalu hilang di tengah jalan. Tap di mana bola akan mendarat di garis tanah.',run:(b,f)=>{
  const[c,x]=canvas();b.append(c);let vx,vy,Tt,lx;
  do{vx=rnd(110,230);vy=rnd(240,330);Tt=2*vy/500;lx=20+vx*Tt}while(lx<130||lx>280);
  const P=t=>[20+vx*t,260-vy*t+250*t*t],tv=Tt*.42;let t0=null,ready=0,dn=0;
@@ -114,41 +123,41 @@ const T=[
  requestAnimationFrame(fr);
  c.onpointerdown=e=>{if(!ready||dn)return;dn=1;const px=pt(c,e)[0];for(let t=0;t<=Tt;t+=.05){const[p,q]=P(t);dot(x,p,q,'#aaa',2)}
   dot(x,lx,260,'#2f9e44',8);dot(x,px,260,'#d9480f',6);const d=Math.abs(px-lx);f(ex(d,35),`meleset ${Math.round(d)} px (hijau = aslinya)`)}}},
-{n:'Sudut',d:'Tarik di kotak untuk memutar garis oranye. Sudutnya dari garis abu-abu (berlawanan arah jarum jam) harus sama dengan target.',run:(b,f)=>{
+{n:'Rotate Angle',d:'Tarik di kotak untuk memutar garis oranye. Sudutnya dari garis abu-abu (berlawanan arah jarum jam) harus sama dengan target.',run:(b,f)=>{
  const tg=ri(10,350),[c,x]=canvas(),cx=150,cy=150,rad=Math.PI/180;let a=0,dn=0;
  b.append(el('p',`Target: <b>${tg}°</b>`),c);
  const ln=(d,col)=>{x.strokeStyle=col;x.lineWidth=3;x.beginPath();x.moveTo(cx,cy);x.lineTo(cx+125*Math.cos(d*rad),cy-125*Math.sin(d*rad));x.stroke()};
  let p0=0;const dr=ts=>{if(ts)p0=ts;x.clearRect(0,0,S,S);ln(0,'#8a8678');ln(a,'#ff7a45');const hx=cx+125*Math.cos(a*rad),hy=cy-125*Math.sin(a*rad),k=(Math.sin(p0/170)+1)/2;if(!dn){x.strokeStyle='rgba(255,122,69,'+(.65-.5*k)+')';x.lineWidth=3;x.beginPath();x.arc(hx,hy,13+9*k,0,7);x.stroke()}dot(x,hx,hy,'#ff7a45',11);dot(x,hx,hy,'#fff',4)};dr();const lp=ts=>{if(dn)return;dr(ts);requestAnimationFrame(lp)};requestAnimationFrame(lp);
  c.onpointerdown=c.onpointermove=e=>{if(dn||!e.buttons)return;const[px,py]=pt(c,e);a=(Math.atan2(cy-py,px-cx)/rad+360)%360;dr()};
  const g=btn('Kunci',()=>{dn=1;g.remove();dr();ln(tg,'#2f9e44');const d=Math.abs(a-tg),er=Math.min(d,360-d);f(ex(er,14),`selisih ${er.toFixed(1)}° (hijau = aslinya)`)});b.append(g)}},
-{n:'Persen',d:'Berapa persen lingkaran yang berwarna oranye? Geser slider.',run:(b,f)=>{
+{n:'Guess Percent',d:'Berapa persen lingkaran yang berwarna oranye? Geser slider.',run:(b,f)=>{
  const p=ri(5,95),s0=rnd(0,6.28),[c,x]=canvas();
  dot(x,150,150,'#383845',120);x.fillStyle='#d9480f';x.beginPath();x.moveTo(150,150);x.arc(150,150,120,s0,s0+p*.0628319);x.fill();b.append(c);
  const s=sl(b,0,100,1,50,v=>v+'%'),g=btn('Kunci',()=>{const v=+s.value;g.remove();s.remove();f(ex(Math.abs(v-p),10),`tebakanmu ${v}%, aslinya ${p}%`)});b.append(g)}},
-{n:'Warna RGB',d:'Samakan warnamu dengan target lewat slider. Hasil campuranmu disembunyikan sampai kamu kunci.',run:(b,f)=>{
+{n:'Tune Color',d:'Samakan warnamu dengan target lewat slider. Hasil campuranmu disembunyikan sampai kamu kunci.',run:(b,f)=>{
  const t=[ri(30,225),ri(30,225),ri(30,225)],g=[128,128,128],pr=el('div','','pair'),A=el('div','Target','sw'),B=el('div','Warnamu?','sw');
  A.style.background=`rgb(${t})`;A.style.color='#fff';A.style.textShadow='0 0 3px #000';pr.append(A,B);b.append(pr);
  const ss=['R','G','B'].map((k,i)=>sl(b,0,255,1,128,v=>k+' '+v,v=>g[i]=v)),
  bt=btn('Kunci',()=>{bt.remove();ss.forEach((s,k)=>{s.disabled=true;const lb=s.nextSibling,w=el('div','','rw');lb.textContent=`${'RGB'[k]} · tebakanmu ${g[k]} · aslinya ${t[k]}`;s.before(w);w.append(s,el('i','','gh'));w.lastChild.style.left=`calc(15px + (100% - 30px) * ${t[k]/255})`});B.style.background=`rgb(${g})`;B.textContent='Warnamu';B.style.color='#fff';B.style.textShadow='0 0 3px #000';
-  const l1=lab(...t),l2=lab(...g),dE=Math.hypot(l1[0]-l2[0],l1[1]-l2[1],l1[2]-l2[2]);f(ex(dE,18),`ΔE ${dE.toFixed(1)}. Target rgb(${t}), tebakanmu rgb(${g})`)});b.append(bt)}},
-{n:'Tahan tombol',d:'Tahan tombol selama waktu yang diminta, tanpa timer.',run:(b,f)=>{
+  const l1=lab(...t),l2=lab(...g),dE=Math.hypot(l1[0]-l2[0],l1[1]-l2[1],l1[2]-l2[2]);f(ex(Math.max(0,dE-2),35),`ΔE ${dE.toFixed(1)}. Target rgb(${t}), tebakanmu rgb(${g})`)});b.append(bt)}},
+{n:'Hold Button',d:'Tahan tombol selama waktu yang diminta, tanpa timer.',run:(b,f)=>{
  const N=ri(3,12),h=el('button','Tahan di sini','hold');let t0=0,dn=0;
  b.append(el('p',`Tahan tombol tepat <b>${N} detik</b>, lalu lepas.`),h);
  h.onpointerdown=()=>{if(dn)return;t0=performance.now();h.textContent='Menahan…'};
  const up=()=>{if(dn||!t0)return;dn=1;const t=(performance.now()-t0)/1000;h.remove();f(ex(Math.abs(t-N)/N,.12),`kamu menahan ${t.toFixed(2)} dtk, targetnya ${N} dtk`)};
  h.onpointerup=h.onpointercancel=h.onpointerleave=up;h.oncontextmenu=e=>e.preventDefault()}},
-{n:'Faktor luas',d:'Berapa kali luas bentuk Target (oranye) dibanding luas Kontrol (biru)? Isi dengan 1 angka desimal.',run:(b,f)=>{
+{n:'Scale Area',d:'Berapa kali luas bentuk Target (oranye) dibanding luas Kontrol (biru)? Isi dengan 1 angka desimal.',run:(b,f)=>{
  const[c,x]=canvas(),A=poly(ri(4,7),40,.55),Ac=area(A),r=Math.round(rnd(.4,2.5)*10)/10;let B,k;
  do{B=poly(ri(4,7),40,.55);k=Math.sqrt(r*Ac/area(B));B=B.map(p=>[p[0]*k,p[1]*k])}while(Math.max(...B.map(p=>Math.hypot(...p)))>68);
  fp(x,A,75,150,'#74c0fc');fp(x,B,225,150,'#ff922b');x.fillStyle='#ddd';x.font='13px system-ui';x.fillText('Kontrol',50,285);x.fillText('Target',200,285);b.append(c);
  const inp=el('input');inp.type='number';inp.step='.1';inp.inputMode='decimal';inp.placeholder='Target = … × Kontrol';
  const g=btn('Kunci',()=>{const v=+inp.value;if(!(v>0))return;inp.remove();g.remove();f(ex(Math.abs(Math.log(v/r)),.3),`tebakanmu ${v}×, aslinya ${r}×`)});b.append(inp,g)}},
-{n:'Pusat massa',d:'Tap di mana titik pusat massa bentuk ini (anggap tebalnya merata). Boleh tap ulang sebelum dikunci.',run:(b,f)=>{
+{n:'Center Mass',d:'Tap di mana titik pusat massa bentuk ini (anggap tebalnya merata). Boleh tap ulang sebelum dikunci.',run:(b,f)=>{
  const[c,x]=canvas(),ox=150+rnd(-12,12),oy=150+rnd(-12,12),P=poly(ri(6,9),115,.3),C=cen(P);let m=null,dn=0;
  const dr=()=>{x.clearRect(0,0,S,S);fp(x,P,ox,oy,'#a5d8ff');if(m)dot(x,m[0],m[1],'#d9480f')};dr();b.append(c);
  c.onpointerdown=e=>{if(dn)return;m=pt(c,e);dr()};
  const g=btn('Kunci',()=>{if(!m)return;dn=1;g.remove();dot(x,C[0]+ox,C[1]+oy,'#2f9e44',7);const d=Math.hypot(m[0]-C[0]-ox,m[1]-C[1]-oy);f(ex(d,22),`meleset ${Math.round(d)} px (hijau = aslinya)`)});b.append(g)}},
-{n:'Panjang kurva',d:'Berapa panjang kurva ini jika diluruskan? Atur garis lurus di bawah. Tanda 1× = lebar kotak, 2× = dua kali lebar kotak.',run:(b,f)=>{
+{n:'Expand Curve',d:'Berapa panjang kurva ini jika diluruskan? Atur garis lurus di bawah. Tanda 1× = lebar kotak, 2× = dua kali lebar kotak.',run:(b,f)=>{
  const[c,x]=canvas();let pts,L,line;
  do{pts=[...Array(ri(4,6))].map(()=>[rnd(25,275),rnd(25,275)]);const q=[pts[0],...pts,pts[pts.length-1]];line=[];
   for(let i=0;i<q.length-3;i++)for(let t=0;t<30;t++)line.push(cr(q[i],q[i+1],q[i+2],q[i+3],t/30));line.push(pts[pts.length-1]);
@@ -156,7 +165,7 @@ const T=[
  x.strokeStyle='#d9480f';x.lineWidth=3;x.lineJoin='round';x.beginPath();line.forEach((p,i)=>i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]));x.stroke();b.append(c);
  const rl=el('div','<i style="width:14.3%"></i><b style="left:42.86%"><span>1×</span></b><b style="left:85.71%"><span>2×</span></b>','ruler'),bar=rl.firstChild;b.append(rl);
  const s=sl(b,0,700,1,100,()=>'',v=>bar.style.width=v/7+'%'),g=btn('Kunci',()=>{const v=+s.value||1;g.remove();s.remove();f(ex(Math.abs(Math.log(v/L)),.25),`tebakanmu ${(v/300).toFixed(2)}× lebar kotak, aslinya ${(L/300).toFixed(2)}×`);bar.style.background='#2f9e44';bar.style.width=L/7+'%'});b.append(g)}},
-{n:'Pantulan biliar',d:'Bola meluncur tanpa gesekan di meja persegi, sudut datang = sudut pantul. Hanya pantulan pertama yang ditunjukkan. Tap perkiraan titik pantulan yang diminta (otomatis menempel ke dinding).',run:(b,f)=>{
+{n:'Trace Path',d:'Bola meluncur tanpa gesekan di meja persegi, sudut datang = sudut pantul. Hanya pantulan pertama yang ditunjukkan. Tap perkiraan titik pantulan yang diminta (otomatis menempel ke dinding).',run:(b,f)=>{
  const Q=270,M=15,n=ri(3,5),[c,x]=canvas();let sx,sy,H;
  const hits=(px,py,dx,dy,k)=>{const h=[];for(let i=0;i<k;i++){const tx=dx>0?(Q-px)/dx:-px/dx,ty=dy>0?(Q-py)/dy:-py/dy,t=Math.min(tx,ty);px+=dx*t;py+=dy*t;if(tx<ty)dx=-dx;else dy=-dy;h.push([px,py])}return h};
  for(;;){sx=rnd(50,220);sy=rnd(50,220);const a=rnd(0,6.2832),dx=Math.cos(a),dy=Math.sin(a);if(Math.abs(dx)<.25||Math.abs(dx)>.95||Math.abs(dy)<.25||Math.abs(dy)>.95)continue;
@@ -171,6 +180,7 @@ const T=[
   x.save();x.translate(M,M);dot(x,tgt[0],tgt[1],'#2f9e44',8);dot(x,m[0],m[1],'#7048e8');x.restore();const d=Math.hypot(m[0]-tgt[0],m[1]-tgt[1]);f(ex(d,45),`meleset ${Math.round(d)} px (hijau = aslinya)`)});b.append(g)}}
 ];
 
+const LOGO=`<svg viewBox="0 0 56 56" aria-hidden="true"><path d="M4 4v48h48z" fill="#ffd43b" stroke="#1d1d1b" stroke-width="3" stroke-linejoin="round"/><path d="M15 28v13h13z" style="fill:var(--bg)" stroke="#1d1d1b" stroke-width="2.5" stroke-linejoin="round"/><path d="M4 14h6M4 24h6M4 34h6M4 44h6M14 52v-6M24 52v-6M34 52v-6M44 52v-6" stroke="#1d1d1b" stroke-width="2"/></svg>estim<span class="dot">.</span>`;
 const SL=['Estimasi jumlah titiknya','Prediksi titik mendaratnya','Putar sampai sudutnya pas','Tebak berapa persen yang terisi','Racik warna tanpa mengintip','Rasakan detiknya, tanpa timer','Berapa kali lebih luas?','Temukan titik seimbangnya','Luruskan kurvanya dalam kepala','Ikuti pantulannya sampai ujung'];
 const pips=()=>`<div class="pips">${T.map((_,k)=>`<i class="${k<i?'d':k==i?'c':''}"></i>`).join('')}</div><span>Tes ${i+1} / ${T.length}</span>`;
 let i=0,res=[],box;
@@ -198,11 +208,11 @@ function login(){
    r.forEach(p=>list.append(btn(esc(p.name),()=>{keep(p);home()})));if(!r.length)list.textContent='Tidak ketemu.'}
   catch(_){list.textContent='Gagal mencari.'}},250)};
  card.append(el('h3','# Pemain baru'),a,reg,msg,el('div','atau','or'),el('h3','# Sudah punya akun'),q,list);
- app.append(el('h1','Estim'),el('p','Tebak, ukur, lalu adu skor di leaderboard.','mut'),card)}
+ app.append(el('h1',LOGO,'logo'),el('p','tes seberapa tajam estimasi kamu.','mut'),card)}
 function home(){
  if(!me)return login();i=0;res=[];app.innerHTML='';app.className='home';
  const p=el('p',`Halo, <b>${esc(me.name)}</b> · `,'mut'),sw=btn('ganti pemain',()=>{keep(null);login()}),lb=el('div','','card');sw.className='lnk';p.append(sw);
- app.append(el('h1','Estim'),p,btn('Mulai',go),el('div','Leaderboard','lv'),lb);board(lb,10)}
+ app.append(el('h1',LOGO,'logo'),el('p','tes seberapa tajam estimasi kamu.','mut'),el('div',T.map(t=>{const[a,b]=t.n.split(' ');return `<div><small>${a}</small><b>${b}</b></div>`}).join(''),'tiles'),btn('Mulai',go),p,el('div','Leaderboard','lv'),lb);board(lb,10)}
 function lbScreen(){
  app.innerHTML='';app.className='';const b=el('div','','card');
  app.append(el('h2','Leaderboard'),el('p','Skor terbaik tiap pemain.','mut'),b,btn('Main lagi',again),btn('Beranda',home));board(b,50)}
