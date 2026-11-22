@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pixelcode</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 22 22'%3E%3Crect x='5.5' width='9' height='9' fill='%23e8365c'/%3E%3Crect y='11' width='9' height='9' fill='%233a4aa0'/%3E%3Crect x='11' y='11' width='9' height='9' fill='%23ffcb62'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-0.5 -1 22 22'%3E%3Crect x='6' width='9' height='9' fill='%23e8365c'/%3E%3Crect y='11' width='9' height='9' fill='%233d9b5a'/%3E%3Crect x='12' y='11' width='9' height='9' fill='%23ffcb62'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 <style>
@@ -95,14 +95,14 @@ button.on{background:var(--ac);color:#0a0a0a;border-color:var(--ac)}
 </style>
 </head>
 <body>
-<div id="auth" class="scr" style="max-width:380px;text-align:center;padding-top:5vh"><h1 style="font-size:46px;line-height:1"><svg class="lg" viewBox="0 0 20 20" aria-hidden="true"><rect x="5.5" y="0" width="9" height="9" fill="#e8365c"/><rect x="0" y="11" width="9" height="9" fill="#3a4aa0"/><rect x="11" y="11" width="9" height="9" fill="#ffcb62"/></svg>Pixelcode</h1>
+<div id="auth" class="scr" style="max-width:380px;text-align:center;padding-top:5vh"><h1 style="font-size:46px;line-height:1"><svg class="lg" viewBox="0 0 21 20" aria-hidden="true"><rect x="6" y="0" width="9" height="9" fill="#e8365c"/><rect x="0" y="11" width="9" height="9" fill="#3d9b5a"/><rect x="12" y="11" width="9" height="9" fill="#ffcb62"/></svg>Pixelcode</h1>
 <p class="sub">Gambar ulang pixel art dengan kode Lua seefisien mungkin, lalu adu skor di leaderboard.</p>
 <div class="card" style="text-align:left;margin-top:18px"><p class="lbl">Pemain baru</p><input id="sn" maxlength="20" placeholder="nama pemain"><div class="row"><button class="p" id="su">Daftar</button></div>
 <div class="or">atau</div>
 <p class="lbl">Sudah punya akun</p><input id="ls" placeholder="cari nama..." autocomplete="off"><div id="lres"></div></div><p id="am" class="er"></p></div>
 <div id="menu" class="scr" hidden></div><div id="lbp" class="scr" hidden></div>
 <div id="game" hidden>
-<div class="wrap" style="margin-bottom:0"><div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;gap:10px"><h1><svg class="lg" viewBox="0 0 20 20" aria-hidden="true"><rect x="5.5" y="0" width="9" height="9" fill="#e8365c"/><rect x="0" y="11" width="9" height="9" fill="#3a4aa0"/><rect x="11" y="11" width="9" height="9" fill="#ffcb62"/></svg>Pixelcode</h1><span id="who" class="who"></span></div></div>
+<div class="wrap" style="margin-bottom:0"><div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;gap:10px"><h1><svg class="lg" viewBox="0 0 21 20" aria-hidden="true"><rect x="6" y="0" width="9" height="9" fill="#e8365c"/><rect x="0" y="11" width="9" height="9" fill="#3d9b5a"/><rect x="12" y="11" width="9" height="9" fill="#ffcb62"/></svg>Pixelcode</h1><span id="who" class="who"></span></div></div>
 <div class="wrap">
 <div class="card">
 <p class="lbl">Target</p><canvas id="t" width="290" height="286"></canvas>
@@ -404,7 +404,7 @@ async function menu(){flush();show("menu");const M=$("menu");M.innerHTML='<p cla
 let rk=[];try{rk=await rpc("rp_ranking")}catch(e){}
 const ks=Object.values(mine),n=ks.length,av=k=>n?(ks.reduce((s,o)=>s+o[k],0)/n).toFixed(1):"–",pos=rk.findIndex(p=>p.name===me)+1;
 const PG=`<p class="lbl" style="text-transform:none"><span class="ok">${E(me)}</span>’s progress</p><div class="stats"><div>Level<br><b>${n}/${LEVELS.length}</b></div><div>${XB} size<br><b>${av("size")}</b></div><div>${XB} cycles<br><b>${av("cyc")}</b></div><div>${XB} skor<br><b>${av("score")}</b></div><div>Peringkat<br><b>${pos?"#"+pos+" / "+rk.length:"–"}</b></div></div>`;
-M.innerHTML=`<div class="hero"><div><div class="wl">Welcome to</div><h1><svg class="lg" viewBox="0 0 20 20" aria-hidden="true"><rect x="5.5" y="0" width="9" height="9" fill="#e8365c"/><rect x="0" y="11" width="9" height="9" fill="#3a4aa0"/><rect x="11" y="11" width="9" height="9" fill="#ffcb62"/></svg>Pixelcode</h1><p class="sub">Gambar ulang pixel art dengan kode Lua seefisien mungkin. <br class="dbr">Pilih level, tulis kodenya, dan hasilnya langsung terlihat.</p><div class="hprog">${PG}</div><div class="hst"><span class="dot"></span><span>${LOCAL?"Mode lokal: data hanya di browser ini":"Terhubung ke database"}</span><button id="out" title="Keluar" aria-label="Keluar">${IO}</button></div></div><div class="ha"><pre id="hcode"></pre><canvas id="hc" width="252" height="252"></canvas></div></div>
+M.innerHTML=`<div class="hero"><div><div class="wl">Welcome to</div><h1><svg class="lg" viewBox="0 0 21 20" aria-hidden="true"><rect x="6" y="0" width="9" height="9" fill="#e8365c"/><rect x="0" y="11" width="9" height="9" fill="#3d9b5a"/><rect x="12" y="11" width="9" height="9" fill="#ffcb62"/></svg>Pixelcode</h1><p class="sub">Gambar ulang pixel art dengan kode Lua seefisien mungkin. <br class="dbr">Pilih level, tulis kodenya, dan hasilnya langsung terlihat.</p><div class="hprog">${PG}</div><div class="hst"><span class="dot"></span><span>${LOCAL?"Mode lokal: data hanya di browser ini":"Terhubung ke database"}</span><button id="out" title="Keluar" aria-label="Keluar">${IO}</button></div></div><div class="ha"><pre id="hcode"></pre><canvas id="hc" width="252" height="252"></canvas></div></div>
 <div class="card pcard" style="margin-bottom:14px">${PG}</div>
 <div class="card" style="margin-bottom:14px"><p class="lbl">Peringkat pemain</p>${rankT(rk)}<p class="sub">Urutan: level terbanyak, lalu ${XB} skor terkecil.</p></div>
 <details class="card" style="margin-bottom:14px"><summary>Panduan permainan</summary>${GUIDE}</details>
