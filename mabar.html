@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mabar | Repo S2</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0C0C0A">
+<meta name="application-name" content="Repo S2 TMI">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Repo S2 TMI">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500&family=Space+Grotesk:wght@700&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0C0C0A;--ink:#FFFFFF;--mut:#A9A9A0;--line:rgba(255,255,255,.6);--line2:rgba(255,255,255,.26);
+--grid:rgba(255,255,255,.05);--gridM:rgba(255,255,255,.12);--ni:#0C0C0A;--amber:#FFC400;--blurple:#5865F2;
+--disp:"Barlow Condensed","Arial Narrow",sans-serif;--body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background-color:var(--bg);color:var(--ink);font:400 16px/1.55 var(--body);padding:36px clamp(24px,5vw,64px) 48px;
+background-image:linear-gradient(var(--gridM) 1px,transparent 1px),linear-gradient(90deg,var(--gridM) 1px,transparent 1px),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+background-size:100px 100px,100px 100px,20px 20px,20px 20px}
+body::before{content:"";position:fixed;inset:10px;border:1.5px solid var(--line);pointer-events:none}
+header,main{max-width:1000px;margin:0 auto}
+.back{display:inline-block;margin:0 0 18px;font:600 22px/1 var(--disp);letter-spacing:.01em;color:var(--amber);text-decoration:none;border-bottom:1px solid transparent}
+.back:hover{border-bottom-color:var(--amber)}
+.back:focus-visible{outline:3px solid #fff;outline-offset:3px}
+h1{margin:0;font:700 clamp(68px,13vw,148px)/.88 var(--disp);letter-spacing:-.01em}
+.sub{margin:10px 0 0;font-size:18px;font-weight:500;color:var(--mut)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:34px}
+.card{position:relative;display:flex;align-items:center;gap:18px;padding:20px 22px 20px 28px;background:var(--ni);color:#fff;border:1.5px solid var(--line);box-shadow:inset 6px 0 0 var(--amber);border-radius:3px;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translate(-3px,-3px);box-shadow:inset 6px 0 0 var(--amber),6px 6px 0 var(--amber)}
+.card:focus-visible{outline:3px solid #fff;outline-offset:4px}
+.card h2{margin:0 0 4px;font:600 34px/1 var(--disp)}
+.card p{margin:0;font-size:14.5px;line-height:1.45;color:#CFCFC6}
+.txt{min-width:0}
+.logo{flex:0 0 auto;display:block;line-height:0}
+.logo svg{width:56px;height:56px;display:block}
+.dc{grid-column:1/-1;background:var(--blurple);border-color:var(--blurple);color:#fff;box-shadow:inset 6px 0 0 #3C45A5}
+.dc:hover{box-shadow:inset 6px 0 0 #3C45A5,6px 6px 0 var(--amber)}
+.dc .logo{background:transparent;width:80px;height:80px}
+.dc .logo svg{width:68px;height:68px;fill:#fff}
+.dc h2{font-size:40px}
+.dc p{font-size:16px;color:#fff}
+.dc .txt{flex:1 1 auto}
+.play{flex:0 0 auto;align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:8px;margin:-4px 0;padding-left:22px;border-left:1.5px solid rgba(255,255,255,.4)}
+.play b{font:600 18px/1 var(--disp);letter-spacing:.08em;text-transform:uppercase;color:#fff}
+.play ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.play li{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:500;line-height:1.2;color:#fff}
+.play svg{flex:0 0 auto;width:20px;height:20px;display:block;fill:currentColor}
+.sh{display:none}
+.play svg.st{fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round}
+.divider{grid-column:1/-1;display:flex;align-items:center;gap:18px;margin:2px 0;font:600 26px/1 var(--disp);letter-spacing:.04em;color:var(--mut)}
+.divider::before,.divider::after{content:"";flex:1;height:1.5px;background:var(--mut)}
+.g-estim h2{font:700 38px/1 "Space Grotesk",system-ui,sans-serif;letter-spacing:-.05em;text-transform:none}
+.g-estim h2 span{color:#FF5A1F}
+.g-pix h2{font:400 40px/1 VT323,ui-monospace,Menlo,Consolas,monospace;letter-spacing:.03em}
+@media (max-width:720px){
+ .dbr{display:none}
+ .grid{grid-template-columns:1fr;gap:22px}
+ .card{gap:14px;padding:18px 16px 18px 24px}
+ .dc .logo{width:60px;height:60px}.dc .logo svg{width:52px;height:52px}
+ .dc h2{font-size:34px}
+ .dc{flex-wrap:wrap}
+ .dc .txt{flex:1 1 0}
+ .play{flex:1 1 100%;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:6px 10px;align-self:auto;margin:4px 0 0;padding:12px 0 0;border-left:0;border-top:1.5px solid rgba(255,255,255,.4)}
+ .play b{font-size:16px}
+ .play b::after{content:":"}
+ .play ul{display:flex;flex-wrap:wrap;gap:6px 12px}
+ .play li{gap:6px;font-size:14px}
+ .play svg{width:18px;height:18px}
+ .fl{display:none}
+ .sh{display:inline}
+}
+</style>
+<script data-goatcounter="https://feinstehaar.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header>
+  <a class="back" href="index.html">&larr; Repo S2</a>
+  <h1>Mabar</h1>
+  <p class="sub">Santai dulu kawan, kita mabar sejenak<br class="dbr"> atau bantai leaderboard di mini games</p>
+</header>
+
+<main class="grid">
+  <a class="card dc" href="https://discord.gg/yyFQtZR6W" target="_blank" rel="noopener">
+    <span class="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+    </span>
+    <span class="txt">
+      <h2>Info Mabar</h2>
+      <p>Persekutuan kultus mabar santuy plus diskusi tesis tipis-tipis</p>
+    </span>
+    <span class="play">
+      <b>Ongoing</b>
+      <ul>
+        <li><svg class="st" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 16L19.5 4.5"/><path d="M5 13l6 6"/><path d="M8 16l-4 4"/></svg><span class="fl">Mobile Legends</span><span class="sh">ML</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 3C7.6 3 4.5 6 4.5 10c0 2.4 1.1 4 2.5 5v3.5c0 .8.7 1.5 1.5 1.5h7c.8 0 1.5-.7 1.5-1.5V15c1.4-1 2.5-2.6 2.5-5 0-4-3.1-7-7.5-7zM9 9.5a1.8 1.8 0 100 3.6 1.8 1.8 0 000-3.6zM15 9.5a1.8 1.8 0 100 3.6 1.8 1.8 0 000-3.6zM12 13.5l-1.1 2.2h2.2z"/></svg><span class="fl">Outlast Trials</span><span class="sh">OLT</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M11 2h2v4h-2zM4 14a8 8 0 0116 0v5a1 1 0 01-1 1H5a1 1 0 01-1-1zM9 12.4a1.8 1.8 0 100 3.6 1.8 1.8 0 000-3.6zM15 12.4a1.8 1.8 0 100 3.6 1.8 1.8 0 000-3.6z"/></svg><span class="fl">R.E.P.O</span><span class="sh">REPO</span></li>
+      </ul>
+    </span>
+  </a>
+
+  <div class="divider" role="separator" aria-label="Mini Games">Mini Games</div>
+
+  <a class="card g-estim" href="mabar/estim.html">
+    <span class="logo" aria-hidden="true">
+      <svg viewBox="0 0 56 56"><path d="M4 4v48h48z" fill="#ffd43b" stroke="#0C0C0A" stroke-width="3" stroke-linejoin="round"/><path d="M15 28v13h13z" fill="#0C0C0A" stroke="#0C0C0A" stroke-width="2.5" stroke-linejoin="round"/><path d="M4 14h6M4 24h6M4 34h6M4 44h6M14 52v-6M24 52v-6M34 52v-6M44 52v-6" stroke="#0C0C0A" stroke-width="2"/></svg>
+    </span>
+    <span class="txt">
+      <h2>estim<span>.</span></h2>
+      <p>Tes seberapa tajam estimasi dan akurasimu.</p>
+    </span>
+  </a>
+
+  <a class="card g-pix" href="mabar/pixelcode.html">
+    <span class="logo" aria-hidden="true">
+      <svg viewBox="0 0 21 20"><rect x="6" y="0" width="9" height="9" fill="#e8365c"/><rect x="0" y="11" width="9" height="9" fill="#3d9b5a"/><rect x="12" y="11" width="9" height="9" fill="#ffcb62"/></svg>
+    </span>
+    <span class="txt">
+      <h2>Pixelcode</h2>
+      <p>Gambar ulang pixel art dengan kode parsimoni.</p>
+    </span>
+  </a>
+</main>
+
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('sw.js').catch(function(e){console.warn('SW gagal:',e)});
+  });
+}
+</script>
+</body>
+</html>

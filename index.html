@@ -35,25 +35,27 @@ h1{margin:0;font:700 clamp(68px,13vw,148px)/.88 var(--disp);letter-spacing:-.01e
 .by a:hover{ border-bottom-color:#F99C1C; }
 .by a:focus-visible{ outline: 3px solid #fff; outline-offset: 3px; }
 .by img{height: 1em;width: auto;display: inline-block;}
-.loop{position:relative;aspect-ratio:1000/620;max-width:1000px;margin:28px auto 0}
+.loop{position:relative;aspect-ratio:1000/440;max-width:1000px;margin:28px auto 0;container-type:inline-size}
 .loop svg{position:absolute;inset:0;width:100%;height:100%}
 .d{fill:none;stroke:var(--amber);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:draw .75s ease-out forwards;animation-delay:var(--t)}
 .h,.pl,.rb2{fill:var(--amber);opacity:0;animation:pop .25s forwards;animation-delay:var(--t)}
 .pl{font:700 28px var(--disp)}
 .rl{font:700 46px var(--disp);fill:var(--ni)}
 @keyframes draw{to{stroke-dashoffset:0}}@keyframes pop{to{opacity:1}}
-.node{position:absolute;left:var(--x);top:var(--y);width:28%;min-width:210px;transform:translate(-50%,-50%);display:block;padding:16px 18px 16px 22px;
+.node{position:absolute;left:var(--x);top:var(--y);width:30%;min-width:210px;transform:translate(-50%,-50%);display:block;padding:16px 18px 16px 22px;
 background:var(--amber);color:var(--ni);border:1.5px solid var(--amber);box-shadow:inset 6px 0 0 var(--ni);border-radius:3px;text-decoration:none;transition:transform .15s,box-shadow .15s}
 .node:hover{transform:translate(calc(-50% - 3px),calc(-50% - 3px));box-shadow:inset 6px 0 0 var(--ni),6px 6px 0 #fff}
 .node:focus-visible{outline:3px solid #fff;outline-offset:4px}
-.node h2{margin:0 0 4px;font:600 30px/1 var(--disp)}
-.node p{margin:0;font-size:14.5px;line-height:1.45;color:var(--ni)}
-.cap{position:absolute;left:50%;top:64%;width:27%;transform:translateX(-50%);text-align:center;font-size:13.5px;line-height:1.45;color:var(--mut)}
+.node h2{margin:0 0 4px;font:600 clamp(24px,3cqw,30px)/1 var(--disp)}
+.node p{margin:0;font-size:clamp(12.5px,1.5cqw,14.5px);line-height:1.45;color:var(--ni)}
+.cap{position:absolute;left:50%;top:62%;width:27%;transform:translateX(-50%);text-align:center;font-size:13.5px;line-height:1.45;color:var(--mut)}
 .cap .rb{display:none}
 @media (prefers-reduced-motion:reduce){.d,.h,.pl,.rb2{animation:none;opacity:1;stroke-dashoffset:0}}
 @media (max-width:860px){
  .loop{aspect-ratio:auto;display:flex;flex-direction:column;gap:46px;margin-top:34px}
  .loop svg{display:none}
+ .node h2{font-size:30px}
+ .node p{font-size:14.5px}
  .node,.node:hover{position:relative;left:auto;top:auto;width:100%;min-width:0;transform:none}
  .node:hover{transform:translate(-3px,-3px)}
  .node:not(:last-of-type)::after{content:"";position:absolute;left:50%;top:100%;width:3px;height:30px;margin-left:-1.5px;background:var(--amber)}
@@ -72,36 +74,43 @@ background:var(--amber);color:var(--ni);border:1.5px solid var(--amber);box-shad
 </header>
 
 <main class="loop">
-  <svg viewBox="0 0 1000 620" role="img" aria-label="Diagram loop penguat: bahan kuliah mendorong latihan, latihan mendorong stack riset, stack riset kembali mendorong bahan kuliah">
-    <path class="d" pathLength="1" d="M210 316 C 210 230, 260 150, 324 150" style="--t:.2s"/>
-    <polygon class="h" points="338,150 322,142 322,158" style="--t:.9s"/>
-    <text class="pl" x="196" y="232" text-anchor="end" style="--t:.9s">+</text>
-    <path class="d" pathLength="1" d="M662 150 C 750 150, 790 220, 790 302" style="--t:.9s"/>
-    <polygon class="h" points="790,316 782,300 798,300" style="--t:1.6s"/>
-    <text class="pl" x="806" y="232" style="--t:1.6s">+</text>
-    <path class="d" pathLength="1" d="M810 484 C 810 590, 190 590, 190 500" style="--t:1.6s;animation-duration:.95s"/>
-    <polygon class="h" points="190,484 182,500 198,500" style="--t:2.55s"/>
-    <text class="pl" x="500" y="604" text-anchor="middle" style="--t:2.55s">+</text>
-    <circle class="rb2" cx="500" cy="330" r="40" style="--t:2.4s"/>
-    <text class="rl" x="500" y="346" text-anchor="middle" style="opacity:1">R</text>
-    <path class="d" pathLength="1" d="M441.7 308.8 A62 62 0 1 1 478.8 388.3" style="--t:2.55s;animation-duration:.6s"/>
-    <polygon class="h" points="478.8,388.3 494.4,386.5 489.6,399.7" style="--t:3.15s"/>
+  <svg viewBox="0 0 1000 440" role="img" aria-label="Diagram loop penguat: bahan kuliah mendorong latihan, latihan mendorong stack riset, stack riset mendorong mabar, mabar kembali mendorong bahan kuliah">
+    <path class="d" pathLength="1" d="M337 66 H646" style="--t:.2s"/>
+    <polygon class="h" points="662,66 646,58 646,74" style="--t:.95s"/>
+    <text class="pl" x="500" y="48" text-anchor="middle" style="--t:.95s">+</text>
+    <path class="d" pathLength="1" d="M825 140 V286" style="--t:.95s"/>
+    <polygon class="h" points="825,302 817,286 833,286" style="--t:1.7s"/>
+    <text class="pl" x="846" y="228" style="--t:1.7s">+</text>
+    <path class="d" pathLength="1" d="M663 374 H354" style="--t:1.7s"/>
+    <polygon class="h" points="338,374 354,366 354,382" style="--t:2.45s"/>
+    <text class="pl" x="500" y="412" text-anchor="middle" style="--t:2.45s">+</text>
+    <path class="d" pathLength="1" d="M175 302 V156" style="--t:2.45s"/>
+    <polygon class="h" points="175,140 167,156 183,156" style="--t:3.2s"/>
+    <text class="pl" x="154" y="228" text-anchor="end" style="--t:3.2s">+</text>
+    <circle class="rb2" cx="500" cy="190" r="40" style="--t:3.2s"/>
+    <text class="rl" x="500" y="206" text-anchor="middle" style="opacity:1">R</text>
+    <path class="d" pathLength="1" d="M441.7 168.8 A62 62 0 1 1 478.8 248.3" style="--t:3.35s;animation-duration:.6s"/>
+    <polygon class="h" points="478.8,248.3 494.4,246.5 489.6,259.7" style="--t:3.95s"/>
   </svg>
 
-  <a class="node" href="bahan/" style="--x:19%;--y:64.5%">
+  <a class="node" href="bahan/" style="--x:17.5%;--y:15%">
     <h2>Bahan kuliah</h2>
     <p>Materi dan tugas untuk Anstat, Pemsis, Metlit, dan Optim.</p>
   </a>
-  <a class="node" href="latihan/index.html" style="--x:50%;--y:22.6%">
+  <a class="node" href="latihan/index.html" style="--x:82.5%;--y:15%">
     <h2>Latihan</h2>
     <p>Kuis dan latihan interaktif per mata kuliah dan per materi.</p>
   </a>
-  <a class="node" href="riset.html" style="--x:81%;--y:64.5%">
+  <a class="node" href="riset.html" style="--x:82.5%;--y:85%">
     <h2>Stack Riset</h2>
     <p>Katalog tesis, protokol SLR, dan bengkel teknis penyusunan tesis.</p>
   </a>
+  <a class="node" href="mabar.html" style="--x:17.5%;--y:85%">
+    <h2>Mabar</h2>
+    <p>Refreshing sejenak dengan mabar dan mini games</p>
+  </a>
 
-  <p class="cap"><span class="rb" aria-hidden="true">R</span><span>Reinforcing loop: belajar, berlatih, eksekusi riset, lalu belajar lagi</span></p>
+  <p class="cap"><span class="rb" aria-hidden="true">R</span><span>Reinforcing loop: belajar, berlatih, eksekusi riset, mabar, lalu belajar lagi</span></p>
 </main>
 
 <script>
