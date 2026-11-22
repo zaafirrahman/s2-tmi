@@ -101,6 +101,14 @@ h1.logo+p{margin-top:2px}
 .ibar button{flex:1;height:56px;padding:0;margin:0;display:grid;place-items:center;color:#1d1d1b}
 .ibar button.w{background:#f4f1ea}
 .plist{max-height:240px;overflow-y:auto;padding-bottom:4px}
+#app{position:relative}
+.lbc{max-height:242px;overflow-y:auto;overscroll-behavior:contain}
+a.back{position:absolute;top:18px;left:16px;width:46px;height:46px;display:grid;place-items:center;background:#f4f1ea;color:#1d1d1b;border:2px solid var(--line);border-radius:14px;box-shadow:0 4px 0 var(--line);text-decoration:none;z-index:2}
+a.back:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+a.backbtn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:12px 24px;background:#f4f1ea;color:#1d1d1b;border:2px solid var(--line);border-radius:14px;box-shadow:0 4px 0 var(--line);font-weight:700;text-decoration:none}
+a.backbtn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+a.backbtn svg{width:20px;height:20px}
+footer{margin-top:30px;font-size:12px;color:var(--mut);text-align:center}
 </style></head>
 <body><div id="app"></div>
 <script>
@@ -195,6 +203,8 @@ const T=[
 ];
 
 function fitTiles(){document.querySelectorAll('.tiles b').forEach(b=>{b.style.fontSize='20px';const av=b.parentNode.clientWidth-10,w=b.offsetWidth;if(w)b.style.fontSize=Math.min(26,20*av/w)+'px'});if(!fitTiles.d&&document.fonts){fitTiles.d=1;document.fonts.ready.then(fitTiles)}}
+const FOOT='Inspired by: Perceptle by Tucker Gardner';
+const BACK=`<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>`;
 const OUT=`<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4H5v16h4"/><path d="M16 8l4 4-4 4M20 12H9"/></svg>`;
 const LOGO=`<svg viewBox="0 0 56 56" aria-hidden="true"><path d="M4 4v48h48z" fill="#ffd43b" stroke="#1d1d1b" stroke-width="3" stroke-linejoin="round"/><path d="M15 28v13h13z" style="fill:var(--bg)" stroke="#1d1d1b" stroke-width="2.5" stroke-linejoin="round"/><path d="M4 14h6M4 24h6M4 34h6M4 44h6M14 52v-6M24 52v-6M34 52v-6M44 52v-6" stroke="#1d1d1b" stroke-width="2"/></svg>estim<span class="dot">.</span>`;
 const SL=['Estimasi jumlah titiknya','Prediksi titik mendaratnya','Putar sampai sudutnya pas','Tebak berapa persen yang terisi','Racik warna tanpa mengintip','Rasakan detiknya, tanpa timer','Berapa kali lebih luas?','Temukan titik seimbangnya','Luruskan kurvanya dalam kepala','Ikuti pantulannya sampai ujung'];
@@ -207,7 +217,7 @@ function keep(p){me=p;try{p?localStorage.setItem('es_me',JSON.stringify(p)):loca
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const again=()=>{i=0;res=[];go()};
 async function board(box,n){box.innerHTML='<p class="mut">Memuat…</p>';
- try{const r=await sb('es_scores?select=score,player_id,es_players(name)&order=score.desc&limit=300'),seen={},top=[];
+ try{const r=await sb('es_scores?select=score,player_id,es_players(name)&order=score.desc&limit=1000'),seen={},top=[];
   r.forEach(x=>{if(!seen[x.player_id]){seen[x.player_id]=1;top.push(x)}});
   box.innerHTML=top.slice(0,n).map((x,k)=>`<div class="lb${me&&x.player_id==me.id?' me':''}"><b>${k+1}</b><span>${esc(x.es_players.name)}</span><em>${(x.score/10).toFixed(1)} · ${rank(Math.round(x.score/10))}</em></div>`).join('')||'<p class="mut">Belum ada skor. Jadilah yang pertama!</p>'}
  catch(_){box.innerHTML='<p class="mut">Leaderboard gagal dimuat.</p>'}}
@@ -225,11 +235,11 @@ function login(){
   catch(_){if(k==seq)list.textContent='Gagal mencari.'}};
  q.oninput=()=>{clearTimeout(tm);tm=setTimeout(find,200)};q.onfocus=find;
  card.append(el('h3','# Pemain baru'),a,reg,msg,el('div','atau','or'),el('h3','# Sudah punya akun'),q,list);
- app.append(el('h1',LOGO,'logo'),el('p','tes seberapa tajam estimasi kamu.','mut'),card)}
+ app.append(el('h1',LOGO,'logo'),el('p','tes seberapa tajam estimasi kamu.','mut'),card,el('footer',FOOT))}
 function home(){
  if(!me)return login();i=0;res=[];app.innerHTML='';app.className='home';
- const sub=el('p',`Halo <span class="nm">${esc(me.name)}</span>, tes seberapa tajam estimasi kamu.`,'mut'),out=btn(OUT,()=>{keep(null);login()}),lb=el('div','','card'),acts=el('div','','acts');out.className='out';out.title='ganti pemain';out.setAttribute('aria-label','ganti pemain');acts.append(btn('Mulai',go),out);
- app.append(el('h1',LOGO,'logo'),sub,el('div',T.map(t=>{const[a,b]=t.n.split(' ');return `<div><small>${a}</small><b>${b}</b></div>`}).join(''),'tiles'),acts,el('div','Leaderboard','lv'),lb);fitTiles();board(lb,10)}
+ const sub=el('p',`Halo <span class="nm">${esc(me.name)}</span>, tes seberapa tajam estimasi kamu.`,'mut'),out=btn(OUT,()=>{keep(null);login()}),lb=el('div','','card lbc'),acts=el('div','','acts');out.className='out';out.title='ganti pemain';out.setAttribute('aria-label','ganti pemain');acts.append(btn('Mulai',go),out);const bk=el('a',BACK+'<span>Back</span>','backbtn');bk.href='../mabar.html';
+ app.append(el('h1',LOGO,'logo'),sub,el('div',T.map(t=>{const[a,b]=t.n.split(' ');return `<div><small>${a}</small><b>${b}</b></div>`}).join(''),'tiles'),acts,el('div','Leaderboard','lv'),lb,bk,el('footer',FOOT));fitTiles();board(lb,1e4)}
 function lbScreen(){
  app.innerHTML='';app.className='';const b=el('div','','card');
  app.append(el('h2','Leaderboard'),el('p','Skor terbaik tiap pemain.','mut'),b,btn('Main lagi',again),btn('Beranda',home));board(b,50)}
