@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="id"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>estim.</title>
+<title>estim.</title><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2056%2056%22%3E%3Cpath%20fill%3D%22%23ffd43b%22%20fill-rule%3D%22evenodd%22%20stroke%3D%22%231d1d1b%22%20stroke-width%3D%223%22%20stroke-linejoin%3D%22round%22%20d%3D%22M4%204v48h48zM15%2028v13h13z%22/%3E%3Cpath%20stroke%3D%22%231d1d1b%22%20stroke-width%3D%222.4%22%20d%3D%22M4%2014h6M4%2024h6M4%2034h6M4%2044h6M14%2052v-6M24%2052v-6M34%2052v-6M44%2052v-6%22/%3E%3C/svg%3E">
 <style>
 :root{--bg:#f6f4ef;--fg:#1d1d1b;--mut:#6b6a65;--ac:#d9480f;--card:#fff;--bd:#dedbd2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171716;--fg:#f0eee8;--mut:#a09e96;--card:#242422;--bd:#3a3935;color-scheme:dark}}
@@ -87,6 +87,20 @@ h1.logo{display:inline-flex;align-items:center;gap:12px;background:none;border:0
 .tiles div:nth-child(even){background:#0c0c0c;color:#f0eee8}
 .tiles small{font-size:9.5px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;opacity:.85}
 .tiles b{font-size:clamp(11px,3.4vw,14px);line-height:1.05;letter-spacing:-.03em;overflow-wrap:anywhere}
+h1.logo{gap:0;margin:6px 0 2px}.logo svg{margin-right:12px}
+h1.logo+p{margin-top:2px}
+.tiles div{aspect-ratio:auto;justify-content:center;gap:0;padding:5px 5px 6px}
+.tiles small{line-height:1;margin-bottom:1px}
+.tiles b{display:block;width:max-content;line-height:1;font-size:14px}
+.nm{color:var(--ac);font-weight:700}
+#app.home>p.mut{max-width:none;text-wrap:balance}
+.acts{display:flex;gap:10px;justify-content:center;margin-top:14px}
+#app.home .acts button{margin:0}
+#app.home .acts button.out{background:#e03131;padding:0 16px;display:grid;place-items:center}
+.ibar{display:flex;gap:10px;margin-top:18px}
+.ibar button{flex:1;height:56px;padding:0;margin:0;display:grid;place-items:center;color:#1d1d1b}
+.ibar button.w{background:#f4f1ea}
+.plist{max-height:240px;overflow-y:auto;padding-bottom:4px}
 </style></head>
 <body><div id="app"></div>
 <script>
@@ -113,7 +127,7 @@ const T=[
  const n=ri(15,120),[c,x]=canvas();b.append(c);
  for(let k=0;k<n;k++)dot(x,rnd(12,288),rnd(12,288),'#ff7a45',4);
  setTimeout(()=>{x.clearRect(0,0,S,S);const inp=el('input');inp.type='number';inp.inputMode='numeric';inp.placeholder='Berapa jumlah titiknya?';
-  const g=btn('Kunci',()=>{const v=+inp.value;if(!v)return;inp.remove();g.remove();f(ex(Math.abs(v-n)/n,.15),`tebakanmu ${v}, aslinya ${n}`)});b.append(inp,g)},1500)}},
+  const g=btn('Kunci',()=>{const v=+inp.value;if(!v)return;inp.remove();g.remove();f(ex(Math.max(0,Math.abs(v-n)/n-.03),.3),`tebakanmu ${v}, aslinya ${n}`)});b.append(inp,g)},1500)}},
 {n:'Track Ball',d:'Bola melambung lalu hilang di tengah jalan. Tap di mana bola akan mendarat di garis tanah.',run:(b,f)=>{
  const[c,x]=canvas();b.append(c);let vx,vy,Tt,lx;
  do{vx=rnd(110,230);vy=rnd(240,330);Tt=2*vy/500;lx=20+vx*Tt}while(lx<130||lx>280);
@@ -180,6 +194,8 @@ const T=[
   x.save();x.translate(M,M);dot(x,tgt[0],tgt[1],'#2f9e44',8);dot(x,m[0],m[1],'#7048e8');x.restore();const d=Math.hypot(m[0]-tgt[0],m[1]-tgt[1]);f(ex(d,45),`meleset ${Math.round(d)} px (hijau = aslinya)`)});b.append(g)}}
 ];
 
+function fitTiles(){document.querySelectorAll('.tiles b').forEach(b=>{b.style.fontSize='20px';const av=b.parentNode.clientWidth-10,w=b.offsetWidth;if(w)b.style.fontSize=Math.min(26,20*av/w)+'px'});if(!fitTiles.d&&document.fonts){fitTiles.d=1;document.fonts.ready.then(fitTiles)}}
+const OUT=`<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4H5v16h4"/><path d="M16 8l4 4-4 4M20 12H9"/></svg>`;
 const LOGO=`<svg viewBox="0 0 56 56" aria-hidden="true"><path d="M4 4v48h48z" fill="#ffd43b" stroke="#1d1d1b" stroke-width="3" stroke-linejoin="round"/><path d="M15 28v13h13z" style="fill:var(--bg)" stroke="#1d1d1b" stroke-width="2.5" stroke-linejoin="round"/><path d="M4 14h6M4 24h6M4 34h6M4 44h6M14 52v-6M24 52v-6M34 52v-6M44 52v-6" stroke="#1d1d1b" stroke-width="2"/></svg>estim<span class="dot">.</span>`;
 const SL=['Estimasi jumlah titiknya','Prediksi titik mendaratnya','Putar sampai sudutnya pas','Tebak berapa persen yang terisi','Racik warna tanpa mengintip','Rasakan detiknya, tanpa timer','Berapa kali lebih luas?','Temukan titik seimbangnya','Luruskan kurvanya dalam kepala','Ikuti pantulannya sampai ujung'];
 const pips=()=>`<div class="pips">${T.map((_,k)=>`<i class="${k<i?'d':k==i?'c':''}"></i>`).join('')}</div><span>Tes ${i+1} / ${T.length}</span>`;
@@ -203,16 +219,17 @@ function login(){
   reg.disabled=true;msg.textContent='';
   try{const[p]=await sb('es_players',{method:'POST',body:JSON.stringify({name:n})});keep({id:p.id,name:p.name});home()}
   catch(e){msg.textContent=e.code==409?'Nama sudah dipakai. Cari di bagian masuk.':'Gagal daftar, coba lagi.';reg.disabled=false}});
- let tm;q.oninput=()=>{clearTimeout(tm);tm=setTimeout(async()=>{const v=q.value.trim().replace(/[*%,()]/g,'');list.innerHTML='';if(!v)return;
-  try{const r=await sb('es_players?select=id,name&name=ilike.*'+encodeURIComponent(v)+'*&order=name&limit=8');
+ let tm,seq=0;const find=async()=>{const v=q.value.trim().replace(/[*%,()]/g,''),k=++seq;
+  try{const r=await sb('es_players?select=id,name'+(v?'&name=ilike.*'+encodeURIComponent(v)+'*':'')+'&order=name&limit=30');if(k!=seq)return;list.innerHTML='';
    r.forEach(p=>list.append(btn(esc(p.name),()=>{keep(p);home()})));if(!r.length)list.textContent='Tidak ketemu.'}
-  catch(_){list.textContent='Gagal mencari.'}},250)};
+  catch(_){if(k==seq)list.textContent='Gagal mencari.'}};
+ q.oninput=()=>{clearTimeout(tm);tm=setTimeout(find,200)};q.onfocus=find;
  card.append(el('h3','# Pemain baru'),a,reg,msg,el('div','atau','or'),el('h3','# Sudah punya akun'),q,list);
  app.append(el('h1',LOGO,'logo'),el('p','tes seberapa tajam estimasi kamu.','mut'),card)}
 function home(){
  if(!me)return login();i=0;res=[];app.innerHTML='';app.className='home';
- const p=el('p',`Halo, <b>${esc(me.name)}</b> · `,'mut'),sw=btn('ganti pemain',()=>{keep(null);login()}),lb=el('div','','card');sw.className='lnk';p.append(sw);
- app.append(el('h1',LOGO,'logo'),el('p','tes seberapa tajam estimasi kamu.','mut'),el('div',T.map(t=>{const[a,b]=t.n.split(' ');return `<div><small>${a}</small><b>${b}</b></div>`}).join(''),'tiles'),btn('Mulai',go),p,el('div','Leaderboard','lv'),lb);board(lb,10)}
+ const sub=el('p',`Halo <span class="nm">${esc(me.name)}</span>, tes seberapa tajam estimasi kamu.`,'mut'),out=btn(OUT,()=>{keep(null);login()}),lb=el('div','','card'),acts=el('div','','acts');out.className='out';out.title='ganti pemain';out.setAttribute('aria-label','ganti pemain');acts.append(btn('Mulai',go),out);
+ app.append(el('h1',LOGO,'logo'),sub,el('div',T.map(t=>{const[a,b]=t.n.split(' ');return `<div><small>${a}</small><b>${b}</b></div>`}).join(''),'tiles'),acts,el('div','Leaderboard','lv'),lb);fitTiles();board(lb,10)}
 function lbScreen(){
  app.innerHTML='';app.className='';const b=el('div','','card');
  app.append(el('h2','Leaderboard'),el('p','Skor terbaik tiap pemain.','mut'),b,btn('Main lagi',again),btn('Beranda',home));board(b,50)}
@@ -229,6 +246,10 @@ function end(){
  sb('es_scores',{method:'POST',body:JSON.stringify({player_id:me.id,score:tot,details:res.map(r=>r.s)})}).then(()=>st.textContent='Skor tersimpan ✓').catch(()=>st.textContent='Skor gagal disimpan.');
  const tb=el('div');res.forEach(r=>tb.append(el('div',`<span>${r.n}</span><span class="bar"><i style="width:${r.s}%"></i></span><span>${r.s} · <b>${rank(r.s)}</b></span>`,'row')));app.append(tb);
  const sh=`Estim: rank ${R} (${(tot/10).toFixed(1)})\n`+res.map(r=>rank(r.s)).join(' ');
- app.append(btn('Leaderboard',lbScreen),btn('Salin hasil',e=>{try{navigator.clipboard.writeText(sh);e.target.textContent='Tersalin ✓'}catch(_){}}),btn('Main lagi',again))}
+ const I={home:'<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',copy:'<rect x="9" y="9" width="12" height="12"/><path d="M5 15H3V3h12v2"/>',ok:'<path d="M5 12l5 5 9-10"/>',redo:'<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',stats:'<path d="M5 20V11M12 20V4M19 20v-6"/>'},
+ ic=d=>`<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`,
+ ib=(d,cl,lb,f)=>{const b=btn(ic(d),f);b.className=cl;b.title=lb;b.setAttribute('aria-label',lb);return b},
+ cp=ib(I.copy,'o','Salin hasil',()=>{try{navigator.clipboard.writeText(sh)}catch(_){}cp.innerHTML=ic(I.ok);setTimeout(()=>cp.innerHTML=ic(I.copy),1500)}),bar=el('div','','ibar');
+ bar.append(ib(I.home,'w','Beranda',home),cp,ib(I.redo,'w','Main lagi',again),ib(I.stats,'o','Leaderboard',lbScreen));app.append(bar)}
 me?home():login();
 </script></body></html>
