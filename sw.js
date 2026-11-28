@@ -1,9 +1,9 @@
-const VERSION = 'repo-s2-tmi-v2';
+const VERSION = 'repo-s2-tmi-v3';
 const CORE = [
   './',
   './index.html',
-  './logo.png',
-  './zaa.svg',
+  './assets/logo.png',
+  './assets/zaa.svg',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',

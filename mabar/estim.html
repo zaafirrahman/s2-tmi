@@ -244,7 +244,7 @@ function login(){
  app.append(el('h1',LOGO,'logo'),el('p','tes seberapa tajam estimasi kamu.','mut'),card,el('footer',FOOT))}
 function home(){
  if(!me)return login();i=0;res=[];app.innerHTML='';app.className='home';
- const sub=el('p',`Halo <span class="nm">${esc(me.name)}</span>, tes seberapa tajam estimasi kamu.`,'mut'),out=btn(OUT,()=>{keep(null);login()}),lb=el('div','','card lbc'),acts=el('div','','acts');out.className='out';out.title='ganti pemain';out.setAttribute('aria-label','ganti pemain');acts.append(btn('Mulai',go),out);const bk=el('a',BACK+'<span>Back</span>','backbtn');bk.href='../mabar.html';
+ const sub=el('p',`Halo <span class="nm">${esc(me.name)}</span>, tes seberapa tajam estimasi kamu.`,'mut'),out=btn(OUT,()=>{keep(null);login()}),lb=el('div','','card lbc'),acts=el('div','','acts');out.className='out';out.title='ganti pemain';out.setAttribute('aria-label','ganti pemain');acts.append(btn('Mulai',go),out);const bk=el('a',BACK+'<span>Back</span>','backbtn');bk.href='mabar.html';
  app.append(el('h1',LOGO,'logo'),sub,el('div',T.map(t=>{const[a,b]=t.n.split(' ');return `<div><small>${a}</small><b>${b}</b></div>`}).join(''),'tiles'),acts,el('div','Leaderboard','lv'),lb,bk,el('footer',FOOT));fitTiles();board(lb,1e4)}
 function lbScreen(){
  app.innerHTML='';app.className='';const b=el('div','','card');

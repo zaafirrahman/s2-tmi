@@ -101,7 +101,7 @@ try{me=JSON.parse(localStorage.getItem('br_me'))}catch(_){}
 const keep=p=>{me=p;try{p?localStorage.setItem('br_me',JSON.stringify(p)):localStorage.removeItem('br_me')}catch(_){}};
 const keepRoom=id=>{try{id?localStorage.setItem('br_room',id):localStorage.removeItem('br_room')}catch(_){}};
 const logo=()=>el('h1','buckshot<span class="dot">.</span>');
-const backLink=()=>{const a=el('a','Back','back');a.href='../mabar.html';return a};
+const backLink=()=>{const a=el('a','Back','back');a.href='mabar.html';return a};
 let on=0,lastExp=0,pick=null,last=null,flash='',aim=null,lastShotN=null;
 let AC=null;const ac=()=>{try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state=='suspended')AC.resume()}catch(_){}return AC};
 document.addEventListener('click',ac);

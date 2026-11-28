@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Stack Riset | Repo S2 TMI</title>
-<link rel="icon" type="image/png" href="logo.png">
-<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="../assets/logo.png">
+<link rel="manifest" href="../manifest.json">
 <meta name="theme-color" content="#0C0C0A">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -44,13 +44,13 @@ border:1.5px solid var(--line);border-radius:3px;box-shadow:inset 6px 0 0 var(--
 </head>
 <body>
 <div class="wrap">
-  <a class="back" href="index.html">&larr; Repo S2</a>
+  <a class="back" href="../index.html">&larr; Repo S2</a>
   <h1>Stack Riset</h1>
   <p class="tag">Ekosistem riset terpadu: eksplorasi topik, susun tinjauan pustaka sistematis, rancang metodologi, dan rakit naskah tesis.</p>
 
   <main class="tools">
     <a class="tool" href="https://thesis-tmi.pages.dev" target="_blank" rel="noopener">
-      <div class="ic"><img src="katalog.png" alt="Logo Katalog Tesis"></div>
+      <div class="ic"><img src="../assets/katalog.png" alt="Logo Katalog Tesis"></div>
       <div>
         <h2>Katalog Tesis</h2>
         <p>Cek kaitan tesis terdahulu dengan dosen dan kata kunci tiap kelompok keahlian, dari data perpustakaan ITB.</p>
@@ -58,7 +58,7 @@ border:1.5px solid var(--line);border-radius:3px;box-shadow:inset 6px 0 0 var(--
       <span class="go">Buka katalog</span>
     </a>
     <a class="tool" href="slr-protocol.html">
-      <div class="ic"><img src="slr.png" alt="Logo SLR Protocol"></div>
+      <div class="ic"><img src="../assets/slr.png" alt="Logo SLR Protocol"></div>
       <div>
         <h2>SLR Protocol</h2>
         <p>Susun systematic literature review secara terstruktur, mulai dari arah riset, taksonomi, hingga PRISMA.</p>
@@ -66,7 +66,7 @@ border:1.5px solid var(--line);border-radius:3px;box-shadow:inset 6px 0 0 var(--
       <span class="go">Buka protokol</span>
     </a>
     <a class="tool" href="bengkel.html">
-      <div class="ic"><img src="bengkel.png" alt="Logo Bengkel Tesis"></div>
+      <div class="ic"><img src="../assets/bengkel.png" alt="Logo Bengkel Tesis"></div>
       <div>
         <h2>Bengkel Redaksi</h2>
         <p>Alat bantu teknis penulisan tesis: pilih model/metode, format redaksi LaTeX, dan edit dokumen secara lokal.</p>
@@ -79,7 +79,7 @@ border:1.5px solid var(--line);border-radius:3px;box-shadow:inset 6px 0 0 var(--
 <script>
 if('serviceWorker' in navigator){
   window.addEventListener('load',function(){
-    navigator.serviceWorker.register('sw.js').catch(function(e){console.warn('SW gagal:',e)});
+    navigator.serviceWorker.register('../sw.js').catch(function(e){console.warn('SW gagal:',e)});
   });
 }
 </script>

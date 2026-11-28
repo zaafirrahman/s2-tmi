@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mabar | Repo S2</title>
-<link rel="icon" type="image/png" href="logo.png">
-<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="../assets/logo.png">
+<link rel="manifest" href="../manifest.json">
 <meta name="theme-color" content="#0C0C0A">
 <meta name="application-name" content="Repo S2 TMI">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Repo S2 TMI">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500&family=Space+Grotesk:wght@700&family=VT323&display=swap" rel="stylesheet">
@@ -81,7 +81,7 @@ h1{margin:0;font:700 clamp(68px,13vw,148px)/.88 var(--disp);letter-spacing:-.01e
 </head>
 <body>
 <header>
-  <a class="back" href="index.html">&larr; Repo S2</a>
+  <a class="back" href="../index.html">&larr; Repo S2</a>
   <h1>Mabar</h1>
   <p class="sub">Santai dulu kawan, kita mabar sejenak<br class="dbr"> atau bantai leaderboard di mini games</p>
 </header>
@@ -107,7 +107,7 @@ h1{margin:0;font:700 clamp(68px,13vw,148px)/.88 var(--disp);letter-spacing:-.01e
 
   <div class="divider" role="separator" aria-label="Mini Games">Mini Games</div>
 
-  <a class="card g-estim" href="mabar/estim.html">
+  <a class="card g-estim" href="estim.html">
     <span class="logo" aria-hidden="true">
       <svg viewBox="0 0 56 56"><path d="M4 4v48h48z" fill="#ffd43b" stroke="#0C0C0A" stroke-width="3" stroke-linejoin="round"/><path d="M15 28v13h13z" fill="#0C0C0A" stroke="#0C0C0A" stroke-width="2.5" stroke-linejoin="round"/><path d="M4 14h6M4 24h6M4 34h6M4 44h6M14 52v-6M24 52v-6M34 52v-6M44 52v-6" stroke="#0C0C0A" stroke-width="2"/></svg>
     </span>
@@ -117,7 +117,7 @@ h1{margin:0;font:700 clamp(68px,13vw,148px)/.88 var(--disp);letter-spacing:-.01e
     </span>
   </a>
 
-  <a class="card g-pix" href="mabar/pixelcode.html">
+  <a class="card g-pix" href="pixelcode.html">
     <span class="logo" aria-hidden="true">
       <svg viewBox="0 0 21 20"><rect x="6" y="0" width="9" height="9" fill="#e8365c"/><rect x="0" y="11" width="9" height="9" fill="#3d9b5a"/><rect x="12" y="11" width="9" height="9" fill="#ffcb62"/></svg>
     </span>
@@ -131,7 +131,7 @@ h1{margin:0;font:700 clamp(68px,13vw,148px)/.88 var(--disp);letter-spacing:-.01e
 <script>
 if('serviceWorker' in navigator){
   window.addEventListener('load',function(){
-    navigator.serviceWorker.register('sw.js').catch(function(e){console.warn('SW gagal:',e)});
+    navigator.serviceWorker.register('../sw.js').catch(function(e){console.warn('SW gagal:',e)});
   });
 }
 </script>
