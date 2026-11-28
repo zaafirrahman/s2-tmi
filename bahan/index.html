@@ -25,7 +25,7 @@ button:focus-visible,a.b:focus-visible,aside input:focus-visible,.f:focus-visibl
 aside{background:var(--card);border-right:1.5px solid var(--line);overflow:auto;padding:10px;min-height:0}
 aside input{width:100%;padding:8px 10px;border:1.5px solid var(--bd);border-radius:3px;background:var(--bg);color:var(--fg);font:inherit;margin-bottom:10px}
 aside input:focus{border-color:var(--acc)}
-details{margin-left:10px}summary{cursor:pointer;padding:3px 0;font:600 17px/1.3 var(--disp);letter-spacing:.01em}
+details{margin-left:10px}summary{cursor:pointer;padding:3px 0;font:600 17px/1.3 var(--disp);letter-spacing:.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .f{display:flex;align-items:center;gap:7px;padding:4px 8px;margin-left:10px;border-radius:3px;color:var(--fg);text-decoration:none;font-size:13.5px}
 .f span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ic{flex:none;width:18px;height:18px;object-fit:contain}
@@ -159,7 +159,7 @@ const fico=(pa,k)=>{const v=fg(pa.toLowerCase())||fg(k.toLowerCase())||FD;return
 function build(q){const T=$('#tree');T.innerHTML='';
  if(q){files.filter(f=>f.p.toLowerCase().includes(q)).forEach(f=>{T.appendChild(link(f,1))});return}
  const root={};files.forEach(f=>{let n=root;f.p.split('/').slice(0,-1).forEach(d=>n=n[d]??={});(n.__f??=[]).push(f)});
- const draw=(n,box,top,pp)=>{Object.keys(n).filter(k=>k!=='__f').sort().forEach(k=>{const pa=pp?pp+'/'+k:k,d=document.createElement('details');d.open=top;d.innerHTML='<summary>'+fico(pa,k)+esc(k)+'</summary>';draw(n[k],d,false,pa);box.appendChild(d)});(n.__f||[]).forEach(f=>box.appendChild(link(f)))};
+ const draw=(n,box,top,pp)=>{Object.keys(n).filter(k=>k!=='__f').sort().forEach(k=>{const pa=pp?pp+'/'+k:k,d=document.createElement('details');d.open=top;d.innerHTML='<summary title="'+esc(k).replace(/"/g,'&quot;')+'">'+fico(pa,k)+esc(k)+'</summary>';draw(n[k],d,false,pa);box.appendChild(d)});(n.__f||[]).forEach(f=>box.appendChild(link(f)))};
  draw(root,T,false,'');const cp=decodeURIComponent(location.hash.slice(2));
  if(cp)T.querySelectorAll('.f').forEach(a=>{if(a.dataset.p===cp){a.classList.add('on');for(let e=a.parentElement;e&&e!==T;e=e.parentElement)if(e.tagName==='DETAILS')e.open=true}})}
 $('#q').oninput=e=>build(e.target.value.trim().toLowerCase());
