@@ -28,8 +28,7 @@ aside input:focus{border-color:var(--acc)}
 details{margin-left:10px}summary{cursor:pointer;padding:3px 0;font:600 17px/1.3 var(--disp);letter-spacing:.01em}
 .f{display:flex;align-items:center;gap:7px;padding:4px 8px;margin-left:10px;border-radius:3px;color:var(--fg);text-decoration:none;font-size:13.5px}
 .f span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ic{flex:none;width:26px;height:16px;border-radius:3px;font:700 9px/16px var(--body);font-style:normal;text-align:center;letter-spacing:.02em;color:#fff;background:#6B6B64}
-.ic.pdf{background:#E5473B}.ic.docx{background:#2B6CD4}.ic.xlsx{background:#1E8E4E}.ic.csv{background:#1B9A8C}.ic.ipynb{background:#F37726}.ic.py{background:#3776AB}.ic.html{background:#D8481F}
+.ic{flex:none;width:18px;height:18px;object-fit:contain}
 .f:hover{background:var(--code)}.f.on{background:var(--acc);color:var(--ink);font-weight:500}
 main{overflow:auto;min-height:0;min-width:0}
 #v{margin:20px auto;max-width:980px;padding:22px;background:var(--bg);border:1.5px solid var(--bd)}
@@ -143,14 +142,17 @@ $('#cp').innerHTML=ICO.cp;$('#raw').innerHTML=ICO.dl;
 $('#cp').onclick=async()=>{const b=$('#cp');try{await navigator.clipboard.writeText(location.href);b.innerHTML=ICO.ok}catch(e){prompt('Salin link:',location.href)}setTimeout(()=>b.innerHTML=ICO.cp,1500)};
 
 let files=[];
-const ICT={pdf:'PDF',docx:'DOC',doc:'DOC',xlsx:'XLS',xls:'XLS',csv:'CSV',tsv:'CSV',ipynb:'NB',py:'PY',html:'HTM',htm:'HTM'};
-const ICC={doc:'docx',xls:'xlsx',tsv:'csv',htm:'html'};
+/* Ikon file. Kunci = ekstensi (huruf kecil), nilai = nama file svg di ../assets/ (tanpa .svg). Yang tidak terdaftar memakai file.svg. */
+const FILEI={pdf:'pdf',doc:'ms-word',docx:'ms-word',xls:'ms-excel',xlsx:'ms-excel',ppt:'ms-powerpoint',pptx:'ms-powerpoint',csv:'csv',tsv:'csv',ipynb:'jupyter',py:'python',html:'html',htm:'html',json:'json',md:'markdown',txt:'text',log:'text',svg:'svg',
+ tex:'latex',ltx:'latex',cls:'latex',sty:'latex',dtx:'latex',lib:'lib',bib:'lib',bibtex:'lib',bst:'lib',ris:'lib',enw:'lib',nbib:'lib',csl:'lib'};
+'png jpg jpeg gif webp bmp ico tif tiff avif heic heif jfif apng'.split(' ').forEach(e=>FILEI[e]='image');
+const fileIco=e=>'../assets/'+(Object.hasOwn(FILEI,e)?FILEI[e]:'file')+'.svg';
 const link=(f,full)=>{const a=document.createElement('a');a.className='f';a.dataset.p=f.p;a.href='#/'+enc(f.p);a.title=f.p;
- const e=f.p.split('.').pop().toLowerCase(),i=document.createElement('i'),s=document.createElement('span');
- i.className='ic '+(ICC[e]||e);i.textContent=ICT[e]||e.slice(0,3).toUpperCase();s.textContent=full?f.p:f.p.split('/').pop();a.append(i,s);return a};
+ const e=f.p.split('.').pop().toLowerCase(),i=document.createElement('img'),s=document.createElement('span');
+ i.className='ic';i.alt='';i.src=fileIco(e);i.onerror=()=>{i.onerror=null;i.src='../assets/file.svg'};s.textContent=full?f.p:f.p.split('/').pop();a.append(i,s);return a};
 /* Ikon folder. Kunci = nama folder (huruf kecil) atau path lengkap, mis. 'tesis/latex' (path lengkap menang).
    Nilai = emoji, atau path gambar (mengandung '/' atau '.'), mis. '../assets/slr.png'. Folder tanpa entri tampil tanpa ikon. */
-const FI={anstat:'../assets/anstat.png',metlit:'../assets/metlit.png',optim:'../assets/optim.png',pemsis:'../assets/pemsis.png',tesis:'../assets/tesis.png',materi:'../assets/materi.png',tugas:'../assets/tugas.png'};
+const FI={anstat:'📊',metlit:'🔬',optim:'📈',pemsis:'🧩',tesis:'🎓',materi:'📖',tugas:'📝',latex:'📄',slr:'../assets/slr.png'};
 const fico=(pa,k)=>{const v=FI[pa.toLowerCase()]??FI[k.toLowerCase()];if(!v)return'';return /[\/.]/.test(v)?'<img class="fi" src="'+v.replace(/"/g,'&quot;')+'" alt="">':'<span class="fi" aria-hidden="true">'+esc(v)+'</span>'};
 function build(q){const T=$('#tree');T.innerHTML='';
  if(q){files.filter(f=>f.p.toLowerCase().includes(q)).forEach(f=>{T.appendChild(link(f,1))});return}
