@@ -154,7 +154,8 @@ const link=(f,full)=>{const a=document.createElement('a');a.className='f';a.data
    Nilai = path png di ../assets/. Folder tanpa entri tampil tanpa ikon; kalau png-nya belum ada, ikon otomatis disembunyikan. */
 const FI={anstat:'../assets/anstat.svg',metlit:'../assets/metlit.svg',optim:'../assets/optim.svg',pemsis:'../assets/pemsis.svg',materi:'../assets/materi.svg',tugas:'../assets/tugas.svg',tesis:'../assets/tesis.svg'};
 const fg=x=>Object.hasOwn(FI,x)?FI[x]:'';
-const fico=(pa,k)=>{const v=fg(pa.toLowerCase())||fg(k.toLowerCase());return v?'<img class="fi" src="'+v+'" alt="" onerror="this.remove()">':''};
+const FD='../assets/folder.svg';
+const fico=(pa,k)=>{const v=fg(pa.toLowerCase())||fg(k.toLowerCase())||FD;return '<img class="fi" src="'+v+'" alt="" onerror="this.remove()">'};
 function build(q){const T=$('#tree');T.innerHTML='';
  if(q){files.filter(f=>f.p.toLowerCase().includes(q)).forEach(f=>{T.appendChild(link(f,1))});return}
  const root={};files.forEach(f=>{let n=root;f.p.split('/').slice(0,-1).forEach(d=>n=n[d]??={});(n.__f??=[]).push(f)});
