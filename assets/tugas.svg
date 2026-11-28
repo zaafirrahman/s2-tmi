@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+  <title>folder_mocks.svg</title>
+  <g id="Layer_1" data-name="Layer 1">
+    <path d="M4.5 4.5 L12 4.5 C12.828 4.5 13.5 5.172 13.5 6 L13.5 6.5 M6 13.5 L2 13.5 C1.172 13.5 0.5 12.828 0.5 12 L0.5 3.5 C0.5 2.948 0.948 2.5 1.5 2.5 L6.5 2.5 C7.052 2.5 7.5 2.948 7.5 3.5 L7.5 4.5" fill="none" stroke="#4c4f69" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M10.327 15.5 L15.122 10.705 C15.448 10.379 15.575 9.903 15.456 9.457 C15.337 9.012 14.988 8.663 14.543 8.544 C14.097 8.425 13.621 8.552 13.295 8.878 L8.5 13.673 L8.5 15.5 Z M12.838 9.335 L14.665 11.162" fill="none" stroke="#df8e1d" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

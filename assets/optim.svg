@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+  <title>folder_functions.svg</title>
+  <g id="Layer_1" data-name="Layer 1">
+    <path d="M4.5 4.5 L12 4.5 C12.828 4.5 13.5 5.172 13.5 6 L13.5 6.5 M6 13.5 L2 13.5 C1.172 13.5 0.5 12.828 0.5 12 L0.5 3.5 C0.5 2.948 0.948 2.5 1.5 2.5 L6.5 2.5 C7.052 2.5 7.5 2.948 7.5 3.5 L7.5 4.5" fill="none" stroke="#4c4f69" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7 14.75 C7 15.333 7.417 15.5 8 15.5 C8.583 15.5 8.556 13.944 8.945 12 C9.333 10.055 9.417 8.5 10 8.5 C10.583 8.5 11 8.667 11 9.25 M7.778 11.5 L10.111 11.5 M15.5 13.5 L15 13.5 C13.5 13.5 13.182 10.5 12 10.5 L11.5 10.5 M11.5 13.5 L12 13.5 C13.5 13.5 13.818 10.5 15 10.5 L15.5 10.5" fill="none" stroke="#04a5e5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

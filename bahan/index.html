@@ -152,7 +152,7 @@ const link=(f,full)=>{const a=document.createElement('a');a.className='f';a.data
  i.className='ic';i.alt='';i.src=fileIco(e);i.onerror=()=>{i.onerror=null;i.src='../assets/file.svg'};s.textContent=full?f.p:f.p.split('/').pop();a.append(i,s);return a};
 /* Ikon folder. Kunci = nama folder (huruf kecil) atau path lengkap, mis. 'tesis/latex' (path lengkap menang).
    Nilai = path png di ../assets/. Folder tanpa entri tampil tanpa ikon; kalau png-nya belum ada, ikon otomatis disembunyikan. */
-const FI={anstat:'../assets/anstat.png',metlit:'../assets/metlit.png',optim:'../assets/optim.png',pemsis:'../assets/pemsis.png',materi:'../assets/materi.png',tugas:'../assets/tugas.png'};
+const FI={anstat:'../assets/anstat.svg',metlit:'../assets/metlit.svg',optim:'../assets/optim.svg',pemsis:'../assets/pemsis.svg',materi:'../assets/materi.svg',tugas:'../assets/tugas.svg'};
 const fg=x=>Object.hasOwn(FI,x)?FI[x]:'';
 const fico=(pa,k)=>{const v=fg(pa.toLowerCase())||fg(k.toLowerCase());return v?'<img class="fi" src="'+v+'" alt="" onerror="this.remove()">':''};
 function build(q){const T=$('#tree');T.innerHTML='';
